@@ -1,13 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class TimeBuster : MonoBehaviour {
+public class Enemy : MonoBehaviour {
 
     public Transform target;
 
     private GameObject timeBuster;
-
-    private HitCounter hitCounter;
 
     private float speed;
     private float sightRadius;
@@ -34,8 +32,6 @@ public class TimeBuster : MonoBehaviour {
         {
             targetFollowed = true;
         }
-
-        destroyCondition();
     }
 
     void LateUpdate()
@@ -48,22 +44,6 @@ public class TimeBuster : MonoBehaviour {
         else
         {
             targetFollowed = false;
-        }
-    }
-
-    private void destroyCondition()
-    {
-        if(Vector3.Distance(target.position, timeBuster.transform.position) <= 5)
-        {
-            hitTime += Time.deltaTime;
-        }
-        if (hitTime >= 5)
-        {
-            hitCounter.GetComponent<HitCounter>().HitNumber++;
-        }
-        if (hitCounter.GetComponent<HitCounter>().HitNumber >= 3)
-        {
-            DestroyObject(timeBuster);
         }
     }
 

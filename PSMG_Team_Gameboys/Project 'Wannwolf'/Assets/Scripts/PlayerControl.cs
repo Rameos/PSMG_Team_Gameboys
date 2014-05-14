@@ -66,7 +66,9 @@ public class PlayerControl : MonoBehaviour {
 
         Vector3 sidewards = h * player.transform.TransformDirection(Vector3.left) * -1.0f;
         Vector3 forward = v * player.transform.TransformDirection(Vector3.forward) * -1.0f;
+        
         Quaternion playerRotation = new Quaternion(cameraOne.rotation.x, 0, cameraOne.rotation.z, 0);
+        
         player.transform.rotation = playerRotation;
         player.transform.position += sidewards;
         player.transform.position += forward;
