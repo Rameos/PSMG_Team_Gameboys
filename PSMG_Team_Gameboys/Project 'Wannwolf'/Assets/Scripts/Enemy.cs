@@ -5,63 +5,58 @@ public class Enemy : MonoBehaviour {
 
     public Transform target;
 
-    private GameObject timeBuster;
+    private GameObject enemy;
 
     private float speed;
     private float sightRadius;
     private float followingRadius;
-    private float hitTime;
+    private float currentAttentionRadius;
 
-    private bool targetFollowed;
+    private bool playerFollowed;
 
 	// Use this for initialization
 	void Start () {
-        timeBuster = gameObject;
+        enemy = gameObject;
 
         sightRadius = 30f;
         followingRadius = 60f;
+        currentAttentionRadius = sightRadius;
         speed = 0.5f;
-        hitTime = 0.0f;
 
-        targetFollowed = false;
+        playerFollowed = false;
 	}
-
-    void Update()
-    {
-        if (Vector3.Distance(target.position, timeBuster.transform.position) <= sightRadius)
-        {
-            targetFollowed = true;
-        }
-    }
 
     void LateUpdate()
     {
-        if (Vector3.Distance(target.position, timeBuster.transform.position) <= followingRadius && targetFollowed)
+        if (playerFollowed && Vector3.Distance(target.position, enemy.transform.position) <= currentAttentionRadius)
         {
-            timeBuster.transform.rotation = Quaternion.LookRotation(target.position - timeBuster.transform.position);
-            timeBuster.transform.position += timeBuster.transform.TransformDirection(Vector3.forward * speed);
+            enemy.transform.rotation = Quaternion.LookRotation(target.position - enemy.transform.position);
+            enemy.transform.position += enemy.transform.TransformDirection(Vector3.forward * speed);
         }
         else
         {
-            targetFollowed = false;
+            playerFollowed = false;
+            currentAttentionRadius = sightRadius;
         }
     }
 
-    /*
+    
     void OnTriggerEnter(Collider col)
     {
         if (col.gameObject.tag == "Player")
         {
-            followingRadius = 30;
+            playerFollowed = true;
+            currentAttentionRadius = followingRadius;
         }
     }
 
+    /*
     void OnTriggerStay()
     {
-        if (Vector3.Distance(target.position, timeBuster.transform.position) <= radius) 
+        if (Vector3.Distance(target.position, enemy.transform.position) <= currentAttentionRadius) 
         {
-            timeBuster.transform.rotation = Quaternion.LookRotation(target.position - timeBuster.transform.position);
-            timeBuster.transform.position += timeBuster.transform.TransformDirection(Vector3.forward * speed);
+            enemy.transform.rotation = Quaternion.LookRotation(target.position - enemy.transform.position);
+            enemy.transform.position += enemy.transform.TransformDirection(Vector3.forward * speed);
         }
     }
 

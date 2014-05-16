@@ -70,23 +70,23 @@ public class Camera_Control : MonoBehaviour {
     {
         if (cameraReversed)
         {
-            if (mouseY > 0)
+            if (mouseY > -5)
             {
-                mouseY = 0;
+                mouseY = -5;
             }
-            else if (mouseY <= -80)
+            else if (mouseY <= -75)
             {
-                mouseY = -80;
+                mouseY = -75;
             }
         }else
             {
-                if (mouseY < 0)
+                if (mouseY < 5)
                 {
-                    mouseY = 0;
+                    mouseY = 5;
                 }
-                 else if (mouseY >= 80)
+                 else if (mouseY >= 75)
                 {
-                    mouseY = 80;
+                    mouseY = 75;
                 }
             }
 

@@ -98,7 +98,7 @@ public class PlayerControl : MonoBehaviour {
     void setRunCondition()
     {
         run = OnKeyFunctions.OnKeyDownPositive("Run/Sneak");
-        if (run && runable)
+        if (run && runable && !jumping)
         {
             countRunTime();
             playerSpeed = playerRunSpeed;
@@ -152,14 +152,14 @@ public class PlayerControl : MonoBehaviour {
             {
                 jumping = true;
                 jumpDecay = 0.1f;
-            }   
+            }
         }
     }
 
     //Checks and sets the player's jump permission
     void OnCollisionEnter(Collision col)
     {
-        if (col.gameObject.tag == "Floor")
+        if (col.gameObject.tag == "Ground")
         {
             jumping = false;
         }
