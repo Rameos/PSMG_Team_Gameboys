@@ -112,21 +112,25 @@ public class Camera_Control : MonoBehaviour {
             hitMap = true;
         }
         else x++;
+        
         if (Physics.Raycast(mainCamera.transform.position, camera.transform.TransformDirection(Vector3.forward), out hit, 10f))
         {
             hitMap = true;
         }
         else x++;
+        
         if (Physics.Raycast(mainCamera.transform.position, camera.transform.TransformDirection(Vector3.left), out hit, 10f))
         {
             hitMap = true;
         }
         else x++;
+        
         if (Physics.Raycast(mainCamera.transform.position, camera.transform.TransformDirection(Vector3.right), out hit, 10f))
         {
             hitMap = true;
         }
         else x++;
+        
         if (Physics.Raycast(mainCamera.transform.position, camera.transform.TransformDirection(Vector3.up), out hit, 10f))
         {
             hitMap = true;
