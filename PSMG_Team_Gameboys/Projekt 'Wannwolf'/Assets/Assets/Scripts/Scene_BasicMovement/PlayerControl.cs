@@ -1,22 +1,26 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+[RequireComponent(typeof(CharacterController))]
+
 public class PlayerControl : MonoBehaviour {
 
     private const float minTime = 3f;   //Min time the player has to rest after a 'full' run
     private const float maxTime = 6f;   //Max time the player is able to run
-    private const float jumpStrength = 0.6f;
-    private const float playerRunSpeed = 0.8f;
-    private const float playerWalkSpeed = 0.3f;
-    private const float playerSneakSpeed = 0.1f;
+    private const float jumpStrength = 25f;
+    private const float playerRunSpeed = 60f;
+    private const float playerWalkSpeed = 40f;
+    private const float playerSneakSpeed = 20f;
+    private const float gravityBoost = 3f;
 
     public Transform mainCamera;
 
-    private GameObject player;
+    private CharacterController characterController;
     private GameObject playerEmpty;
 
+    private Vector3 gravity;
+
     private float playerSpeed;
-    private float jumpDecay;
     private float pastTime;
 
     private bool jumping;
@@ -26,11 +30,12 @@ public class PlayerControl : MonoBehaviour {
 
 	// Use this for initialization
 	void Awake () {
-        player = gameObject;
+        characterController = GetComponent<CharacterController>();
         playerEmpty = GameObject.FindGameObjectWithTag("PlayerEmpty");
+        
+        gravity = Vector3.zero;
 
         playerSpeed = playerWalkSpeed;
-        jumpDecay = 0.1f;
         pastTime = 0f;
 
         jumping = false;
@@ -42,14 +47,7 @@ public class PlayerControl : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         move();
-        jump();
 	}
-
-    //LateUpdate is called once per frame after Update()
-    void LateUpdate()
-    {
-        setJumpCondition();
-    }
 
     //Moves the Player depending on the Inputs
     void move()
@@ -57,17 +55,24 @@ public class PlayerControl : MonoBehaviour {
         setRunCondition();
         setSneakCondition();
         setWalkCondition();
+        setJumpCondition();
 
         setPlayerMovement();
     }
 
     private void setPlayerMovement()
     {
-        float h = Input.GetAxis("Horizontal") * playerSpeed;
-        float v = Input.GetAxis("Vertical") * playerSpeed;
+        float h = Input.GetAxis("Horizontal");
+        float v = Input.GetAxis("Vertical")*-1;
 
-        Vector3 sidewards = h * playerEmpty.transform.TransformDirection(Vector3.left) * -1.0f;
-        Vector3 forward = v * playerEmpty.transform.TransformDirection(Vector3.forward) * -1.0f;
+        Vector3 move = new Vector3(h, 0f, v);
+        move.Normalize();
+        move = characterController.transform.TransformDirection(move);
+        move *= playerSpeed;
+
+        setGravity();
+
+        move += gravity;
 
         Quaternion emptyRotation = new Quaternion(mainCamera.localRotation.x, 0, mainCamera.localRotation.z, 0);
         
@@ -75,10 +80,10 @@ public class PlayerControl : MonoBehaviour {
 
         if (h != 0 || v != 0)
         {
-            player.collider.transform.rotation = emptyRotation;
-            player.collider.transform.position += forward;
-            player.collider.transform.position += sidewards;
+            characterController.transform.rotation = emptyRotation;
         }
+
+        characterController.Move(move * Time.deltaTime);
     }
 
     //Checks if sneak key is pressed
@@ -140,35 +145,28 @@ public class PlayerControl : MonoBehaviour {
         }
     }
 
-    //Let the Player jump
-    void jump()
-    {
-        if (jumping)
-        {
-            player.transform.position += new Vector3(0, jumpStrength - jumpDecay, 0);
-            jumpDecay += 0.009f;
-        }
-    }
-
-    //Checks if jump key is hit
     void setJumpCondition()
     {
-        if (Input.GetAxis("Jump") > 0)
+        if (Input.GetKeyDown(KeyCode.Space) && characterController.isGrounded)
         {
-            if (!jumping)
-            {
-                jumping = true;
-                jumpDecay = 0.1f;
-            }
+            jumping = true;
         }
     }
 
-    //Checks and sets the player's jump permission
-    void OnCollisionEnter(Collision col)
+    void setGravity()
     {
-        if (col.gameObject.tag == "Ground")
+        if (!characterController.isGrounded)
         {
-            jumping = false;
+            gravity += Physics.gravity * Time.deltaTime * gravityBoost;
+        }
+        else
+        {
+            gravity = Vector3.zero;
+            if (jumping)
+            {
+                jumping = false;
+                gravity.y = jumpStrength;
+            }
         }
     }
 }
