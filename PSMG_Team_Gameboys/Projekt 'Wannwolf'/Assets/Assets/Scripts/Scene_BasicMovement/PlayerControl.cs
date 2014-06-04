@@ -28,6 +28,8 @@ public class PlayerControl : MonoBehaviour {
     private bool runable;
     private bool sneak;
 
+    MoneyManagement money; // Money Management
+
 	// Use this for initialization
 	void Awake () {
         characterController = GetComponent<CharacterController>();
@@ -42,6 +44,8 @@ public class PlayerControl : MonoBehaviour {
         run = false;
         runable = true;
         sneak = false;
+
+        money = GetComponent<MoneyManagement>();
 	}
 	
 	// Update is called once per frame
