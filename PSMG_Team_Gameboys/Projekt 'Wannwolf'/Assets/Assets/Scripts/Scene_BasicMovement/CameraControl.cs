@@ -11,7 +11,6 @@ public class CameraControl : MonoBehaviour {
     private Transform mainCamera;
 
     private float walkDistance;
-    private float height;
     private float mouseX;
     private float mouseY;
     private float timePassed;
@@ -21,7 +20,6 @@ public class CameraControl : MonoBehaviour {
 	void Start () {
         mainCamera = transform;
         walkDistance = 20f;
-        height = 50f;
         mouseX = 0f;
         mouseY = 0f;
         timePassed = 0f;
@@ -34,16 +32,8 @@ public class CameraControl : MonoBehaviour {
         mainCamera.position = mainCamera.rotation * new Vector3(0, 0, -walkDistance) + target.position;
         mainCamera.LookAt(target);
 
-        if (!hitMap)
-        {
-            mouseX += Input.GetAxis("Mouse X") * 5;
-            mouseY += Input.GetAxis("Mouse Y") * 5;
-        }
-        else
-        {
-            mouseX += Input.GetAxis("Mouse X") * 5;
-            mouseY += 2;
-        }
+        mouseX += Input.GetAxis("Mouse X") * 5;
+        mouseY += Input.GetAxis("Mouse Y") * 5;
 
         recalculateRotateAngles();
         
@@ -84,11 +74,11 @@ public class CameraControl : MonoBehaviour {
             float cameraSpeed = 0.25f;
             timePassed += Time.deltaTime;
 
-            if (mouseY > 26 && timePassed >= passingTime && !hitMap)
+            if (mouseY > 26 && timePassed >= passingTime)
             {
                 mouseY -= cameraSpeed;
             }
-            else if (mouseY < 24 && timePassed >= passingTime && !hitMap)
+            else if (mouseY < 24 && timePassed >= passingTime)
             {
                 mouseY += cameraSpeed;
             }
@@ -99,43 +89,23 @@ public class CameraControl : MonoBehaviour {
     void checkHit()
     {
         RaycastHit hit = new RaycastHit();
-        float x = 0;
-        float rayDistance = 10f;
+        float rayDistance = 5f;
 
         if (Physics.Raycast(mainCamera.transform.position, camera.transform.TransformDirection(Vector3.back), out hit, rayDistance))
-        {
-            hitMap = true;
+            {
+                mouseY += rayDistance;
+            }else if (Physics.Raycast(mainCamera.transform.position, camera.transform.TransformDirection(Vector3.left), out hit, rayDistance))
+                {
+                    mouseY += rayDistance;
+                }else if (Physics.Raycast(mainCamera.transform.position, camera.transform.TransformDirection(Vector3.right), out hit, rayDistance))
+                    {
+                        mouseY += rayDistance;
+                    }else if (Physics.Raycast(mainCamera.transform.position, camera.transform.TransformDirection(Vector3.down), out hit, rayDistance))
+                        {
+                            mouseY += rayDistance;
+                        }else if (Physics.Raycast(mainCamera.transform.position, camera.transform.TransformDirection(Vector3.up), out hit, rayDistance))
+                            {
+                                mouseY += rayDistance;
+                            }
         }
-        else x++;
-
-        if (Physics.Raycast(mainCamera.transform.position, camera.transform.TransformDirection(Vector3.forward), out hit, rayDistance))
-        {
-            hitMap = true;
-        }
-        else x++;
-
-        if (Physics.Raycast(mainCamera.transform.position, camera.transform.TransformDirection(Vector3.left), out hit, rayDistance))
-        {
-            hitMap = true;
-        }
-        else x++;
-
-        if (Physics.Raycast(mainCamera.transform.position, camera.transform.TransformDirection(Vector3.right), out hit, rayDistance))
-        {
-            hitMap = true;
-        }
-        else x++;
-
-        if (Physics.Raycast(mainCamera.transform.position, camera.transform.TransformDirection(Vector3.up), out hit, rayDistance))
-        {
-            hitMap = true;
-        }
-        else x++;
-
-        if (x == 5)
-        {
-            hitMap = false;
-        }
-
-    }
 }
