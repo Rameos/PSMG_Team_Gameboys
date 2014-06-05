@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Camera_Control : MonoBehaviour {
+public class CameraControl : MonoBehaviour {
 
     public Transform target;
     public Transform terrain;

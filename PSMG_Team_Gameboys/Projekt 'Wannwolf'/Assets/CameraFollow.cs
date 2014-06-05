@@ -3,10 +3,10 @@ using System.Collections;
 
 public class CameraFollow : MonoBehaviour {
 
-    public Transform Target;
+    public Transform target;
 
     void LateUpdate()
     {
-        transform.position = new Vector3(Target.position.x, transform.position.y, Target.position.z);
+        transform.position = new Vector3(target.position.x, transform.position.y, target.position.z);
     }
 }

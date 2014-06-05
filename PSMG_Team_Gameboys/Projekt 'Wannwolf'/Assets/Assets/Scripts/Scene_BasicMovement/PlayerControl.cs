@@ -7,18 +7,18 @@ public class PlayerControl : MonoBehaviour {
 
     private const float minTime = 3f;   //Min time the player has to rest after a 'full' run
     private const float maxTime = 6f;   //Max time the player is able to run
-    private const float jumpStrength = 25f;
-    private const float playerRunSpeed = 60f;
-    private const float playerWalkSpeed = 40f;
-    private const float playerSneakSpeed = 20f;
-    private const float gravityBoost = 3f;
+    private const float jumpStrength = 20f;
+    private const float playerRunSpeed = 30f;
+    private const float playerWalkSpeed = 20f;
+    private const float playerSneakSpeed = 10f;
+    private const float gravityBoost = 3.5f;
 
     public Transform mainCamera;
 
     private CharacterController characterController;
-    private GameObject playerEmpty;
 
     private Vector3 gravity;
+    private Vector3 alternativeMoveTo;
 
     private float playerSpeed;
     private float pastTime;
@@ -33,9 +33,9 @@ public class PlayerControl : MonoBehaviour {
 	// Use this for initialization
 	void Awake () {
         characterController = GetComponent<CharacterController>();
-        playerEmpty = GameObject.FindGameObjectWithTag("PlayerEmpty");
         
         gravity = Vector3.zero;
+        alternativeMoveTo = Vector3.zero;
 
         playerSpeed = playerWalkSpeed;
         pastTime = 0f;
@@ -62,32 +62,30 @@ public class PlayerControl : MonoBehaviour {
         setJumpCondition();
 
         setPlayerMovement();
+        setNotJumpable();
     }
 
     private void setPlayerMovement()
     {
-        float h = Input.GetAxis("Horizontal");
-        float v = Input.GetAxis("Vertical")*-1;
+        float horizontal = Input.GetAxis("Horizontal");
+        float vertical = Input.GetAxis("Vertical");
 
-        Vector3 move = new Vector3(h, 0f, v);
-        move.Normalize();
-        move = characterController.transform.TransformDirection(move);
-        move *= playerSpeed;
+        Vector3 moveTo = new Vector3(horizontal, 0f, vertical * -1);
 
         setGravity();
-
-        move += gravity;
-
-        Quaternion emptyRotation = new Quaternion(mainCamera.localRotation.x, 0, mainCamera.localRotation.z, 0);
+        setupMoveToVector(ref moveTo);
         
-        playerEmpty.transform.rotation = emptyRotation;
-
-        if (h != 0 || v != 0)
+        if (horizontal != 0 || vertical != 0)
         {
-            characterController.transform.rotation = emptyRotation;
-        }
+            alternativeMoveTo = moveTo;
+            Quaternion playerRotation = new Quaternion(mainCamera.localRotation.x, 0f, mainCamera.localRotation.z, 0f);
+            characterController.transform.rotation = playerRotation;
+        }else if (jumping && horizontal == 0 && vertical == 0)
+             {
+                 characterController.Move(alternativeMoveTo * Time.deltaTime);
+             }
 
-        characterController.Move(move * Time.deltaTime);
+        characterController.Move(moveTo * Time.deltaTime);
     }
 
     //Checks if sneak key is pressed
@@ -114,6 +112,7 @@ public class PlayerControl : MonoBehaviour {
     void setRunCondition()
     {
         run = OnKeyFunctions.OnKeyDownPositive("Run/Sneak");
+
         if (run && runable && !jumping)
         {
             countRunTime();
@@ -151,9 +150,18 @@ public class PlayerControl : MonoBehaviour {
 
     void setJumpCondition()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && characterController.isGrounded)
+        if (Input.GetAxis("Jump") > 0 && !jumping)
         {
             jumping = true;
+        }
+    }
+
+    void setNotJumpable()
+    {
+        if (characterController.collisionFlags == CollisionFlags.Below || characterController.isGrounded)
+        {
+            jumping = false;
+            alternativeMoveTo = Vector3.zero;
         }
     }
 
@@ -168,9 +176,16 @@ public class PlayerControl : MonoBehaviour {
             gravity = Vector3.zero;
             if (jumping)
             {
-                jumping = false;
                 gravity.y = jumpStrength;
             }
         }
+    }
+
+    void setupMoveToVector(ref Vector3 moveToVector)
+    {
+        moveToVector.Normalize();
+        moveToVector = characterController.transform.TransformDirection(moveToVector);
+        moveToVector *= playerSpeed;
+        moveToVector += gravity;
     }
 }
