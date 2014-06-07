@@ -9,7 +9,7 @@ public class MoneyManagement : MonoBehaviour {
 	int currentMoney;
 	public GUIText moneyText;
 	
-	// Initialize instance variables
+	// Initialize instance variables on gamestart
 	void Start () {
 		moneyMinimum = 0;
 		moneyMaximum = 100;
@@ -37,5 +37,13 @@ public class MoneyManagement : MonoBehaviour {
 	
 	// Subtract money from current money
 	public void subtractMoney(int value) { currentMoney -= value; }
+
+    // Getter methods for instance variables
+    public int getCurrentMoney() { return currentMoney; }    
+    public int getMoneyMinimum() { return moneyMinimum; }    
+    public int getMoneyMaximum() { return moneyMaximum; }
+
+    // Setter methods for instance variables
+    public void setCurrentMoney(int value) { currentMoney = value; } 
 	
 }
