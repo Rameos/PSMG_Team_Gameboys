@@ -16,6 +16,7 @@ public class Enemy : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+        
         enemy = gameObject;
 
         sightRadius = 30f;
@@ -32,6 +33,7 @@ public class Enemy : MonoBehaviour {
         {
             enemy.transform.rotation = Quaternion.LookRotation(target.position - enemy.transform.position);
             enemy.transform.position += enemy.transform.TransformDirection(Vector3.forward * speed);
+            Debug.Log("5 Sekunden");
         }
         else
         {
@@ -43,12 +45,15 @@ public class Enemy : MonoBehaviour {
     
     void OnTriggerEnter(Collider col)
     {
+        
         if (col.gameObject.tag == "Player")
         {
             playerFollowed = true;
             currentAttentionRadius = followingRadius;
         }
     }
+
+  
 
     /*
     void OnTriggerStay()

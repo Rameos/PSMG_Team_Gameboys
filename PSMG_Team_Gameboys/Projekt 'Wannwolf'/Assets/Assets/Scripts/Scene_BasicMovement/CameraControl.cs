@@ -15,6 +15,7 @@ public class CameraControl : MonoBehaviour {
     private float mouseY;
     private float timePassed;
     private bool hitMap;
+    public bool staticCamera = false;
 
 	// Use this for initialization
 	void Start () {
@@ -31,7 +32,6 @@ public class CameraControl : MonoBehaviour {
         mainCamera.rotation = Quaternion.Euler(mouseY, mouseX, 0);
         mainCamera.position = mainCamera.rotation * new Vector3(0, 0, -walkDistance) + target.position;
         mainCamera.LookAt(target);
-
         mouseX += Input.GetAxis("Mouse X") * 5;
         mouseY += Input.GetAxis("Mouse Y") * 5;
 
@@ -52,6 +52,12 @@ public class CameraControl : MonoBehaviour {
             mouseX += 360;
         }
         setupCameraMovement();
+    }
+
+    public void setStatic(bool val)
+    {
+        staticCamera = val;
+        Debug.Log(val);
     }
 
     void setupCameraMovement()
