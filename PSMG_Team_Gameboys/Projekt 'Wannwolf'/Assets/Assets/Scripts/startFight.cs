@@ -12,18 +12,17 @@ public class startFight : MonoBehaviourWithGazeComponent
     public Camera StaticCamera;
     private GameObject pizza;
 
-    public Rect position = new Rect(16, 16, 128, 24);
-    public Color color = Color.yellow;
-
+ 
     private bool draw = false;
     private bool drawNext = false;
-    private float xMax = 400f;
-    private float xMin = 00f;
-    private float yMax = 550f;
-    private float yMin = 350f;
-    private float xLinePos = 250f;
+    private float xMax = 550f;
+    private float xMin = 400f;
+    private float yMax = 700f;
+    private float yMin = 100f;
+    private float xLinePos = 430f;
     private float xLineMaxPos = 700f;
     private int countCuts = 0;
+    private bool stat = false;
 
 
 
@@ -36,12 +35,24 @@ public class startFight : MonoBehaviourWithGazeComponent
 
     }
 
+    void Update()
+    {
+        if (countCuts == 10)
+        {
+            MainCamera.enabled = true;
+            StaticCamera.enabled = false;
+            Destroy(gameObject);
+
+        }
+    }
+
 
     void OnTriggerEnter(Collider col)
     {
 
         if (col.gameObject.tag == "Player")
         {
+
             StartCoroutine(startPizzaFight(5));
         }
     }
@@ -55,6 +66,7 @@ public class startFight : MonoBehaviourWithGazeComponent
 
         MainCamera.enabled = false;
         StaticCamera.enabled = true;
+        stat = true;
         draw = true;
  
 
@@ -64,43 +76,53 @@ public class startFight : MonoBehaviourWithGazeComponent
 
     void OnGUI()
     {
-        if (draw == true)
+        if (draw == true && countCuts <11)
         {
-
-            GUI.color = Color.yellow;
-            GUI.Box(new Rect(xLinePos, 400, 50, 50), "---------");
+            xLinePos = 430f;
+            for (int i = 0; i < 10; i++)
+            {
+                GUI.color = Color.yellow;
+                GUI.Box(new Rect(xLinePos, 280, 50, 50), "---------");
+                xLinePos += 50;
+            }
+           
  
         }
-        if (drawNext == true && xLinePos <= xLineMaxPos)
+        if (drawNext == true )
         {
-            xLinePos = 250f;
+            xLinePos = 430f;
             for (int i = 0; i < countCuts; i++)
             {
                 GUI.color = Color.red;
-                GUI.Box(new Rect(xLinePos, 400, 50, 50), "---------");
+                GUI.Box(new Rect(xLinePos, 280, 50, 50), "---------");
                 xLinePos += 50;
             }
-            GUI.color = Color.yellow;
-            GUI.Box(new Rect(xLinePos, 400, 50, 50), "---------");
+           
         }
     }
 
     public override void OnGazeEnter(RaycastHit hit)
     {
-
-        if (gazeModel.posGazeRight.x >= xMin && gazeModel.posGazeRight.x <= xMax && gazeModel.posGazeRight.y >= yMin && gazeModel.posGazeRight.y <= yMax)
-        {
-            Debug.Log("cut");
-            xMin += 50;
-            xMax += 50;
-            countCuts++;
-            draw = false;
-            drawNext = true;
-        }
+       
 
     }
     public override void OnGazeStay(RaycastHit hit)
     {
+
+        if (stat == true)
+        {
+            Debug.Log("Gaze");
+
+            if (gazeModel.posGazeRight.x >= xMin && gazeModel.posGazeRight.x <= xMax && gazeModel.posGazeRight.y >= yMin && gazeModel.posGazeRight.y <= yMax)
+            {
+                Debug.Log("cut");
+                xMin += 50;
+                xMax += 50;
+                countCuts++;
+                //draw = false;
+                drawNext = true;
+            }
+        }
 
     }
 
