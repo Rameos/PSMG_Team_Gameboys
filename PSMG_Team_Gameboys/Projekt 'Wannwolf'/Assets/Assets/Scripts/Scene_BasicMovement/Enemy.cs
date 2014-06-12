@@ -26,9 +26,6 @@ public class Enemy : MonoBehaviour {
     private float subtractRate = 5f;
     private bool enemySeen = false;
 
-	// Use this for initialization
-	void Start () {
-        
 
 	// Initializing Instance Variables
 	void Start () {
