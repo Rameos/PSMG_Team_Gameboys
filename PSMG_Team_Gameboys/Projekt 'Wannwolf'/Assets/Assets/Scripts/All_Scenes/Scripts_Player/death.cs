@@ -19,8 +19,22 @@ public class Death : MonoBehaviour {
     // Reaction on players death
     void OnTriggerEnter(Collider col)
     {
-        if (col.tag == "Player")
+        string tag = gameObject.tag;
+        switch (tag)
         {
+            case "DeathzoneRiver": player.position = new Vector3(531f, 102f, 252f);
+                manageMoney();
+                break;
+            case "DeathzoneGap": player.position = new Vector3(1149f, 105f, 375f);
+                manageMoney();
+                break;
+        }
+
+       
+    }
+
+    void manageMoney()
+    {
             // Subtract money from the players account on death
             money.subtractMoney(15);
 
@@ -29,20 +43,12 @@ public class Death : MonoBehaviour {
             int moneyMinimum = money.getMoneyMinimum();
             int moneyMaximum = money.getMoneyMaximum();
 
-            if (curMoney > moneyMinimum)
-            {
-                // a) Relocate player in front of canyon on death
-                player.position = new Vector3(1149f, 105f, 375f);
-            }
-            else
+            if (curMoney <= moneyMinimum)
             {
                 // b) Relocate player at the begin of the level if no money is left
                 player.position = new Vector3(96f, 107f, 101f);
                 money.setCurrentMoney(moneyMaximum);
             }
-
-
-            
-        }
     }
+
 }
