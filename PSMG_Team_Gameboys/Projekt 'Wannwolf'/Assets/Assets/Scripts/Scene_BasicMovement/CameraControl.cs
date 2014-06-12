@@ -14,7 +14,7 @@ public class CameraControl : MonoBehaviour {
     private float mouseX;
     private float mouseY;
     private float timePassed;
-    private bool hitMap;
+    private float minCameraDistance;
 
 	// Use this for initialization
 	void Start () {
@@ -23,7 +23,7 @@ public class CameraControl : MonoBehaviour {
         mouseX = 0f;
         mouseY = 0f;
         timePassed = 0f;
-        hitMap = false;
+        minCameraDistance = 5f;
 	}
 
     void LateUpdate()
@@ -36,7 +36,6 @@ public class CameraControl : MonoBehaviour {
         mouseY += Input.GetAxis("Mouse Y") * 5;
 
         recalculateRotateAngles();
-        
         checkHit();
         setCameraPosition();
     }
@@ -56,9 +55,9 @@ public class CameraControl : MonoBehaviour {
 
     void setupCameraMovement()
     {
-        if (mouseY <= 5)
+        if (mouseY <= minCameraDistance)
                 {
-                    mouseY = 5;
+                    mouseY = minCameraDistance;
                 }
                  else if (mouseY >= 75)
                 {
@@ -88,22 +87,26 @@ public class CameraControl : MonoBehaviour {
 
     void checkHit()
     {
-        RaycastHit hit = new RaycastHit();
+        RaycastHit hit;
         float rayDistance = 5f;
 
-        if (Physics.Raycast(mainCamera.transform.position, camera.transform.TransformDirection(Vector3.back), out hit, rayDistance))
+        if (Physics.Raycast(mainCamera.transform.position, Vector3.forward, out hit, rayDistance))
             {
                 mouseY += rayDistance;
-            }else if (Physics.Raycast(mainCamera.transform.position, camera.transform.TransformDirection(Vector3.left), out hit, rayDistance))
+            }
+        else if (Physics.Raycast(mainCamera.transform.position, camera.transform.TransformDirection(Vector3.left), out hit, rayDistance))
                 {
                     mouseY += rayDistance;
-                }else if (Physics.Raycast(mainCamera.transform.position, camera.transform.TransformDirection(Vector3.right), out hit, rayDistance))
+                }
+        else if (Physics.Raycast(mainCamera.transform.position, camera.transform.TransformDirection(Vector3.right), out hit, rayDistance))
                     {
                         mouseY += rayDistance;
-                    }else if (Physics.Raycast(mainCamera.transform.position, camera.transform.TransformDirection(Vector3.down), out hit, rayDistance))
+                    }
+        else if (Physics.Raycast(mainCamera.transform.position, camera.transform.TransformDirection(Vector3.down), out hit, rayDistance))
                         {
                             mouseY += rayDistance;
-                        }else if (Physics.Raycast(mainCamera.transform.position, camera.transform.TransformDirection(Vector3.up), out hit, rayDistance))
+                        }
+        else if (Physics.Raycast(mainCamera.transform.position, camera.transform.TransformDirection(Vector3.up), out hit, rayDistance))
                             {
                                 mouseY += rayDistance;
                             }

@@ -56,13 +56,12 @@ public class PlayerControl : MonoBehaviour {
     //Moves the Player depending on the Inputs
     void move()
     {
+        setNotJumpable();
+        setJumpCondition();
         setRunCondition();
         setSneakCondition();
         setWalkCondition();
-        setJumpCondition();
-
         setPlayerMovement();
-        setNotJumpable();
     }
 
     private void setPlayerMovement()
@@ -150,7 +149,7 @@ public class PlayerControl : MonoBehaviour {
 
     void setJumpCondition()
     {
-        if (Input.GetAxis("Jump") > 0 && !jumping)
+        if (Input.GetButtonDown("Jump") || Input.GetAxis("Jump") > 0)
         {
             jumping = true;
         }
