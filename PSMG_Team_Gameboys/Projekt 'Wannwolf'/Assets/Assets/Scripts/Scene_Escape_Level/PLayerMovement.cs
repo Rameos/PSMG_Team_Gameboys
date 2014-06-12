@@ -3,10 +3,10 @@ using System.Collections;
 
 public class PLayerMovement : MonoBehaviour {
 
-    public Transform playerEmpty;
+    public Transform treeTrunk;
 	
 	// Update is called once per frame
 	void Update () {
-        playerEmpty.Rotate(new Vector3(1f, 0f, 0f), -Input.GetAxis("Horizontal"));
+        treeTrunk.Rotate(new Vector3(0f, 0f, 1f), Input.GetAxis("Horizontal"));
 	}
 }

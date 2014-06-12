@@ -3,6 +3,7 @@ using System.Collections;
 
 public class Death : MonoBehaviour {
 
+
     // Instance variables
     public Transform player;
     GameObject playerObject;
@@ -11,13 +12,13 @@ public class Death : MonoBehaviour {
     // Initialize objects/scripts
     void Awake()
     {
-        playerObject = GameObject.Find("Player");
+        playerObject = GameObject.FindGameObjectWithTag("Player");
         money = playerObject.GetComponent<MoneyManagement>();
     }
 
     // Reaction on players death
     void OnTriggerEnter(Collider col)
-    {        
+    {
         if (col.tag == "Player")
         {
             // Subtract money from the players account on death
