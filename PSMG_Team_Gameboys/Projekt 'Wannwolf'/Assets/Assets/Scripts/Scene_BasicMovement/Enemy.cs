@@ -19,11 +19,16 @@ public class Enemy : MonoBehaviour {
 
     private bool playerFollowed;
 
+
     // Money Management Instance Variables
     private MoneyManagement money;
     private float subtractTime = 3f;
     private float subtractRate = 5f;
     private bool enemySeen = false;
+
+	// Use this for initialization
+	void Start () {
+        
 
 	// Initializing Instance Variables
 	void Start () {
@@ -43,8 +48,10 @@ public class Enemy : MonoBehaviour {
     {
         if (playerFollowed && Vector3.Distance(player.position, thisEnemy.position) <= currentAttentionRadius)
         {
+
             thisEnemy.rotation = Quaternion.LookRotation(player.position - thisEnemy.position);
             thisEnemy.position += thisEnemy.TransformDirection(Vector3.forward * followSpeed);
+
         }
         else
         {
@@ -62,6 +69,7 @@ public class Enemy : MonoBehaviour {
     // When Player enters the Box Collider
     void OnTriggerEnter(Collider col)
     {
+        
         if (col.gameObject.tag == "Player")
         {
             playerFollowed = true;
@@ -88,6 +96,8 @@ public class Enemy : MonoBehaviour {
             yield return new WaitForSeconds(5);
         }
     }
+
+  
 
     /*
     void OnTriggerStay()
