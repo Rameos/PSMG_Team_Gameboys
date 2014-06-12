@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Enemy : MonoBehaviour {
+public class EnemyBehaviour : MonoBehaviour {
 
     public Transform player;
     public Transform thisEnemy;
@@ -18,6 +18,7 @@ public class Enemy : MonoBehaviour {
     private float distancePlayerEnemy;
 
     private bool playerFollowed;
+    private bool currentlyAttacking;
 
     // Money Management Instance Variables
     private MoneyManagement money;
@@ -34,6 +35,7 @@ public class Enemy : MonoBehaviour {
         followSpeed = 0.25f;
         attackSpeed = 0.5f;
         playerFollowed = false;
+        currentlyAttacking = false;
 
         playerObject = GameObject.Find("Player");
         money = playerObject.GetComponent<MoneyManagement>();
@@ -43,8 +45,18 @@ public class Enemy : MonoBehaviour {
     {
         if (playerFollowed && Vector3.Distance(player.position, thisEnemy.position) <= currentAttentionRadius)
         {
-            thisEnemy.rotation = Quaternion.LookRotation(player.position - thisEnemy.position);
-            thisEnemy.position += thisEnemy.TransformDirection(Vector3.forward * followSpeed);
+            // Enemy slowly follows the player
+            if (Vector3.Distance(player.position, thisEnemy.position) >= 30f)
+            {
+                thisEnemy.rotation = Quaternion.LookRotation(player.position - thisEnemy.position);
+                thisEnemy.position += thisEnemy.TransformDirection(Vector3.forward * followSpeed);
+            }
+            // Enemy becomes faster
+            else
+            {
+                thisEnemy.rotation = Quaternion.LookRotation(player.position - thisEnemy.position);
+                thisEnemy.position += thisEnemy.TransformDirection(Vector3.forward * attackSpeed);
+            }
         }
         else
         {
@@ -62,14 +74,26 @@ public class Enemy : MonoBehaviour {
     // When Player enters the Box Collider
     void OnTriggerEnter(Collider col)
     {
+        print("Trigger entered");
+        currentlyAttacking = true;
         if (col.gameObject.tag == "Player")
         {
             playerFollowed = true;
             currentAttentionRadius = followingRadius;
             enemySeen = true;
         }
-        StartCoroutine("attackPlayer");
-    }    
+        if (currentlyAttacking)
+        {
+            InvokeRepeating("attackPlayer", 1.5f, 3.5f);
+        }
+    }
+
+    void OnTriggerExit()
+    {
+        print("Trigger exited");
+        currentlyAttacking = false;
+        CancelInvoke();
+    }
 
     // Enemy returns to its original position
     void returnToOrigin()
@@ -80,12 +104,12 @@ public class Enemy : MonoBehaviour {
     }
 
     // Attack the Player while in range
-    IEnumerator attackPlayer()
+    void attackPlayer()
     {
-        while (playerFollowed)
+        print("coroutine started: " + currentlyAttacking);
+        if (currentlyAttacking)
         {
             money.subtractMoney(3);
-            yield return new WaitForSeconds(5);
         }
     }
 

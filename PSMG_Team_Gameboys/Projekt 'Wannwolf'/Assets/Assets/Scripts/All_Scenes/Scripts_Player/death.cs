@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class death : MonoBehaviour {
+public class Death : MonoBehaviour {
 
     // Instance variables
     public Transform player;
