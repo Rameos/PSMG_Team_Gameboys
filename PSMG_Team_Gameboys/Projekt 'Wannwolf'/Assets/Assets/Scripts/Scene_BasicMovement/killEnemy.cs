@@ -12,6 +12,7 @@ public class KillEnemy : MonoBehaviour {
 
     public Transform enemy;
     public Transform player;
+    public Transform minimapEnemy;
 
     private int hitNumber;
 
@@ -47,6 +48,7 @@ public class KillEnemy : MonoBehaviour {
         if (curHealth == 0)
         {
             DestroyObject(enemy.gameObject);
+            DestroyObject(minimapEnemy.gameObject);
             money.addMoney(15);
         }
     }
