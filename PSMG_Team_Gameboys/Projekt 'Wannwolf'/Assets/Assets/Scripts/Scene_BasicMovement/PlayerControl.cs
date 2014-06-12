@@ -46,6 +46,7 @@ public class PlayerControl : MonoBehaviour {
         sneak = false;
 
         money = GetComponent<MoneyManagement>();
+        
 	}
 	
 	// Update is called once per frame

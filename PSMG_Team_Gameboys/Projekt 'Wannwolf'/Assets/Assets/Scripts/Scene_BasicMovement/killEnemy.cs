@@ -1,21 +1,28 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class killEnemy : MonoBehaviour {
+public class KillEnemy : MonoBehaviour {
 
-    private const int enemyHealth = 5;
-    private const float interactionRadius = 3.0f;
+    private const int maxHealth = 5;
+    private int curHealth;
+  
+    private const float interactionRadius = 8.0f;
 
     public int mouseButtonNum;
 
-    public GameObject enemy;
-    private GameObject player;
+    public Transform enemy;
+    public Transform player;
+    public Transform minimapEnemy;
 
     private int hitNumber;
 
+    MoneyManagement money;
+
     void Awake()
     {
-        player = gameObject;
+        money = player.gameObject.GetComponent<MoneyManagement>();
+        curHealth = maxHealth;
+        updateGUIText(curHealth);
 
         hitNumber = 0;
     }
@@ -23,9 +30,13 @@ public class killEnemy : MonoBehaviour {
     void Update()
     {
         RaycastHit hit = new RaycastHit();
-        if (Physics.Raycast(player.transform.position, player.transform.forward * -1, out hit, interactionRadius) && Input.GetMouseButtonDown(mouseButtonNum))
+        if (Vector3.Distance(player.position, enemy.position) <= interactionRadius && Input.GetKeyDown(KeyCode.R))
         {
+            Debug.Log("R pressed");
             hitNumber++;
+            curHealth--;
+            updateGUIText(curHealth);
+            Debug.Log("HitNum: " + hitNumber + ", curHealth: " + curHealth);
         }
 
         destroyEnemy();
@@ -34,10 +45,19 @@ public class killEnemy : MonoBehaviour {
 
     void destroyEnemy()
     {
-        if (hitNumber == enemyHealth)
+        if (curHealth == 0)
         {
-            DestroyObject(enemy);
+            DestroyObject(enemy.gameObject);
+            DestroyObject(minimapEnemy.gameObject);
+            money.addMoney(15);
         }
+    }
+
+    void updateGUIText(int health)
+    {
+        //enemyHealthText.text = health.ToString();
     }
 	
 }
+
+//Physics.Raycast(player.transform.position, player.transform.forward * -1, out hit, interactionRadius) &&
