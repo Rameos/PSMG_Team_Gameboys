@@ -5,6 +5,6 @@ public class RotateObject : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-		transform.Rotate (new Vector3 (0, 20, 15) * Time.deltaTime);
+		transform.Rotate (new Vector3 (10, 5, 25) * Time.deltaTime);
 	}
 }
