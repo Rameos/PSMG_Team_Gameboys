@@ -4,7 +4,7 @@ using iViewX;
 
 //[RequireComponent(typeof(CameraControl))]
 
-public class startFight : MonoBehaviourWithGazeComponent
+public class StartFight : MonoBehaviourWithGazeComponent
 {
 
  //CameraControl cam;
