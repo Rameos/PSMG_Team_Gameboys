@@ -12,6 +12,7 @@ public class PlayerControl : MonoBehaviour {
     private const float playerWalkSpeed = 20f;
     private const float playerSneakSpeed = 10f;
     private const float gravityBoost = 3.5f;
+	private AudioManager audioManager;
 
     public Transform mainCamera;
 
@@ -46,12 +47,11 @@ public class PlayerControl : MonoBehaviour {
         sneak = false;
 
         money = GetComponent<MoneyManagement>();
-        
 	}
 	
 	// Update is called once per frame
 	void Update () {
-        move();
+		move ();
 	}
 
     //Moves the Player depending on the Inputs
