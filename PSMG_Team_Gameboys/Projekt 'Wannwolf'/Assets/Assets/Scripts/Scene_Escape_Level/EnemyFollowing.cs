@@ -8,16 +8,14 @@ public class EnemyFollowing : MonoBehaviour {
     private GameObject enemy;
 
     private float speed;
-    private float gravity;
+    private float climbSpeed;
     private bool climb;
-    private bool grounded;
 
     void Awake()
     {
-        speed = 0.3f;
-        gravity = 1f;
+        speed = 0.35f;
+        climbSpeed = 3f;
         climb = false;
-        grounded = true;
         enemy = gameObject;
     }
 	
@@ -27,12 +25,8 @@ public class EnemyFollowing : MonoBehaviour {
         if(!climb)
         {
             enemy.transform.position += enemy.transform.TransformDirection(Vector3.forward * speed);
-            if (!grounded)
-            {
-                enemy.transform.position += enemy.transform.TransformDirection(Vector3.down * gravity);
-            }
         }else{
-            enemy.transform.position += enemy.transform.TransformDirection(Vector3.up * speed);
+            enemy.transform.position += enemy.transform.TransformDirection(Vector3.up * speed * climbSpeed);
         }
 	}
 
@@ -55,32 +49,6 @@ public class EnemyFollowing : MonoBehaviour {
         if (col.gameObject.tag == "Barrier")
         {
             climb = false;
-        }
-    }
-
-    void OnCollisionEnter(Collision col)
-    {
-        Debug.LogWarning("CollisionEnter");
-        if (col.gameObject.tag == "Ground")
-        {
-            grounded = true;
-        }
-    }
-
-    void OnCollisionStay(Collision col)
-    {
-        Debug.LogWarning("CollisionEnter");
-        if (col.gameObject.tag == "Ground")
-        {
-            grounded = true;
-        }
-    }
-
-    void OnCollisionExit(Collision col)
-    {
-        if (col.gameObject.tag == "Ground")
-        {
-            grounded = false;
         }
     }
  }
