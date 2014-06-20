@@ -5,10 +5,44 @@ public class AutomaticMovement : MonoBehaviour {
 
     public Transform mainCamera;
 
+    private float speed;
+    private bool stop;
+
+    void Awake()
+    {
+        speed = 0.3f;
+        stop = false;
+    }
+
 	// Update is called once per frame
 	void Update () {
-        //gameObject.transform.rotation = Quaternion.LookRotation(mainCamera.position - gameObject.transform.position);
-        //gameObject.transform.localPosition += gameObject.transform.TransformDirection(Vector3.forward*0.2f);
-        gameObject.transform.position += new Vector3(1f, 0f, 0f) * 0.2f;
+        if (!stop)
+        {
+            gameObject.transform.position += new Vector3(1f, 0f, 0f) * speed;
+        }
 	}
+
+    void OnTriggerEnter(Collider col)
+    {
+        if (col.gameObject.tag == "Barrier")
+        {
+            stop = true;
+        }
+    }
+
+    void OnTriggerStay(Collider col)
+    {
+        if (col.gameObject.tag == "Barrier")
+        {
+            stop = true;
+        }
+    }
+
+    void OnTriggerExit(Collider col)
+    {
+        if (col.gameObject.tag == "Barrier")
+        {
+            stop = false;
+        }
+    }
 }
