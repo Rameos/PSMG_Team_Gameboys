@@ -5,6 +5,7 @@ public class AutomaticMovement : MonoBehaviour {
 
     public Transform mainCamera;
 
+    private MoneyManagement money;
     private float speed;
     private bool stop;
 
@@ -12,6 +13,7 @@ public class AutomaticMovement : MonoBehaviour {
     {
         speed = 0.3f;
         stop = false;
+        money = GetComponent<MoneyManagement>();
     }
 
 	// Update is called once per frame
@@ -43,6 +45,15 @@ public class AutomaticMovement : MonoBehaviour {
         if (col.gameObject.tag == "Barrier")
         {
             stop = false;
+        }
+    }
+
+    void OnCollisionEnter(Collision col)
+    {
+        if (col.gameObject.tag == "Mushroom")
+        {
+            money.addMoney(1);
+            GameObject.Destroy(col.gameObject);
         }
     }
 }
