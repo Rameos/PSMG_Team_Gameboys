@@ -12,6 +12,9 @@ public class PlayerControl : MonoBehaviour {
     private const float playerWalkSpeed = 20f;
     private const float playerSneakSpeed = 10f;
     private const float gravityBoost = 3.5f;
+	private const int slowWalking = 0;
+	private const int speedWalking = 1;
+
 
     public Transform mainCamera;
 
@@ -29,11 +32,12 @@ public class PlayerControl : MonoBehaviour {
     private bool sneak;
 
     MoneyManagement money; // Money Management
+	AudioManager audioManager;
 
 	// Use this for initialization
 	void Awake () {
         characterController = GetComponent<CharacterController>();
-        
+		audioManager = GetComponent<AudioManager>();   
         gravity = Vector3.zero;
         alternativeMoveTo = Vector3.zero;
 
@@ -46,12 +50,11 @@ public class PlayerControl : MonoBehaviour {
         sneak = false;
 
         money = GetComponent<MoneyManagement>();
-        
 	}
 	
 	// Update is called once per frame
 	void Update () {
-        move();
+		move ();
 	}
 
     //Moves the Player depending on the Inputs
@@ -74,18 +77,23 @@ public class PlayerControl : MonoBehaviour {
 
         setGravity();
         setupMoveToVector(ref moveTo);
-        
-        if (horizontal != 0 || vertical != 0)
-        {
-            alternativeMoveTo = moveTo;
-            Quaternion playerRotation = new Quaternion(mainCamera.localRotation.x, 0f, mainCamera.localRotation.z, 0f);
-            characterController.transform.rotation = playerRotation;
-        }else if (jumping && horizontal == 0 && vertical == 0)
-             {
-                 characterController.Move(alternativeMoveTo * Time.deltaTime);
-             }
+
+        if (horizontal != 0 || vertical != 0) {
+			playWalkingSound ();
+			alternativeMoveTo = moveTo;
+			Quaternion playerRotation = new Quaternion (mainCamera.localRotation.x, 0f, mainCamera.localRotation.z, 0f);
+			characterController.transform.rotation = playerRotation;
+		} else if (jumping && horizontal == 0 && vertical == 0) {
+			characterController.Move (alternativeMoveTo * Time.deltaTime);
+			audioManager.handleWalkingSound(false);
+		} else if (horizontal != 0 || vertical != 0) {
+			audioManager.handleWalkingSound(false);	
+		}else if (jumping){
+			audioManager.handleWalkingSound(false);
+		}
 
         characterController.Move(moveTo * Time.deltaTime);
+
     }
 
     //Checks if sneak key is pressed
@@ -117,10 +125,12 @@ public class PlayerControl : MonoBehaviour {
         {
             countRunTime();
             playerSpeed = playerRunSpeed;
+			audioManager.handleSpeedWalkingSound(speedWalking);
         }
         else
         {
             runRest();
+			audioManager.handleSpeedWalkingSound(slowWalking);
         }
     }
 
@@ -188,4 +198,10 @@ public class PlayerControl : MonoBehaviour {
         moveToVector *= playerSpeed;
         moveToVector += gravity;
     }
+
+	void playWalkingSound(){
+		if (!AudioManager.isWalkingSoundPlaying) {
+			audioManager.handleWalkingSound(true);	
+		}
+	}
 }
