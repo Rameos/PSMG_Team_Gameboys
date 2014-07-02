@@ -10,7 +10,6 @@ public class Loadscreen : MonoBehaviour {
         if (col.gameObject.tag == "Player")
         {
             Application.LoadLevel(loadScreen);
-            LoadList.increaseLoadNum();
         }
     }
 }
