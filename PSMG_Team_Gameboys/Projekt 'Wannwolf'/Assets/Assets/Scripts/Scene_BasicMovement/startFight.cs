@@ -4,7 +4,7 @@ using iViewX;
 
 //[RequireComponent(typeof(CameraControl))]
 
-public class StartFight : MonoBehaviourWithGazeComponent
+public class startFight : MonoBehaviourWithGazeComponent
 {
 
  //CameraControl cam;
@@ -108,7 +108,19 @@ public class StartFight : MonoBehaviourWithGazeComponent
     }
     public override void OnGazeStay(RaycastHit hit)
     {
+        drawLine();
+       
 
+    }
+
+    public void OnMouseDown()
+    {
+        drawLine();
+
+    }
+
+    void drawLine()
+    {
         if (stat == true)
         {
             Debug.Log("Gaze");
