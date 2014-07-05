@@ -15,12 +15,13 @@ public class startFight : MonoBehaviourWithGazeComponent
  
     private bool draw = false;
     private bool drawNext = false;
-    private float xMax = 550f;
-    private float xMin = 400f;
-    private float yMax = 700f;
-    private float yMin = 100f;
-    private float xLinePos = 430f;
-    private float xLineMaxPos = 700f;
+    private float xMax;
+    private float xMin;
+    private float yMax;
+    private float yMin;
+    private float xLinePos;
+    private float xLineMaxPos;
+    private float yLinePos;
     private int countCuts = 0;
     private bool stat = false;
 
@@ -32,6 +33,13 @@ public class startFight : MonoBehaviourWithGazeComponent
         //Debug.Log(cam);
         StaticCamera.enabled = false;
         MainCamera.enabled = true;
+        xLinePos = (Screen.width - Screen.width / 2) - 250;
+        yLinePos = (Screen.height - Screen.height / 2) - 50;
+        xMax = xLinePos + 50;
+        xMin = xLinePos - 50;
+        yMax = yLinePos + 200;
+        yMin = yLinePos - 100;
+        
 
     }
 
@@ -44,6 +52,7 @@ public class startFight : MonoBehaviourWithGazeComponent
             Destroy(gameObject);
 
         }
+        checkMousePosition();
     }
 
 
@@ -78,11 +87,12 @@ public class startFight : MonoBehaviourWithGazeComponent
     {
         if (draw == true && countCuts <11)
         {
-            xLinePos = 430f;
+            xLinePos = (Screen.width - Screen.width / 2) - 250; 
             for (int i = 0; i < 10; i++)
             {
                 GUI.color = Color.yellow;
-                GUI.Box(new Rect(xLinePos, 280, 50, 50), "---------");
+                string pos = Input.mousePosition.x.ToString();
+                GUI.Box(new Rect(xLinePos, yLinePos, 50, 50), "---------");
                 xLinePos += 50;
             }
            
@@ -90,11 +100,11 @@ public class startFight : MonoBehaviourWithGazeComponent
         }
         if (drawNext == true )
         {
-            xLinePos = 430f;
+            xLinePos = (Screen.width - Screen.width / 2) - 250;
             for (int i = 0; i < countCuts; i++)
             {
                 GUI.color = Color.red;
-                GUI.Box(new Rect(xLinePos, 280, 50, 50), "---------");
+                GUI.Box(new Rect(xLinePos, yLinePos, 50, 50), "---------");
                 xLinePos += 50;
             }
            
@@ -107,15 +117,25 @@ public class startFight : MonoBehaviourWithGazeComponent
 
     }
     public override void OnGazeStay(RaycastHit hit)
+
     {
-        drawLine();
+        if (gazeModel.posGazeRight.x >= xMin && gazeModel.posGazeRight.x <= xMax && gazeModel.posGazeRight.y >= yMin && gazeModel.posGazeRight.y <= yMax)
+        {
+            drawLine();
+        
+        }
+        
        
 
     }
 
-    public void OnMouseDown()
+
+    void checkMousePosition()
     {
-        drawLine();
+        if (Input.mousePosition.x >= xMin && Input.mousePosition.x <= xMax && Input.mousePosition.y >= yMin && Input.mousePosition.y <= yMax)
+        {
+            drawLine();
+        }
 
     }
 
@@ -123,17 +143,14 @@ public class startFight : MonoBehaviourWithGazeComponent
     {
         if (stat == true)
         {
-            Debug.Log("Gaze");
 
-            if (gazeModel.posGazeRight.x >= xMin && gazeModel.posGazeRight.x <= xMax && gazeModel.posGazeRight.y >= yMin && gazeModel.posGazeRight.y <= yMax)
-            {
-                Debug.Log("cut");
                 xMin += 50;
                 xMax += 50;
                 countCuts++;
                 //draw = false;
                 drawNext = true;
-            }
+               
+            
         }
 
     }
