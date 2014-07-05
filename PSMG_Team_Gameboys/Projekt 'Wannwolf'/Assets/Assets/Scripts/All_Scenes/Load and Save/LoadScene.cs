@@ -3,19 +3,24 @@ using System.Collections;
 
 public class LoadScene : MonoBehaviour
 {
-    private string[] levels = new string[2] {"Escape_Level_Basic", "BasicMovement"};
+    private SceneFader sceneFader;
+    private string[] levels = new string[3] {"BasicMovement", "Escape_Level_Basic", "BasicMovement"};
     private static int loadNum = 0;
 
     // Use this for initialization
     void Awake()
-    {   
-        StartCoroutine(load());
+    {
+        sceneFader = GetComponent<SceneFader>();
     }
 
-    IEnumerator load()
+    public void loadScene()
     {
-        yield return new WaitForSeconds(10);
-        Application.LoadLevel(levels[loadNum]);
+        sceneFader.switchScene(levels[loadNum]);
+        increaseLoadNum();
+    }
+
+    void increaseLoadNum()
+    {
         if (loadNum < levels.Length - 1)
         {
             loadNum++;

@@ -17,7 +17,7 @@ public class AutomaticMovement : MonoBehaviour {
     }
 
 	// Update is called once per frame
-	void Update () {
+	void FixedUpdate () {
         if (!stop)
         {
             gameObject.transform.position += new Vector3(1f, 0f, 0f) * speed;

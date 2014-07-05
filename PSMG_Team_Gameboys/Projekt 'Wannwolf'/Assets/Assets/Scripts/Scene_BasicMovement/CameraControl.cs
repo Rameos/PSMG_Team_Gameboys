@@ -28,7 +28,7 @@ public class CameraControl : MonoBehaviour {
         minCameraDistance = 5f;
 	}
 
-    void LateUpdate()
+    void FixedUpdate()
     {
         mainCamera.rotation = Quaternion.Euler(mouseY, mouseX, 0);
         mainCamera.position = mainCamera.rotation * new Vector3(0, 0, -walkDistance) + target.position;

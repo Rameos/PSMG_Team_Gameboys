@@ -20,7 +20,7 @@ public class EnemyFollowing : MonoBehaviour {
     }
 	
 	// Update is called once per frame
-	void Update () {
+	void FixedUpdate () {
         enemy.transform.rotation = Quaternion.LookRotation(player.position - enemy.transform.position);
         if(!climb)
         {
