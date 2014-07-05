@@ -263,13 +263,13 @@ namespace iViewX
             {
                 Vector2 gazePos = (gazeModel.posGazeLeft + gazeModel.posGazeRight) * 0.5f;
                 gazePos.y = Screen.height - gazePos.y;
-                raygaze = Camera.current.ScreenPointToRay(gazePos);
+                raygaze = Camera.main.ScreenPointToRay(gazePos);
             }
 
             //Usee the MouseInput as a DebugInput, if no EyeTracker runs
             else
             {
-                raygaze = Camera.current.ScreenPointToRay(Input.mousePosition);
+                raygaze = Camera.main.ScreenPointToRay(Input.mousePosition);
             }
 
 

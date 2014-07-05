@@ -15,8 +15,10 @@ public class startFight : MonoBehaviourWithGazeComponent
  
     private bool draw = false;
     private bool drawNext = false;
-    private float xMax;
-    private float xMin;
+    private float xMaxMouse;
+    private float xMinMouse;
+    private float xMaxEye;
+    private float xMinEye;
     private float yMax;
     private float yMin;
     private float xLinePos;
@@ -24,6 +26,10 @@ public class startFight : MonoBehaviourWithGazeComponent
     private float yLinePos;
     private int countCuts = 0;
     private bool stat = false;
+    private int mouseCuts = 1;
+    private int eyeCuts = 2;
+    private float mousePos = 50;
+    private float eyePos = 100;
 
 
 
@@ -35,8 +41,10 @@ public class startFight : MonoBehaviourWithGazeComponent
         MainCamera.enabled = true;
         xLinePos = (Screen.width - Screen.width / 2) - 250;
         yLinePos = (Screen.height - Screen.height / 2) - 50;
-        xMax = xLinePos + 50;
-        xMin = xLinePos - 50;
+        xMaxMouse = xLinePos + 50;
+        xMinMouse = xLinePos - 50;
+        xMaxEye = xLinePos + 80;
+        xMinEye = xLinePos - 80;
         yMax = yLinePos + 200;
         yMin = yLinePos - 100;
         
@@ -52,7 +60,10 @@ public class startFight : MonoBehaviourWithGazeComponent
             Destroy(gameObject);
 
         }
-        checkMousePosition();
+      
+            checkMousePosition();
+            checkGazePosition();
+        
     }
 
 
@@ -75,6 +86,7 @@ public class startFight : MonoBehaviourWithGazeComponent
 
         MainCamera.enabled = false;
         StaticCamera.enabled = true;
+
         stat = true;
         draw = true;
  
@@ -91,7 +103,6 @@ public class startFight : MonoBehaviourWithGazeComponent
             for (int i = 0; i < 10; i++)
             {
                 GUI.color = Color.yellow;
-                string pos = Input.mousePosition.x.ToString();
                 GUI.Box(new Rect(xLinePos, yLinePos, 50, 50), "---------");
                 xLinePos += 50;
             }
@@ -113,45 +124,53 @@ public class startFight : MonoBehaviourWithGazeComponent
 
     public override void OnGazeEnter(RaycastHit hit)
     {
-       
 
+       
     }
     public override void OnGazeStay(RaycastHit hit)
 
     {
-        if (gazeModel.posGazeRight.x >= xMin && gazeModel.posGazeRight.x <= xMax && gazeModel.posGazeRight.y >= yMin && gazeModel.posGazeRight.y <= yMax)
-        {
-            drawLine();
-        
-        }
-        
+
+        //checkGazePosition();
        
+
+    }
+
+    void checkGazePosition()
+    {
+        Debug.Log(gazeModel.posGazeRight.x);
+        if (gazeModel.posGazeRight.x >= xMinEye && gazeModel.posGazeRight.x <= xMaxEye && gazeModel.posGazeRight.y >= yMin && gazeModel.posGazeRight.y <= yMax)
+        {
+            drawLine(eyePos, eyeCuts);
+
+        }
 
     }
 
 
     void checkMousePosition()
     {
-        if (Input.mousePosition.x >= xMin && Input.mousePosition.x <= xMax && Input.mousePosition.y >= yMin && Input.mousePosition.y <= yMax)
+        if (Input.mousePosition.x >= xMinMouse && Input.mousePosition.x <= xMaxMouse && Input.mousePosition.y >= yMin && Input.mousePosition.y <= yMax)
         {
-            drawLine();
+            drawLine(mousePos, mouseCuts);
         }
 
     }
 
-    void drawLine()
+    void drawLine(float pos, int cuts)
     {
         if (stat == true)
         {
 
-                xMin += 50;
-                xMax += 50;
-                countCuts++;
-                //draw = false;
-                drawNext = true;
+            xMinMouse += pos;
+            xMaxMouse += pos;
+            xMinEye += pos;
+            xMaxEye += pos;
+            countCuts += cuts;
+            drawNext = true;
+        }
                
             
-        }
 
     }
 
