@@ -8,7 +8,7 @@ public class LoadGameSetings : MonoBehaviour {
         if (PlayerPrefsX.GetBool("GameSaved") && PlayerPrefs.GetString("SceneToLoad").Equals(Application.loadedLevelName))
         {
             loadPlayer();
-            loadBierber();
+            //loadBierber();
             //loadBier();
             //loadPizza();
         }
