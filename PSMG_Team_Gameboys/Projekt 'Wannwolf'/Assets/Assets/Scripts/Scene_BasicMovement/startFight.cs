@@ -3,6 +3,7 @@ using System.Collections;
 using iViewX;
 
 //[RequireComponent(typeof(CameraControl))]
+[RequireComponent(typeof(RecyclePizza))]
 
 public class startFight : MonoBehaviourWithGazeComponent
 {
@@ -24,12 +25,13 @@ public class startFight : MonoBehaviourWithGazeComponent
     private float xLinePos;
     private float xLineMaxPos;
     private float yLinePos;
-    private int countCuts = 0;
+    private int countCuts;
     private bool stat = false;
     private int mouseCuts = 1;
     private int eyeCuts = 2;
     private float mousePos = 50;
     private float eyePos = 100;
+    private RecyclePizza recycle;
 
 
 
@@ -39,6 +41,14 @@ public class startFight : MonoBehaviourWithGazeComponent
         //Debug.Log(cam);
         StaticCamera.enabled = false;
         MainCamera.enabled = true;
+        setValues();
+        recycle = GetComponent<RecyclePizza>();
+        
+
+    }
+
+    void setValues()
+    {
         xLinePos = (Screen.width - Screen.width / 2) - 250;
         yLinePos = (Screen.height - Screen.height / 2) - 50;
         xMaxMouse = xLinePos + 50;
@@ -47,7 +57,9 @@ public class startFight : MonoBehaviourWithGazeComponent
         xMinEye = xLinePos - 80;
         yMax = yLinePos + 200;
         yMin = yLinePos - 100;
-        
+        stat = false;
+        draw = false;
+        countCuts = 0;
 
     }
 
@@ -57,7 +69,10 @@ public class startFight : MonoBehaviourWithGazeComponent
         {
             MainCamera.enabled = true;
             StaticCamera.enabled = false;
-            Destroy(gameObject);
+            setValues();
+            recycle.recycleEnemy();
+           
+            
 
         }
       
@@ -65,6 +80,8 @@ public class startFight : MonoBehaviourWithGazeComponent
             checkGazePosition();
         
     }
+
+   
 
 
     void OnTriggerEnter(Collider col)
@@ -138,7 +155,6 @@ public class startFight : MonoBehaviourWithGazeComponent
 
     void checkGazePosition()
     {
-        Debug.Log(gazeModel.posGazeRight.x);
         if (gazeModel.posGazeRight.x >= xMinEye && gazeModel.posGazeRight.x <= xMaxEye && gazeModel.posGazeRight.y >= yMin && gazeModel.posGazeRight.y <= yMax)
         {
             drawLine(eyePos, eyeCuts);
