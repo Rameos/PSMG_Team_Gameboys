@@ -19,34 +19,34 @@ public class LoadScene : MonoBehaviour
         increaseLoadNum();
     }
 
-    public static void loadMainMenu()
+    public static void loadLastGame()
     {
-        sceneFader.switchScene(mainMenu);
-    }
-
-    static void increaseLoadNum()
-    {
-        if (loadNum < levels.Length - 1)
-        {
-            loadNum++;
-        }
+        sceneFader.switchScene(PlayerPrefs.GetString("SceneToLoad"));
     }
 
     public static void loadFirstLevel()
     {
         resetLoadNum();
         PlayerPrefs.DeleteAll();
-        loadScene();
+        sceneFader.switchScene(levels[loadNum]);
     }
 
-    public static void loadSavedGame()
+    public static void loadMainMenu()
     {
-        sceneFader.switchScene(PlayerPrefs.GetString("SceneToLoad"));
+        sceneFader.switchScene(mainMenu);
     }
 
-    static void resetLoadNum()
+   static void resetLoadNum()
     {
         loadNum = 0;
     }
+
+   static void increaseLoadNum()
+   {
+       if (loadNum < levels.Length - 1)
+       {
+           loadNum++;
+       }
+   }
 }
 

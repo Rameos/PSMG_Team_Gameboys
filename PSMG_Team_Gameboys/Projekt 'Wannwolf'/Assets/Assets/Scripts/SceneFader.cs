@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class SceneFader : MonoBehaviour {
+public class SceneFader : MonoBehaviour
+{
 
     public Texture2D texture;
 
@@ -20,9 +21,10 @@ public class SceneFader : MonoBehaviour {
         screenRect = new Rect(0, 0, Screen.width, Screen.height);
         currentColor = Color.black;
     }
-	
-	// Update is called once per frame
-	void Update () {
+
+    // Update is called once per frame
+    void FixedUpdate()
+    {
         if (isStarting)
         {
             fadeIn();
@@ -31,7 +33,7 @@ public class SceneFader : MonoBehaviour {
         {
             fadeOut();
         }
-	}
+    }
 
     void OnGUI()
     {
@@ -58,7 +60,8 @@ public class SceneFader : MonoBehaviour {
     {
         currentColor = Color.Lerp(currentColor, Color.black, fadeSpeed * Time.deltaTime);
 
-        if(currentColor.a >= 0.95f){
+        if (currentColor.a >= 0.95f)
+        {
             currentColor.a = 1f;
             Application.LoadLevel(nextLevel);
         }
@@ -71,3 +74,4 @@ public class SceneFader : MonoBehaviour {
         isStarting = false;
     }
 }
+

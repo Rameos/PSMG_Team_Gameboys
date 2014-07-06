@@ -4,22 +4,21 @@ using System.Collections;
 public class Menu : MonoBehaviour {
 
     private static string firstLevel = "BasicMovement";
-
+ 
 	void OnGUI(){
-        if (GUI.Button(new Rect(15, 15, 100, 50), "New Game"))
+        if (GUI.Button(new Rect(15, 15, 200, 100), "New Game"))
         {
             LoadScene.loadFirstLevel();
         }
 
-        if (GUI.Button(new Rect(15, 130, 100, 50), "Load Last"))
+        if (GUI.Button(new Rect(15, 130, 200, 100), "Load Last"))
         {
             if (PlayerPrefs.HasKey("GameSaved"))
             {
-                LoadScene.loadSavedGame();
+                LoadScene.loadLastGame();
             }
         }
-
-        if (GUI.Button(new Rect(15, 245, 100, 50), "Quit Game"))
+        if (GUI.Button(new Rect(15, 245, 200, 100), "Quit Game"))
         {
             Application.Quit();
         }

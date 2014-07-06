@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class LoadGameSetings : MonoBehaviour {
+public class LoadGameSettings : MonoBehaviour {
 
     void Awake()
     {

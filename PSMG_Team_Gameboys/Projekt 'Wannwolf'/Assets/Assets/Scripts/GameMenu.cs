@@ -48,6 +48,7 @@ public class GameMenu : MonoBehaviour {
             if (GUI.Button(new Rect((width-100)/2, height/2 + 225, 100, 50), "Quit"))
             {
                 LoadScene.loadMainMenu();
+                toggleTimeScale();
             }
         }
     }

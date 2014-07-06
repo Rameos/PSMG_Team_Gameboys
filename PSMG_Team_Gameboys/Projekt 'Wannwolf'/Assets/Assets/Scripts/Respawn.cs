@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Respawn : MonoBehaviour {
+public class Respawn : MonoBehaviour
+{
 
     public Texture2D texture;
 
@@ -108,7 +109,7 @@ public class Respawn : MonoBehaviour {
         if (curMoney <= moneyMinimum)
         {
             // b) Relocate player at the begin of the level if no money is left
-            respawnPosition  = new Vector3(96f, 107f, 101f);
+            respawnPosition = new Vector3(96f, 107f, 101f);
             money.setCurrentMoney(moneyMaximum);
         }
     }
@@ -126,3 +127,4 @@ public class Respawn : MonoBehaviour {
         }
     }
 }
+
