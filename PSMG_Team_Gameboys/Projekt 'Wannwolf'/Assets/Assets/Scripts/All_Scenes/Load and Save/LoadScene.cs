@@ -3,23 +3,28 @@ using System.Collections;
 
 public class LoadScene : MonoBehaviour
 {
-    private SceneFader sceneFader;
-    private string[] levels = new string[3] {"BasicMovement", "Escape_Level_Basic", "BasicMovement"};
+    private static SceneFader sceneFader;
+    private static string[] levels = new string[3] {"BasicMovement", "Escape_Level_Basic", "BasicMovement"};
+    private static string mainMenu = "load_test_scene";
     private static int loadNum = 0;
 
-    // Use this for initialization
     void Awake()
     {
         sceneFader = GetComponent<SceneFader>();
     }
 
-    public void loadScene()
+    public static void loadScene()
     {
         sceneFader.switchScene(levels[loadNum]);
         increaseLoadNum();
     }
 
-    void increaseLoadNum()
+    public static void loadMainMenu()
+    {
+        sceneFader.switchScene(mainMenu);
+    }
+
+    static void increaseLoadNum()
     {
         if (loadNum < levels.Length - 1)
         {
@@ -27,7 +32,19 @@ public class LoadScene : MonoBehaviour
         }
     }
 
-    public static void resetLoadNum()
+    public static void loadFirstLevel()
+    {
+        resetLoadNum();
+        PlayerPrefs.DeleteAll();
+        loadScene();
+    }
+
+    public static void loadSavedGame()
+    {
+        sceneFader.switchScene(PlayerPrefs.GetString("SceneToLoad"));
+    }
+
+    static void resetLoadNum()
     {
         loadNum = 0;
     }

@@ -37,7 +37,7 @@ public class GameMenu : MonoBehaviour {
             {
                 toggleTimeScale();
                 toggleAudioListener();
-                Menu.loadFirstLevel();
+                LoadScene.loadFirstLevel();
             }
 
             if (GUI.Button(new Rect((width-100)/2, height/2 + 150, 100, 50), "Save Game"))
@@ -45,9 +45,9 @@ public class GameMenu : MonoBehaviour {
                 Save.saveGame();
             }
 
-            if (GUI.Button(new Rect((width-100)/2, height/2 + 225, 100, 50), "Exit Game"))
+            if (GUI.Button(new Rect((width-100)/2, height/2 + 225, 100, 50), "Quit"))
             {
-                Application.Quit();
+                LoadScene.loadMainMenu();
             }
         }
     }

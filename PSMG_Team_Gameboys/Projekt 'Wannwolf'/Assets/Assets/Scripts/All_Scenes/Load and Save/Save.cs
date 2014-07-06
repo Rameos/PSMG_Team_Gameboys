@@ -21,7 +21,7 @@ public class Save : MonoBehaviour {
     {
         saveScene();
         savePlayer();
-        saveBierber();
+        //saveBierber();
         //saveBier();
         //savePizza();
         PlayerPrefs.Save();
