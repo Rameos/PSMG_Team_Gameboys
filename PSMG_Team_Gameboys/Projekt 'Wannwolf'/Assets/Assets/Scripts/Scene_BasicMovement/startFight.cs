@@ -32,6 +32,7 @@ public class startFight : MonoBehaviourWithGazeComponent
     private float mousePos = 50;
     private float eyePos = 100;
     private RecyclePizza recycle;
+    private bool fClicked = false;
 
 
 
@@ -60,6 +61,7 @@ public class startFight : MonoBehaviourWithGazeComponent
         stat = false;
         draw = false;
         countCuts = 0;
+        fClicked = false;
 
     }
 
@@ -87,11 +89,27 @@ public class startFight : MonoBehaviourWithGazeComponent
     void OnTriggerEnter(Collider col)
     {
 
+        
+
         if (col.gameObject.tag == "Player")
-        {
+        { 
 
             StartCoroutine(startPizzaFight(5));
         }
+    }
+
+    void OnTriggerStay(Collider col)
+    {
+        if (col.gameObject.tag == "Player")
+        {
+            if (Input.GetKeyDown("f"))
+            {
+                Debug.Log("f clicked");
+                StopAllCoroutines();
+                fight();
+            }
+        }
+
     }
 
     IEnumerator startPizzaFight(float seconds)
@@ -100,16 +118,25 @@ public class startFight : MonoBehaviourWithGazeComponent
     
         yield return new WaitForSeconds(seconds);
         Debug.Log("5 Sekunden");
+        if (fClicked == false)
+        {
+            fight();
+        }
+       
+ 
 
+
+        
+    }
+
+    void fight()
+    {
         MainCamera.enabled = false;
         StaticCamera.enabled = true;
 
         stat = true;
         draw = true;
- 
 
-
-        
     }
 
     void OnGUI()
