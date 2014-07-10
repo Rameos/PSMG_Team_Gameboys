@@ -11,7 +11,7 @@ public class startFight : MonoBehaviourWithGazeComponent
  //CameraControl cam;
     public Camera MainCamera;
     public Camera StaticCamera;
-    private GameObject pizza;
+    public Transform pizza;
 
  
     private bool draw = false;
@@ -104,12 +104,20 @@ public class startFight : MonoBehaviourWithGazeComponent
         MainCamera.enabled = false;
         StaticCamera.enabled = true;
 
+        GetComponent<FollowPlayer>().enabled = false;
+        rotatePizza();
+
         stat = true;
         draw = true;
- 
+    }
 
-
-        
+    void rotatePizza()
+    {
+        float currentX = pizza.eulerAngles.x;
+        float currentY = pizza.eulerAngles.y;
+        float currentZ = pizza.eulerAngles.z;
+        pizza.Rotate(currentX - 90, currentY - 180, currentZ -0);
+        print("" + currentX + ", " + currentY + ", " + currentZ);
     }
 
     void OnGUI()
