@@ -34,6 +34,10 @@ public class PlayerControl : MonoBehaviour {
     MoneyManagement money; // Money Management
 	AudioManager audioManager;
 
+    // Beverages
+    public bool hasVodka;
+    public bool hasWater;
+
 	// Use this for initialization
 	void Awake () {
         characterController = GetComponent<CharacterController>();
@@ -50,6 +54,9 @@ public class PlayerControl : MonoBehaviour {
         sneak = false;
 
         money = GetComponent<MoneyManagement>();
+
+        hasVodka = false;
+        hasWater = false;
 	}
 	
 	// Update is called once per frame
