@@ -18,7 +18,7 @@ public class Respawn : MonoBehaviour
 
     void Awake()
     {
-        deathzoneTags = new string[2] { "DeathzoneRiver", "DeathzoneGap" };
+        deathzoneTags = new string[3] { "DeathzoneRiver", "DeathzoneGap", "Enemy"};
         dying = false;
         respawn = false;
         currentColor = Color.black;
