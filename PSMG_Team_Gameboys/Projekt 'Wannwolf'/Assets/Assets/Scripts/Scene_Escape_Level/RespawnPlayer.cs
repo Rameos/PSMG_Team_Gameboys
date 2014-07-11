@@ -7,7 +7,7 @@ public class RespawnPlayer : MonoBehaviour {
     {
         if (col.gameObject.tag == "Enemy")
         {
-            gameObject.transform.position = Vector3.zero;
+            
         }
     }
 }

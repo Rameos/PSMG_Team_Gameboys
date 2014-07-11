@@ -8,12 +8,21 @@ public class AutomaticMovement : MonoBehaviour {
     private MoneyManagement money;
     private float speed;
     private bool stop;
+    private EscapeCountdown escapeCountdown;
 
     void Awake()
     {
         speed = 0.3f;
-        stop = false;
+        stop = true;
         money = GetComponent<MoneyManagement>();
+        escapeCountdown = GetComponent<EscapeCountdown>();
+        StartCoroutine(wait());
+    }
+
+    IEnumerator wait()
+    {
+        yield return new WaitForSeconds(1.8f);
+        stop = false;
     }
 
 	// Update is called once per frame

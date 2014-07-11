@@ -8,9 +8,13 @@ public class LoadGameSettings : MonoBehaviour {
         if (PlayerPrefsX.GetBool("GameSaved") && PlayerPrefs.GetString("SceneToLoad").Equals(Application.loadedLevelName))
         {
             loadPlayer();
-            //loadBierber();
-            //loadBier();
-            //loadPizza();
+            loadBierber();
+            loadBierberBody();
+            loadBierberHead();
+            loadFallenTree();
+            loadInvisibleWall();
+            loadBier();
+            loadPizza();
         }
     }
 
@@ -28,9 +32,33 @@ public class LoadGameSettings : MonoBehaviour {
         bierber.transform.rotation = PlayerPrefsX.GetQuaternion("BierberRotation");
     }
 
+    void loadBierberBody()
+    {
+        GameObject bierberBody = GameObject.FindGameObjectWithTag("BierberBody");
+        bierberBody.renderer.enabled = PlayerPrefsX.GetBool("BierberBodyRendered");
+    }
+
+    void loadBierberHead()
+    {
+        GameObject bierberHead = GameObject.FindGameObjectWithTag("BierberHead");
+        bierberHead.renderer.enabled = PlayerPrefsX.GetBool("BierberHeadRendered");
+    }
+
+    void loadFallenTree()
+    {
+        GameObject fallenTree = GameObject.FindGameObjectWithTag("FallenTree");
+        fallenTree.renderer.enabled = PlayerPrefsX.GetBool("FallenTreeRendered");
+    }
+
+    void loadInvisibleWall()
+    {
+        GameObject invisibleWall = GameObject.FindGameObjectWithTag("BierberInvisibleWall");
+        invisibleWall.collider.enabled = PlayerPrefsX.GetBool("BierberInvisibleWall");
+    }
+
     void loadBier()
     {
-        GameObject bier = GameObject.FindGameObjectWithTag("Bier");
+        GameObject bier = GameObject.FindGameObjectWithTag("Beer");
         bier.transform.position = PlayerPrefsX.GetVector3("BierPosition");
         bier.transform.rotation = PlayerPrefsX.GetQuaternion("BierRotation");
     }

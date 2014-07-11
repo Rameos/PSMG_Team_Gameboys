@@ -6,27 +6,43 @@ public class EnemyFollowing : MonoBehaviour {
     public Transform player;
 
     private GameObject enemy;
+    private EscapeCountdown escapeCountdown;
 
     private float speed;
     private float climbSpeed;
     private bool climb;
+    private bool go;
 
     void Awake()
     {
+        go = false;
         speed = 0.35f;
         climbSpeed = 3f;
         climb = false;
         enemy = gameObject;
+        escapeCountdown = GetComponent<EscapeCountdown>();
+        StartCoroutine(wait());
+    }
+
+    IEnumerator wait()
+    {
+        yield return new WaitForSeconds(1.8f);
+        go = true;
     }
 	
 	// Update is called once per frame
 	void FixedUpdate () {
-        enemy.transform.rotation = Quaternion.LookRotation(player.position - enemy.transform.position);
-        if(!climb)
+        if (go)
         {
-            enemy.transform.position += enemy.transform.TransformDirection(Vector3.forward * speed);
-        }else{
-            enemy.transform.position += enemy.transform.TransformDirection(Vector3.up * speed * climbSpeed);
+            enemy.transform.rotation = Quaternion.LookRotation(player.position - enemy.transform.position);
+            if (!climb)
+            {
+                enemy.transform.position += enemy.transform.TransformDirection(Vector3.forward * speed);
+            }
+            else
+            {
+                enemy.transform.position += enemy.transform.TransformDirection(Vector3.up * speed * climbSpeed);
+            }
         }
 	}
 
