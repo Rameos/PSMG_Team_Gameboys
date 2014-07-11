@@ -72,7 +72,7 @@ public class startFight : MonoBehaviourWithGazeComponent
             MainCamera.enabled = true;
             StaticCamera.enabled = false;
             setValues();
-            StopCoroutine(startPizzaFight(5));
+            StopAllCoroutines();
             recycle.recycleEnemy();
         }
       
