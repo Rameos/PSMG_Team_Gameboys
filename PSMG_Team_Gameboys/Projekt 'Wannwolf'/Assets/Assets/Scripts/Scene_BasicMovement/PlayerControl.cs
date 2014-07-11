@@ -6,7 +6,7 @@ using System.Collections;
 public class PlayerControl : MonoBehaviour {
 
     private const float minTime = 3f;   //Min time the player has to rest after a 'full' run
-    private const float maxTime = 6f;   //Max time the player is able to run
+    private static float maxTime = 6f;   //Max time the player is able to run
     private const float jumpStrength = 20f;
     private const float playerRunSpeed = 30f;
     private const float playerWalkSpeed = 20f;
@@ -210,5 +210,13 @@ public class PlayerControl : MonoBehaviour {
 		if (!AudioManager.isWalkingSoundPlaying) {
 			audioManager.handleWalkingSound(true);	
 		}
+	}
+
+	public static float getSprintTime () {
+		return maxTime;
+	}
+
+	public static void setSprintTime (float time) {
+		maxTime = time;
 	}
 }
