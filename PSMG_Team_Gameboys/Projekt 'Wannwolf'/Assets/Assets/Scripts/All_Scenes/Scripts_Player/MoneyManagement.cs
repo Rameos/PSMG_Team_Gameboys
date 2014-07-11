@@ -8,6 +8,10 @@ public class MoneyManagement : MonoBehaviour {
 	int moneyMaximum;
 	int currentMoney;
 	public GUIText moneyText;
+
+	public MoneyManagement () {
+		Start ();
+	}
 	
 	// Initialize instance variables on gamestart
 	void Start () {
@@ -44,6 +48,8 @@ public class MoneyManagement : MonoBehaviour {
     public int getMoneyMaximum() { return moneyMaximum; }
 
     // Setter methods for instance variables
-    public void setCurrentMoney(int value) { currentMoney = value; } 
+    public void setCurrentMoney(int value) { currentMoney = value; }
+	public void setMoneyMaximum(int newMax) { moneyMaximum = newMax; } 
+	public void updateMoneyView (){ updateGuiText (); }
 	
 }
