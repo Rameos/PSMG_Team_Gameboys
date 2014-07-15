@@ -3,7 +3,6 @@ using System.Collections;
 
 public class Menu : MonoBehaviour {
 
-    private static string firstLevel = "BasicMovement";
  
 	void OnGUI(){
         if (GUI.Button(new Rect(15, 15, 200, 100), "New Game"))
