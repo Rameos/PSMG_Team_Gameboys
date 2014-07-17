@@ -77,6 +77,12 @@ public class PlayerControl : MonoBehaviour {
         float horizontal = Input.GetAxis("Horizontal");
         float vertical = Input.GetAxis("Vertical");
 
+        if (hasVodka)
+        {
+            horizontal *= -1;
+            vertical *= -1;
+        }
+
         Vector3 moveTo = new Vector3(horizontal, 0f, vertical * -1);
 
         setGravity();
