@@ -36,6 +36,7 @@ public class PlayerControl : MonoBehaviour {
     // Beverages
     public bool hasVodka;
     public bool hasWater;
+    public bool drunkVodka;
 
 	// Use this for initialization
 	void Awake () {
@@ -54,6 +55,7 @@ public class PlayerControl : MonoBehaviour {
 
         hasVodka = false;
         hasWater = false;
+        drunkVodka = false;
 	}
 	
 	// Update is called once per frame
@@ -77,7 +79,7 @@ public class PlayerControl : MonoBehaviour {
         float horizontal = Input.GetAxis("Horizontal");
         float vertical = Input.GetAxis("Vertical");
 
-        if (hasVodka)
+        if (drunkVodka)
         {
             horizontal *= -1;
             vertical *= -1;
