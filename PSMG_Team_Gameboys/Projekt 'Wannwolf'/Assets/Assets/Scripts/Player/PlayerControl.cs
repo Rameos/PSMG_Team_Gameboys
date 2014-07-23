@@ -35,7 +35,6 @@ public class PlayerControl : MonoBehaviour {
 
     // Beverages
     public bool hasVodka;
-    public bool hasWater;
     public bool drunkVodka;
 
 	// Use this for initialization
@@ -54,7 +53,6 @@ public class PlayerControl : MonoBehaviour {
         sneak = false;
 
         hasVodka = false;
-        hasWater = false;
         drunkVodka = false;
 	}
 	

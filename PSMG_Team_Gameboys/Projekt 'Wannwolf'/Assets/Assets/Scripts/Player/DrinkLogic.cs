@@ -5,7 +5,7 @@ public class DrinkLogic : MonoBehaviour {
 
     public bool inFireRadius = false;
     public bool vodkaEmptied = false;
-    public bool urinating = false;
+    public bool ableToUrinate = false;
 
     private PlayerControl control;
 
@@ -13,7 +13,12 @@ public class DrinkLogic : MonoBehaviour {
 	void Awake () {
 	    control = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerControl>();
 	}
-	
+
+    void Update()
+    {
+        drinkVodka();
+        emptyVodka();
+    }
 
     void drinkVodka()
     {
@@ -21,18 +26,16 @@ public class DrinkLogic : MonoBehaviour {
         {
             setPlayerDrunk();
             setPlayerDrinkStatus();
+            
         }
     }
 
     void emptyVodka()
     {
-        if (control.hasVodka && Input.GetKeyDown(KeyCode.F))
+        if (inFireRadius && control.hasVodka && Input.GetKeyDown(KeyCode.F))
         {
             setPlayerDrinkStatus();
-            if (inFireRadius)
-            {
-                vodkaEmptied = true;
-            }
+            vodkaEmptied = true;
         }
     }
 
@@ -43,6 +46,7 @@ public class DrinkLogic : MonoBehaviour {
 
     void setPlayerDrunk()
     {
-           control.drunkVodka = true; 
+        control.drunkVodka = true;
+        ableToUrinate = true;
     }
 }
