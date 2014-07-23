@@ -4,27 +4,40 @@ using System.Collections;
 public class PilzeriaMenu : MonoBehaviour {
 
 	private bool isMenu = false;
+    private bool inMenuRadius = false;
 	private Rect butRect;
 	private float width = 160;
 	private float height = 30;
     private MoneyManagement moneyManagement;
+    private GameObject player;
+    private PlayerControl control;
 
 
 	// Use this for initialization
 	void Start () {
 		butRect = new Rect ((Screen.width - width) / 2, 0, width, height);
         moneyManagement = GameObject.FindGameObjectWithTag("Player").GetComponent<MoneyManagement>();
+        player = GameObject.Find("Player");
+        control = player.GetComponent<PlayerControl>();
 	}
+
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "Player")
+        {
+            inMenuRadius = true;
+        }
+    }
 
 	void OnTriggerStay (Collider other) {
 		if (Input.GetKeyDown (KeyCode.F))
 			ToggleTimeScale ();
 	}
-	
-	// Update is called once per frame
-	void Update () {
 
-	}
+    void OnTriggerExit(Collider other)
+    {
+        inMenuRadius = false;
+    }
 
 	//create menu buttons
 	void OnGUI()
@@ -68,9 +81,24 @@ public class PilzeriaMenu : MonoBehaviour {
 			}
 			butRect.y += height + 20;
 
+            if (GUI.Button(butRect, "Vodka"))
+            {
+                pay(5);
+                control.hasVodka = true;
+                ToggleTimeScale();
+            }
+            butRect.y += height + 20;
+
 			if(GUI.Button (butRect, "Zurück") || Input.GetKeyDown(KeyCode.Escape))
 				ToggleTimeScale();
-		}
+        }
+        else
+        {
+            if (!isMenu && inMenuRadius)
+            {
+                GUI.Button(new Rect (Screen.width - width, 0, width, height), "Drücke \"F\" um das \nPilzeriamenu zu öffnen");
+            }
+        }
 	}
 
 	//substracts money
