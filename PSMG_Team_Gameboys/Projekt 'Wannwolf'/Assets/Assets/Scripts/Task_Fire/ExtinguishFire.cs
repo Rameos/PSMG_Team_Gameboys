@@ -52,7 +52,7 @@ public class ExtinguishFire : MonoBehaviour {
 
         if (drinkLogic.inFireRadius && drinkLogic.ableToUrinate)
         {
-            GUI.Button(new Rect(Screen.width - (Screen.width / 6), 0, Screen.width / 5, Screen.height / 8), "Drücke \"F\" um das Feuer zu auszupinkeln");
+            GUI.Button(new Rect(Screen.width - (Screen.width / 6), 0, Screen.width / 5, Screen.height / 8), "Drücke \"E\" um das Feuer zu auszupinkeln");
         }
     }
 
