@@ -6,7 +6,8 @@ public class DrinkLogic : MonoBehaviour {
     public bool inFireRadius = false;
     public bool vodkaEmptied = false;
     public bool ableToUrinate = false;
-
+    public bool inPilzeria = false;
+    public bool diedInFire = false;
     private PlayerControl control;
 
 	// Use this for initialization
@@ -22,17 +23,16 @@ public class DrinkLogic : MonoBehaviour {
 
     void drinkVodka()
     {
-        if (control.hasVodka && Input.GetKeyDown(KeyCode.E))
+        if (control.vodkaStatus && inPilzeria && Input.GetKeyDown(KeyCode.E))
         {
             setPlayerDrunk();
-            setPlayerDrinkStatus();
-            
+            setPlayerDrinkStatus(); 
         }
     }
 
     void emptyVodka()
     {
-        if (inFireRadius && control.hasVodka && Input.GetKeyDown(KeyCode.F))
+        if (inFireRadius && control.vodkaStatus && Input.GetKeyDown(KeyCode.F))
         {
             setPlayerDrinkStatus();
             vodkaEmptied = true;
@@ -41,12 +41,12 @@ public class DrinkLogic : MonoBehaviour {
 
     void setPlayerDrinkStatus()
     {
-        control.hasVodka = false;
+        control.vodkaStatus = false;
     }
 
     void setPlayerDrunk()
     {
-        control.drunkVodka = true;
+        control.drankStatus = true;
         ableToUrinate = true;
     }
 }

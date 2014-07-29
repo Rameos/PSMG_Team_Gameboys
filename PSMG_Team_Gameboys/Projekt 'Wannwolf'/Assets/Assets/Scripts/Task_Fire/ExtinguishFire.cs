@@ -31,6 +31,7 @@ public class ExtinguishFire : MonoBehaviour {
         if (drinkLogic.vodkaEmptied && extinguishable)
         {
             moneyManagement.subtractMoney(10);
+            drinkLogic.diedInFire = true;
             drinkLogic.vodkaEmptied = false;
             extinguishable = false;
         }
@@ -45,7 +46,7 @@ public class ExtinguishFire : MonoBehaviour {
 
     void OnGUI()
     {
-        if (drinkLogic.inFireRadius && control.hasVodka)
+        if (drinkLogic.inFireRadius && control.vodkaStatus)
         {
             GUI.Button(new Rect(Screen.width-(Screen.width/6), 0, Screen.width / 5 , Screen.height / 8), "Drücke \"F\" um das Feuer zu löschen");
         }

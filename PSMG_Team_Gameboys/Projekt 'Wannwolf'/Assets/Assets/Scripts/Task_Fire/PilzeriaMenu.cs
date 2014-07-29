@@ -11,6 +11,7 @@ public class PilzeriaMenu : MonoBehaviour {
     private MoneyManagement moneyManagement;
     private GameObject player;
     private PlayerControl control;
+    private DrinkLogic drinkLogic;
 
 
 	// Use this for initialization
@@ -19,6 +20,7 @@ public class PilzeriaMenu : MonoBehaviour {
         moneyManagement = GameObject.FindGameObjectWithTag("Player").GetComponent<MoneyManagement>();
         player = GameObject.Find("Player");
         control = player.GetComponent<PlayerControl>();
+        drinkLogic = player.GetComponent<DrinkLogic>();
 	}
 
     void OnTriggerEnter(Collider other)
@@ -26,6 +28,7 @@ public class PilzeriaMenu : MonoBehaviour {
         if (other.gameObject.tag == "Player")
         {
             inMenuRadius = true;
+            drinkLogic.inPilzeria = true;
         }
     }
 
@@ -37,6 +40,7 @@ public class PilzeriaMenu : MonoBehaviour {
     void OnTriggerExit(Collider other)
     {
         inMenuRadius = false;
+        drinkLogic.inPilzeria = false;
     }
 
 	//create menu buttons
@@ -50,7 +54,7 @@ public class PilzeriaMenu : MonoBehaviour {
 				if(moneyManagement.getCurrentMoney() > 49)
 				{
 					pay(50);
-					//enable double jump
+                    control.ableToDoubleJumpStatus = true;
                     ToggleTimeScale();
 				}
 			}
@@ -61,8 +65,7 @@ public class PilzeriaMenu : MonoBehaviour {
 				if(moneyManagement.getCurrentMoney() > 49)
 				{
 					pay(50);
-					float currentTime = PlayerControl.getSprintTime();
-					PlayerControl.setSprintTime(currentTime + 4f);
+                    control.sprintTimeStatus = 2; 
 					ToggleTimeScale();
 				}
 				else Debug.Log(moneyManagement.getCurrentMoney());
@@ -81,10 +84,10 @@ public class PilzeriaMenu : MonoBehaviour {
 			}
 			butRect.y += height + 20;
 
-            if (GUI.Button(butRect, "Vodka"))
+            if (GUI.Button(butRect, "Vodka") && !control.vodkaStatus)
             {
                 pay(5);
-                control.hasVodka = true;
+                control.vodkaStatus = true;
                 ToggleTimeScale();
             }
             butRect.y += height + 20;
@@ -96,8 +99,24 @@ public class PilzeriaMenu : MonoBehaviour {
         {
             if (!isMenu && inMenuRadius)
             {
-                GUI.Button(new Rect (Screen.width - width, 0, width, height), "Drücke \"F\" um das \nPilzeriamenu zu öffnen");
+                if (control.vodkaStatus && drinkLogic.diedInFire)
+                {
+                    GUI.Button(new Rect(Screen.width - width, 0, width, height), "Drücke \"E\" um den \nVodka zu trinken");
+                }
+                else
+                {
+                    GUI.Button(new Rect(Screen.width - width, 0, width, height), "Drücke \"F\" um das \nPilzeriamenu zu öffnen");
+                }
             }
+        }
+
+        if (control.vodkaStatus)
+        {
+            GUI.Button(new Rect(Screen.width / 3, 0, width, height), "Norbert hat Vodka");
+        }
+        else if (control.drankStatus)
+        {
+            GUI.Button(new Rect(Screen.width / 3, 0, width, height), "Norbert ist betrunken");
         }
 	}
 
