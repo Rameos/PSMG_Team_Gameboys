@@ -8,6 +8,7 @@ public class ExtinguishFire : MonoBehaviour {
     private DrinkLogic drinkLogic;
     private MoneyManagement moneyManagement;
     private PlayerControl control;
+    private ParticleSystem urin;
     private bool extinguishable;
     
     void Start()
@@ -18,6 +19,7 @@ public class ExtinguishFire : MonoBehaviour {
         drinkLogic = GameObject.FindGameObjectWithTag("Player").GetComponent<DrinkLogic>();
         moneyManagement = GameObject.FindGameObjectWithTag("Player").GetComponent<MoneyManagement>();
         extinguishable = true;
+        urin = GameObject.FindGameObjectWithTag("Urinstrahl").GetComponent<ParticleSystem>();
     }
 
     void OnTriggerEnter(Collider other)
@@ -38,9 +40,7 @@ public class ExtinguishFire : MonoBehaviour {
 
         if (drinkLogic.ableToUrinate && Input.GetKeyDown(KeyCode.E))
         {
-            DestroyObject(fire);
-            DestroyObject(fireInvisibleWall);
-            drinkLogic.ableToUrinate = false;
+            urin.particleSystem.Play(true);    
         }
     }
 
