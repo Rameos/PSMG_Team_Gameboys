@@ -53,4 +53,6 @@ public class BeerTrigger : MonoBehaviour {
 		yield return new WaitForSeconds (0.2f);
 		waitActive = false;
 	}
+
+
 }
