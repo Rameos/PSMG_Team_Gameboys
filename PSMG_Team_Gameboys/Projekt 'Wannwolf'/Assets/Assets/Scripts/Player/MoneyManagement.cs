@@ -52,5 +52,7 @@ public class MoneyManagement : MonoBehaviour {
     public void setCurrentMoney(int value) { currentMoney = value; }
 	public void setMoneyMaximum(int newMax) { moneyMaximum = newMax; } 
 	public void updateMoneyView (){ updateGuiText (); }
-	
+
+
+
 }
