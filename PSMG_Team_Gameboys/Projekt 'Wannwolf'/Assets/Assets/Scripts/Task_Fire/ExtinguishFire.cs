@@ -32,7 +32,6 @@ public class ExtinguishFire : MonoBehaviour {
     {
         if (drinkLogic.vodkaEmptied && extinguishable)
         {
-            moneyManagement.subtractMoney(10);
             drinkLogic.diedInFire = true;
             drinkLogic.vodkaEmptied = false;
             extinguishable = false;
