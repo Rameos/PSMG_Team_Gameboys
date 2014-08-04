@@ -3,58 +3,83 @@ using System.Collections;
 
 public class MoveCube : MonoBehaviour {
 
-    public Transform target;
-    float moveSpeed = 20;
-    bool moving = false;
-    float stop = 5f;
-    float rotationSpeed = 5;
+    public GameObject tree;
+    private bool waitActive = false;
 
     void Start()
     {
-        gameObject.GetComponent<FollowPlayer>().enabled = false;
+
     }
 
-    void OnTriggerStay(Collider other)
+    void OnTriggerStay(Collider col)
     {
+        if (col.gameObject.tag == "Player")
+        {
+            if (gameObject.tag == "n")
+            {
+                if (Input.GetKeyDown("n"))
+                {
+                    tree = GameObject.FindGameObjectWithTag("n");
+                    follow();
+                }
+
+            }
+            else if (gameObject.tag == "m")
+            {
+                if (Input.GetKeyDown("m"))
+                {
+                    tree = GameObject.FindGameObjectWithTag("m");
+                    follow();
+                }
+
+            }
 
 
-        if (Input.GetKeyDown("f"))
-        {
-            if (moving == false)
-            {
-                moving = true;
-                gameObject.GetComponent<FollowPlayer>().enabled = true;
-            }
-            else
-            {
-                moving = false;
-                gameObject.GetComponent<FollowPlayer>().enabled = false;
-            }
-           }
-        if (moving == true)
-        {
             //float distance = Vector3.Distance(transform.position,target.position);
             //if (distance <= stop)
             //{
-              //  transform.rotation = Quaternion.Slerp(transform.rotation,
-               // Quaternion.LookRotation(target.position - transform.position), rotationSpeed * Time.deltaTime);
-                //transform.Rotate(0, 0, 0);
+            //  transform.rotation = Quaternion.Slerp(transform.rotation,
+            // Quaternion.LookRotation(target.position - transform.position), rotationSpeed * Time.deltaTime);
+            //transform.Rotate(0, 0, 0);
             //}
             //else
             //{
-              //  Vector3 newPos = target.position;
-                //gameObject.transform.position = Vector3.Lerp(gameObject.transform.position, newPos, 0.2f);
+            //  Vector3 newPos = target.position;
+            //gameObject.transform.position = Vector3.Lerp(gameObject.transform.position, newPos, 0.2f);
             //}
+
+
+            //  }
+
+
+
+
         }
-           
-      //  }
 
 
+    }
 
+    void follow()
+    {
+        if (tree.transform.parent == null && !waitActive)
+        {
+            Debug.Log("if");
+            tree.transform.parent = GameObject.Find("pickto").transform;
+            StartCoroutine(Wait());
+        }
+        else if (!waitActive)
+        {
+            Debug.Log("else");
+            tree.transform.parent = null;
+            StartCoroutine(Wait());
+        }
+    }
 
-
-
-
+    IEnumerator Wait()
+    {
+        waitActive = true;
+        yield return new WaitForSeconds(0.2f);
+        waitActive = false;
     }
   
 
