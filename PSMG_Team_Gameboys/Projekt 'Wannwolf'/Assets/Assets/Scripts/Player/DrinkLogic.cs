@@ -6,12 +6,10 @@ public class DrinkLogic : MonoBehaviour {
     public bool inFireRadius = false;
     public bool vodkaEmptied = false;
     public bool ableToUrinate = false;
-<<<<<<< HEAD
 
-=======
     public bool inPilzeria = false;
     public bool diedInFire = false;
->>>>>>> origin/Drunk-Player
+
     private PlayerControl control;
 
 	// Use this for initialization
@@ -27,28 +25,16 @@ public class DrinkLogic : MonoBehaviour {
 
     void drinkVodka()
     {
-<<<<<<< HEAD
-        if (control.hasVodka && Input.GetKeyDown(KeyCode.E))
-        {
-            setPlayerDrunk();
-            setPlayerDrinkStatus();
-            
-=======
         if (control.vodkaStatus && inPilzeria && Input.GetKeyDown(KeyCode.E))
         {
             setPlayerDrunk();
             setPlayerDrinkStatus(); 
->>>>>>> origin/Drunk-Player
         }
     }
 
     void emptyVodka()
     {
-<<<<<<< HEAD
-        if (inFireRadius && control.hasVodka && Input.GetKeyDown(KeyCode.F))
-=======
         if (inFireRadius && control.vodkaStatus && Input.GetKeyDown(KeyCode.F))
->>>>>>> origin/Drunk-Player
         {
             setPlayerDrinkStatus();
             vodkaEmptied = true;
@@ -57,20 +43,12 @@ public class DrinkLogic : MonoBehaviour {
 
     void setPlayerDrinkStatus()
     {
-<<<<<<< HEAD
-        control.hasVodka = false;
-=======
         control.vodkaStatus = false;
->>>>>>> origin/Drunk-Player
     }
 
     void setPlayerDrunk()
     {
-<<<<<<< HEAD
-        control.drunkVodka = true;
-=======
         control.drankStatus = true;
->>>>>>> origin/Drunk-Player
         ableToUrinate = true;
     }
 }

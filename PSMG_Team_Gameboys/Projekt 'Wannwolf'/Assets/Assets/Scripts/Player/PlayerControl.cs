@@ -39,13 +39,6 @@ public class PlayerControl : MonoBehaviour {
 
 	AudioManager audioManager;
 
-<<<<<<< HEAD
-    // Beverages
-    public bool hasVodka;
-    public bool drunkVodka;
-
-=======
->>>>>>> origin/Drunk-Player
 	// Use this for initialization
 	void Awake () {
         characterController = GetComponent<CharacterController>();
@@ -66,12 +59,8 @@ public class PlayerControl : MonoBehaviour {
         
 
         hasVodka = false;
-<<<<<<< HEAD
-        drunkVodka = false;
-=======
         drankVodka = false;
         ableToDoubleJump = false;
->>>>>>> origin/Drunk-Player
 	}
 	
 	// Update is called once per frame
@@ -95,11 +84,7 @@ public class PlayerControl : MonoBehaviour {
         float horizontal = Input.GetAxis("Horizontal");
         float vertical = Input.GetAxis("Vertical");
 
-<<<<<<< HEAD
-        if (drunkVodka)
-=======
         if (drankVodka)
->>>>>>> origin/Drunk-Player
         {
             horizontal *= -1;
             vertical *= -1;
