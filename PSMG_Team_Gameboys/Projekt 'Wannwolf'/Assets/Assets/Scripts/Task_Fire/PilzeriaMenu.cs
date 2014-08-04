@@ -112,18 +112,14 @@ public class PilzeriaMenu : MonoBehaviour {
                 {
                     GUI.Button(new Rect(Screen.width - width, 0, width, height), "Drücke \"E\" um den \nVodka zu trinken");
                 }
-                else
-                {
-                    GUI.Button(new Rect(Screen.width - width, 0, width, height), "Drücke \"F\" um das \nPilzeriamenu zu öffnen");
-                }
 
         if(control.vodkaStatus)
         {
-            GUI.Button(new Rect(Screen.width / 3, 0, width, height), "Norbert hat Vodka");
+            GUI.Button(new Rect(Screen.width / 3, 0, width, height), "Eberhardt hat Vodka");
         }
         else if (control.drankStatus)
         {
-            GUI.Button(new Rect(Screen.width / 3, 0, width, height), "Norbert ist betrunken");
+            GUI.Button(new Rect(Screen.width / 3, 0, width, height), "Eberhardt ist betrunken");
         }
     }
 
