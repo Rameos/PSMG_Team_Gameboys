@@ -13,7 +13,7 @@ public class BurnPlayer : MonoBehaviour {
 
     void Awake()
     {
-        respawn = GameObject.FindGameObjectWithTag("FireInvisibleWall").GetComponent<Respawn>();
+        respawn = GameObject.FindGameObjectWithTag("Fire").GetComponent<Respawn>();
         playerFlames = GameObject.FindGameObjectWithTag("PlayerFlames").GetComponent<ParticleSystem>();
         moneyManagment = GameObject.FindGameObjectWithTag("Player").GetComponent<MoneyManagement>();
 

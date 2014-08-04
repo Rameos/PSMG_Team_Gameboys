@@ -70,7 +70,7 @@ public class CameraControl : MonoBehaviour {
                 {
                     mouseY = 75;
                 }
-        setCameraPosition();
+        //setCameraPosition();
     }
 
     void setCameraPosition()

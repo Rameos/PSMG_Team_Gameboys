@@ -8,7 +8,6 @@ public class PLayerMovement : MonoBehaviour {
 
     public Transform treeTrunk;
 
-    private GameObject player;
     private CharacterController characterController;
 
     private bool jumping;
@@ -16,7 +15,6 @@ public class PLayerMovement : MonoBehaviour {
 
     void Awake()
     {
-        player = GameObject.FindGameObjectWithTag("Player");
         characterController = GetComponent<CharacterController>();
 
         gravity = Vector3.zero;
