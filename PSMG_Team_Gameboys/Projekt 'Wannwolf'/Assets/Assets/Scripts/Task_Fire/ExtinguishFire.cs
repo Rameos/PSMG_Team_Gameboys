@@ -4,7 +4,6 @@ using System.Collections;
 public class ExtinguishFire : MonoBehaviour {
 
     private GameObject fireInvisibleWall;
-    private MoneyManagement moneyManagement;
     private DrinkLogic drinkLogic;
     private PlayerControl control;
     private ParticleSystem urin;
@@ -14,7 +13,6 @@ public class ExtinguishFire : MonoBehaviour {
     {
         control = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerControl>();
         drinkLogic = GameObject.FindGameObjectWithTag("Player").GetComponent<DrinkLogic>();
-        moneyManagement = GameObject.FindGameObjectWithTag("Player").GetComponent<MoneyManagement>();
         extinguishable = true;
         drinkLogic = GameObject.FindGameObjectWithTag("Player").GetComponent<DrinkLogic>();
         extinguishable = true;
