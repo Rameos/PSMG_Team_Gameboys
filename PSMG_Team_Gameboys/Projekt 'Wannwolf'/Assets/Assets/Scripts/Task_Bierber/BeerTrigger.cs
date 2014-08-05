@@ -1,16 +1,21 @@
 ﻿using UnityEngine;
 using System.Collections;
 [RequireComponent(typeof(MoneyManagement))]
+[RequireComponent(typeof(DragByPlayer))]
+
 
 public class BeerTrigger : MonoBehaviour {
 
 	bool waitActive = false;
     private MoneyManagement money;
     int dieVal = 0;
+    private DragByPlayer drag;
+
 
     void Start()
     {
         money = GameObject.FindGameObjectWithTag("Player").GetComponent<MoneyManagement>();
+        drag = GetComponent<DragByPlayer>();
     }
 
 	void OnTriggerStay (Collider other) {
@@ -24,35 +29,13 @@ public class BeerTrigger : MonoBehaviour {
 
             if (Input.GetKeyDown("f"))
             {
-
-                if (GameObject.Find("bier").transform.parent == null && !waitActive)
-                {
-                    Debug.Log("if");
-                    GameObject.Find("bier").transform.parent = GameObject.Find("pickto").transform;
-                    Destroy(GameObject.Find("bier").GetComponent("RotateObject"));
-                    StartCoroutine(Wait());
-                }
-                else if (!waitActive)
-                {
-                    Debug.Log("else");
-                    GameObject.Find("bier").transform.parent = null;
-                    GameObject.Find("bier").AddComponent("RotateObject");
-                    StartCoroutine(Wait());
-                }
+                drag.follow(gameObject, true);
+               
             }
-            
-        
-      
-
-        
+              
 
 
 	}
-	IEnumerator Wait(){
-		waitActive = true;
-		yield return new WaitForSeconds (0.2f);
-		waitActive = false;
-	}
-
+	
 
 }

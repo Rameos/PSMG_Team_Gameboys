@@ -1,38 +1,29 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+[RequireComponent(typeof(DragByPlayer))]
 public class MoveCube : MonoBehaviour {
+    private DragByPlayer drag;
 
-    public GameObject tree;
-    private bool waitActive = false;
+   
 
     void Start()
     {
-
+        drag = GetComponent<DragByPlayer>();
     }
 
     void OnTriggerStay(Collider col)
     {
         if (col.gameObject.tag == "Player")
         {
-            if (gameObject.tag == "n")
-            {
-                if (Input.GetKeyDown("n"))
+        
+                if (Input.GetKeyDown("f"))
                 {
                     //tree = GameObject.FindGameObjectWithTag("n");
-                    follow();
+                    drag.follow(gameObject, false);
                 }
 
-            }
-            else if (gameObject.tag == "m")
-            {
-                if (Input.GetKeyDown("m"))
-                {
-                    //tree = GameObject.FindGameObjectWithTag("m");
-                    follow();
-                }
-
-            }
+         
 
 
             //float distance = Vector3.Distance(transform.position,target.position);
@@ -59,28 +50,7 @@ public class MoveCube : MonoBehaviour {
 
     }
 
-    void follow()
-    {
-        if (tree.transform.parent == null && !waitActive)
-        {
-            Debug.Log("if");
-            tree.transform.parent = GameObject.Find("pickto").transform;
-            StartCoroutine(Wait());
-        }
-        else if (!waitActive)
-        {
-            Debug.Log("else");
-            tree.transform.parent = null;
-            StartCoroutine(Wait());
-        }
-    }
-
-    IEnumerator Wait()
-    {
-        waitActive = true;
-        yield return new WaitForSeconds(0.2f);
-        waitActive = false;
-    }
+    
   
 
 }
