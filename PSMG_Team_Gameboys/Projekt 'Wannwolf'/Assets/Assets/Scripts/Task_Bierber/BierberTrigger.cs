@@ -2,6 +2,8 @@
 using System.Collections;
 
 public class BierberTrigger : MonoBehaviour {
+
+
 	
 	void OnTriggerEnter (Collider other) {
 		if(GameObject.Find("BierberBody").renderer.enabled == false)
