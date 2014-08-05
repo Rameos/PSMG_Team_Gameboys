@@ -1,0 +1,126 @@
+fileFormatVersion: 2
+guid: 93ccb93eeb200444f93ebff80293f374
+ModelImporter:
+  serializedVersion: 16
+  fileIDToRecycleName:
+    100000: Bodenplatte
+    100002: Circle
+    100004: Cube
+    100006: Cube_001
+    100008: Cube_002
+    100010: Hauptstange
+    100012: Hauptstange_001
+    100014: Hauptstange_002
+    100016: Hauptstange_003
+    100018: Plane
+    100020: Plane_001
+    100022: Plane_002
+    100024: Scharnier
+    100026: //RootNode
+    400000: Bodenplatte
+    400002: Circle
+    400004: Cube
+    400006: Cube_001
+    400008: Cube_002
+    400010: Hauptstange
+    400012: Hauptstange_001
+    400014: Hauptstange_002
+    400016: Hauptstange_003
+    400018: Plane
+    400020: Plane_001
+    400022: Plane_002
+    400024: Scharnier
+    400026: //RootNode
+    2300000: Bodenplatte
+    2300002: Circle
+    2300004: Cube
+    2300006: Cube_001
+    2300008: Cube_002
+    2300010: Hauptstange
+    2300012: Hauptstange_001
+    2300014: Hauptstange_002
+    2300016: Hauptstange_003
+    2300018: Plane
+    2300020: Plane_001
+    2300022: Plane_002
+    2300024: Scharnier
+    3300000: Bodenplatte
+    3300002: Circle
+    3300004: Cube
+    3300006: Cube_001
+    3300008: Cube_002
+    3300010: Hauptstange
+    3300012: Hauptstange_001
+    3300014: Hauptstange_002
+    3300016: Hauptstange_003
+    3300018: Plane
+    3300020: Plane_001
+    3300022: Plane_002
+    3300024: Scharnier
+    4300000: Circle
+    4300002: Plane_002
+    4300004: Plane_001
+    4300006: Plane
+    4300008: Cube_002
+    4300010: Hauptstange_003
+    4300012: Hauptstange_002
+    4300014: Hauptstange_001
+    4300016: Cube
+    4300018: Cube_001
+    4300020: Hauptstange
+    4300022: Bodenplatte
+    4300024: Scharnier
+    9500000: //RootNode
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    optimizeGameObjects: 0
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: .00999999978
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  additionalBone: 0
+  userData: 
