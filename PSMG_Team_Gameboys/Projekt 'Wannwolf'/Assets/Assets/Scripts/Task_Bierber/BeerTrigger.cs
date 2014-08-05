@@ -6,7 +6,6 @@ using System.Collections;
 
 public class BeerTrigger : MonoBehaviour {
 
-	bool waitActive = false;
     private MoneyManagement money;
     int dieVal = 0;
     private DragByPlayer drag;
@@ -32,9 +31,6 @@ public class BeerTrigger : MonoBehaviour {
                 drag.follow(gameObject, true);
                
             }
-              
-
-
 	}
 	
 
