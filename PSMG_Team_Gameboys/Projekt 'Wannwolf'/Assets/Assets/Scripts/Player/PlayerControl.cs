@@ -179,7 +179,7 @@ public class PlayerControl : MonoBehaviour {
     {
         if (ableToDoubleJump)
         {
-            if (Input.GetButtonDown("Jump") || Input.GetAxis("Jump") > 0 && jumps < Time.deltaTime * 2)
+            if (Input.GetButtonDown("Jump") && jumps < Time.deltaTime * 2)
              {
                 jumping = true;
                 gravity.y = jumpStrength;
