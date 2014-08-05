@@ -10,7 +10,7 @@ public class BeerTrigger : MonoBehaviour {
 
     void Start()
     {
-        money = GetComponent<MoneyManagement>();
+        money = GameObject.FindGameObjectWithTag("Player").GetComponent<MoneyManagement>();
     }
 
 	void OnTriggerStay (Collider other) {
@@ -25,18 +25,17 @@ public class BeerTrigger : MonoBehaviour {
             if (Input.GetKeyDown("f"))
             {
 
-                if (GameObject.Find("bier").transform.parent == null && !waitActive)
+                if (GameObject.FindGameObjectWithTag("Beer").transform.parent == null && !waitActive)
                 {
                     Debug.Log("if");
-                    GameObject.Find("bier").transform.parent = GameObject.Find("pickto").transform;
-                    Destroy(GameObject.Find("bier").GetComponent("RotateObject"));
+					GameObject.FindGameObjectWithTag("Beer").transform.parent = GameObject.Find("pickto").transform;
+					Destroy(GameObject.FindGameObjectWithTag("Beer").GetComponent("RotateObject"));
                     StartCoroutine(Wait());
                 }
                 else if (!waitActive)
                 {
-                    Debug.Log("else");
-                    GameObject.Find("bier").transform.parent = null;
-                    GameObject.Find("bier").AddComponent("RotateObject");
+					GameObject.FindGameObjectWithTag("Beer").transform.parent = null;
+					GameObject.FindGameObjectWithTag("Beer").AddComponent("RotateObject");
                     StartCoroutine(Wait());
                 }
             }
