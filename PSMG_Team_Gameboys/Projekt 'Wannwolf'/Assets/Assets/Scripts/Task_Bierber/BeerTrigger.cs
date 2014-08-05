@@ -28,8 +28,11 @@ public class BeerTrigger : MonoBehaviour {
 
             if (Input.GetKeyDown("f"))
             {
+
                 drag.follow(gameObject, true);
-               
+
+
+              
             }
 	}
 	
