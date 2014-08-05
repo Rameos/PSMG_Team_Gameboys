@@ -4,30 +4,52 @@ using System.Collections;
 public class PilzeriaMenu : MonoBehaviour {
 
 	private bool isMenu = false;
+    private bool inMenuRadius = false;
 	private Rect butRect;
 	private float width = 160;
 	private float height = 30;
+    private MoneyManagement moneyManagement;
+    private GameObject player;
+    private PlayerControl control;
+
+    private DrinkLogic drinkLogic;
 
 
 	// Use this for initialization
 	void Start () {
 		butRect = new Rect ((Screen.width - width) / 2, 0, width, height);
+        moneyManagement = GameObject.FindGameObjectWithTag("Player").GetComponent<MoneyManagement>();
+        player = GameObject.Find("Player");
+        control = player.GetComponent<PlayerControl>();
+        drinkLogic = player.GetComponent<DrinkLogic>();
 	}
+
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "Player")
+        {
+            inMenuRadius = true;
+            drinkLogic.inPilzeria = true;
+
+        }
+    }
 
 	void OnTriggerStay (Collider other) {
 		if (Input.GetKeyDown (KeyCode.F))
-			ToggleTimeScale ();
+        {
+            ToggleTimeScale();
+        }
 	}
-	
-	// Update is called once per frame
-	void Update () {
 
-	}
+    void OnTriggerExit(Collider other)
+    {
+        inMenuRadius = false;
+        drinkLogic.inPilzeria = false;
+    }
 
 	//create menu buttons
 	void OnGUI()
 	{
-		MoneyManagement moneyManagement = GetComponent<MoneyManagement>();
 		if (isMenu) {
 			butRect.y = (Screen.height - height)/2 - 60;
 
@@ -37,8 +59,9 @@ public class PilzeriaMenu : MonoBehaviour {
 				{
 					pay(50);
 					//enable double jump
+                    control.ableToDoubleJumpStatus = true;
+                    ToggleTimeScale();
 				}
-				ToggleTimeScale();
 			}
 			butRect.y += height + 20;
 
@@ -47,8 +70,7 @@ public class PilzeriaMenu : MonoBehaviour {
 				if(moneyManagement.getCurrentMoney() > 49)
 				{
 					pay(50);
-					float currentTime = PlayerControl.getSprintTime();
-					PlayerControl.setSprintTime(currentTime + 4f);
+                    control.sprintTimeStatus = 2; 
 					ToggleTimeScale();
 				}
 				else Debug.Log(moneyManagement.getCurrentMoney());
@@ -67,14 +89,42 @@ public class PilzeriaMenu : MonoBehaviour {
 			}
 			butRect.y += height + 20;
 
-			if(GUI.Button (butRect, "Zurück"))
+            if (GUI.Button(butRect, "Vodka") && !control.vodkaStatus)
+            {
+                pay(5);
+                control.vodkaStatus = true;
+                ToggleTimeScale();
+            }
+
+            butRect.y += height + 20;
+
+			if(GUI.Button (butRect, "Zurück") || Input.GetKeyDown(KeyCode.Escape))
 				ToggleTimeScale();
-		}
-	}
+        }
+        else
+        {
+            if (!isMenu && inMenuRadius)
+            {
+                GUI.Button(new Rect (Screen.width - width, 0, width, height), "Drücke \"F\" um das \nPilzeriamenu zu öffnen");
+            }
+        }
+                if (control.vodkaStatus && drinkLogic.diedInFire)
+                {
+                    GUI.Button(new Rect(Screen.width - width, 0, width, height), "Drücke \"E\" um den \nVodka zu trinken");
+                }
+
+        if(control.vodkaStatus)
+        {
+            GUI.Button(new Rect(Screen.width / 3, 0, width, height), "Eberhardt hat Vodka");
+        }
+        else if (control.drankStatus)
+        {
+            GUI.Button(new Rect(Screen.width / 3, 0, width, height), "Eberhardt ist betrunken");
+        }
+    }
 
 	//substracts money
 	void pay (int amount) {
-		MoneyManagement moneyManagement = GetComponent<MoneyManagement>();
 		int OldAmount = moneyManagement.getCurrentMoney ();
 		moneyManagement.setCurrentMoney (OldAmount - amount);
 		//moneyManagement.updateMoneyView ();

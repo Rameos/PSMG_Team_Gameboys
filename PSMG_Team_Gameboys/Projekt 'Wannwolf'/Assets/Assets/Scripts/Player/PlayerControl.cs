@@ -5,8 +5,7 @@ using System.Collections;
 
 public class PlayerControl : MonoBehaviour {
 
-    private const float minTime = 3f;   //Min time the player has to rest after a 'full' run
-    private static float maxTime = 6f;   //Max time the player is able to run
+    private const float minWaitTime = 3f;   //Min time the player has to rest after a 'full' run
     private const float jumpStrength = 20f;
     private const float playerRunSpeed = 30f;
     private const float playerWalkSpeed = 20f;
@@ -18,6 +17,11 @@ public class PlayerControl : MonoBehaviour {
 
     public Transform mainCamera;
 
+    // Beverages
+    private bool hasVodka;
+    private bool drankVodka;
+    private bool ableToDoubleJump;
+
     private CharacterController characterController;
 
     private Vector3 gravity;
@@ -25,6 +29,8 @@ public class PlayerControl : MonoBehaviour {
 
     private float playerSpeed;
     private float pastTime;
+    private float maxRunTime;
+    private float jumps;
 
     private bool jumping;
     private bool run;
@@ -32,10 +38,6 @@ public class PlayerControl : MonoBehaviour {
     private bool sneak;
 
 	AudioManager audioManager;
-
-    // Beverages
-    public bool hasVodka;
-    public bool hasWater;
 
 	// Use this for initialization
 	void Awake () {
@@ -46,14 +48,19 @@ public class PlayerControl : MonoBehaviour {
 
         playerSpeed = playerWalkSpeed;
         pastTime = 0f;
+        maxRunTime = 6f;
+        jumps = 0;
 
         jumping = false;
         run = false;
         runable = true;
         sneak = false;
 
+        
+
         hasVodka = false;
-        hasWater = false;
+        drankVodka = false;
+        ableToDoubleJump = false;
 	}
 	
 	// Update is called once per frame
@@ -76,6 +83,12 @@ public class PlayerControl : MonoBehaviour {
     {
         float horizontal = Input.GetAxis("Horizontal");
         float vertical = Input.GetAxis("Vertical");
+
+        if (drankVodka)
+        {
+            horizontal *= -1;
+            vertical *= -1;
+        }
 
         Vector3 moveTo = new Vector3(horizontal, 0f, vertical * -1);
 
@@ -145,7 +158,7 @@ public class PlayerControl : MonoBehaviour {
         {
             pastTime -= Time.deltaTime;
         }
-        if (maxTime - pastTime >= minTime)
+        if (maxRunTime - pastTime >= minWaitTime)
         {
             runable = true;
         }
@@ -156,7 +169,7 @@ public class PlayerControl : MonoBehaviour {
     {
         pastTime += Time.deltaTime;
 
-        if (maxTime - pastTime <= 0)
+        if (maxRunTime - pastTime <= 0)
         {
             runable = false;
         }
@@ -164,9 +177,20 @@ public class PlayerControl : MonoBehaviour {
 
     void setJumpCondition()
     {
-        if (Input.GetButtonDown("Jump") || Input.GetAxis("Jump") > 0)
+        if (ableToDoubleJump)
         {
-            jumping = true;
+            if (Input.GetButtonDown("Jump") && jumps < Time.deltaTime * 2)
+             {
+                jumping = true;
+                gravity.y = jumpStrength;
+                jumps += Time.deltaTime;
+             }
+        }else
+        {
+             if (Input.GetButtonDown("Jump") || Input.GetAxis("Jump") > 0)
+                    {
+                        jumping = true;
+                    }
         }
     }
 
@@ -175,6 +199,7 @@ public class PlayerControl : MonoBehaviour {
         if (characterController.collisionFlags == CollisionFlags.Below || characterController.isGrounded)
         {
             jumping = false;
+            jumps = 0;
             alternativeMoveTo = Vector3.zero;
         }
     }
@@ -209,11 +234,26 @@ public class PlayerControl : MonoBehaviour {
 		}
 	}
 
-	public static float getSprintTime () {
-		return maxTime;
+	public float sprintTimeStatus {
+        get { return maxRunTime; }
+        set { maxRunTime *= value; }
 	}
 
-	public static void setSprintTime (float time) {
-		maxTime = time;
-	}
+    public bool ableToDoubleJumpStatus
+    {
+        get { return ableToDoubleJump; }
+        set { ableToDoubleJump = value; }
+    }
+
+    public bool vodkaStatus
+    {
+        get { return hasVodka; }
+        set { hasVodka = value; }
+    }
+
+    public bool drankStatus
+    {
+        get { return drankVodka; }
+        set { drankVodka = value; }
+    }
 }

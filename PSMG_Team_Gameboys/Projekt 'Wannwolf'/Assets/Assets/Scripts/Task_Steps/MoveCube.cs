@@ -19,7 +19,7 @@ public class MoveCube : MonoBehaviour {
             {
                 if (Input.GetKeyDown("n"))
                 {
-                    tree = GameObject.FindGameObjectWithTag("n");
+                    //tree = GameObject.FindGameObjectWithTag("n");
                     follow();
                 }
 
@@ -28,7 +28,7 @@ public class MoveCube : MonoBehaviour {
             {
                 if (Input.GetKeyDown("m"))
                 {
-                    tree = GameObject.FindGameObjectWithTag("m");
+                    //tree = GameObject.FindGameObjectWithTag("m");
                     follow();
                 }
 

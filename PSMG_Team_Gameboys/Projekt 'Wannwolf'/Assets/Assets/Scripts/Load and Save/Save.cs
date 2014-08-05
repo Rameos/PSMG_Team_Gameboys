@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Save : MonoBehaviour {
+public class Save : MonoBehaviour
+{
 
     private const string playerPosition = "PlayerPosition";
     private const string playerRotation = "PlayerRotation";
@@ -9,7 +10,12 @@ public class Save : MonoBehaviour {
 
     private const string bierberPosition = "BierberPosition";
     private const string bierberRotation = "BierberRotation";
-    private const string bierberRendered = "BierberRendered";
+    private const string bierberBodyRendered = "BierberBodyRendered";
+    private const string bierberHeadRendered = "BierberHeadRendered";
+
+    private const string bierberInvisibleWall = "BierberInvisibleWall";
+
+    private const string fallenTreeRendered = "FallenTreeRendered";
 
     private const string bierPosition = "BierPosition";
     private const string bierRotation = "BierRotation";
@@ -21,19 +27,23 @@ public class Save : MonoBehaviour {
     {
         saveScene();
         savePlayer();
-        //saveBierber();
-        //saveBier();
-        //savePizza();
+        saveBierber();
+        saveBierberBody();
+        saveBierberHead();
+        saveTreeStatus();
+        saveBierberWallStatus();
+        saveBier();
+        savePizza();
         PlayerPrefs.Save();
     }
 
-   static void saveScene()
+    static void saveScene()
     {
         PlayerPrefs.SetString("SceneToLoad", Application.loadedLevelName);
         PlayerPrefsX.SetBool("GameSaved", true);
     }
 
-   static void savePlayer()
+    static void savePlayer()
     {
         if (GameObject.FindGameObjectWithTag("Player") != null)
         {
@@ -43,31 +53,58 @@ public class Save : MonoBehaviour {
         }
     }
 
-   static void saveBierber()
+    static void saveBierber()
     {
-       if(GameObject.FindGameObjectWithTag("Bierber") !=null)
-       {
+        if (GameObject.FindGameObjectWithTag("Bierber") != null)
+        {
             GameObject bierber = GameObject.FindGameObjectWithTag("Bierber");
             PlayerPrefsX.SetVector3(bierberPosition, bierber.transform.position);
             PlayerPrefsX.SetQuaternion(bierberRotation, bierber.transform.rotation);
-       }
+        }
     }
 
-   static void saveBierberWallStatus()
-   {
-
-   }
-
-   static void saveTreeStatus()
-   {
-
-   }
-
-   static void saveBier()
+    static void saveBierberBody()
     {
-        if(GameObject.FindGameObjectWithTag("Bier") !=null)
+        if (GameObject.FindGameObjectWithTag("BierberBody") != null)
         {
-            GameObject bier = GameObject.FindGameObjectWithTag("Bier");
+            GameObject bierberBody = GameObject.FindGameObjectWithTag("BierberBody");
+            PlayerPrefsX.SetBool(bierberBodyRendered, bierberBody.renderer.enabled);
+        }
+    }
+
+    static void saveBierberHead()
+    {
+        if (GameObject.FindGameObjectWithTag("BierberHead") != null)
+        {
+            GameObject bierberHead = GameObject.FindGameObjectWithTag("BierberHead");
+            PlayerPrefsX.SetBool(bierberHeadRendered, bierberHead.renderer.enabled);
+        }
+    }
+
+    static void saveBierberWallStatus()
+    {
+        if (GameObject.FindGameObjectWithTag("BierberInvisibleWall") != null)
+        {
+            GameObject invisibleWall = GameObject.FindGameObjectWithTag("BierberInvisibleWall");
+            PlayerPrefsX.SetBool(bierberInvisibleWall, invisibleWall.collider.enabled);
+        }
+    }
+
+    static void saveTreeStatus()
+    {
+
+        if (GameObject.FindGameObjectWithTag("FallenTree") != null)
+        {
+            GameObject fallenTree = GameObject.FindGameObjectWithTag("FallenTree");
+            PlayerPrefsX.SetBool(fallenTreeRendered, fallenTree.renderer.enabled);
+        }
+    }
+
+    static void saveBier()
+    {
+        if (GameObject.FindGameObjectWithTag("Beer") != null)
+        {
+            GameObject bier = GameObject.FindGameObjectWithTag("Beer");
             PlayerPrefsX.SetVector3(bierPosition, bier.transform.position);
             PlayerPrefsX.SetQuaternion(bierRotation, bier.transform.rotation);
         }

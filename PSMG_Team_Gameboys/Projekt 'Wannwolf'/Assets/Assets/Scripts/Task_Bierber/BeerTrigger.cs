@@ -10,7 +10,7 @@ public class BeerTrigger : MonoBehaviour {
 
     void Start()
     {
-        money = GetComponent<MoneyManagement>();
+        money = GameObject.FindGameObjectWithTag("Player").GetComponent<MoneyManagement>();
     }
 
 	void OnTriggerStay (Collider other) {
