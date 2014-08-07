@@ -3,7 +3,7 @@ using System.Collections;
 
 public class ExtinguishFire : MonoBehaviour {
 
-    private GameObject fireInvisibleWall;
+    private GameObject fireRadiusTrigger;
     private DrinkLogic drinkLogic;
     private PlayerControl control;
     private ParticleSystem urin;
@@ -11,12 +11,21 @@ public class ExtinguishFire : MonoBehaviour {
     
     void Start()
     {
+        fireRadiusTrigger = GameObject.FindGameObjectWithTag("FireRadiusTrigger");
         control = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerControl>();
         drinkLogic = GameObject.FindGameObjectWithTag("Player").GetComponent<DrinkLogic>();
         extinguishable = true;
         drinkLogic = GameObject.FindGameObjectWithTag("Player").GetComponent<DrinkLogic>();
         extinguishable = true;
         urin = GameObject.FindGameObjectWithTag("Urinstrahl").GetComponent<ParticleSystem>();
+    }
+
+    void Update()
+    {
+        if (GameObject.FindGameObjectWithTag("Fire") == null)
+        {
+            GameObject.Destroy(fireRadiusTrigger);
+        }
     }
 
     void OnTriggerEnter(Collider other)
