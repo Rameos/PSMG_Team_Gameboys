@@ -4,6 +4,7 @@ using iViewX;
 
 public class PeeOnFire : MonoBehaviourWithGazeComponent
 {
+
     private bool peeing = false;
     private ParticleSystem fire;
 
