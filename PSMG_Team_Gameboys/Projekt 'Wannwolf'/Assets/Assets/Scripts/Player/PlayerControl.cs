@@ -98,8 +98,7 @@ public class PlayerControl : MonoBehaviour {
         if (horizontal != 0 || vertical != 0) {
 			playWalkingSound ();
 			alternativeMoveTo = moveTo;
-			Quaternion playerRotation = new Quaternion (mainCamera.localRotation.x, 0f, mainCamera.localRotation.z, 0f);
-			characterController.transform.rotation = playerRotation;
+            rotateInCameraView();
 		} else if (jumping && horizontal == 0 && vertical == 0) {
 			characterController.Move (alternativeMoveTo * Time.deltaTime);
 			audioManager.handleWalkingSound(false);
@@ -111,6 +110,12 @@ public class PlayerControl : MonoBehaviour {
 
         characterController.Move(moveTo * Time.deltaTime);
 
+    }
+
+    void rotateInCameraView()
+    {
+        Quaternion playerRotation = new Quaternion(mainCamera.localRotation.x, 0f, mainCamera.localRotation.z, 0f);
+        characterController.transform.rotation = playerRotation;
     }
 
     //Checks if sneak key is pressed

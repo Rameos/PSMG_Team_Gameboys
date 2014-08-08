@@ -3,7 +3,6 @@ using System.Collections;
 
 public class BurnPlayer : MonoBehaviour {
 
-    private Respawn respawn;
     private ParticleSystem playerFlames;
     private MoneyManagement moneyManagment;
 
@@ -13,7 +12,6 @@ public class BurnPlayer : MonoBehaviour {
 
     void Awake()
     {
-        respawn = GameObject.FindGameObjectWithTag("BurnPlayer").GetComponent<Respawn>();
         playerFlames = GameObject.FindGameObjectWithTag("PlayerFlames").GetComponent<ParticleSystem>();
         moneyManagment = GameObject.FindGameObjectWithTag("Player").GetComponent<MoneyManagement>();
 
@@ -22,7 +20,6 @@ public class BurnPlayer : MonoBehaviour {
 
     void Start()
     {
-        respawn.enabled = false;
         beforeBurningMoney = moneyManagment.getCurrentMoney();
     }
 
@@ -30,7 +27,7 @@ public class BurnPlayer : MonoBehaviour {
     {
         if (isBurning)
         {
-            if (moneyManagment.getCurrentMoney() > beforeBurningMoney / 2)
+            if (moneyManagment.getCurrentMoney() > (beforeBurningMoney+1) / 2)
             {
                 moneyManagment.subtractMoney(1);
             }
@@ -45,11 +42,18 @@ public class BurnPlayer : MonoBehaviour {
         StartCoroutine("Wait");
     }
 
+    void OnTriggerStay()
+    {
+        isBurning = true;
+        playerFlames.Play(true);
+        StartCoroutine("Wait");
+    }
+
     IEnumerator Wait()
     {
         yield return new WaitForSeconds(5);
         isBurning = false;
         playerFlames.Stop(true);
-        respawn.enabled = true;
+        beforeBurningMoney = moneyManagment.getCurrentMoney();
     }
 }
