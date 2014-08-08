@@ -13,6 +13,9 @@ public class startFight : MonoBehaviourWithGazeComponent
     public Camera StaticCamera;
     public Transform pizza;
 
+    private bool cursorAcvtive = false;
+    public Texture2D gazeCursor;
+
  
     private bool draw = false;
     private bool drawNext = false;
@@ -141,6 +144,7 @@ public class startFight : MonoBehaviourWithGazeComponent
     {
         MainCamera.enabled = false;
         StaticCamera.enabled = true;
+        cursorAcvtive = true;
 
         GetComponent<FollowPlayer>().enabled = false;
         rotatePizza();
@@ -162,6 +166,12 @@ public class startFight : MonoBehaviourWithGazeComponent
 
     void OnGUI()
     {
+        if (cursorAcvtive)
+        {
+            Vector3 posGaze = (gazeModel.posGazeLeft + gazeModel.posGazeRight) * 0.5f;
+            GUI.DrawTexture(new Rect(posGaze.x, posGaze.y, gazeCursor.width, gazeCursor.height), gazeCursor);
+        }
+
         if (draw == true && countCuts <11)
         {
             xLinePos = (Screen.width - Screen.width / 2) - 250; 
