@@ -36,7 +36,6 @@ public class FollowPlayer : MonoBehaviour
         else
             if (distance <= attentionRange && distance > stop)
             {
-
                 //move towards the player
                 pizza.rotation = Quaternion.Slerp(pizza.rotation,
                 Quaternion.LookRotation(player.position - pizza.position), rotationSpeed * Time.deltaTime);

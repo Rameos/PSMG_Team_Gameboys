@@ -19,7 +19,6 @@ public class PeeOnFire : MonoBehaviourWithGazeComponent
 
     public override void OnGazeEnter(RaycastHit hit)
     {
-
         peeing = true;
         StartCoroutine(pee(2));
 
