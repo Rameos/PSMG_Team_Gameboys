@@ -7,10 +7,12 @@ public class BeerTrigger : MonoBehaviour {
 	bool waitActive = false;
     private MoneyManagement money;
     int dieVal = 0;
+   
 
     void Start()
     {
         money = GameObject.FindGameObjectWithTag("Player").GetComponent<MoneyManagement>();
+       
     }
 
 	void OnTriggerStay (Collider other) {
@@ -24,7 +26,7 @@ public class BeerTrigger : MonoBehaviour {
 
             if (Input.GetKeyDown("f"))
             {
-
+                HintDialogue.hint.playNorbertBeerHint();
                 if (GameObject.Find("bier").transform.parent == null && !waitActive)
                 {
                     Debug.Log("if");
