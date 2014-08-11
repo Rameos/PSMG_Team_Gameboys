@@ -16,7 +16,7 @@ public class PeeOnFire : MonoBehaviourWithGazeComponent
 	// Update is called once per frame
 	void Update () {
         shrinkFire();
-        growFire();
+        //growFire();
 	}
 
     void shrinkFire()
@@ -30,7 +30,7 @@ public class PeeOnFire : MonoBehaviourWithGazeComponent
             }
             else
             {
-                fire.startLifetime -= 2 * Time.deltaTime;
+                fire.startLifetime -= Time.deltaTime;
             }
         }
     }
@@ -46,6 +46,7 @@ public class PeeOnFire : MonoBehaviourWithGazeComponent
 
     public override void OnGazeEnter(RaycastHit hit)
     {
+        Debug.Log("Hallihallo");
         peeing = true;
     }
 
@@ -56,6 +57,6 @@ public class PeeOnFire : MonoBehaviourWithGazeComponent
 
     public override void OnGazeExit()
     {
-        peeing = false;
+        //peeing = false;
     }
 }
