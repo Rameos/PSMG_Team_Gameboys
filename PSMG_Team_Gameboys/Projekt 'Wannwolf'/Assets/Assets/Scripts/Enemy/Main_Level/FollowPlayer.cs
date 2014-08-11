@@ -4,7 +4,7 @@ using System.Collections;
 public class FollowPlayer : MonoBehaviour
 {
 
-
+    CharacterController controller;
     Transform player; //the pizza's target
     float moveSpeed = 20; //move speed
     float rotationSpeed = 5; //speed of turning
@@ -20,7 +20,8 @@ public class FollowPlayer : MonoBehaviour
 
     void Start()
     {
-        player = GameObject.FindWithTag("Player").transform; //target the player
+        controller = GameObject.FindGameObjectWithTag("Pizza").GetComponent<CharacterController>();
+        player = GameObject.FindGameObjectWithTag("Player").transform; //target the player
 
     }
 
@@ -30,26 +31,24 @@ public class FollowPlayer : MonoBehaviour
         float distance = Vector3.Distance(pizza.position, player.position);
         if (distance <= attackRange && distance >= attentionRange)
         {
-            pizza.rotation = Quaternion.Slerp(pizza.rotation,
-            Quaternion.LookRotation(player.position - pizza.position), rotationSpeed * Time.deltaTime);
+            controller.transform.rotation = Quaternion.Slerp(controller.transform.rotation,
+            Quaternion.LookRotation(player.position - controller.transform.position), rotationSpeed * Time.deltaTime);
         }
         else
             if (distance <= attentionRange && distance > stop)
             {
                 //move towards the player
-                pizza.rotation = Quaternion.Slerp(pizza.rotation,
-                Quaternion.LookRotation(player.position - pizza.position), rotationSpeed * Time.deltaTime);
-                pizza.position += pizza.forward * moveSpeed * Time.deltaTime;
-                pizza.Rotate(0, Input.GetAxis("Horizontal") * moveSpeed * Time.deltaTime, 0,Space.World);
+                controller.transform.rotation = Quaternion.Slerp(pizza.rotation,
+                Quaternion.LookRotation(player.position - controller.transform.position), rotationSpeed * Time.deltaTime);
+                controller.Move(controller.transform.forward * moveSpeed * Time.deltaTime);
+                controller.transform.Rotate(0, Input.GetAxis("Horizontal") * moveSpeed * Time.deltaTime, 0,Space.World);
             } 
             else 
                 if (distance <= stop)
                 {
-                    pizza.rotation = Quaternion.Slerp(pizza.rotation,
-                    Quaternion.LookRotation(player.position - pizza.position), rotationSpeed * Time.deltaTime);
-                    pizza.Rotate(0, 0, 0);
+                    controller.transform.rotation = Quaternion.Slerp(controller.transform.rotation,
+                    Quaternion.LookRotation(player.position - controller.transform.position), rotationSpeed * Time.deltaTime);
+                    controller.transform.Rotate(0, 0, 0);
                 }
     }
-
-
 }
