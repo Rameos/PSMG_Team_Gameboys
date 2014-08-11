@@ -3,13 +3,14 @@ using System.Collections;
 
 public class RecyclePizza : MonoBehaviour {
 
-    public GameObject pizza;
+    //public GameObject[] pizza;
     private Vector3 pizzaStartPosition;
     private float moveSpeed; 
 
    void Awake()
    {
-       pizzaStartPosition = pizza.transform.position;
+       //pizza = GameObject.FindGameObjectsWithTag("Pizza");
+       pizzaStartPosition = gameObject.transform.position;
        moveSpeed = 0.5f;
    }
 
@@ -17,7 +18,7 @@ public class RecyclePizza : MonoBehaviour {
     {        
         Debug.Log("inactive");
 
-        pizza.transform.position = pizzaStartPosition;
+        gameObject.transform.position = pizzaStartPosition;
 
         StartCoroutine(recyclePizza(15));
 
@@ -25,22 +26,27 @@ public class RecyclePizza : MonoBehaviour {
 
     IEnumerator recyclePizza(float seconds)
     {
-        //pizza.SetActive(false);
-        renderer.enabled = false;
-        collider.enabled = false;
-        yield return new WaitForSeconds(seconds);
-        Debug.Log("recycle");
-        renderer.enabled = true;
-        collider.enabled = true;
-        //pizza.SetActive(true);
+  
+            gameObject.transform.position = new Vector3(0, 0, 300);
+            //pizza.SetActive(false);
+            //pizza[i].renderer.enabled = false;
+            //gameObject.collider.enabled = false;
+            yield return new WaitForSeconds(seconds);
+            Debug.Log("recycle");
+            //pizza[i].renderer.enabled = true;
+            //gameObject.collider.enabled = true;
+            //pizza.SetActive(true);
+            gameObject.transform.position = pizzaStartPosition;
+        
+            
 
     }
 
     // Enemy returns to its original position
     void returnToOrigin()
     {
-        pizza.transform.rotation = Quaternion.Slerp(pizza.transform.rotation,
-        Quaternion.LookRotation(pizzaStartPosition - pizza.transform.position), 1f);
-        pizza.transform.position += pizza.transform.forward * moveSpeed;
+        gameObject.transform.rotation = Quaternion.Slerp(gameObject.transform.rotation,
+        Quaternion.LookRotation(pizzaStartPosition - gameObject.transform.position), 1f);
+        gameObject.transform.position += gameObject.transform.forward * moveSpeed;
     }
 }

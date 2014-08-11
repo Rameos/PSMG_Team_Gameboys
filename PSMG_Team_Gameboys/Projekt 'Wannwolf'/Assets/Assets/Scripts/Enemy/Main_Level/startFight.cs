@@ -4,6 +4,7 @@ using iViewX;
 
 //[RequireComponent(typeof(CameraControl))]
 [RequireComponent(typeof(RecyclePizza))]
+[RequireComponent(typeof(FollowPlayer))]
 
 public class startFight : MonoBehaviourWithGazeComponent
 {
