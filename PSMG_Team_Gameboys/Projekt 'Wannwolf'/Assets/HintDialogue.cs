@@ -6,14 +6,18 @@ public class HintDialogue : MonoBehaviour {
     const int PIZZA_HINT = 0;
     const int BIERBER_HINT = 1;
     const int SNEEK_HINT = 2;
-    const int ANGLER_AWAKE_HINT = 3;
-    const int BEER_TO_BIERBER_HINT = 4;
-    const int FIRE_ARRIVAL_HINT = 5;
-    const int FIRE_FIGHTING_HINT = 6;
-    const int VODKA_HINT = 7;
-    const int JUMP_HINT = 8;
-    const int STAIR_HINT = 9;
+    const int BEER_TO_BIERBER_HINT = 3;
+    const int FIRE_ARRIVAL_HINT = 4;
+    const int FIRE_FIGHTING_HINT = 5;
+    const int VODKA_HINT = 6;
+    const int JUMP_HINT = 7;
+    const int STAIR_HINT = 8;
+    const int BAUM_HINT = 9;
     const int CHASE_HINT = 10;
+    const int ANGLER_AWAKE_HINT = 11;
+
+    public AudioSource myAudio;
+    public AudioClip pizza;
 
     public AudioClip[] Dialogues;
     GameObject player;
@@ -28,7 +32,8 @@ public class HintDialogue : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        audio.clip = Dialogues[0];
+        myAudio = gameObject.AddComponent<AudioSource>();
+        myAudio.playOnAwake = false;
 	}
 	
 	// Update is called once per frame
@@ -41,8 +46,9 @@ public class HintDialogue : MonoBehaviour {
         string tag = gameObject.tag;
         switch (tag)
         {
-            case "PizzaHint": audio.clip = Dialogues [PIZZA_HINT];
-                audio.Play();
+            case "PizzaHint": audio.clip = (AudioClip)Resources.Load("pizza");
+                Debug.Log("Jetzt müsste Sound spielen");
+                myAudio.Play();
                 break;
             case "BierberHint": audio.clip = Dialogues[BIERBER_HINT];
                 audio.Play();
@@ -67,7 +73,7 @@ public class HintDialogue : MonoBehaviour {
                 audio.Play();
                 break;
             case "ChaseHint":
-                audio.clip = Dialogues[CHASE_HINT];
+                audio.clip = Dialogues[BAUM_HINT];
                 audio.Play();
                 break;
         }
