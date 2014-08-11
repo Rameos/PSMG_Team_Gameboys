@@ -109,6 +109,7 @@ public class HintDialogue : MonoBehaviour {
 
     public void playNorbertBeerHint()
     {
+        Debug.Log(Dialogues[BEER_TO_BIERBER_HINT]);
         audio.clip = Dialogues[BEER_TO_BIERBER_HINT];
         audio.Play();
     }

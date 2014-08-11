@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 9341cd1a2094d95478df34fd10a3e35f
+guid: c8c5a238caa446046a3a6bc533e4c263
 ModelImporter:
   serializedVersion: 16
   fileIDToRecycleName:
@@ -14,6 +14,8 @@ ModelImporter:
     2300000: Baumstamm
     3300000: Baumstamm
     4300000: Baumstamm
+    6400000: Baumstamm
+    7400000: Default Take
     9500000: //RootNode
   materials:
     importMaterials: 1
@@ -35,7 +37,7 @@ ModelImporter:
     lODScreenPercentages: []
     globalScale: .00999999978
     meshCompression: 0
-    addColliders: 0
+    addColliders: 1
     importBlendShapes: 1
     swapUVChannels: 0
     generateSecondaryUV: 0
@@ -49,7 +51,7 @@ ModelImporter:
   tangentSpace:
     normalSmoothAngle: 60
     splitTangentsAcrossUV: 1
-    normalImportMode: 0
+    normalImportMode: 1
     tangentImportMode: 1
   importAnimation: 1
   copyAvatar: 0

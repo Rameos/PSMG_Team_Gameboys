@@ -18,7 +18,7 @@ public class BeerTrigger : MonoBehaviour {
     {
         money = GameObject.FindGameObjectWithTag("Player").GetComponent<MoneyManagement>();
         drag = GetComponent<DragByPlayer>();
-		hint = GetComponent<HintDialogue>();
+		hint = GameObject.FindGameObjectWithTag("AnglerArrivalHint").GetComponent<HintDialogue>();
 
     }
 
