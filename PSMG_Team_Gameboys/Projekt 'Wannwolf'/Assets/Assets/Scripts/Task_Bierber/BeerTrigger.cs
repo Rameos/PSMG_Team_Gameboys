@@ -2,6 +2,7 @@
 using System.Collections;
 [RequireComponent(typeof(MoneyManagement))]
 [RequireComponent(typeof(DragByPlayer))]
+[RequireComponent(typeof(HintDialogue))]
 
 
 public class BeerTrigger : MonoBehaviour {
@@ -9,6 +10,7 @@ public class BeerTrigger : MonoBehaviour {
     private MoneyManagement money;
     int dieVal = 0;
     private DragByPlayer drag;
+	private HintDialogue hint;
 
 
 
@@ -16,6 +18,7 @@ public class BeerTrigger : MonoBehaviour {
     {
         money = GameObject.FindGameObjectWithTag("Player").GetComponent<MoneyManagement>();
         drag = GetComponent<DragByPlayer>();
+		hint = GetComponent<HintDialogue>();
 
     }
 
@@ -30,7 +33,7 @@ public class BeerTrigger : MonoBehaviour {
 
             if (Input.GetKeyDown("f"))
             {
-                HintDialogue.hint.playNorbertBeerHint();
+                hint.playNorbertBeerHint();
                 drag.follow(gameObject, true);
             }
             
