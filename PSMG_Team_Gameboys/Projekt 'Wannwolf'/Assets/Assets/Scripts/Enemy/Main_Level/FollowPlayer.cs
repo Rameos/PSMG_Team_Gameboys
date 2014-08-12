@@ -20,7 +20,7 @@ public class FollowPlayer : MonoBehaviour
 
     void Start()
     {
-        controller = GameObject.FindGameObjectWithTag(TagManager.PIZZA).GetComponent<CharacterController>();
+        controller = pizza.GetComponent<CharacterController>();
         player = GameObject.FindGameObjectWithTag(TagManager.PLAYER).transform; //target the player
 
     }
