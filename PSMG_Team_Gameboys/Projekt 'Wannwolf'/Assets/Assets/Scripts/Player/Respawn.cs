@@ -3,6 +3,7 @@ using System.Collections;
 
 public class Respawn : MonoBehaviour
 {
+    private const int subtractValue = 15;
 
     public Texture2D texture;
 
@@ -11,7 +12,6 @@ public class Respawn : MonoBehaviour
     private bool respawn;
     private Color currentColor;
     private Rect screenRect;
-    private float fadeSpeed;
     private GameObject player;
     private MoneyManagement money;
     LoadGameSettings loadGame;
@@ -22,15 +22,20 @@ public class Respawn : MonoBehaviour
         respawn = false;
         currentColor = Color.black;
         screenRect = new Rect(0f, 0f, Screen.width, Screen.height);
-        fadeSpeed = 1.0f;
         player = GameObject.FindGameObjectWithTag("Player");
         money = player.GetComponent<MoneyManagement>();
         loadGame = GameObject.FindGameObjectWithTag("GameController").GetComponent<LoadGameSettings>();
     }
 
+    void Start()
+    {
+        Save.saveGame();
+    }
+
     void Update()
     {
         dyingPlayer();
+        restartGame();
         respawnPlayer();
     }
 
@@ -44,36 +49,36 @@ public class Respawn : MonoBehaviour
         }
     }
 
-    void OnTriggerEnter(Collider col)
-    {
-        if (col.gameObject.tag == player.tag)
-        {
-            dying = true;
-        }
-    }
-
     void fadeIn()
     {
-        currentColor = Color.Lerp(currentColor, Color.clear, fadeSpeed * Time.deltaTime);
+        currentColor = Color.Lerp(currentColor, Color.clear, Time.deltaTime);
 
-        if (currentColor.a <= 0.05f)
+        if (currentColor.a <= 0.3f)
         {
             currentColor = Color.clear;
             respawn = false;
+            setPlayerControl(true);
         }
     }
 
     void fadeOut()
     {
-        currentColor = Color.Lerp(currentColor, Color.black, fadeSpeed * Time.deltaTime);
+        currentColor = Color.Lerp(currentColor, Color.black, Time.deltaTime);
+        setPlayerControl(false);
 
         if (currentColor.a >= 0.95f)
         {
-            setGameSettings();
             currentColor.a = 1f;
+            setGameSettings();
+            manageMoney();
             dying = false;
             respawn = true;
         }
+    }
+
+    void setPlayerControl(bool enabled)
+    {
+        player.GetComponent<PlayerControl>().enabled = enabled;
     }
 
     //Reloads the last-saved version of the Game and manages the money
@@ -100,22 +105,30 @@ public class Respawn : MonoBehaviour
         }
     }
 
+    void restartGame(){
+        int currentMoney = money.getCurrentMoney();
+        int minMoney = money.getMoneyMinimum();
+        if(currentMoney <= minMoney){
+            LoadScene.loadFirstLevel();
+            setPlayerControl(true);
+        }
+    }
+
     void manageMoney()
     {
-        // Subtract money from the players account on death
-        money.subtractMoney(15);
+        money.subtractMoney(subtractValue);
+    }
 
-        // Decide where to relocate the player to after death
-        int curMoney = money.getCurrentMoney();
-        int moneyMinimum = money.getMoneyMinimum();
-        int moneyMaximum = money.getMoneyMaximum();
+    public bool respawnStatus
+    {
+        get { return respawn; }
+        set{respawn = value;}
+    }
 
-        if (curMoney <= moneyMinimum)
-        {
-            LoadScene.loadFirstLevel();
-            // b) Relocate player at the begin of the level if no money is left
-            money.setCurrentMoney(moneyMaximum);
-        }
+    public bool dyingStatus
+    {
+        get { return dying; }
+        set { dying = value; }
     }
 }
 

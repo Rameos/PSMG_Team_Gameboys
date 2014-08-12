@@ -12,14 +12,14 @@ public class BurnPlayer : MonoBehaviour {
 
     void Awake()
     {
-        playerFlames = GameObject.FindGameObjectWithTag("PlayerFlames").GetComponent<ParticleSystem>();
-        moneyManagment = GameObject.FindGameObjectWithTag("Player").GetComponent<MoneyManagement>();
-
         isBurning = false;
     }
 
     void Start()
     {
+        playerFlames = GameObject.FindGameObjectWithTag("PlayerFlames").GetComponent<ParticleSystem>();
+        moneyManagment = GameObject.FindGameObjectWithTag("Player").GetComponent<MoneyManagement>();
+
         beforeBurningMoney = moneyManagment.getCurrentMoney();
     }
 
