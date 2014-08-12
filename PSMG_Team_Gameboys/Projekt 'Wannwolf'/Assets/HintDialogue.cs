@@ -87,18 +87,21 @@ public class HintDialogue : MonoBehaviour {
 
     void checkFireArrivalTimes()
     {
+
         if (fireArrival == 0)
         {
             audio.clip = Dialogues[FIRE_ARRIVAL_HINT];
             audio.Play();
-            fireArrival++;
+            
         }
-        else if (fireArrival == 1)
+        else if (fireArrival == 2)
         {
             audio.clip = Dialogues[FIRE_FIGHTING_HINT];
             audio.Play();
-            fireArrival++;
+            
         }
+        fireArrival++;
+        Debug.Log("Times: " + fireArrival);
     }
 
     public void playAnglerAwakeSound()
