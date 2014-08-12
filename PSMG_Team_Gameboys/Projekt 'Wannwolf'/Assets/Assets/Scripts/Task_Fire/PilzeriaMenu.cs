@@ -19,7 +19,7 @@ public class PilzeriaMenu : MonoBehaviour {
 	void Start () {
 		butRect = new Rect ((Screen.width - width) / 2, 0, width, height);
         moneyManagement = GameObject.FindGameObjectWithTag("Player").GetComponent<MoneyManagement>();
-        player = GameObject.Find("Player");
+        player = GameObject.FindGameObjectWithTag("Player");
         control = player.GetComponent<PlayerControl>();
         drinkLogic = player.GetComponent<DrinkLogic>();
 	}
