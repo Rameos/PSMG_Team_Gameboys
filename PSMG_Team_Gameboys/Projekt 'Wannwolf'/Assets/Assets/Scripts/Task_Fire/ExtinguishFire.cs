@@ -9,7 +9,7 @@ public class ExtinguishFire : MonoBehaviour {
     private ParticleSystem urin;
     private bool extinguishable;
     
-    void Start()
+    void Awake()
     {
         fireRadiusTrigger = GameObject.FindGameObjectWithTag("FireRadiusTrigger");
         control = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerControl>();

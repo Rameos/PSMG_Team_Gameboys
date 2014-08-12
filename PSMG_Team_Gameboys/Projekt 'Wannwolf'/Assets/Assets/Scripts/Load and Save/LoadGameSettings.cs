@@ -8,15 +8,20 @@ public class LoadGameSettings : MonoBehaviour
     {
         if (PlayerPrefsX.GetBool("GameSaved") && PlayerPrefs.GetString("SceneToLoad").Equals(Application.loadedLevelName))
         {
-            loadPlayer();
-            loadBierber();
-            loadBierberBody();
-            loadBierberHead();
-            loadFallenTree();
-            loadInvisibleWall();
-            loadBier();
-            loadPizza();
+            loadAll();
         }
+    }
+
+    public void loadAll()
+    {
+        loadPlayer();
+        loadBierber();
+        loadBierberBody(); 
+        loadBierberHead();
+        loadFallenTree();
+        loadInvisibleWall();
+        loadBier();
+        loadPizza();
     }
 
     void loadPlayer()
