@@ -5,11 +5,11 @@ public class UrinFireCollision : MonoBehaviour{
 
     void OnParticleCollision(GameObject other)
     {
-        if (other.tag == "Fire")
+        if (other.tag == TagManager.FIRE)
         {
             if (other.GetComponent<ParticleSystem>().startLifetime <= 0.1)
             {
-                GameObject.FindGameObjectWithTag("PlayerFlames").GetComponent<ParticleSystem>().Stop();
+                GameObject.FindGameObjectWithTag(TagManager.PLAYER_FLAMES).GetComponent<ParticleSystem>().Stop();
                 GameObject.Destroy(other);
             }
             else

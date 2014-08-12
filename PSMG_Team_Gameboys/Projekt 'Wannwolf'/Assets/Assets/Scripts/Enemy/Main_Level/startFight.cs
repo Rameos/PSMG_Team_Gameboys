@@ -100,7 +100,7 @@ public class startFight : MonoBehaviourWithGazeComponent
 
        
 
-        if (col.gameObject.tag == "Player")
+        if (col.gameObject.tag == TagManager.PLAYER)
         {
             inTrigger = true;
             StartCoroutine(startPizzaFight(5));
@@ -109,7 +109,7 @@ public class startFight : MonoBehaviourWithGazeComponent
 
     void OnTriggerStay(Collider col)
     {
-        if (col.gameObject.tag == "Player")
+        if (col.gameObject.tag == TagManager.PLAYER)
         {
             inTrigger = true;
             if (Input.GetKeyDown("f"))

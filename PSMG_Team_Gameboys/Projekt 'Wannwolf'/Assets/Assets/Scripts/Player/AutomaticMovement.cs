@@ -33,7 +33,7 @@ public class AutomaticMovement : MonoBehaviour {
 
     void OnTriggerEnter(Collider col)
     {
-        if (col.gameObject.tag == "Barrier")
+        if (col.gameObject.tag == TagManager.BARRIER)
         {
             stop = true;
         }
@@ -41,7 +41,7 @@ public class AutomaticMovement : MonoBehaviour {
 
     void OnTriggerStay(Collider col)
     {
-        if (col.gameObject.tag == "Barrier")
+        if (col.gameObject.tag == TagManager.BARRIER)
         {
             stop = true;
         }
@@ -49,7 +49,7 @@ public class AutomaticMovement : MonoBehaviour {
 
     void OnTriggerExit(Collider col)
     {
-        if (col.gameObject.tag == "Barrier")
+        if (col.gameObject.tag == TagManager.BARRIER)
         {
             stop = false;
         }
@@ -57,7 +57,7 @@ public class AutomaticMovement : MonoBehaviour {
 
     void OnCollisionEnter(Collision col)
     {
-        if (col.gameObject.tag == "Mushroom")
+        if (col.gameObject.tag == TagManager.MUSHROOM)
         {
             money.addMoney(1);
             GameObject.Destroy(col.gameObject);

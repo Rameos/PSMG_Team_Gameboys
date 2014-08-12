@@ -28,7 +28,7 @@ public class PeeOnFire : MonoBehaviourWithGazeComponent
         {
             if (fire.startLifetime <= 0.1)
             {
-                GameObject.FindGameObjectWithTag("PlayerFlames").GetComponent<ParticleSystem>().Stop();
+                GameObject.FindGameObjectWithTag(TagManager.PLAYER_FLAMES).GetComponent<ParticleSystem>().Stop();
                 GameObject.Destroy(fire);
             }
             else
