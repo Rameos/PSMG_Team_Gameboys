@@ -4,16 +4,6 @@ using System.Collections;
 public class DragByPlayer : MonoBehaviour {
     private bool waitActive = false;
 
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
-
     public void follow(GameObject obj, bool rotate)
     {
         if(rotate == true){
