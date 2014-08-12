@@ -9,6 +9,7 @@ public class PeeOnFire : MonoBehaviourWithGazeComponent
     private ParticleSystem fire;
     private GameObject player;
     private float rotation;
+    private float currentY;
 
 	// Use this for initialization
 	void Awake () {
@@ -51,15 +52,16 @@ public class PeeOnFire : MonoBehaviourWithGazeComponent
     {
         Debug.Log("Hallihallo");
         peeing = true;
+        currentY = player.transform.rotation.y;
         
     }
 
     public override void OnGazeStay(RaycastHit hit)
     {
         //Vector3 rotate = new Vector3(gazeModel.posGazeRight.x / 10,0, 0 );
-        rotation = (500 - gazeModel.posGazeRight.x) / 10;
+        rotation = (player.transform.position.x - gazeModel.posGazeRight.x) / 10;
 
-            player.transform.Rotate(0, rotation, 0);
+            player.transform.Rotate(0, currentY - rotation, 0);
         
      
         //player.transform.Rotate(gazeModel.posGazeRight.x / 10, 0, 0);
