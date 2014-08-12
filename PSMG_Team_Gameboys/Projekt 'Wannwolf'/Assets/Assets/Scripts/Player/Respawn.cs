@@ -22,9 +22,9 @@ public class Respawn : MonoBehaviour
         respawn = false;
         currentColor = Color.black;
         screenRect = new Rect(0f, 0f, Screen.width, Screen.height);
-        player = GameObject.FindGameObjectWithTag("Player");
+        player = GameObject.FindGameObjectWithTag(TagManager.PLAYER);
         money = player.GetComponent<MoneyManagement>();
-        loadGame = GameObject.FindGameObjectWithTag("GameController").GetComponent<LoadGameSettings>();
+        loadGame = GameObject.FindGameObjectWithTag(TagManager.GAME_CONTROLLER).GetComponent<LoadGameSettings>();
     }
 
     void Start()

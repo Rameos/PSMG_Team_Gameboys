@@ -7,12 +7,12 @@ public class PlayerDie : MonoBehaviour {
 
     void Awake()
     {
-        respawn = GameObject.FindGameObjectWithTag("GameController").GetComponent<Respawn>();
+        respawn = GameObject.FindGameObjectWithTag(TagManager.GAME_CONTROLLER).GetComponent<Respawn>();
     }
 
     void OnTriggerEnter(Collider col)
     {
-        if (col.gameObject.tag == ("Player"))
+        if (col.gameObject.tag == (TagManager.PLAYER))
         {
             respawn.dyingStatus = true;
         }

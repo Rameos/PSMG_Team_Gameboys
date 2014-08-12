@@ -7,7 +7,7 @@ public class DragByPlayer : MonoBehaviour {
     public void follow(GameObject obj, bool rotate)
     {
         if(rotate == true){
-            obj = GameObject.Find("bier");
+            obj = GameObject.FindGameObjectWithTag(TagManager.BEER);
         }
         if (obj.transform.parent == null && !waitActive)
         {

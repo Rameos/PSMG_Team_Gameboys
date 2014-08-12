@@ -17,8 +17,8 @@ public class BurnPlayer : MonoBehaviour {
 
     void Start()
     {
-        playerFlames = GameObject.FindGameObjectWithTag("PlayerFlames").GetComponent<ParticleSystem>();
-        moneyManagment = GameObject.FindGameObjectWithTag("Player").GetComponent<MoneyManagement>();
+        playerFlames = GameObject.FindGameObjectWithTag(TagManager.PLAYER_FLAMES).GetComponent<ParticleSystem>();
+        moneyManagment = GameObject.FindGameObjectWithTag(TagManager.PLAYER).GetComponent<MoneyManagement>();
 
         beforeBurningMoney = moneyManagment.getCurrentMoney();
     }
@@ -39,14 +39,14 @@ public class BurnPlayer : MonoBehaviour {
     {
         isBurning = true;
         playerFlames.Play(true);
-        StartCoroutine("Wait");
+        StartCoroutine(Wait());
     }
 
     void OnTriggerStay()
     {
         isBurning = true;
         playerFlames.Play(true);
-        StartCoroutine("Wait");
+        StartCoroutine(Wait());
     }
 
     IEnumerator Wait()

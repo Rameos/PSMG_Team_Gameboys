@@ -5,6 +5,6 @@ public class StopUrinating : MonoBehaviour {
 
     void OnTriggerEnter()
     {
-        GameObject.FindGameObjectWithTag("Urinstrahl").GetComponent<ParticleSystem>().Stop();
+        GameObject.FindGameObjectWithTag(TagManager.URINSTRAHL).GetComponent<ParticleSystem>().Stop();
     }
 }
