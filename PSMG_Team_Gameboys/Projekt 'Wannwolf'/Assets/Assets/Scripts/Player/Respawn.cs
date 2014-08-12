@@ -14,11 +14,10 @@ public class Respawn : MonoBehaviour
     private float fadeSpeed;
     private GameObject player;
     private MoneyManagement money;
-    private Vector3 respawnPosition;
+    LoadGameSettings loadGame;
 
     void Awake()
     {
-        deathzoneTags = new string[3] { "DeathzoneRiver", "DeathzoneGap", "Enemy"};
         dying = false;
         respawn = false;
         currentColor = Color.black;
@@ -26,9 +25,10 @@ public class Respawn : MonoBehaviour
         fadeSpeed = 1.0f;
         player = GameObject.FindGameObjectWithTag("Player");
         money = player.GetComponent<MoneyManagement>();
+        loadGame = GameObject.FindGameObjectWithTag("GameController").GetComponent<LoadGameSettings>();
     }
 
-    void FixedUpdate()
+    void Update()
     {
         dyingPlayer();
         respawnPlayer();
@@ -46,11 +46,9 @@ public class Respawn : MonoBehaviour
 
     void OnTriggerEnter(Collider col)
     {
-        checkDeathzone();
         if (col.gameObject.tag == player.tag)
         {
             dying = true;
-            manageMoney();
         }
     }
 
@@ -71,10 +69,17 @@ public class Respawn : MonoBehaviour
 
         if (currentColor.a >= 0.95f)
         {
+            setGameSettings();
             currentColor.a = 1f;
             dying = false;
             respawn = true;
         }
+    }
+
+    //Reloads the last-saved version of the Game and manages the money
+    void setGameSettings()
+    {
+        loadGame.loadAll();
     }
 
     void dyingPlayer()
@@ -91,7 +96,6 @@ public class Respawn : MonoBehaviour
         if (respawn)
         {
             player.renderer.enabled = true;
-            player.transform.position = respawnPosition;
             fadeIn();
         }
     }
@@ -108,22 +112,9 @@ public class Respawn : MonoBehaviour
 
         if (curMoney <= moneyMinimum)
         {
+            LoadScene.loadFirstLevel();
             // b) Relocate player at the begin of the level if no money is left
-            respawnPosition = new Vector3(96f, 107f, 101f);
             money.setCurrentMoney(moneyMaximum);
-        }
-    }
-
-    void checkDeathzone()
-    {
-        string tag = gameObject.tag;
-        for (int i = 0; i < deathzoneTags.Length; i++)
-        {
-            if (tag.Equals(deathzoneTags[i]))
-            {
-                respawnPosition = new Vector3(530, 101, 250);
-                break;
-            }
         }
     }
 }
