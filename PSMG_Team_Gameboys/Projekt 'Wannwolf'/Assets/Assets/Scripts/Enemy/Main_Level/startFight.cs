@@ -67,6 +67,7 @@ public class startFight : MonoBehaviourWithGazeComponent
         draw = false;
         countCuts = 0;
         fClicked = false;
+        cursorAcvtive = false;
 
     }
 
@@ -80,9 +81,14 @@ public class startFight : MonoBehaviourWithGazeComponent
             StopAllCoroutines();
             recycle.recycleEnemy();
         }
-      
+
+        if (gazeModel.posGazeRight.x == 0 && gazeModel.posGazeRight.y == 0)
+        {
             checkMousePosition();
+        }
+         
             checkGazePosition();
+
         
     }
 

@@ -30,7 +30,7 @@ public class BeerTrigger : MonoBehaviour {
 
             if (Input.GetKeyDown("f"))
             {
-                HintDialogue.hint.playNorbertBeerHint();
+                //HintDialogue.hint.playNorbertBeerHint();
                 drag.follow(gameObject, true);
             }
             
