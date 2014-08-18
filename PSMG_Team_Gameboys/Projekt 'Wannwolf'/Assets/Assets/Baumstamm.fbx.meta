@@ -1,18 +1,12 @@
 fileFormatVersion: 2
-guid: 9341cd1a2094d95478df34fd10a3e35f
+guid: 3590501961f753541ae69c0d40471d37
 ModelImporter:
   serializedVersion: 16
   fileIDToRecycleName:
     100000: //RootNode
-    100002: Baumstamm
-    100004: Camera
-    100006: Sun
     400000: //RootNode
-    400002: Baumstamm
-    400004: Camera
-    400006: Sun
-    2300000: Baumstamm
-    3300000: Baumstamm
+    2300000: //RootNode
+    3300000: //RootNode
     4300000: Baumstamm
     9500000: //RootNode
   materials:
