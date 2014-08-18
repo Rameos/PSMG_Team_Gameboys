@@ -9,7 +9,7 @@ using iViewX;
 public class startFight : MonoBehaviourWithGazeComponent
 {
     public Transform pizza;
-
+    public GameObject prefab;
     private bool cursorAcvtive = false;
     public Texture2D gazeCursor;
 
@@ -90,9 +90,6 @@ public class startFight : MonoBehaviourWithGazeComponent
 
     void OnTriggerEnter(Collider col)
     {
-
-       
-
         if (col.gameObject.tag == TagManager.PLAYER)
         {
             inTrigger = true;
@@ -160,6 +157,7 @@ public class startFight : MonoBehaviourWithGazeComponent
         player.GetComponent<PlayerControl>().enabled = false;
         switcher.setCameraStatic();
         switcher.setCameraFocus(gameObject);
+        instantiateMushroom();
     }
 
     void setNotFightingStatus()
@@ -167,6 +165,11 @@ public class startFight : MonoBehaviourWithGazeComponent
         GetComponent<FollowPlayer>().enabled = true;
         player.GetComponent<PlayerControl>().enabled = true;
         switcher.setCameraDynamic();
+    }
+
+    private void instantiateMushroom()
+    {
+        Instantiate(prefab, pizza.transform.position, new Quaternion(0, 0, 0, 0));
     }
 
     void OnGUI()
