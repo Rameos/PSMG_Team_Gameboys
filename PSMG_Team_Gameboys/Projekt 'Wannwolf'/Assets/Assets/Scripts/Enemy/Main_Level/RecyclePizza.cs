@@ -21,7 +21,6 @@ public class RecyclePizza : MonoBehaviour {
         gameObject.transform.position = pizzaStartPosition;
 
         StartCoroutine(recyclePizza(15));
-
     }
 
     IEnumerator recyclePizza(float seconds)

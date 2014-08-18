@@ -3,6 +3,7 @@ using System.Collections;
 
 public class TagManager : MonoBehaviour {
 
+    public static string MAIN_CAMERA = "MainCamera";
     public static string GAME_CONTROLLER = "GameController";
     public static string PLAYER = "Player";
     public static string GROUND = "Ground";
