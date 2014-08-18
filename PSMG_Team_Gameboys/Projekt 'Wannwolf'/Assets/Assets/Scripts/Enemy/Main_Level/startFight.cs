@@ -35,6 +35,7 @@ public class startFight : MonoBehaviourWithGazeComponent
     private GameObject player;
     private CameraSwitcher switcher;
     private bool fClicked = false;
+    private Vector3 mushroomPosition;
     bool inTrigger = false;
 
 
@@ -157,11 +158,12 @@ public class startFight : MonoBehaviourWithGazeComponent
         player.GetComponent<PlayerControl>().enabled = false;
         switcher.setCameraStatic();
         switcher.setCameraFocus(gameObject);
-        instantiateMushroom();
+        mushroomPosition = pizza.transform.position;
     }
 
     void setNotFightingStatus()
     {
+        instantiateMushroom();
         GetComponent<FollowPlayer>().enabled = true;
         player.GetComponent<PlayerControl>().enabled = true;
         switcher.setCameraDynamic();
@@ -169,7 +171,7 @@ public class startFight : MonoBehaviourWithGazeComponent
 
     private void instantiateMushroom()
     {
-        Instantiate(prefab, pizza.transform.position, new Quaternion(0, 0, 0, 0));
+        Instantiate(prefab, mushroomPosition, new Quaternion(0, 0, 0, 0));
     }
 
     void OnGUI()
