@@ -6,6 +6,7 @@ public class MoneyManagement : MonoBehaviour {
 	// Instance variables
 	int moneyMinimum;
 	int moneyMaximum;
+    int startMoney;
 	int currentMoney;
 	public GUIText moneyText;
 
@@ -18,7 +19,8 @@ public class MoneyManagement : MonoBehaviour {
 	void Start () {
         moneyMinimum = 0;
 		moneyMaximum = 100;
-		currentMoney = moneyMaximum;
+        startMoney = 40;
+		currentMoney = startMoney;
 		updateGuiText();
 	}
 	
