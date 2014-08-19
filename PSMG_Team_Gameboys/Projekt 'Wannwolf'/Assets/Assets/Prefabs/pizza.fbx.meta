@@ -28,6 +28,20 @@ ModelImporter:
     100044: Zahn_L
     100046: Zahn_R
     100048: Zunge
+    100050: Arm_L
+    100052: Arm_R
+    100054: Augenbraue
+    100056: Bein_L
+    100058: Bein_R
+    100060: Pilz_Bein_L
+    100062: Pilz_Bein_R
+    100064: Pilz_belag_L
+    100066: Pilz_Belag_mitte
+    100068: Pilz_Belag_mitte_ob
+    100070: Pilz_belag_oben
+    100072: Pilz_Belag_R
+    100074: Pilz_Belag_unten
+    100076: Pilz_Hand
     400000: Auge_L
     400002: Auge_L_001
     400004: Auge_L_002
@@ -53,6 +67,20 @@ ModelImporter:
     400044: Zahn_L
     400046: Zahn_R
     400048: Zunge
+    400050: Arm_L
+    400052: Arm_R
+    400054: Augenbraue
+    400056: Bein_L
+    400058: Bein_R
+    400060: Pilz_Bein_L
+    400062: Pilz_Bein_R
+    400064: Pilz_belag_L
+    400066: Pilz_Belag_mitte
+    400068: Pilz_Belag_mitte_ob
+    400070: Pilz_belag_oben
+    400072: Pilz_Belag_R
+    400074: Pilz_Belag_unten
+    400076: Pilz_Hand
     2300000: Auge_L
     2300002: Auge_L_001
     2300004: Auge_L_002
@@ -77,6 +105,20 @@ ModelImporter:
     2300042: Zahn_L
     2300044: Zahn_R
     2300046: Zunge
+    2300048: Arm_L
+    2300050: Arm_R
+    2300052: Augenbraue
+    2300054: Bein_L
+    2300056: Bein_R
+    2300058: Pilz_Bein_L
+    2300060: Pilz_Bein_R
+    2300062: Pilz_belag_L
+    2300064: Pilz_Belag_mitte
+    2300066: Pilz_Belag_mitte_ob
+    2300068: Pilz_belag_oben
+    2300070: Pilz_Belag_R
+    2300072: Pilz_Belag_unten
+    2300074: Pilz_Hand
     3300000: Auge_L
     3300002: Auge_L_001
     3300004: Auge_L_002
@@ -101,6 +143,20 @@ ModelImporter:
     3300042: Zahn_L
     3300044: Zahn_R
     3300046: Zunge
+    3300048: Arm_L
+    3300050: Arm_R
+    3300052: Augenbraue
+    3300054: Bein_L
+    3300056: Bein_R
+    3300058: Pilz_Bein_L
+    3300060: Pilz_Bein_R
+    3300062: Pilz_belag_L
+    3300064: Pilz_Belag_mitte
+    3300066: Pilz_Belag_mitte_ob
+    3300068: Pilz_belag_oben
+    3300070: Pilz_Belag_R
+    3300072: Pilz_Belag_unten
+    3300074: Pilz_Hand
     4300000: Salami
     4300002: Sphere_013
     4300004: Sphere_012
@@ -125,6 +181,20 @@ ModelImporter:
     4300042: Auge_R
     4300044: Auge_L
     4300046: Teig
+    4300048: Pilz_belag_oben
+    4300050: Pilz_belag_L
+    4300052: Pilz_Belag_mitte_ob
+    4300054: Pilz_Belag_mitte
+    4300056: Pilz_Belag_unten
+    4300058: Pilz_Belag_R
+    4300060: Pilz_Bein_L
+    4300062: Pilz_Bein_R
+    4300064: Pilz_Hand
+    4300066: Bein_R
+    4300068: Bein_L
+    4300070: Arm_L
+    4300072: Arm_R
+    4300074: Augenbraue
     7400000: Default Take
     9500000: //RootNode
   materials:
