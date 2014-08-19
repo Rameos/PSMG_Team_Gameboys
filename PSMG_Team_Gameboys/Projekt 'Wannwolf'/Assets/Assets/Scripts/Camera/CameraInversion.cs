@@ -26,7 +26,8 @@ public class CameraInversion : MonoBehaviour {
     void rotateCameraWithPlayer()
     {
         Vector3 temp = camera.transform.eulerAngles;
-        temp.y = -target.eulerAngles.y-90;
+        temp.y = target.eulerAngles.y + 180;
+        temp.z = target.eulerAngles.z + 180;
         camera.transform.eulerAngles = temp;
     }
 }
