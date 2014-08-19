@@ -51,5 +51,5 @@ public class TagManager : MonoBehaviour {
     public static string FIRE_RADIUS_TRIGGER = "FireRadiusTrigger";
     public static string VODKA_HINT = "VodkaHint";
     public static string STOP_URINATING = "StopUrinating";
-        
+    public static string VOMIT = "Vomit";
 }
