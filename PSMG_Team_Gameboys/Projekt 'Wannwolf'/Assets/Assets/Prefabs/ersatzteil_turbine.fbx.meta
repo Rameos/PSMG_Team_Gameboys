@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 0750f268ae3444843a632ce7e0234b46
+guid: b4008f3a01077004fbf655820f6de654
 ModelImporter:
   serializedVersion: 16
   fileIDToRecycleName:
@@ -7,8 +7,7 @@ ModelImporter:
     400000: //RootNode
     2300000: //RootNode
     3300000: //RootNode
-    4300000: Sphere_005
-    4300002: Pilz Hand
+    4300000: Plane
     9500000: //RootNode
   materials:
     importMaterials: 1

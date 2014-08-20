@@ -1,14 +1,45 @@
 fileFormatVersion: 2
-guid: 0750f268ae3444843a632ce7e0234b46
+guid: 4b5b76742b626c44a9b28bf49f48b589
 ModelImporter:
   serializedVersion: 16
   fileIDToRecycleName:
-    100000: //RootNode
-    400000: //RootNode
-    2300000: //RootNode
-    3300000: //RootNode
-    4300000: Sphere_005
-    4300002: Pilz Hand
+    100000: Bodenplatte
+    100002: Circle
+    100004: Cube.001
+    100006: Cube.002
+    100008: Plane.001
+    100010: Plane.002
+    100012: Scharnier
+    100014: //RootNode
+    400000: Bodenplatte
+    400002: Circle
+    400004: Cube.001
+    400006: Cube.002
+    400008: Plane.001
+    400010: Plane.002
+    400012: Scharnier
+    400014: //RootNode
+    2300000: Bodenplatte
+    2300002: Circle
+    2300004: Cube.001
+    2300006: Cube.002
+    2300008: Plane.001
+    2300010: Plane.002
+    2300012: Scharnier
+    3300000: Bodenplatte
+    3300002: Circle
+    3300004: Cube.001
+    3300006: Cube.002
+    3300008: Plane.001
+    3300010: Plane.002
+    3300012: Scharnier
+    4300000: Circle
+    4300002: Plane.002
+    4300004: Plane.001
+    4300006: Cube.002
+    4300008: Cube.001
+    4300010: Bodenplatte
+    4300012: Scharnier
     9500000: //RootNode
   materials:
     importMaterials: 1
