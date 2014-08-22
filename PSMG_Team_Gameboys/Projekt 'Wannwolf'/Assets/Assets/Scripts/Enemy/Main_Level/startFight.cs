@@ -80,6 +80,7 @@ public class startFight : MonoBehaviourWithGazeComponent
 
     void Update()
     {
+        checkPassedTimeInFight();
         checkFightEndStatus();
         checkEyetrackerAvailable();      
     }
@@ -115,8 +116,12 @@ public class startFight : MonoBehaviourWithGazeComponent
     IEnumerator subtractMushrooms()
     {
         yield return new WaitForSeconds(TIME_BEFORE_SUB_MUSHROOMS);
-        player.GetComponent<MoneyManagement>().subtractMoney((int)Time.fixedTime);
-        
+        if(Time.fixedDeltaTime >= 1)
+        {
+            player.GetComponent<MoneyManagement>().subtractMoney(1);
+            Time.fixedDeltaTime = 0;
+        }
+        Time.fixedDeltaTime += Time.deltaTime;
     }
 
     void OnTriggerEnter(Collider col)
