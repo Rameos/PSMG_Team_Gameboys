@@ -47,31 +47,44 @@ public class HintDialogue : MonoBehaviour {
         string tag = gameObject.tag;
         switch (tag)
         {
-			case "PizzaHint": controllPlaytime(pizza, Dialogues[PIZZA_HINT]);
+			case "PizzaHint":
+                checkIsAudioPlaying();
+                controllPlaytime(pizza, Dialogues[PIZZA_HINT]);
 				pizza = true;
                 break;
-			//case "BierberHint": controllPlaytime(bierber, Dialogues[BIERBER_HINT]);
+			//case "BierberHint": 
+			//	controllPlaytime(bierber, Dialogues[BIERBER_HINT]);
 			//	bierber = true;    
 			//	break;
-        	case "AnglerArrivalHint": controllPlaytime(sneek, Dialogues[SNEEK_HINT]);
+        	case "AnglerArrivalHint":
+                checkIsAudioPlaying();
+                controllPlaytime(sneek, Dialogues[SNEEK_HINT]);
 				sneek = true;
                 break;
             case "FireArrivalHint":
+                checkIsAudioPlaying();
                 checkFireArrivalTimes();
                 break;
-			case "VodkaHint": 
+			case "VodkaHint":
+                checkIsAudioPlaying();
 				if(vodkaArrival == 2){
 					controllPlaytime(vodka, Dialogues[VODKA_HINT]);
 				}
 				vodkaArrival++;
 				break;
-			case "JumpHint": controllPlaytime(stair, Dialogues[JUMP_HINT]);
+			case "JumpHint":
+                checkIsAudioPlaying();
+                controllPlaytime(stair, Dialogues[JUMP_HINT]);
 				stair = true;
                 break;
-			case "StairBuildHint": controllPlaytime(edge, Dialogues[STAIR_HINT]);
+			case "StairBuildHint":
+                checkIsAudioPlaying();
+                controllPlaytime(edge, Dialogues[STAIR_HINT]);
 				edge = true;
                 break;
-			case "ChaseHint": controllPlaytime(chase, Dialogues[CHASE_HINT]);
+			case "ChaseHint":
+                checkIsAudioPlaying();
+                controllPlaytime(chase, Dialogues[CHASE_HINT]);
 				chase = true;
                 break;
         }
@@ -84,6 +97,13 @@ public class HintDialogue : MonoBehaviour {
 			audio.Play();
 		}
 	}
+
+    void checkIsAudioPlaying(){
+        if (audio.isPlaying)
+        {
+            audio.Stop();
+        }
+    }
 
     void checkFireArrivalTimes()
     {
