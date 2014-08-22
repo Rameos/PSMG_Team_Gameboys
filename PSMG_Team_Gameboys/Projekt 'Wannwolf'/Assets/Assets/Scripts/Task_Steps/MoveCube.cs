@@ -14,7 +14,7 @@ public class MoveCube : MonoBehaviour {
 
     void OnTriggerStay(Collider col)
     {
-        if (col.gameObject.tag == "Player")
+        if (col.gameObject.tag == TagManager.PLAYER)
         {
         
                 if (Input.GetKeyDown("f"))

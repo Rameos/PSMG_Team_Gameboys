@@ -3,6 +3,7 @@ using System.Collections;
 
 public class Respawn : MonoBehaviour
 {
+    private const int subtractValue = 15;
 
     public Texture2D texture;
 
@@ -11,26 +12,30 @@ public class Respawn : MonoBehaviour
     private bool respawn;
     private Color currentColor;
     private Rect screenRect;
-    private float fadeSpeed;
     private GameObject player;
     private MoneyManagement money;
-    private Vector3 respawnPosition;
+    LoadGameSettings loadGame;
 
     void Awake()
     {
-        deathzoneTags = new string[3] { "DeathzoneRiver", "DeathzoneGap", "Enemy"};
         dying = false;
         respawn = false;
         currentColor = Color.black;
         screenRect = new Rect(0f, 0f, Screen.width, Screen.height);
-        fadeSpeed = 1.0f;
-        player = GameObject.FindGameObjectWithTag("Player");
+        player = GameObject.FindGameObjectWithTag(TagManager.PLAYER);
         money = player.GetComponent<MoneyManagement>();
+        loadGame = GameObject.FindGameObjectWithTag(TagManager.GAME_CONTROLLER).GetComponent<LoadGameSettings>();
     }
 
-    void FixedUpdate()
+    void Start()
+    {
+        Save.saveGame();
+    }
+
+    void Update()
     {
         dyingPlayer();
+        restartGame();
         respawnPlayer();
     }
 
@@ -44,37 +49,42 @@ public class Respawn : MonoBehaviour
         }
     }
 
-    void OnTriggerEnter(Collider col)
-    {
-        checkDeathzone();
-        if (col.gameObject.tag == player.tag)
-        {
-            dying = true;
-            manageMoney();
-        }
-    }
-
     void fadeIn()
     {
-        currentColor = Color.Lerp(currentColor, Color.clear, fadeSpeed * Time.deltaTime);
+        currentColor = Color.Lerp(currentColor, Color.clear, Time.deltaTime);
 
-        if (currentColor.a <= 0.05f)
+        if (currentColor.a <= 0.3f)
         {
             currentColor = Color.clear;
             respawn = false;
+            setPlayerControl(true);
         }
     }
 
     void fadeOut()
     {
-        currentColor = Color.Lerp(currentColor, Color.black, fadeSpeed * Time.deltaTime);
+        currentColor = Color.Lerp(currentColor, Color.black, Time.deltaTime);
+        setPlayerControl(false);
 
         if (currentColor.a >= 0.95f)
         {
             currentColor.a = 1f;
+            setGameSettings();
+            manageMoney();
             dying = false;
             respawn = true;
         }
+    }
+
+    void setPlayerControl(bool enabled)
+    {
+        player.GetComponent<PlayerControl>().enabled = enabled;
+    }
+
+    //Reloads the last-saved version of the Game and manages the money
+    void setGameSettings()
+    {
+        loadGame.loadAll();
     }
 
     void dyingPlayer()
@@ -91,40 +101,34 @@ public class Respawn : MonoBehaviour
         if (respawn)
         {
             player.renderer.enabled = true;
-            player.transform.position = respawnPosition;
             fadeIn();
+        }
+    }
+
+    void restartGame(){
+        int currentMoney = money.getCurrentMoney();
+        int minMoney = money.getMoneyMinimum();
+        if(currentMoney <= minMoney){
+            LoadScene.loadFirstLevel();
+            setPlayerControl(true);
         }
     }
 
     void manageMoney()
     {
-        // Subtract money from the players account on death
-        money.subtractMoney(15);
-
-        // Decide where to relocate the player to after death
-        int curMoney = money.getCurrentMoney();
-        int moneyMinimum = money.getMoneyMinimum();
-        int moneyMaximum = money.getMoneyMaximum();
-
-        if (curMoney <= moneyMinimum)
-        {
-            // b) Relocate player at the begin of the level if no money is left
-            respawnPosition = new Vector3(96f, 107f, 101f);
-            money.setCurrentMoney(moneyMaximum);
-        }
+        money.subtractMoney(subtractValue);
     }
 
-    void checkDeathzone()
+    public bool respawnStatus
     {
-        string tag = gameObject.tag;
-        for (int i = 0; i < deathzoneTags.Length; i++)
-        {
-            if (tag.Equals(deathzoneTags[i]))
-            {
-                respawnPosition = new Vector3(530, 101, 250);
-                break;
-            }
-        }
+        get { return respawn; }
+        set{respawn = value;}
+    }
+
+    public bool dyingStatus
+    {
+        get { return dying; }
+        set { dying = value; }
     }
 }
 

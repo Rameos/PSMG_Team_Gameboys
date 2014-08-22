@@ -8,7 +8,8 @@ using System.Collections;
 public class BeerTrigger : MonoBehaviour {
 
     private MoneyManagement money;
-    int dieVal = 0;
+    private double currentVal;
+    private int value;
     private DragByPlayer drag;
 	private HintDialogue hint;
 
@@ -16,9 +17,9 @@ public class BeerTrigger : MonoBehaviour {
 
     void Start()
     {
-        money = GameObject.FindGameObjectWithTag("Player").GetComponent<MoneyManagement>();
+        money = GameObject.FindGameObjectWithTag(TagManager.PLAYER).GetComponent<MoneyManagement>();
         drag = GetComponent<DragByPlayer>();
-		hint = GameObject.FindGameObjectWithTag("AnglerArrivalHint").GetComponent<HintDialogue>();
+		hint = GameObject.FindGameObjectWithTag(TagManager.ANGLER_ARRIVAL_HINT).GetComponent<HintDialogue>();
 
     }
 
@@ -27,7 +28,10 @@ public class BeerTrigger : MonoBehaviour {
 
             if (Input.GetAxis("Run/Sneak") >= 0)
             {
-                money.setCurrentMoney(dieVal);
+                currentVal = money.getCurrentMoney();
+                currentVal *= 0.7;
+                value = (int)currentVal;
+                money.setCurrentMoney(value);
 
             }
 

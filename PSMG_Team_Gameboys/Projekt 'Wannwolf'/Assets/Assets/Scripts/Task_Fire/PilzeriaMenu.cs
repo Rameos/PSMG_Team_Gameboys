@@ -18,15 +18,15 @@ public class PilzeriaMenu : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		butRect = new Rect ((Screen.width - width) / 2, 0, width, height);
-        moneyManagement = GameObject.FindGameObjectWithTag("Player").GetComponent<MoneyManagement>();
-        player = GameObject.Find("Player");
+        moneyManagement = GameObject.FindGameObjectWithTag(TagManager.PLAYER).GetComponent<MoneyManagement>();
+        player = GameObject.FindGameObjectWithTag(TagManager.PLAYER);
         control = player.GetComponent<PlayerControl>();
         drinkLogic = player.GetComponent<DrinkLogic>();
 	}
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "Player")
+        if (other.gameObject.tag == TagManager.PLAYER)
         {
             inMenuRadius = true;
             drinkLogic.inPilzeria = true;
@@ -127,7 +127,6 @@ public class PilzeriaMenu : MonoBehaviour {
 	void pay (int amount) {
 		int OldAmount = moneyManagement.getCurrentMoney ();
 		moneyManagement.setCurrentMoney (OldAmount - amount);
-		//moneyManagement.updateMoneyView ();
 	}
 
 	//stops game

@@ -45,19 +45,19 @@ public class Save : MonoBehaviour
 
     static void savePlayer()
     {
-        if (GameObject.FindGameObjectWithTag("Player") != null)
+        if (GameObject.FindGameObjectWithTag(TagManager.PLAYER) != null)
         {
-            GameObject player = GameObject.FindGameObjectWithTag("Player");
-            PlayerPrefsX.SetVector3("PlayerPosition", player.transform.position);
-            PlayerPrefsX.SetQuaternion("PlayerRotation", player.transform.rotation);
+            GameObject player = GameObject.FindGameObjectWithTag(TagManager.PLAYER);
+            PlayerPrefsX.SetVector3(playerPosition, player.transform.position);
+            PlayerPrefsX.SetQuaternion(playerRotation, player.transform.rotation);
         }
     }
 
     static void saveBierber()
     {
-        if (GameObject.FindGameObjectWithTag("Bierber") != null)
+        if (GameObject.FindGameObjectWithTag(TagManager.BIERBER) != null)
         {
-            GameObject bierber = GameObject.FindGameObjectWithTag("Bierber");
+            GameObject bierber = GameObject.FindGameObjectWithTag(TagManager.BIERBER);
             PlayerPrefsX.SetVector3(bierberPosition, bierber.transform.position);
             PlayerPrefsX.SetQuaternion(bierberRotation, bierber.transform.rotation);
         }
@@ -65,27 +65,27 @@ public class Save : MonoBehaviour
 
     static void saveBierberBody()
     {
-        if (GameObject.FindGameObjectWithTag("BierberBody") != null)
+        if (GameObject.FindGameObjectWithTag(TagManager.BIERBER_BODY) != null)
         {
-            GameObject bierberBody = GameObject.FindGameObjectWithTag("BierberBody");
+            GameObject bierberBody = GameObject.FindGameObjectWithTag(TagManager.BIERBER_BODY);
             PlayerPrefsX.SetBool(bierberBodyRendered, bierberBody.renderer.enabled);
         }
     }
 
     static void saveBierberHead()
     {
-        if (GameObject.FindGameObjectWithTag("BierberHead") != null)
+        if (GameObject.FindGameObjectWithTag(TagManager.BIERBER_HEAD) != null)
         {
-            GameObject bierberHead = GameObject.FindGameObjectWithTag("BierberHead");
+            GameObject bierberHead = GameObject.FindGameObjectWithTag(TagManager.BIERBER_HEAD);
             PlayerPrefsX.SetBool(bierberHeadRendered, bierberHead.renderer.enabled);
         }
     }
 
     static void saveBierberWallStatus()
     {
-        if (GameObject.FindGameObjectWithTag("BierberInvisibleWall") != null)
+        if (GameObject.FindGameObjectWithTag(TagManager.BIERBER_INVISIBLE_WALL) != null)
         {
-            GameObject invisibleWall = GameObject.FindGameObjectWithTag("BierberInvisibleWall");
+            GameObject invisibleWall = GameObject.FindGameObjectWithTag(TagManager.BIERBER_INVISIBLE_WALL);
             PlayerPrefsX.SetBool(bierberInvisibleWall, invisibleWall.collider.enabled);
         }
     }
@@ -93,18 +93,18 @@ public class Save : MonoBehaviour
     static void saveTreeStatus()
     {
 
-        if (GameObject.FindGameObjectWithTag("FallenTree") != null)
+        if (GameObject.FindGameObjectWithTag(TagManager.FALLEN_TREE) != null)
         {
-            GameObject fallenTree = GameObject.FindGameObjectWithTag("FallenTree");
+            GameObject fallenTree = GameObject.FindGameObjectWithTag(TagManager.FALLEN_TREE);
             PlayerPrefsX.SetBool(fallenTreeRendered, fallenTree.renderer.enabled);
         }
     }
 
     static void saveBier()
     {
-        if (GameObject.FindGameObjectWithTag("Beer") != null)
+        if (GameObject.FindGameObjectWithTag(TagManager.BEER) != null)
         {
-            GameObject bier = GameObject.FindGameObjectWithTag("Beer");
+            GameObject bier = GameObject.FindGameObjectWithTag(TagManager.BEER);
             PlayerPrefsX.SetVector3(bierPosition, bier.transform.position);
             PlayerPrefsX.SetQuaternion(bierRotation, bier.transform.rotation);
         }
@@ -112,9 +112,9 @@ public class Save : MonoBehaviour
 
     static void savePizza()
     {
-        if (GameObject.FindGameObjectWithTag("Pizza") != null)
+        if (GameObject.FindGameObjectWithTag(TagManager.PIZZA) != null)
         {
-            GameObject[] pizzas = GameObject.FindGameObjectsWithTag("Pizza");
+            GameObject[] pizzas = GameObject.FindGameObjectsWithTag(TagManager.PIZZA);
             Vector3[] pizzaPos = new Vector3[pizzas.Length];
             Quaternion[] pizzaRot = new Quaternion[pizzas.Length];
             for (int i = 0; i < pizzas.Length; i++)

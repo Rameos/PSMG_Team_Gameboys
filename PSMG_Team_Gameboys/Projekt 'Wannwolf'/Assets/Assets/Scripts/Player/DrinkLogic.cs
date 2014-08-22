@@ -14,7 +14,7 @@ public class DrinkLogic : MonoBehaviour {
 
 	// Use this for initialization
 	void Awake () {
-	    control = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerControl>();
+	    control = GameObject.FindGameObjectWithTag(TagManager.PLAYER).GetComponent<PlayerControl>();
 	}
 
     void Update()

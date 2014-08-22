@@ -45,14 +45,14 @@ public class EnemyFollowing : MonoBehaviour {
 	}
 
     void OnTrigerEnter(Collider col){
-        if(col.gameObject.tag == "Barrier")
+        if(col.gameObject.tag == TagManager.BARRIER)
         {
             climb = true;
         }
     }
 
     void OnTriggerStay(Collider col){
-        if (col.gameObject.tag == "Barrier")
+        if (col.gameObject.tag == TagManager.BARRIER)
         {
             climb = true;
         }
@@ -60,7 +60,7 @@ public class EnemyFollowing : MonoBehaviour {
 
     void OnTriggerExit(Collider col)
     {
-        if (col.gameObject.tag == "Barrier")
+        if (col.gameObject.tag == TagManager.BARRIER)
         {
             climb = false;
         }

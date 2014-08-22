@@ -9,20 +9,19 @@ public class ExtinguishFire : MonoBehaviour {
     private ParticleSystem urin;
     private bool extinguishable;
     
-    void Start()
+    void Awake()
     {
-        fireRadiusTrigger = GameObject.FindGameObjectWithTag("FireRadiusTrigger");
-        control = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerControl>();
-        drinkLogic = GameObject.FindGameObjectWithTag("Player").GetComponent<DrinkLogic>();
+        fireRadiusTrigger = GameObject.FindGameObjectWithTag(TagManager.FIRE_RADIUS_TRIGGER);
+        control = GameObject.FindGameObjectWithTag(TagManager.PLAYER).GetComponent<PlayerControl>();
         extinguishable = true;
-        drinkLogic = GameObject.FindGameObjectWithTag("Player").GetComponent<DrinkLogic>();
+        drinkLogic = GameObject.FindGameObjectWithTag(TagManager.PLAYER).GetComponent<DrinkLogic>();
         extinguishable = true;
-        urin = GameObject.FindGameObjectWithTag("Urinstrahl").GetComponent<ParticleSystem>();
+        urin = GameObject.FindGameObjectWithTag(TagManager.URINSTRAHL).GetComponent<ParticleSystem>();
     }
 
     void Update()
     {
-        if (GameObject.FindGameObjectWithTag("Fire") == null)
+        if (GameObject.FindGameObjectWithTag(TagManager.FIRE) == null)
         {
             GameObject.Destroy(fireRadiusTrigger);
         }

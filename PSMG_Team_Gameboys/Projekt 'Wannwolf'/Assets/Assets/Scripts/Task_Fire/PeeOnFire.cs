@@ -7,10 +7,16 @@ public class PeeOnFire : MonoBehaviourWithGazeComponent
 
     private bool peeing = false;
     private ParticleSystem fire;
+    private GameObject player;
+    private float rotation;
+
+    private float currentY;
+
 
 	// Use this for initialization
 	void Awake () {
 	fire = gameObject.GetComponent<ParticleSystem>();
+    player = GameObject.FindGameObjectWithTag("Player");
 	}
 	
 	// Update is called once per frame
@@ -25,7 +31,7 @@ public class PeeOnFire : MonoBehaviourWithGazeComponent
         {
             if (fire.startLifetime <= 0.1)
             {
-                GameObject.FindGameObjectWithTag("PlayerFlames").GetComponent<ParticleSystem>().Stop();
+                GameObject.FindGameObjectWithTag(TagManager.PLAYER_FLAMES).GetComponent<ParticleSystem>().Stop();
                 GameObject.Destroy(fire);
             }
             else
@@ -48,11 +54,25 @@ public class PeeOnFire : MonoBehaviourWithGazeComponent
     {
         Debug.Log("Hallihallo");
         peeing = true;
+
+        currentY = player.transform.rotation.y;
+
+        
     }
 
     public override void OnGazeStay(RaycastHit hit)
     {
+        //Vector3 rotate = new Vector3(gazeModel.posGazeRight.x / 10,0, 0 );
 
+        rotation = (player.transform.position.x - gazeModel.posGazeRight.x) / 10;
+
+            player.transform.Rotate(0, currentY - rotation, 0);
+
+        
+     
+        //player.transform.Rotate(gazeModel.posGazeRight.x / 10, 0, 0);
+        //Debug.Log(player.transform.rotation);
+        
     }
 
     public override void OnGazeExit()

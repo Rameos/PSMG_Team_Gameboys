@@ -5,9 +5,9 @@ using System.Collections;
 
 public class PlayerControl : MonoBehaviour {
 
-    private const float minWaitTime = 3f;   //Min time the player has to rest after a 'full' run
+    private const float minWaitTime = 0.01f;   //Min time the player has to rest after a 'full' run //WAS 3f!!
     private const float jumpStrength = 20f;
-    private const float playerRunSpeed = 30f;
+    private const float playerRunSpeed = 50f; // was 30f, set up for debugging purposes!
     private const float playerWalkSpeed = 20f;
     private const float playerSneakSpeed = 10f;
     private const float gravityBoost = 3.5f;
@@ -90,15 +90,16 @@ public class PlayerControl : MonoBehaviour {
             vertical *= -1;
         }
 
-        Vector3 moveTo = new Vector3(horizontal, 0f, vertical * -1);
+        Vector3 moveTo = new Vector3(horizontal, 0f, vertical);
 
         setGravity();
         setupMoveToVector(ref moveTo);
 
         if (horizontal != 0 || vertical != 0) {
-			playWalkingSound ();
+            playWalkingSound();
 			alternativeMoveTo = moveTo;
             rotateInCameraView();
+
 		} else if (jumping && horizontal == 0 && vertical == 0) {
 			characterController.Move (alternativeMoveTo * Time.deltaTime);
 			audioManager.handleWalkingSound(false);
@@ -115,7 +116,8 @@ public class PlayerControl : MonoBehaviour {
     void rotateInCameraView()
     {
         Quaternion playerRotation = new Quaternion(mainCamera.localRotation.x, 0f, mainCamera.localRotation.z, 0f);
-        characterController.transform.rotation = playerRotation;
+        characterController.transform.localRotation = playerRotation;
+        characterController.transform.Rotate(180f, 0, 0);
     }
 
     //Checks if sneak key is pressed
