@@ -5,9 +5,9 @@ using System.Collections;
 
 public class PlayerControl : MonoBehaviour {
 
-    private const float minWaitTime = 3f;   //Min time the player has to rest after a 'full' run
+    private const float minWaitTime = 0.01f;   //Min time the player has to rest after a 'full' run //WAS 3f!!
     private const float jumpStrength = 20f;
-    private const float playerRunSpeed = 30f;
+    private const float playerRunSpeed = 50f; // was 30f, set up for debugging purposes!
     private const float playerWalkSpeed = 20f;
     private const float playerSneakSpeed = 10f;
     private const float gravityBoost = 3.5f;

@@ -8,14 +8,20 @@ using iViewX;
 
 public class startFight : MonoBehaviourWithGazeComponent
 {
+    private const float TIME_BEFORE_SUB_MUSHROOMS = 2f;
+
     public Transform pizza;
     public GameObject prefab;
-    private bool cursorAcvtive = false;
     public Texture2D gazeCursor;
 
+    private bool cursorAcvtive;
+    private bool draw; 
+    private bool drawNext; 
+    private bool stat;
+    private bool inTrigger;
+    private bool fighting;
+    private bool fClicked;
 
-    private bool draw = false;
-    private bool drawNext = false;
     private float xMaxMouse;
     private float xMinMouse;
     private float xMaxEye;
@@ -25,18 +31,17 @@ public class startFight : MonoBehaviourWithGazeComponent
     private float xLinePos;
     private float xLineMaxPos;
     private float yLinePos;
-    private int countCuts;
-    private bool stat = false;
-    private int mouseCuts = 1;
-    private int eyeCuts = 2;
     private float mousePos = 50;
     private float eyePos = 100;
+
+    private int countCuts;
+    private int mouseCuts = 1;
+    private int eyeCuts = 2;
+
     private RecyclePizza recycle;
     private GameObject player;
     private CameraSwitcher switcher;
-    private bool fClicked = false;
     private Vector3 mushroomPosition;
-    bool inTrigger = false;
 
 
 
@@ -60,15 +65,36 @@ public class startFight : MonoBehaviourWithGazeComponent
         xMinEye = xLinePos - 80;
         yMax = yLinePos + 200;
         yMin = yLinePos - 100;
+
+        countCuts = 0;
+        
         stat = false;
         draw = false;
-        countCuts = 0;
         fClicked = false;
         cursorAcvtive = false;
+        fighting = false;
+        inTrigger = false;
+        drawNext = false;
 
     }
 
     void Update()
+    {
+        checkPassedTimeInFight();
+        checkFightEndStatus();
+        checkEyetrackerAvailable();      
+    }
+
+    void checkEyetrackerAvailable()
+    {
+        if (gazeModel.posGazeRight.x == 0 && gazeModel.posGazeRight.y == 0)
+        {
+            checkMousePosition();
+        }
+        checkGazePosition();
+    }
+
+    void checkFightEndStatus()
     {
         if (countCuts == 10)
         {
@@ -77,17 +103,26 @@ public class startFight : MonoBehaviourWithGazeComponent
             StopAllCoroutines();
             recycle.recycleEnemy();
         }
-
-        if (gazeModel.posGazeRight.x == 0 && gazeModel.posGazeRight.y == 0)
-        {
-            checkMousePosition();
-        }
-         
-            checkGazePosition();
     }
 
-   
+    void checkPassedTimeInFight()
+    {
+        if (fighting)
+        {
+            StartCoroutine(subtractMushrooms());
+        }
+    }
 
+    IEnumerator subtractMushrooms()
+    {
+        yield return new WaitForSeconds(TIME_BEFORE_SUB_MUSHROOMS);
+        if(Time.fixedDeltaTime >= 1)
+        {
+            player.GetComponent<MoneyManagement>().subtractMoney(1);
+            Time.fixedDeltaTime = 0;
+        }
+        Time.fixedDeltaTime += Time.deltaTime;
+    }
 
     void OnTriggerEnter(Collider col)
     {
@@ -110,19 +145,15 @@ public class startFight : MonoBehaviourWithGazeComponent
                 fight();
             }
         }
-
     }
 
     void OnTriggerExit(Collider col)
     {
         inTrigger = false;
-
     }
 
     IEnumerator startPizzaFight(float seconds)
     {
-        
-    
         yield return new WaitForSeconds(seconds);
         if (inTrigger == true)
         {
@@ -139,6 +170,7 @@ public class startFight : MonoBehaviourWithGazeComponent
         setFightStatus();
         stat = true;
         draw = true;
+        fighting = true;
     }
 
     void rotatePizza()
@@ -163,6 +195,7 @@ public class startFight : MonoBehaviourWithGazeComponent
 
     void setNotFightingStatus()
     {
+        fighting = false;
         instantiateMushroom();
         GetComponent<FollowPlayer>().enabled = true;
         player.GetComponent<PlayerControl>().enabled = true;
