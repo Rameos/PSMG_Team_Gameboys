@@ -64,9 +64,9 @@ public class PeeOnFire : MonoBehaviourWithGazeComponent
     {
         //Vector3 rotate = new Vector3(gazeModel.posGazeRight.x / 10,0, 0 );
 
-        rotation = (player.transform.position.x - gazeModel.posGazeRight.x) / 10;
+        //rotation = (player.transform.position.x - gazeModel.posGazeRight.x) / 10;
 
-            player.transform.Rotate(0, currentY - rotation, 0);
+          //  player.transform.Rotate(0, currentY - rotation, 0);
 
         
      
