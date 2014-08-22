@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 0750f268ae3444843a632ce7e0234b46
+guid: 3cb787c244c9f4a44a6d1cd8c718b405
 ModelImporter:
   serializedVersion: 16
   fileIDToRecycleName:
@@ -7,7 +7,8 @@ ModelImporter:
     400000: //RootNode
     2300000: //RootNode
     3300000: //RootNode
-    4300000: Pilz Hand
+    4300000: Norbert_Kopf
+    7400000: Norbert_Kopf|Norbert_Walk
     9500000: //RootNode
   materials:
     importMaterials: 1
@@ -17,6 +18,7 @@ ModelImporter:
     legacyGenerateAnimations: 4
     bakeSimulation: 0
     optimizeGameObjects: 0
+    motionNodeName: 
     animationCompression: 1
     animationRotationError: .5
     animationPositionError: .5
