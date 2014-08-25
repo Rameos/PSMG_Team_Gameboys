@@ -4,7 +4,7 @@ using System.Collections;
 public class LoadScene : MonoBehaviour
 {
     private static SceneFader sceneFader;
-    private static string[] levels = new string[3] {"BasicMovement", "Escape_Level_Basic", "BasicMovement"};
+    private static string[] levels = new string[3] {"IntroComic", "Escape_Level_Basic", "BasicMovement"};
     private static string mainMenu = "load_test_scene";
     private static int loadNum = 0;
 
