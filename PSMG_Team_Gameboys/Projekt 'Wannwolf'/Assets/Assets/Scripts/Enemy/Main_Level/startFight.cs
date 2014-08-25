@@ -11,7 +11,7 @@ public class startFight : MonoBehaviourWithGazeComponent
     private const float TIME_BEFORE_SUB_MUSHROOMS = 2f;
 
     public Transform pizza;
-    public GameObject prefab;
+    //public GameObject prefab;
     public Texture2D gazeCursor;
 
     private bool cursorAcvtive;
@@ -204,7 +204,7 @@ public class startFight : MonoBehaviourWithGazeComponent
 
     private void instantiateMushroom()
     {
-        Instantiate(prefab, mushroomPosition, new Quaternion(0, 0, 0, 0));
+        //Instantiate(prefab, mushroomPosition, new Quaternion(0, 0, 0, 0));
     }
 
     void OnGUI()
