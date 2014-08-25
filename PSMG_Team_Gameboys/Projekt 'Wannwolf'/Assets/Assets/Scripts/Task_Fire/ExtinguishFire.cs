@@ -8,6 +8,7 @@ public class ExtinguishFire : MonoBehaviour {
     private PlayerControl control;
     private ParticleSystem urin;
     private bool extinguishable;
+    public bool startPeeing = false;
     
     void Awake()
     {
@@ -44,7 +45,8 @@ public class ExtinguishFire : MonoBehaviour {
 
         if (drinkLogic.ableToUrinate && Input.GetKeyDown(KeyCode.E))
         {
-            urin.particleSystem.Play(true);    
+            urin.particleSystem.Play(true);
+            startPeeing = true;
         }
     }
 

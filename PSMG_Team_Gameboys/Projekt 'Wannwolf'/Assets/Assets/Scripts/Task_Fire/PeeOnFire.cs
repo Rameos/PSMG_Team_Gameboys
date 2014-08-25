@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using iViewX;
-
+[RequireComponent(typeof(ExtinguishFire))]
 public class PeeOnFire : MonoBehaviourWithGazeComponent
 {
 
@@ -9,13 +9,15 @@ public class PeeOnFire : MonoBehaviourWithGazeComponent
     private ParticleSystem fire;
     private GameObject player;
     private float rotation;
+    private ExtinguishFire exFire;
 
     private float currentY;
 
 
 	// Use this for initialization
 	void Awake () {
-	fire = gameObject.GetComponent<ParticleSystem>();
+    exFire = GameObject.FindGameObjectWithTag(TagManager.FIRE_RADIUS_TRIGGER).GetComponent<ExtinguishFire>();
+    fire = gameObject.GetComponent<ParticleSystem>();
     player = GameObject.FindGameObjectWithTag("Player");
 	}
 	
@@ -27,7 +29,7 @@ public class PeeOnFire : MonoBehaviourWithGazeComponent
 
     void shrinkFire()
     {
-        if (peeing)
+        if (peeing && exFire.startPeeing)
         {
             if (fire.startLifetime <= 0.1)
             {
