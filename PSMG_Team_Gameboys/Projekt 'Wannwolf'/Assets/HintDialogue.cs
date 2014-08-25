@@ -52,11 +52,10 @@ public class HintDialogue : MonoBehaviour {
                 controllPlaytime(pizza, Dialogues[PIZZA_HINT]);
 				pizza = true;
                 break;
-			case "BierberHint":
-                checkIsAudioPlaying();
-                controllPlaytime(bierber, Dialogues[BIERBER_HINT]);
-				bierber = true;    
-				break;
+			//case "BierberHint": 
+			//	controllPlaytime(bierber, Dialogues[BIERBER_HINT]);
+			//	bierber = true;    
+			//	break;
         	case "AnglerArrivalHint":
                 checkIsAudioPlaying();
                 controllPlaytime(sneek, Dialogues[SNEEK_HINT]);
@@ -137,4 +136,10 @@ public class HintDialogue : MonoBehaviour {
         audio.clip = Dialogues[BEER_TO_BIERBER_HINT];
         audio.Play();
     }
+
+	public void playBierberAngry()
+	{
+		audio.clip = Dialogues[BIERBER_HINT];
+		audio.Play();
+	}
 }
