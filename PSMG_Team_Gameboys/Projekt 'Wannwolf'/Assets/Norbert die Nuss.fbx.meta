@@ -1,0 +1,133 @@
+fileFormatVersion: 2
+guid: 93d4fa72b0737424fa0a20a7f307a387
+ModelImporter:
+  serializedVersion: 16
+  fileIDToRecycleName:
+    100000: Armature
+    100002: Armature.001
+    100004: Armature.001|Auge_L_Blick
+    100006: Armature.002
+    100008: Armature.002|Auge_R_Blick
+    100010: Armature.003
+    100012: Armature.003|Auge_R
+    100014: Armature.004
+    100016: Armature.004|Blickrichtung
+    100018: Armature.005
+    100020: Armature.005|Auge_L
+    100022: Armature|Kopf
+    100024: //RootNode
+    100026: Norbert_Kopf
+    100028: Norbert_Kopf_MeshPart0
+    100030: Norbert_Kopf_MeshPart1
+    400000: Armature
+    400002: Armature.001
+    400004: Armature.001|Auge_L_Blick
+    400006: Armature.002
+    400008: Armature.002|Auge_R_Blick
+    400010: Armature.003
+    400012: Armature.003|Auge_R
+    400014: Armature.004
+    400016: Armature.004|Blickrichtung
+    400018: Armature.005
+    400020: Armature.005|Auge_L
+    400022: Armature|Kopf
+    400024: //RootNode
+    400026: Norbert_Kopf
+    400028: Norbert_Kopf_MeshPart0
+    400030: Norbert_Kopf_MeshPart1
+    2300000: Norbert_Kopf_MeshPart0
+    2300002: Norbert_Kopf_MeshPart1
+    3300000: Norbert_Kopf_MeshPart0
+    3300002: Norbert_Kopf_MeshPart1
+    4300000: Norbert_Kopf_MeshPart0
+    4300002: Norbert_Kopf_MeshPart1
+    7400000: Armature.004|Armature.004Action
+    7400002: Armature.004|ArmatureAction
+    7400004: Armature.004|Norbert_Walk
+    7400006: Armature.001|Armature.001Action.002
+    7400008: Armature.001|Armature.002Action
+    7400010: Armature.001|Armature.003Action
+    7400012: Armature.001|Armature.004Action
+    7400014: Armature.001|ArmatureAction
+    7400016: Armature.001|Augenbewegung
+    7400018: Armature.001|Norbert_Walk
+    7400020: Armature.002|Armature.002Action
+    7400022: Armature.002|Armature.003Action
+    7400024: Armature.002|Armature.004Action
+    7400026: Armature.002|ArmatureAction
+    7400028: Armature.002|Augenbewegung
+    7400030: Armature.002|Norbert_Walk
+    7400032: Armature|Armature.004Action
+    7400034: Armature|ArmatureAction
+    7400036: Armature|Norbert_Walk
+    7400038: Armature.003|Armature.002Action
+    7400040: Armature.003|Armature.003Action
+    7400042: Armature.003|Armature.004Action
+    7400044: Armature.003|ArmatureAction
+    7400046: Armature.003|Augenbewegung
+    7400048: Armature.003|Norbert_Walk
+    7400050: Armature.005|Armature.002Action
+    7400052: Armature.005|Armature.003Action
+    7400054: Armature.005|Armature.004Action
+    7400056: Armature.005|ArmatureAction
+    7400058: Armature.005|Augenbewegung
+    7400060: Armature.005|Norbert_Walk
+    7400062: Norbert_Kopf|Armature.004Action
+    7400064: Norbert_Kopf|ArmatureAction
+    7400066: Norbert_Kopf|Norbert_Walk
+    9500000: //RootNode
+    11100000: //RootNode
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: .00999999978
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 1
+  additionalBone: 0
+  userData: 
