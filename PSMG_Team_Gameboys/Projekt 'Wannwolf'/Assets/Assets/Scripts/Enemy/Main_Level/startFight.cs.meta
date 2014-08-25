@@ -2,7 +2,10 @@ fileFormatVersion: 2
 guid: 958d0df7feb83f746b365b7bc8d795f8
 MonoImporter:
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - pizza: {instanceID: 0}
+  - prefab: {instanceID: 0}
+  - gazeCursor: {fileID: 2800000, guid: 68b08c419e5b25d4f91d5975b851f098, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

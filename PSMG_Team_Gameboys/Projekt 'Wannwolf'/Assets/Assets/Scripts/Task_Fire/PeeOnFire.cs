@@ -24,13 +24,14 @@ public class PeeOnFire : MonoBehaviourWithGazeComponent
 	// Update is called once per frame
 	void Update () {
         shrinkFire();
-        //growFire();
+        growFire();
 	}
 
     void shrinkFire()
     {
         if (peeing && exFire.startPeeing)
         {
+            player.transform.LookAt(gameObject.transform);
             if (fire.startLifetime <= 0.1)
             {
                 GameObject.FindGameObjectWithTag(TagManager.PLAYER_FLAMES).GetComponent<ParticleSystem>().Stop();
@@ -47,16 +48,18 @@ public class PeeOnFire : MonoBehaviourWithGazeComponent
     {
         if (!peeing)
         {
-            if(fire.startLifetime < 4.5f)
-            fire.startLifetime += Time.deltaTime;
+            if (fire.startLifetime < 4.5f)
+            {
+                fire.startLifetime += Time.deltaTime;
+            }
         }
     }
+
 
     public override void OnGazeEnter(RaycastHit hit)
     {
         Debug.Log("Hallihallo");
         peeing = true;
-
         currentY = player.transform.rotation.y;
 
         
@@ -79,6 +82,6 @@ public class PeeOnFire : MonoBehaviourWithGazeComponent
 
     public override void OnGazeExit()
     {
-        //peeing = false;
+        peeing = false;
     }
 }
