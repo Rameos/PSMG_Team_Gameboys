@@ -74,7 +74,7 @@ public class HintDialogue : MonoBehaviour {
                 checkIsAudioPlaying();
 				controllPlaytime(bierber, Dialogues[BIERBER_HINT]);
                 untertitel.guiText.text = bierberHint;
-                StartCoroutine(resetDialog(5));
+                StartCoroutine(resetDialog(8));
 				bierber = true;    
 				break;
         	case "AnglerArrivalHint":
