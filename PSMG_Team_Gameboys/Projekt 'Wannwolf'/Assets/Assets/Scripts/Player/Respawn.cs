@@ -5,11 +5,13 @@ public class Respawn : MonoBehaviour
 {
     private const int subtractValue = 15;
 
+    public static Respawn respawn;
+
     public Texture2D texture;
 
     private string[] deathzoneTags;
     private bool dying;
-    private bool respawn;
+    private bool respawning;
     private Color currentColor;
     private Rect screenRect;
     private GameObject player;
@@ -18,8 +20,9 @@ public class Respawn : MonoBehaviour
 
     void Awake()
     {
+        respawn = GameObject.FindGameObjectWithTag(TagManager.GAME_CONTROLLER).GetComponent<Respawn>();
         dying = false;
-        respawn = false;
+        respawning = false;
         currentColor = Color.black;
         screenRect = new Rect(0f, 0f, Screen.width, Screen.height);
         player = GameObject.FindGameObjectWithTag(TagManager.PLAYER);
@@ -41,7 +44,7 @@ public class Respawn : MonoBehaviour
 
     void OnGUI()
     {
-        if (dying || respawn)
+        if (dying || respawning)
         {
             GUI.depth = 0;
             GUI.color = currentColor;
@@ -56,7 +59,7 @@ public class Respawn : MonoBehaviour
         if (currentColor.a <= 0.3f)
         {
             currentColor = Color.clear;
-            respawn = false;
+            respawning = false;
             setPlayerControl(true);
         }
     }
@@ -72,7 +75,7 @@ public class Respawn : MonoBehaviour
             setGameSettings();
             manageMoney();
             dying = false;
-            respawn = true;
+            respawning = true;
         }
     }
 
@@ -92,15 +95,13 @@ public class Respawn : MonoBehaviour
         if (dying)
         {
             fadeOut();
-            player.renderer.enabled = false;
         }
     }
 
     void respawnPlayer()
     {
-        if (respawn)
+        if (respawning)
         {
-            player.renderer.enabled = true;
             fadeIn();
         }
     }
@@ -121,8 +122,8 @@ public class Respawn : MonoBehaviour
 
     public bool respawnStatus
     {
-        get { return respawn; }
-        set{respawn = value;}
+        get { return respawning; }
+        set{respawning = value;}
     }
 
     public bool dyingStatus
