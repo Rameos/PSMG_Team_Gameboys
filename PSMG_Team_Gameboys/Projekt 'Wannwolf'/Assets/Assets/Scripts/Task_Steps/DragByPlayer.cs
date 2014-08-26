@@ -5,10 +5,15 @@ public class DragByPlayer : MonoBehaviour {
 
     private GameObject obj;
     private bool waitActive = false;
+    private bool isBeer = false;
 
     void Start()
     {
         obj = gameObject;
+        if (obj.tag == TagManager.BEER)
+        {
+            isBeer = true;
+        }
     }
 
     void OnTriggerStay()
@@ -21,21 +26,34 @@ public class DragByPlayer : MonoBehaviour {
 
     void follow()
     {
-        if (obj.transform.parent == null && !waitActive)
+        if (obj.transform.parent == null && GameObject.Find("pickto").GetComponentInChildren<DragByPlayer>() == null && !waitActive)
         {
             obj.transform.parent = GameObject.Find("pickto").transform;
+            obj.transform.position = GameObject.Find("pickto").transform.position;
 
-            Destroy(obj.GetComponent<RotateObject>());
+            destroyRotation();
             
             StartCoroutine(Wait());
         }
         else if (!waitActive)
         {
             obj.transform.parent = null;
-            obj.AddComponent<RotateObject>();
+            addRotation();
 
             StartCoroutine(Wait());
         }
+    }
+
+    void destroyRotation()
+    {
+        if(isBeer)
+        Destroy(obj.GetComponent<RotateObject>());
+    }
+
+    void addRotation()
+    {
+        if(isBeer)
+        obj.AddComponent<RotateObject>();
     }
 
     IEnumerator Wait()

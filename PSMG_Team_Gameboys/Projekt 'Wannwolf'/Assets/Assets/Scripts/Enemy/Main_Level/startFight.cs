@@ -186,7 +186,7 @@ public class startFight : MonoBehaviourWithGazeComponent
     void setFightStatus()
     {
         GetComponent<FollowPlayer>().enabled = false;
-        rotatePizza();
+        //rotatePizza();
         player.GetComponent<PlayerControl>().enabled = false;
         switcher.setCameraStatic();
         switcher.setCameraFocus(gameObject);

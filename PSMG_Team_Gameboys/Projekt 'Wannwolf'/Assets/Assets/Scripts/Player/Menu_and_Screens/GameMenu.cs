@@ -57,10 +57,14 @@ public class GameMenu : MonoBehaviour {
     {
         if (!isPaused)
         {
+            setPlayerControlStatus = false;
+            setCameraControlStatus = false;
             Time.timeScale = 0.0f;
         }
         else
         {
+            setPlayerControlStatus = true;
+            setCameraControlStatus = true;
             Time.timeScale = 1.0f;
         }
         isPaused = !isPaused;
@@ -75,5 +79,15 @@ public class GameMenu : MonoBehaviour {
         {
             AudioListener.pause = false;
         }
+    }
+
+    bool setPlayerControlStatus
+    {
+        set {GameObject.FindGameObjectWithTag(TagManager.PLAYER).GetComponent<PlayerControl>().enabled = value;}
+    }
+
+    bool setCameraControlStatus
+    {
+        set { GameObject.FindGameObjectWithTag(TagManager.MAIN_CAMERA).GetComponent<CameraControl>().enabled = value; }
     }
 }

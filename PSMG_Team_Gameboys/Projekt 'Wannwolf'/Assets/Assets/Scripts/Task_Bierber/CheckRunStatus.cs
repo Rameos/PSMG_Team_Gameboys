@@ -48,10 +48,10 @@ public class CheckRunStatus : MonoBehaviour {
     {
         if (col.tag == TagManager.PLAYER)
         {
-            sneaking = false;
+            sneaking = true;
         }
     }
-	}
+}
 	
 
 
