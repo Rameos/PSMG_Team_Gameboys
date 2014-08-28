@@ -8,7 +8,7 @@ public class NorbertFollowEberhardt : MonoBehaviour
     Transform player; //norberts target
     float moveSpeed = 20; //move speed
     float rotationSpeed = 5; //speed of turning
-    float stop = 20f;
+    float stop = 13f;
     float gravityBoost = 3.5f;
     Vector3 gravity;
     Transform norbert; //current transform data of this enemy

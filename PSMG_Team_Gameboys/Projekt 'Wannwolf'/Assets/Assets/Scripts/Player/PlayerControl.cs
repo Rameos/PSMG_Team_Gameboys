@@ -99,15 +99,23 @@ public class PlayerControl : MonoBehaviour {
             playWalkingSound();
 			alternativeMoveTo = moveTo;
             rotateInCameraView();
+            animation.Play("Armature|Eberhardt_Walk");
+            animation["Armature|Eberhardt_Walk"].speed = 1.0f;
 
 		} else if (jumping && horizontal == 0 && vertical == 0) {
 			characterController.Move (alternativeMoveTo * Time.deltaTime);
 			audioManager.handleWalkingSound(false);
 		} else if (horizontal != 0 || vertical != 0) {
-			audioManager.handleWalkingSound(false);	
-		}else if (jumping){
 			audioManager.handleWalkingSound(false);
-		}
+        }
+        else if (jumping)
+        {
+            audioManager.handleWalkingSound(false);
+        }
+        else
+        {
+            animation.Stop();
+        }
 
         characterController.Move(moveTo * Time.deltaTime);
 
@@ -128,6 +136,8 @@ public class PlayerControl : MonoBehaviour {
         if (sneak)
         {
             playerSpeed = playerSneakSpeed;
+            animation.Play("Armature|Eberhardt_Walk");
+            animation["Armature|Eberhardt_Walk"].speed = 0.5f;
         }
     }
 
@@ -150,6 +160,9 @@ public class PlayerControl : MonoBehaviour {
             countRunTime();
             playerSpeed = playerRunSpeed;
 			audioManager.handleSpeedWalkingSound(speedWalking);
+            animation.Play("Armature|Eberhardt_Walk");
+            animation["Armature|Eberhardt_Walk"].speed = 2f;
+
         }
         else
         {

@@ -90,6 +90,7 @@ ModelImporter:
     7400000: Armature|Eberhardt_Run
     7400002: Armature|Eberhardt_Walk
     9500000: //RootNode
+    11100000: //RootNode
     13700000: Eberhardt_Body
     13700002: Eberhardt_Button_L
     13700004: Eberhardt_Button_R
@@ -159,6 +160,6 @@ ModelImporter:
     feetSpacing: 0
     rootMotionBoneName: 
   lastHumanDescriptionAvatarSource: {instanceID: 0}
-  animationType: 2
+  animationType: 1
   additionalBone: 0
   userData: 
