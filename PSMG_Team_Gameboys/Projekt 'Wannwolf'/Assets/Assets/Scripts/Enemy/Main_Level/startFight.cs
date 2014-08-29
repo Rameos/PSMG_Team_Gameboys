@@ -102,6 +102,7 @@ public class startFight : MonoBehaviourWithGazeComponent
             setValues();
             StopAllCoroutines();
             recycle.recycleEnemy();
+            rewardPlayer();
         }
     }
 
@@ -282,5 +283,11 @@ public class startFight : MonoBehaviourWithGazeComponent
     public override void OnGazeExit()
     {
        
+    }
+
+    // Add money to the player's account after defeating a pizza
+    void rewardPlayer()
+    {
+        player.GetComponent<MoneyManagement>().addMoney(5);
     }
 }
