@@ -14,10 +14,12 @@ public class FollowPlayer : MonoBehaviour
     float gravityBoost = 3.5f;
     Vector3 gravity;
     Transform pizza; //current transform data of this enemy
+    public bool isFollowing;
 
     void Awake()
     {
         pizza = transform; //cache transform data for easy access/performance
+        isFollowing = false;
     }
 
     void Start()
@@ -49,6 +51,7 @@ public class FollowPlayer : MonoBehaviour
                 Quaternion.LookRotation(player.position - controller.transform.position), rotationSpeed * Time.deltaTime);
                 controller.Move(moveTo * Time.deltaTime);
                 controller.transform.Rotate(0, Input.GetAxis("Horizontal") * moveSpeed * Time.deltaTime, 0, Space.World);
+                isFollowing = true;
             }
             else
                 if (distance <= stop)
