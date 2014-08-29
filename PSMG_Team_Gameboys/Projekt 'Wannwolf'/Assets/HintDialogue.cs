@@ -30,62 +30,68 @@ public class HintDialogue : MonoBehaviour {
 	int fireArrival = 0;
 	int vodkaArrival = 0;
 
+    private GameObject playerControl;
+
     public AudioClip[] Dialogues;
     
     void Awake()
     {
-        
+        playerControl = GameObject.FindGameObjectWithTag(TagManager.PLAYER);
     }
-
-	// Use this for initialization
-	void Start () {
-        
-	}
 	
     void OnTriggerEnter(Collider col)
+    {
+        if (col.tag == TagManager.PLAYER)
+        {
+            checkTags();
+        }
+    }
+
+    void checkTags()
     {
         string tag = gameObject.tag;
         switch (tag)
         {
-			case "PizzaHint":
+            case "PizzaHint":
                 checkIsAudioPlaying();
                 controllPlaytime(pizza, Dialogues[PIZZA_HINT]);
-				pizza = true;
+                pizza = true;
                 break;
-			//case "BierberHint": 
-			//	controllPlaytime(bierber, Dialogues[BIERBER_HINT]);
-			//	bierber = true;    
-			//	break;
-        	case "AnglerArrivalHint":
+            case "BierberHint":
+                controllPlaytime(bierber, Dialogues[BIERBER_HINT]);
+                bierber = true;
+                break;
+            case "AnglerArrivalHint":
                 checkIsAudioPlaying();
                 controllPlaytime(sneek, Dialogues[SNEEK_HINT]);
-				sneek = true;
+                sneek = true;
                 break;
             case "FireArrivalHint":
                 checkIsAudioPlaying();
                 checkFireArrivalTimes();
                 break;
-			case "VodkaHint":
+            case "VodkaHint":
                 checkIsAudioPlaying();
-				if(vodkaArrival == 2){
-					controllPlaytime(vodka, Dialogues[VODKA_HINT]);
-				}
-				vodkaArrival++;
-				break;
-			case "JumpHint":
+                if (vodkaArrival == 2)
+                {
+                    controllPlaytime(vodka, Dialogues[VODKA_HINT]);
+                }
+                vodkaArrival++;
+                break;
+            case "JumpHint":
                 checkIsAudioPlaying();
                 controllPlaytime(stair, Dialogues[JUMP_HINT]);
-				stair = true;
+                stair = true;
                 break;
-			case "StairBuildHint":
+            case "StairBuildHint":
                 checkIsAudioPlaying();
                 controllPlaytime(edge, Dialogues[STAIR_HINT]);
-				edge = true;
+                edge = true;
                 break;
-			case "ChaseHint":
+            case "ChaseHint":
                 checkIsAudioPlaying();
                 controllPlaytime(chase, Dialogues[CHASE_HINT]);
-				chase = true;
+                chase = true;
                 break;
         }
     }
@@ -107,21 +113,17 @@ public class HintDialogue : MonoBehaviour {
 
     void checkFireArrivalTimes()
     {
-
-        if (fireArrival == 0)
+        if (!playerControl.GetComponent<PlayerControl>().vodkaStatus && !playerControl.GetComponent<PlayerControl>().drankStatus && fireArrival == 0)
         {
             audio.clip = Dialogues[FIRE_ARRIVAL_HINT];
             audio.Play();
-            
+            fireArrival = 1;
         }
-        else if (fireArrival == 2)
+        else if (playerControl.GetComponent<PlayerControl>().drankStatus)
         {
             audio.clip = Dialogues[FIRE_FIGHTING_HINT];
             audio.Play();
-            
         }
-        fireArrival++;
-        Debug.Log("Times: " + fireArrival);
     }
 
     public void playAnglerAwakeSound()
@@ -132,7 +134,6 @@ public class HintDialogue : MonoBehaviour {
 
     public void playNorbertBeerHint()
     {
-        Debug.Log(Dialogues[BEER_TO_BIERBER_HINT]);
         audio.clip = Dialogues[BEER_TO_BIERBER_HINT];
         audio.Play();
     }
