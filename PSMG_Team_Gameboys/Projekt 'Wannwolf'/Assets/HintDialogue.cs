@@ -44,28 +44,34 @@ public class HintDialogue : MonoBehaviour {
 	int fireArrival = 0;
 	int vodkaArrival = 0;
 
+    private GameObject playerControl;
+
     public AudioClip[] Dialogues;
 
     public GameObject untertitel;
     
     void Awake()
     {
-        
+        playerControl = GameObject.FindGameObjectWithTag(TagManager.PLAYER);
     }
-
-	// Use this for initialization
-	void Start () {
-        
-	}
 	
     void OnTriggerEnter(Collider col)
+    {
+        if (col.tag == TagManager.PLAYER)
+        {
+            checkTags();
+        }
+    }
+
+    void checkTags()
     {
         string tag = gameObject.tag;
         switch (tag)
         {
-			case "PizzaHint":
+            case "PizzaHint":
                 checkIsAudioPlaying();
                 controllPlaytime(pizza, Dialogues[PIZZA_HINT]);
+<<<<<<< HEAD
                 untertitel.guiText.text = pizzaHint;
                 StartCoroutine(resetDialog(5));
 				pizza = true;
@@ -83,13 +89,26 @@ public class HintDialogue : MonoBehaviour {
                 untertitel.guiText.text = sneekHint;
                 StartCoroutine(resetDialog(5));
 				sneek = true;
+=======
+                pizza = true;
+                break;
+            case "BierberHint":
+                controllPlaytime(bierber, Dialogues[BIERBER_HINT]);
+                bierber = true;
+                break;
+            case "AnglerArrivalHint":
+                checkIsAudioPlaying();
+                controllPlaytime(sneek, Dialogues[SNEEK_HINT]);
+                sneek = true;
+>>>>>>> origin/Matze_Branch
                 break;
             case "FireArrivalHint":
                 checkIsAudioPlaying();
                 checkFireArrivalTimes();
                 break;
-			case "VodkaHint":
+            case "VodkaHint":
                 checkIsAudioPlaying();
+<<<<<<< HEAD
 				if(vodkaArrival == 2){
 					controllPlaytime(vodka, Dialogues[VODKA_HINT]);
                     untertitel.guiText.text = vodkaHint;
@@ -103,20 +122,40 @@ public class HintDialogue : MonoBehaviour {
                 untertitel.guiText.text = jumpHint;
                 StartCoroutine(resetDialog(5));
 				stair = true;
+=======
+                if (vodkaArrival == 2)
+                {
+                    controllPlaytime(vodka, Dialogues[VODKA_HINT]);
+                }
+                vodkaArrival++;
                 break;
-			case "StairBuildHint":
+            case "JumpHint":
+                checkIsAudioPlaying();
+                controllPlaytime(stair, Dialogues[JUMP_HINT]);
+                stair = true;
+>>>>>>> origin/Matze_Branch
+                break;
+            case "StairBuildHint":
                 checkIsAudioPlaying();
                 controllPlaytime(edge, Dialogues[STAIR_HINT]);
+<<<<<<< HEAD
                 untertitel.guiText.text = stairHint;
                 StartCoroutine(resetDialog(5));
 				edge = true;
+=======
+                edge = true;
+>>>>>>> origin/Matze_Branch
                 break;
-			case "ChaseHint":
+            case "ChaseHint":
                 checkIsAudioPlaying();
                 controllPlaytime(chase, Dialogues[CHASE_HINT]);
+<<<<<<< HEAD
                 untertitel.guiText.text = chaseHint;
                 StartCoroutine(resetDialog(5));
 				chase = true;
+=======
+                chase = true;
+>>>>>>> origin/Matze_Branch
                 break;
         }
     }
@@ -138,26 +177,22 @@ public class HintDialogue : MonoBehaviour {
 
     void checkFireArrivalTimes()
     {
-
-        if (fireArrival == 0)
+        if (!playerControl.GetComponent<PlayerControl>().vodkaStatus && !playerControl.GetComponent<PlayerControl>().drankStatus && fireArrival == 0)
         {
             untertitel.guiText.text = fireArrivalHint;
             StartCoroutine(resetDialog(5));
             audio.clip = Dialogues[FIRE_ARRIVAL_HINT];
             audio.Play();
-            
+            fireArrival = 1;
         }
-        else if (fireArrival == 2)
+        else if (playerControl.GetComponent<PlayerControl>().drankStatus)
         {
             untertitel.guiText.text = fireFightingHint;
             StartCoroutine(resetDialog(5));
             StartCoroutine(resetDialog(5));
             audio.clip = Dialogues[FIRE_FIGHTING_HINT];
             audio.Play();
-            
         }
-        fireArrival++;
-        Debug.Log("Times: " + fireArrival);
     }
 
     public void playAnglerAwakeSound()
@@ -170,9 +205,12 @@ public class HintDialogue : MonoBehaviour {
 
     public void playNorbertBeerHint()
     {
+<<<<<<< HEAD
         Debug.Log(Dialogues[BEER_TO_BIERBER_HINT]);
         untertitel.guiText.text = beerToBierberHint;
         StartCoroutine(resetDialog(5));
+=======
+>>>>>>> origin/Matze_Branch
         audio.clip = Dialogues[BEER_TO_BIERBER_HINT];
         audio.Play();
     }
