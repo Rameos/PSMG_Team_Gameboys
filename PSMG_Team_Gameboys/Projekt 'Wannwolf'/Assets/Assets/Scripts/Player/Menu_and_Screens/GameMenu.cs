@@ -6,9 +6,12 @@ public class GameMenu : MonoBehaviour {
     private bool isPaused;
     private float width;
     private float height;
+   private AudioSource gameMusic;
 
     void Awake()
     {
+        gameMusic = GameObject.FindGameObjectWithTag(TagManager.PLAYER).GetComponent<AudioSource>().audio;
+        gameMusic.ignoreListenerPause = true;
         width = Screen.width;
         height = Screen.height;
         isPaused = false;
@@ -89,5 +92,10 @@ public class GameMenu : MonoBehaviour {
     bool setCameraControlStatus
     {
         set { GameObject.FindGameObjectWithTag(TagManager.MAIN_CAMERA).GetComponent<CameraControl>().enabled = value; }
+    }
+
+    public bool gameMenuStatus
+    {
+        get { return isPaused; }
     }
 }
