@@ -6,12 +6,12 @@ public class GameMenu : MonoBehaviour {
     private bool isPaused;
     private float width;
     private float height;
-   private AudioSource gameMusic;
+    //private AudioSource gameMusic;
 
     void Awake()
     {
-        gameMusic = GameObject.FindGameObjectWithTag(TagManager.PLAYER).GetComponent<AudioSource>().audio;
-        gameMusic.ignoreListenerPause = true;
+        //gameMusic = GameObject.FindGameObjectWithTag(TagManager.PLAYER).GetComponent<AudioSource>().audio;
+        //gameMusic.ignoreListenerPause = true;
         width = Screen.width;
         height = Screen.height;
         isPaused = false;

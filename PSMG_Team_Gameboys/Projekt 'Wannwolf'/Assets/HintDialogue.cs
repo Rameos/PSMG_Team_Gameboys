@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class HintDialogue : MonoBehaviour {
+/*public class HintDialogue : MonoBehaviour {
 
     const int PIZZA_HINT = 0;
     const int BIERBER_HINT = 1;
@@ -228,4 +228,4 @@ public class HintDialogue : MonoBehaviour {
         yield return new WaitForSeconds(seconds);
         untertitel.guiText.text = "";
     }
-}
+}*/
