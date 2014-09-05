@@ -30,6 +30,7 @@ public class DragByPlayer : MonoBehaviour {
         {
             obj.transform.parent = GameObject.Find("pickto").transform;
             obj.transform.position = GameObject.Find("pickto").transform.position;
+            obj.collider.enabled = false;
 
             destroyRotation();
             
@@ -37,6 +38,7 @@ public class DragByPlayer : MonoBehaviour {
         }
         else if (!waitActive)
         {
+            obj.collider.enabled = true;
             obj.transform.parent = null;
             addRotation();
 
