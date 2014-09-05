@@ -54,7 +54,7 @@ public class ExtinguishFire : MonoBehaviour {
             switcher.setCameraStatic();
             switcher.setFireTaskStatic(GameObject.FindGameObjectWithTag(TagManager.PLAYER));
             startPeeing = true;
-            //Destroy(gameObject);
+            Destroy(gameObject);
         }
     }
 
