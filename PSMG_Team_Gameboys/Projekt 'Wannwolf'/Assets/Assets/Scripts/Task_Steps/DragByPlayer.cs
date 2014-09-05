@@ -6,6 +6,7 @@ public class DragByPlayer : MonoBehaviour {
     private GameObject obj;
     private bool waitActive = false;
     private bool isBeer = false;
+    bool inTrigger = false;
 
     void Start()
     {
@@ -14,6 +15,16 @@ public class DragByPlayer : MonoBehaviour {
         {
             isBeer = true;
         }
+    }
+
+    void OnTriggerEnter()
+    {
+        inTrigger = true;
+    }
+
+    void OnTriggerExit()
+    {
+        inTrigger = false;
     }
 
     void OnTriggerStay()
@@ -43,6 +54,36 @@ public class DragByPlayer : MonoBehaviour {
             addRotation();
 
             StartCoroutine(Wait());
+        }
+    }
+
+    void OnGUI()
+    {
+        if (inTrigger)
+        {
+            if (isBeer)
+            {
+                if (obj.transform.parent == null)
+                {
+                    GUI.Button(new Rect(Screen.width - (Screen.width / 6), 0, Screen.width / 5, Screen.height / 8), "Drücke \"F\" um \ndas Bier aufzunehmen");
+                }
+                else
+                {
+                    GUI.Button(new Rect(Screen.width - (Screen.width / 6), 0, Screen.width / 5, Screen.height / 8), "Drücke \"F\" um \ndas Bier abzulegen");
+                }
+            }
+            else
+            {
+                if (obj.transform.parent == null)
+                {
+                    GUI.Button(new Rect(Screen.width - (Screen.width / 6), 0, Screen.width / 5, Screen.height / 8), "Drücke \"F\" um \nden Baumstamm aufzunehmen");
+                }
+                else
+                {
+                    GUI.Button(new Rect(Screen.width - (Screen.width / 6), 0, Screen.width / 5, Screen.height / 8), "Drücke \"F\" um \n den Baumstamm abzulegen");
+                }
+            }
+            
         }
     }
 

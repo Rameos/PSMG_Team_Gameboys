@@ -62,6 +62,14 @@ public class FollowPlayer : MonoBehaviour
                 }
     }
 
+    /*void OnGUI()
+    {
+        if (isFollowing)
+        {
+                GUI.Button(new Rect(Screen.width - (Screen.width / 6), 0, Screen.width / 5, Screen.height / 8), "Drücke \"F\" um \nden Kampf sofort\nzu starten");
+        }
+    }*/
+
     void setupMoveToVector(ref Vector3 moveToVector)
     {
         moveToVector.Normalize();

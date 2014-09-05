@@ -16,8 +16,6 @@ public class RecyclePizza : MonoBehaviour {
 
     public void recycleEnemy()
     {        
-        Debug.Log("inactive");
-
         gameObject.transform.position = pizzaStartPosition;
 
         StartCoroutine(recyclePizza(15));
@@ -31,7 +29,6 @@ public class RecyclePizza : MonoBehaviour {
             //pizza[i].renderer.enabled = false;
             //gameObject.collider.enabled = false;
             yield return new WaitForSeconds(seconds);
-            Debug.Log("recycle");
             //pizza[i].renderer.enabled = true;
             //gameObject.collider.enabled = true;
             //pizza.SetActive(true);

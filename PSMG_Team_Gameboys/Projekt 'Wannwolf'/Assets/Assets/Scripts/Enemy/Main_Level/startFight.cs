@@ -140,7 +140,6 @@ public class startFight : MonoBehaviourWithGazeComponent
             inTrigger = true;
             if (Input.GetKeyDown("f"))
             {
-                Debug.Log("f clicked");
                 StopAllCoroutines();
                 fight();
             }
