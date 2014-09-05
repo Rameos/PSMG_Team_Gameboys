@@ -6,7 +6,6 @@ public class MultidimensionalHintLogic : MonoBehaviour {
     private Respawn respawn;
     private GameMenu gameMenu;
     private GameObject player;
-    private bool wasPlayed;
     private bool dialogueTriggered;
     private int fireArrival;
 
@@ -18,7 +17,6 @@ public class MultidimensionalHintLogic : MonoBehaviour {
     void Awake()
     {
         fireArrival = 0;
-        wasPlayed = false;
         player = GameObject.FindGameObjectWithTag(TagManager.PLAYER);
         respawn = GameObject.FindGameObjectWithTag(TagManager.GAME_CONTROLLER).GetComponent<Respawn>();
         gameMenu = GameObject.FindGameObjectWithTag(TagManager.GAME_CONTROLLER).GetComponent<GameMenu>();
@@ -58,7 +56,6 @@ public class MultidimensionalHintLogic : MonoBehaviour {
     {
         if (dialogueTriggered && !audio.isPlaying && !gameMenu.gameMenuStatus)
         {
-            wasPlayed = true;
             Destroy(gameObject);
             if (invisibleWall != null)
             {

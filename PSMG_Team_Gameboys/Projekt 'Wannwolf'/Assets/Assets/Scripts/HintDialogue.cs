@@ -28,18 +28,14 @@ public class HintDialogue : MonoBehaviour {
     const string baumHint = "Gehe in den Baumstamm hinein.";
     const string chaseHint = "Du wirst vefolgt, schau zu, dass du wegkommst!";
     const string anglerAwakeHint = "";
-    private string currentText = "";
 
 	bool pizza = false;
 	bool bierber = false;
 	bool sneek = false;
-	bool retrieve = false;
 	bool vodka = false;
 	bool stair = false;
 	bool edge = false;
-	bool tree = false;
 	bool chase = false;
-	bool anglerAwake = false;
 
 	int fireArrival = 0;
 	int vodkaArrival = 0;

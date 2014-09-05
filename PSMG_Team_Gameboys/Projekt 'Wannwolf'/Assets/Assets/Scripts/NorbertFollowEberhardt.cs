@@ -13,7 +13,6 @@ public class NorbertFollowEberhardt : MonoBehaviour
     Vector3 gravity;
     Transform norbert; //current transform data of this enemy
     RaycastHit hit;
-    float heightAboveGround = 0;
 
     void Awake()
     {
@@ -32,7 +31,7 @@ public class NorbertFollowEberhardt : MonoBehaviour
         setGravity();
         // Distance to the Player
         float distance = Vector3.Distance(norbert.position, player.position);
-        var rotation = new Quaternion(norbert.rotation.x, norbert.rotation.y, norbert.rotation.z, norbert.rotation.w);
+        //var rotation = new Quaternion(norbert.rotation.x, norbert.rotation.y, norbert.rotation.z, norbert.rotation.w);
         controller.transform.rotation = Quaternion.Slerp(norbert.rotation,
                 Quaternion.LookRotation(player.position - controller.transform.position), rotationSpeed * Time.deltaTime);
         
@@ -67,7 +66,7 @@ public class NorbertFollowEberhardt : MonoBehaviour
 	{
 		float currentX = norbert.eulerAngles.x;
 		float currentY = norbert.eulerAngles.y;
-		float currentZ = norbert.eulerAngles.z;
+		//float currentZ = norbert.eulerAngles.z;
 		controller.transform.localEulerAngles = new Vector3 (currentX - 270, currentY - 90, 0);
 	}
 

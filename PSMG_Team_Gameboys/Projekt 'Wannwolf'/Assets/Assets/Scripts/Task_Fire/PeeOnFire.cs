@@ -10,8 +10,6 @@ public class PeeOnFire : MonoBehaviourWithGazeComponent
     private GameObject player;
     private float rotation;
     private ExtinguishFire exFire;
-    private CameraSwitcher switcher;
-
     private float currentY;
 
 
@@ -19,7 +17,6 @@ public class PeeOnFire : MonoBehaviourWithGazeComponent
 	void Awake () {
     exFire = GameObject.FindGameObjectWithTag(TagManager.FIRE_RADIUS_TRIGGER).GetComponent<ExtinguishFire>();
     fire = gameObject.GetComponent<ParticleSystem>();
-    switcher = gameObject.GetComponent<CameraSwitcher>();
     player = GameObject.FindGameObjectWithTag("Player");
 	}
 	

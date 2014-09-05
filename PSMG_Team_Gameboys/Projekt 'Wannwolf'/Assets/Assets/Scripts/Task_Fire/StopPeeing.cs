@@ -5,14 +5,8 @@ public class StopPeeing : MonoBehaviour {
 
     private GameObject pee;
 
-    void Awake()
-    {
-        Debug.Log("AWAKE");
-    }
-
 	// Update is called once per frame
 	void Update () {
-        Debug.Log("UPDATE");
         checkFireStatus();
 	}
 
