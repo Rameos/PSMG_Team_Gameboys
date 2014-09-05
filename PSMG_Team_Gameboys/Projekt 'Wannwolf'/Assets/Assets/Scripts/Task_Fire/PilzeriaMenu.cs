@@ -37,7 +37,8 @@ public class PilzeriaMenu : MonoBehaviour {
 	void OnTriggerStay (Collider other) {
 		if (Input.GetKeyDown (KeyCode.F))
         {
-            ToggleTimeScale();
+            toggleTimeScale();
+            togglePlayerControl();
         }
 	}
 
@@ -53,64 +54,60 @@ public class PilzeriaMenu : MonoBehaviour {
 		if (isMenu) {
 			butRect.y = (Screen.height - height)/2 - 60;
 
-			if(GUI.Button (butRect, "Double Jump - $50"))
+			if(GUI.Button (butRect, "Double Jump - $30"))
 			{
-				if(moneyManagement.getCurrentMoney() > 49)
+				if(moneyManagement.getCurrentMoney() >= 30)
 				{
-					pay(50);
+					pay(30);
 					//enable double jump
                     control.ableToDoubleJumpStatus = true;
-                    ToggleTimeScale();
+                    togglePlayerControl();
+                    toggleTimeScale();
 				}
 			}
+
 			butRect.y += height + 20;
 
-			if(GUI.Button (butRect, "Länger sprinten - $50"))
+			if(GUI.Button (butRect, "Länger sprinten - $25"))
 			{
-				if(moneyManagement.getCurrentMoney() > 49)
+				if(moneyManagement.getCurrentMoney() >= 25)
 				{
-					pay(50);
-                    control.sprintTimeStatus = 2; 
-					ToggleTimeScale();
-				}
-				else Debug.Log(moneyManagement.getCurrentMoney());
-			}
-			butRect.y += height + 20;
-
-			if(GUI.Button (butRect, "Beutelvergrößerung - $50"))
-			{
-				if(moneyManagement.getCurrentMoney() > 49)
-				{
-					pay(50);
-					int beutelOld = moneyManagement.getMoneyMinimum();
-					moneyManagement.setMoneyMaximum(beutelOld + 50);
-					ToggleTimeScale();
+					pay(25);
+                    control.sprintTimeStatus = 2;
+                    togglePlayerControl();
+                    toggleTimeScale();
 				}
 			}
+
 			butRect.y += height + 20;
 
-            if (GUI.Button(butRect, "Vodka") && !control.vodkaStatus)
+            if (GUI.Button(butRect, "Vodka - 35$") && !control.vodkaStatus)
             {
-                pay(5);
-                control.vodkaStatus = true;
-                ToggleTimeScale();
+                if (moneyManagement.getCurrentMoney() >= 35)
+                {
+                    pay(35);
+                    control.vodkaStatus = true;
+                    toggleTimeScale();
+                    togglePlayerControl();
+                }
             }
 
             butRect.y += height + 20;
 
 			if(GUI.Button (butRect, "Zurück") || Input.GetKeyDown(KeyCode.Escape))
-				ToggleTimeScale();
+                toggleTimeScale();
+                togglePlayerControl();
         }
         else
         {
             if (!isMenu && inMenuRadius)
             {
-                GUI.Button(new Rect (Screen.width - width, 0, width, height), "Drücke \"F\" um das \nPilzeriamenu zu öffnen");
+                GUI.Button(new Rect (Screen.width - Screen.width/4, 0, width*2, height), "Drücke \"F\" um das \nPilzeriamenu zu öffnen");
             }
         }
                 if (control.vodkaStatus && drinkLogic.diedInFire)
                 {
-                    GUI.Button(new Rect(Screen.width - width, 0, width, height), "Drücke \"E\" um den \nVodka zu trinken");
+                    GUI.Button(new Rect(Screen.width - Screen.width/4, 0, width*2, height), "Drücke \"E\" um den \nVodka zu trinken");
                 }
 
         if(control.vodkaStatus)
@@ -130,7 +127,7 @@ public class PilzeriaMenu : MonoBehaviour {
 	}
 
 	//stops game
-	void ToggleTimeScale()
+	void toggleTimeScale()
 	{
 		if (!isMenu)
 				Time.timeScale = 0;
@@ -138,4 +135,12 @@ public class PilzeriaMenu : MonoBehaviour {
 				Time.timeScale = 1;
 		isMenu = !isMenu;
 	}
+
+    void togglePlayerControl()
+    {
+        if (!isMenu)
+            GameObject.FindGameObjectWithTag(TagManager.MAIN_CAMERA).GetComponent<CameraControl>().enabled = true;
+        else
+            GameObject.FindGameObjectWithTag(TagManager.MAIN_CAMERA).GetComponent<CameraControl>().enabled = false;
+    }
 }

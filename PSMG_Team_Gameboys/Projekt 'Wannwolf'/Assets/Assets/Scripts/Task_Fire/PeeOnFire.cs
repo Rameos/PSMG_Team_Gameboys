@@ -50,7 +50,7 @@ public class PeeOnFire : MonoBehaviourWithGazeComponent
     {
         if (!peeing)
         {
-            if (fire.startLifetime < 4.5f)
+            if (fire.startLifetime < 3.5f)
             {
                 fire.startLifetime += Time.deltaTime;
             }
@@ -63,9 +63,6 @@ public class PeeOnFire : MonoBehaviourWithGazeComponent
         Debug.Log("Hallihallo");
         peeing = true;
         currentY = player.transform.rotation.y;
-        switcher.setFireTaskStatic(GameObject.FindGameObjectWithTag(TagManager.PLAYER));
-
-        
     }
 
     public override void OnGazeStay(RaycastHit hit)
