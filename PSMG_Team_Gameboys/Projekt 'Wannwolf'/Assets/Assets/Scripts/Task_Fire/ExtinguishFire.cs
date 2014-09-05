@@ -7,12 +7,14 @@ public class ExtinguishFire : MonoBehaviour {
     private DrinkLogic drinkLogic;
     private PlayerControl control;
     private ParticleSystem urin;
+    private CameraSwitcher switcher;
    
     private bool extinguishable;
     public bool startPeeing = false;
     
     void Awake()
     {
+        switcher = gameObject.GetComponent<CameraSwitcher>();
         fireRadiusTrigger = GameObject.FindGameObjectWithTag(TagManager.FIRE_RADIUS_TRIGGER);
         control = GameObject.FindGameObjectWithTag(TagManager.PLAYER).GetComponent<PlayerControl>();
         extinguishable = true;
@@ -47,7 +49,11 @@ public class ExtinguishFire : MonoBehaviour {
         if (drinkLogic.ableToUrinate && Input.GetKeyDown(KeyCode.E))
         {
             urin.particleSystem.Play(true);
+            control.enabled = false;
+            switcher.setCameraStatic();
+            switcher.setFireTaskStatic(GameObject.FindGameObjectWithTag(TagManager.PLAYER));
             startPeeing = true;
+            Destroy(gameObject);
         }
     }
 

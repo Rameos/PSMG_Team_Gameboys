@@ -24,4 +24,12 @@ public class CameraSwitcher : MonoBehaviour {
     {
         mainCamera.transform.LookAt(gameObject.transform);
     }
+
+    public void setFireTaskStatic(GameObject gameObject)
+    {
+        //mainCamera.transform.position = gameObject.transform.position - new Vector3(-15, -5, 20);
+        //setCameraFocus(gameObject);
+        mainCamera.transform.position = gameObject.transform.position + new Vector3(0,10,0);
+        mainCamera.transform.rotation = gameObject.transform.rotation;
+    }
 }

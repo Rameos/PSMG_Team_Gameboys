@@ -10,6 +10,7 @@ public class PeeOnFire : MonoBehaviourWithGazeComponent
     private GameObject player;
     private float rotation;
     private ExtinguishFire exFire;
+    private CameraSwitcher switcher;
 
     private float currentY;
 
@@ -18,6 +19,7 @@ public class PeeOnFire : MonoBehaviourWithGazeComponent
 	void Awake () {
     exFire = GameObject.FindGameObjectWithTag(TagManager.FIRE_RADIUS_TRIGGER).GetComponent<ExtinguishFire>();
     fire = gameObject.GetComponent<ParticleSystem>();
+    switcher = gameObject.GetComponent<CameraSwitcher>();
     player = GameObject.FindGameObjectWithTag("Player");
 	}
 	
@@ -35,7 +37,7 @@ public class PeeOnFire : MonoBehaviourWithGazeComponent
             if (fire.startLifetime <= 0.1)
             {
                 GameObject.FindGameObjectWithTag(TagManager.PLAYER_FLAMES).GetComponent<ParticleSystem>().Stop();
-                GameObject.Destroy(fire);
+                GameObject.Destroy(gameObject);
             }
             else
             {
@@ -61,6 +63,7 @@ public class PeeOnFire : MonoBehaviourWithGazeComponent
         Debug.Log("Hallihallo");
         peeing = true;
         currentY = player.transform.rotation.y;
+        switcher.setFireTaskStatic(GameObject.FindGameObjectWithTag(TagManager.PLAYER));
 
         
     }

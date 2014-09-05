@@ -8,6 +8,7 @@ public class MultidimensionalHintLogic : MonoBehaviour {
     private GameObject player;
     private bool wasPlayed;
     private bool dialogueTriggered;
+    private int fireArrival;
 
     public AudioClip[] dialogues;
 
@@ -16,6 +17,7 @@ public class MultidimensionalHintLogic : MonoBehaviour {
 
     void Awake()
     {
+        fireArrival = 0;
         wasPlayed = false;
         player = GameObject.FindGameObjectWithTag(TagManager.PLAYER);
         respawn = GameObject.FindGameObjectWithTag(TagManager.GAME_CONTROLLER).GetComponent<Respawn>();
@@ -38,12 +40,13 @@ public class MultidimensionalHintLogic : MonoBehaviour {
 
     void checkFireArrivalTimes()
     {
-        if (!player.GetComponent<PlayerControl>().vodkaStatus && !player.GetComponent<PlayerControl>().drankStatus)
+        if (!player.GetComponent<PlayerControl>().vodkaStatus && !player.GetComponent<PlayerControl>().drankStatus && fireArrival == 0)
         {
             audio.clip = dialogues[0];
             audio.Play();
+            fireArrival = 1;
         }
-        else if (!player.GetComponent<PlayerControl>().drankStatus && player.GetComponent<PlayerControl>().vodkaStatus)
+        else if (!player.GetComponent<PlayerControl>().drankStatus && player.GetComponent<PlayerControl>().hadVodkaOnce)
         {
             audio.clip = dialogues[1];
             audio.Play();
