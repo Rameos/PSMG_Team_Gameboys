@@ -11,6 +11,7 @@ public class AutomaticMovement : MonoBehaviour {
 
     void Awake()
     {
+        gameObject.transform.Rotate(new Vector3(0, 1, 0), 90);
         speed = 0.3f;
         stop = true;
         money = GetComponent<MoneyManagement>();
