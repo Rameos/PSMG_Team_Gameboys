@@ -6,12 +6,14 @@ public class Vomiting : MonoBehaviour {
     private const float VOMIT_TIME = 5f;
 
     private PlayerControl playerControl;
+    private CameraSwitcher switcher;
     private ParticleSystem vomit;
 
     void Start()
     {
         playerControl = GameObject.FindGameObjectWithTag(TagManager.PLAYER).GetComponent<PlayerControl>();
         vomit = GameObject.FindGameObjectWithTag("Vomit").GetComponent<ParticleSystem>();
+        switcher = gameObject.GetComponent<CameraSwitcher>();
     }
 
     void OnTriggerEnter(Collider col)
@@ -19,6 +21,7 @@ public class Vomiting : MonoBehaviour {
         if (col.tag == TagManager.PLAYER)
         {
             setPlayerControlStatus(false);
+            setVomitingCamera();
             startVomiting();
             StartCoroutine(waitForVomitingEnd());
         }
@@ -28,6 +31,7 @@ public class Vomiting : MonoBehaviour {
     {
         yield return new WaitForSeconds(VOMIT_TIME);
         stopVomiting();
+        unsetVomitingCamera();
         setPlayerControlStatus(true);
         setPlayerSober();
         destroyGameObject();
@@ -51,6 +55,16 @@ public class Vomiting : MonoBehaviour {
     void stopVomiting()
     {
         vomit.Stop(true);
+    }
+
+    void setVomitingCamera()
+    {
+        switcher.setVomitStatic();
+    }
+
+    void unsetVomitingCamera()
+    {
+        switcher.setCameraDynamic();
     }
 
     void destroyGameObject()

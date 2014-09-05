@@ -16,19 +16,19 @@ public class HintDialogue : MonoBehaviour {
     const int CHASE_HINT = 10;
     const int ANGLER_AWAKE_HINT = 11;
 
-    const string pizzaHint = "Norbert: Scheisse Alter, die Pizzen greifen uns an, aber gut, dass wir den \n Pizzaroller dabei haben. Mit dem kannst du sie sicher toeten, wenn du sie zerteilst. \n Du kannst den Pizzaroller mit deinen Augen steuern. \n Eberhardt: ja verrueckt, mit den Augen? So wie mit einem Eyetracker, quasi? \n Norbert: was?";
-    const string bierberHint = "Bierber: Ey pass mal auf du! Was suchst du auf meinem Dosendamm? \n Das ist kein Spielplatz hier, du praepubertaere Eichfotze! Wenn du unbedingt ueber denn Fluss willst, \n dann organisier mir ein Bier und zwar vom schlafenden Angler, den FLuss aufwaerts. \n Und dann nage ich dir, vielleicht, wahrscheinlich schon, einen Baum um. Ok? \n Norbert: So ein bloeder, unfreundlicher Bierber! \n Eberhardt:Ja Ultra! Das letzte mal, als dem jemand einen Witz erzaehlt hat, war wahrscheinlich 18-hundert-sonst noch was...";
-    const string sneekHint = "Norbert: Eberhardt, du musst dich anschleichen, damit der Angler nicht aufwacht. \n Sonst verpruegelt der uns doch!";
-    const string beerToBierberHint = "Norbert: Jetzt bring das Bier schnell zum Bierber! \n Eberhardt: Alles klar, los geht's!";
-    const string fireArrivalHint = "Norbert: Alter Eberhardt, wir sind doch gerade an einer Pilzeria vorbeigekommen, \n schau da doch mal rein. Da gibt es bestimmt was zum Loeschen, \n irgendeine Fluessigkeit oder so..";
-    const string fireFightingHint = "Norbert: Also ich glaube, du haettest den Wodka gleich trinken sollen, \n damit du das Feuer auspinkeln kannst.";
-    const string vodkaHint = "Norbert: Trink den Wodka doch gleich, dann musst du am Feuer nicht so lange warten, \n bis du pinkeln kannst. Und uebrigens, deinen Urinstrahl kannst du wieder mit deinen Augen steuern.";
-    const string jumpHint = "Norbert: Warte mal, wahrscheinlich musst du dir ein PowerUp in der Pilzeria kaufen, \n damit du die Treppen hochhuepfen kannst. \n Eberhardt: Willst du Hipsternuss mir jetzt erzaehlen, dass ich zugenommen habe? \n Norbert: Was?";
-    const string stairHint = "Norbert:Schau mal her, ich glaube, du kannst dir sicher aus diesen Baumstaemmen da eine Treppe bauen. \n Eberhardt: Ja, das hoert sich nach einem Plan an! So machen wir das! \n Norbert: Was ist?";
-    const string baumHint = "Norbert: Alter Eberhardt, ich habe irgendwie das Gefuehl, dass der Baumstamm die Tuer \n zum Ende unserer Reise ist. Jetzt gehe mal rein und schaue, was passiert. \n Eberhardt: Alles klar, machen wir! \n Norbert: was?";
-    const string chaseHint = "Norbert: Alter scheisse, jetzt verfolgen die uns auch noch. \n Schnell, siehzu, dass du hier wegkommst!";
+    const string pizzaHint = "Du kannst die Pizza mit deinen Augen zerschneiden. Den Kampf startest du mit 'f'";
+    const string bierberHint = "Stehle ein Bier von dem Angler Flussaufwärts.";
+    const string sneekHint = "Du musst dich anschleichen, damit der Angler nicht aufwacht. Mit 'f' kannst du das Bier aufheben.";
+    const string beerToBierberHint = "Bringe das Bier zurück zum Bierber.";
+    const string fireArrivalHint = "Gehe zur Pilzeria und kaufe eine Löschflüssigkeit.";
+    const string fireFightingHint = "Trinke den Wodka, um das Feuer auszupinkeln";
+    const string vodkaHint = "Trink den Wodka gleich, damit du am Feuer pinkeln kannst. Den Strahl kannst du mit deinen Augen steuern.";
+    const string jumpHint = "Kaufe die ein PowerUp in der PIlzeria, um höher springen zu können.";
+    const string stairHint = "Du kannst dir aus den Baumstämmen eine Treppe bauen.";
+    const string baumHint = "Gehe in den Baumstamm hinein.";
+    const string chaseHint = "Du wirst vefolgt, schau zu, dass du wegkommst!";
     const string anglerAwakeHint = "";
-    private string currentText = "blaaaaa";
+    private string currentText = "";
 
 	bool pizza = false;
 	bool bierber = false;
