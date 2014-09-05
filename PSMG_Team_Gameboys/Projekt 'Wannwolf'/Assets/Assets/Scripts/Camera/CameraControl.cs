@@ -54,12 +54,6 @@ public class CameraControl : MonoBehaviour {
         setupCameraMovement();
     }
 
-    public void setStatic(bool val)
-    {
-        staticCamera = val;
-        Debug.Log(val);
-    }
-
     void setupCameraMovement()
     {
         if (mouseY <= minCameraDistance)

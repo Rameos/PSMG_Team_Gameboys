@@ -54,12 +54,12 @@ public class PeeOnFire : MonoBehaviourWithGazeComponent
         }
     }
 
-
     public override void OnGazeEnter(RaycastHit hit)
     {
         Debug.Log("Hallihallo");
         peeing = true;
         currentY = player.transform.rotation.y;
+        player.transform.LookAt(gameObject.transform);
     }
 
     public override void OnGazeStay(RaycastHit hit)
