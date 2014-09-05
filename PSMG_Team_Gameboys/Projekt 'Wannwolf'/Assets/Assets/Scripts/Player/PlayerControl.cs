@@ -20,6 +20,7 @@ public class PlayerControl : MonoBehaviour {
     // Beverages
     private bool hasVodka;
     private bool drankVodka;
+    private bool hadVodka;
     private bool ableToDoubleJump;
 
     private CharacterController characterController;
@@ -56,8 +57,8 @@ public class PlayerControl : MonoBehaviour {
         runable = true;
         sneak = false;
 
-        
 
+        hadVodka = false;
         hasVodka = false;
         drankVodka = false;
         ableToDoubleJump = false;
@@ -275,5 +276,11 @@ public class PlayerControl : MonoBehaviour {
     {
         get { return drankVodka; }
         set { drankVodka = value; }
+    }
+
+    public bool hadVodkaOnce
+    {
+        get { return hadVodka; }
+        set { hadVodka = value; }
     }
 }

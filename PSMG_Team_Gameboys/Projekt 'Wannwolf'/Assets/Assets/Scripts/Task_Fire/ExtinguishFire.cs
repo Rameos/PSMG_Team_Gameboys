@@ -7,6 +7,7 @@ public class ExtinguishFire : MonoBehaviour {
     private DrinkLogic drinkLogic;
     private PlayerControl control;
     private ParticleSystem urin;
+   
     private bool extinguishable;
     public bool startPeeing = false;
     
@@ -55,6 +56,7 @@ public class ExtinguishFire : MonoBehaviour {
         if (drinkLogic.inFireRadius && control.vodkaStatus)
         {
             GUI.Button(new Rect(Screen.width-(Screen.width/6), 0, Screen.width / 5 , Screen.height / 8), "Drücke \"F\" um das Feuer zu löschen");
+            control.hadVodkaOnce = true;
         }
 
         if (drinkLogic.inFireRadius && drinkLogic.ableToUrinate)

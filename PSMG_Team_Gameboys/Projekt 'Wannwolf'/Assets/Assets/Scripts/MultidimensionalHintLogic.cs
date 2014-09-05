@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class HintLogic : MonoBehaviour {
+public class MultidimensionalHintLogic : MonoBehaviour {
 
     private Respawn respawn;
     private GameMenu gameMenu;
@@ -9,7 +9,7 @@ public class HintLogic : MonoBehaviour {
     private bool wasPlayed;
     private bool dialogueTriggered;
 
-    public AudioClip dialogue;
+    public AudioClip[] dialogues;
 
     public GameObject invisibleWall;
     public GameObject untertitel;
@@ -24,39 +24,28 @@ public class HintLogic : MonoBehaviour {
 
     void Update()
     {
-        destroyHintAndWall();
         checkForDying();
+        destroyHintAndWall();
     }
 
     void OnTriggerEnter(Collider col)
     {
         if (col.tag == TagManager.PLAYER)
         {
-            controllPlaytime(wasPlayed, dialogue);   
+            checkFireArrivalTimes();
         }
     }
 
-    void controllPlaytime(bool wasPlayed, AudioClip sound)
+    void checkFireArrivalTimes()
     {
-        if (gameObject.tag == TagManager.VODKA_HINT)
+        if (!player.GetComponent<PlayerControl>().vodkaStatus && !player.GetComponent<PlayerControl>().drankStatus)
         {
-            if (player.GetComponent<PlayerControl>().hadVodkaOnce)
-            {
-                playSound();
-            }
+            audio.clip = dialogues[0];
+            audio.Play();
         }
-        else
+        else if (!player.GetComponent<PlayerControl>().drankStatus && player.GetComponent<PlayerControl>().vodkaStatus)
         {
-            playSound();
-        }
-        
-    }
-
-    void playSound()
-    {
-        if (!wasPlayed && !audio.isPlaying)
-        {
-            audio.clip = dialogue;
+            audio.clip = dialogues[1];
             audio.Play();
             dialogueTriggered = true;
         }
@@ -81,7 +70,7 @@ public class HintLogic : MonoBehaviour {
         {
             audio.Stop();
             dialogueTriggered = false;
-            
+
         }
     }
 }
