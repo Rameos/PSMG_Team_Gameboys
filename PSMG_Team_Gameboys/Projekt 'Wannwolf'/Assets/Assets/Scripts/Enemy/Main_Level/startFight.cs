@@ -11,7 +11,7 @@ public class startFight : MonoBehaviourWithGazeComponent
     private const float TIME_BEFORE_SUB_MUSHROOMS = 2f;
 
     public Transform pizza;
-    //public GameObject prefab;
+    public GameObject prefab;
     public Texture2D gazeCursor;
 
     private bool cursorAcvtive;
@@ -47,7 +47,7 @@ public class startFight : MonoBehaviourWithGazeComponent
 
     void Start()
     {
-       // cam = GetComponent<CameraControl>();
+        //cam = GetComponent<CameraControl>();
         //Debug.Log(cam);
         setValues();
         recycle = GetComponent<RecyclePizza>();
@@ -102,7 +102,6 @@ public class startFight : MonoBehaviourWithGazeComponent
             setValues();
             StopAllCoroutines();
             recycle.recycleEnemy();
-            rewardPlayer();
         }
     }
 
@@ -205,7 +204,7 @@ public class startFight : MonoBehaviourWithGazeComponent
 
     private void instantiateMushroom()
     {
-        //Instantiate(prefab, mushroomPosition, new Quaternion(0, 0, 0, 0));
+        Instantiate(prefab, mushroomPosition, new Quaternion(0, 0, 0, 0));
     }
 
     void OnGUI()
@@ -283,11 +282,5 @@ public class startFight : MonoBehaviourWithGazeComponent
     public override void OnGazeExit()
     {
        
-    }
-
-    // Add money to the player's account after defeating a pizza
-    void rewardPlayer()
-    {
-        player.GetComponent<MoneyManagement>().addMoney(5);
     }
 }

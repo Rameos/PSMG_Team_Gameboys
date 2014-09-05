@@ -32,7 +32,7 @@ public class PLayerMovement : MonoBehaviour {
 
     void moveHorizontal()
     {
-        treeTrunk.Rotate(new Vector3(0f, 0f, 1f), Input.GetAxis("Horizontal"));
+        treeTrunk.Rotate(new Vector3(0f, 1f, 0f), Input.GetAxis("Horizontal"));
     }
 
     void setJumpCondition()

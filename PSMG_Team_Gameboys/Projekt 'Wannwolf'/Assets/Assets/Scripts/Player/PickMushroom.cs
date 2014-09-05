@@ -8,8 +8,15 @@ public class PickMushroom : MonoBehaviour {
 
     private float passedTime;
 
+    void Awake()
+    {
+        gameObject.transform.Rotate(new Vector3(0, 0, 1), 90);
+    }
+
     void Update ()
     {
+        rotateObject();
+
         passedTime += Time.fixedDeltaTime;
 
         if (passedTime >= livingtime)
@@ -25,6 +32,11 @@ public class PickMushroom : MonoBehaviour {
             col.GetComponent<MoneyManagement>().addMoney(mushroomValue);
             disappearMushroom();
         }
+    }
+
+    void rotateObject()
+    {
+        gameObject.transform.Rotate(new Vector3(1, 0, 0), 10);
     }
 
     void disappearMushroom()

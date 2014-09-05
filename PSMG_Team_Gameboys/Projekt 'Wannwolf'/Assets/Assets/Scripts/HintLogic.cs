@@ -30,7 +30,6 @@ public class HintLogic : MonoBehaviour {
 
     void OnTriggerEnter(Collider col)
     {
-        Debug.LogWarning("TRIGGER ENTER");
         if (col.tag == TagManager.PLAYER)
         {
             controllPlaytime(wasPlayed, dialogue);   
@@ -62,10 +61,11 @@ public class HintLogic : MonoBehaviour {
 
     void checkForDying()
     {
-        if (respawn.dyingStatus)
+        if (respawn.dyingStatus || respawn.respawnStatus)
         {
-            dialogueTriggered = false;
             audio.Stop();
+            dialogueTriggered = false;
+            
         }
     }
 }
