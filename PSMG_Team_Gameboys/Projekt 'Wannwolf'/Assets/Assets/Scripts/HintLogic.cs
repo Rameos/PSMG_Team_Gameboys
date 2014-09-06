@@ -8,11 +8,11 @@ public class HintLogic : MonoBehaviour {
     private GameObject player;
     private bool wasPlayed;
     private bool dialogueTriggered;
-
+    public GameObject untertitel;
     public AudioClip dialogue;
+    public string text;
 
     public GameObject invisibleWall;
-    public GameObject untertitel;
 
     void Awake()
     {
@@ -52,10 +52,23 @@ public class HintLogic : MonoBehaviour {
         
     }
 
+    void showTask()
+    {
+        untertitel.guiText.text = text;
+        StartCoroutine(resetDialog(5));
+    }
+
+    IEnumerator resetDialog(float seconds)
+    {
+        yield return new WaitForSeconds(seconds);
+        untertitel.guiText.text = "";
+    }
+
     void playSound()
     {
         if (!wasPlayed && !audio.isPlaying)
         {
+            showTask();
             audio.clip = dialogue;
             audio.Play();
             dialogueTriggered = true;

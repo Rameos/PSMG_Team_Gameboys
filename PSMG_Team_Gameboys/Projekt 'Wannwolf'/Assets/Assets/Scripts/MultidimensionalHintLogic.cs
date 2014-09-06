@@ -10,6 +10,8 @@ public class MultidimensionalHintLogic : MonoBehaviour {
     private int fireArrival;
 
     public AudioClip[] dialogues;
+    public string fire1;
+    public string fire2;
 
     public GameObject invisibleWall;
     public GameObject untertitel;
@@ -40,12 +42,14 @@ public class MultidimensionalHintLogic : MonoBehaviour {
     {
         if (!player.GetComponent<PlayerControl>().vodkaStatus && !player.GetComponent<PlayerControl>().drankStatus && fireArrival == 0)
         {
+            showTask(fire1);
             audio.clip = dialogues[0];
             audio.Play();
             fireArrival = 1;
         }
         else if (!player.GetComponent<PlayerControl>().drankStatus && player.GetComponent<PlayerControl>().hadVodkaOnce)
         {
+            showTask(fire2);
             audio.clip = dialogues[1];
             audio.Play();
             dialogueTriggered = true;
@@ -64,6 +68,12 @@ public class MultidimensionalHintLogic : MonoBehaviour {
         }
     }
 
+    void showTask(string text)
+    {
+        untertitel.guiText.text = text;
+        StartCoroutine(resetDialog(5));
+    }
+
     void checkForDying()
     {
         if (respawn.dyingStatus || respawn.respawnStatus)
@@ -72,5 +82,10 @@ public class MultidimensionalHintLogic : MonoBehaviour {
             dialogueTriggered = false;
 
         }
+    }
+    IEnumerator resetDialog(float seconds)
+    {
+        yield return new WaitForSeconds(seconds);
+        untertitel.guiText.text = "";
     }
 }

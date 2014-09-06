@@ -13,14 +13,13 @@ public class PeeOnFire : MonoBehaviourWithGazeComponent
     private float currentY;
 
 
-	// Use this for initialization
 	void Awake () {
     exFire = GameObject.FindGameObjectWithTag(TagManager.FIRE_RADIUS_TRIGGER).GetComponent<ExtinguishFire>();
     fire = gameObject.GetComponent<ParticleSystem>();
     player = GameObject.FindGameObjectWithTag("Player");
 	}
 	
-	// Update is called once per frame
+
 	void Update () {
         shrinkFire();
         growFire();
