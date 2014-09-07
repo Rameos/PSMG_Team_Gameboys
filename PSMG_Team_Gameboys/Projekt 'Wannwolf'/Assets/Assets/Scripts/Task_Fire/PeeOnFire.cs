@@ -1,44 +1,54 @@
 ﻿using UnityEngine;
 using System.Collections;
 using iViewX;
-[RequireComponent(typeof(ExtinguishFire))]
+
 public class PeeOnFire : MonoBehaviourWithGazeComponent
 {
 
     private bool peeing = false;
-    private ParticleSystem fire;
+    private ParticleSystem[] fire;
     private GameObject player;
     private float rotation;
     private ExtinguishFire exFire;
-    private float currentY;
 
 
 	void Awake () {
     exFire = GameObject.FindGameObjectWithTag(TagManager.FIRE_RADIUS_TRIGGER).GetComponent<ExtinguishFire>();
-    fire = gameObject.GetComponent<ParticleSystem>();
+    fire = gameObject.GetComponentsInChildren<ParticleSystem>();
     player = GameObject.FindGameObjectWithTag("Player");
 	}
 	
 
 	void Update () {
         shrinkFire();
-        growFire();
+        //growFire();
 	}
 
     void shrinkFire()
     {
         if (peeing && exFire.startPeeing)
         {
-            player.transform.LookAt(gameObject.transform);
-            if (fire.startLifetime <= 0.1)
+            if (fire[0].startLifetime <= 0.1)
             {
                 GameObject.FindGameObjectWithTag(TagManager.PLAYER_FLAMES).GetComponent<ParticleSystem>().Stop();
                 GameObject.Destroy(gameObject);
             }
             else
             {
-                fire.startLifetime -= Time.deltaTime;
+                if (fire[0].startLifetime > 2.5f)
+                {
+                    setFireHeight(Time.deltaTime * 3);
+                }
+                else setFireHeight(Time.deltaTime * 0.7f);
             }
+        }
+    }
+
+    void setFireHeight(float shrinkFactor)
+    {
+       for (int i = 0; i < fire.Length; i++)
+        {
+            fire[i].startLifetime -= shrinkFactor;
         }
     }
 
@@ -46,34 +56,25 @@ public class PeeOnFire : MonoBehaviourWithGazeComponent
     {
         if (!peeing)
         {
-            if (fire.startLifetime < 3.5f)
+            if (fire[0].startLifetime < 3.5f)
             {
-                fire.startLifetime += Time.deltaTime;
+                for (int i = 0; i < fire.Length; i++)
+                {
+                    fire[i].startLifetime += Time.deltaTime;
+                }
             }
         }
     }
 
     public override void OnGazeEnter(RaycastHit hit)
     {
-        Debug.Log("Hallihallo");
         peeing = true;
-        currentY = player.transform.rotation.y;
         player.transform.LookAt(gameObject.transform);
     }
 
     public override void OnGazeStay(RaycastHit hit)
     {
-        //Vector3 rotate = new Vector3(gazeModel.posGazeRight.x / 10,0, 0 );
-
-        //rotation = (player.transform.position.x - gazeModel.posGazeRight.x) / 10;
-
-          //  player.transform.Rotate(0, currentY - rotation, 0);
-
-        
-     
-        //player.transform.Rotate(gazeModel.posGazeRight.x / 10, 0, 0);
-        //Debug.Log(player.transform.rotation);
-        
+   
     }
 
     public override void OnGazeExit()

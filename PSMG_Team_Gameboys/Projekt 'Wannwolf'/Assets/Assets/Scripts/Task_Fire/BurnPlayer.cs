@@ -23,7 +23,7 @@ public class BurnPlayer : MonoBehaviour {
         beforeBurningMoney = moneyManagment.getCurrentMoney();
     }
 
-    void FixedUpdate()
+    void Update()
     {
         if (isBurning)
         {

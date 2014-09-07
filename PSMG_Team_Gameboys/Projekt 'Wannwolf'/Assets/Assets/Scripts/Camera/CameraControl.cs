@@ -21,7 +21,7 @@ public class CameraControl : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         mainCamera = transform;
-        walkDistance = 20f;
+        walkDistance = 30f;
         mouseX = 0f;
         mouseY = 0f;
         timePassed = 0f;

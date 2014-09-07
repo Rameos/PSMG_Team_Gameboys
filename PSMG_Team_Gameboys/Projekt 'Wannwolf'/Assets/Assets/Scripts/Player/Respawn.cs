@@ -110,7 +110,7 @@ public class Respawn : MonoBehaviour
         int currentMoney = money.getCurrentMoney();
         int minMoney = money.getMoneyMinimum();
         if(currentMoney <= minMoney){
-            LoadScene.loadBM();
+            LoadScene.loadLastGame();
             setPlayerControl(true);
         }
     }

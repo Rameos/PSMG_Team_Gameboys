@@ -6,11 +6,12 @@ public class NorbertFollowEberhardt : MonoBehaviour
 
     CharacterController controller;
     Transform player; //norberts target
-    float moveSpeed = 20; //move speed
+    float moveSpeed; //move speed
     float rotationSpeed = 5; //speed of turning
-    float stop = 13f;
+    float stop = 8f;
     float gravityBoost = 3.5f;
     Vector3 gravity;
+    PlayerControl control;
     Transform norbert; //current transform data of this enemy
     RaycastHit hit;
 
@@ -24,6 +25,9 @@ public class NorbertFollowEberhardt : MonoBehaviour
         gravity = Vector3.zero;
         controller = norbert.GetComponent<CharacterController>();
         player = GameObject.FindGameObjectWithTag(TagManager.PLAYER).transform; //target the player
+        control = GameObject.FindGameObjectWithTag(TagManager.PLAYER).GetComponent<PlayerControl>();
+        moveSpeed = control.getPlayerSpeed;
+       
     }
 
     void Update()
@@ -56,6 +60,7 @@ public class NorbertFollowEberhardt : MonoBehaviour
 
     void LateUpdate()
     {
+        moveSpeed = control.getPlayerSpeed;
         /**if (animation["Gehen"].enabled == false)
         {
             animation.Play("Gehen");
