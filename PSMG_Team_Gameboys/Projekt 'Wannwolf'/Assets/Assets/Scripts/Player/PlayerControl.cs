@@ -63,6 +63,11 @@ public class PlayerControl : MonoBehaviour {
         drankVodka = false;
         ableToDoubleJump = false;
 	}
+
+    void Start()
+    {
+        characterController.transform.Rotate(180f, 0, 0);
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -122,7 +127,7 @@ public class PlayerControl : MonoBehaviour {
 
     }
 
-   public void rotateInCameraView()
+   void rotateInCameraView()
     {
         Quaternion playerRotation = new Quaternion(mainCamera.localRotation.x, 0f, mainCamera.localRotation.z, 0f);
         characterController.transform.localRotation = playerRotation;
