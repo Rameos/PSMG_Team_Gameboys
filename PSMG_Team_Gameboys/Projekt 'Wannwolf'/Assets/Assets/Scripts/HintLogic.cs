@@ -32,13 +32,13 @@ public class HintLogic : MonoBehaviour {
     {
         if (col.tag == TagManager.PLAYER)
         {
-            controllPlaytime(wasPlayed, dialogue);   
+            checkForNeed();  
         }
     }
 
     void controllPlaytime(bool wasPlayed, AudioClip sound)
     {
-        if (gameObject.tag == TagManager.VODKA_HINT)
+        /*if (gameObject.tag == TagManager.VODKA_HINT)
         {
             if (player.GetComponent<PlayerControl>().hadVodkaOnce)
             {
@@ -48,8 +48,8 @@ public class HintLogic : MonoBehaviour {
         else
         {
             playSound();
-        }
-        
+        }*/
+        playSound();
     }
 
     void showTask()
@@ -68,9 +68,9 @@ public class HintLogic : MonoBehaviour {
     {
         if (!wasPlayed && !audio.isPlaying)
         {
-            showTask();
             audio.clip = dialogue;
             audio.Play();
+            showTask();
             dialogueTriggered = true;
         }
     }
@@ -95,6 +95,21 @@ public class HintLogic : MonoBehaviour {
             audio.Stop();
             dialogueTriggered = false;
             
+        }
+    }
+    void checkForNeed()
+    {
+        if (gameObject.tag == TagManager.FIRE_ARRIVAL_HINT && player.GetComponent<PlayerControl>().drankStatus || player.GetComponent<PlayerControl>().vodkaStatus)
+        {
+            Destroy(gameObject);
+        }
+        else if (gameObject.tag == TagManager.JUMP_HINT && player.GetComponent<PlayerControl>().ableToDoubleJumpStatus)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            controllPlaytime(wasPlayed, dialogue); 
         }
     }
 }

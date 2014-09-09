@@ -66,7 +66,10 @@ public class PlayerControl : MonoBehaviour {
 
     void Start()
     {
-        characterController.transform.Rotate(180f, 0, 0);
+        if (PlayerPrefsX.GetQuaternion("PlayerRotation").Equals(null))
+        {
+            characterController.transform.Rotate(180f, 0, 0);
+        }
     }
 	
 	// Update is called once per frame

@@ -20,26 +20,26 @@ public class DrinkLogic : MonoBehaviour {
     void Update()
     {
         drinkVodka();
-        emptyVodka();
+        //emptyVodka();
     }
 
     void drinkVodka()
     {
-        if (control.vodkaStatus && inPilzeria && Input.GetKeyDown(KeyCode.E))
+        if (control.vodkaStatus && Input.GetKeyDown(KeyCode.E))
         {
             setPlayerDrunk();
             setPlayerDrinkStatus(); 
         }
     }
 
-    void emptyVodka()
+    /*void emptyVodka()
     {
         if (inFireRadius && control.vodkaStatus && Input.GetKeyDown(KeyCode.F))
         {
             setPlayerDrinkStatus();
             vodkaEmptied = true;
         }
-    }
+    }*/
 
     void setPlayerDrinkStatus()
     {

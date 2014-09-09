@@ -105,7 +105,7 @@ public class PilzeriaMenu : MonoBehaviour {
                 GUI.Button(new Rect (Screen.width - Screen.width/4, 0, width*2, height), "Drücke \"F\" um das \nPilzeriamenu zu öffnen");
             }
         }
-                if (control.vodkaStatus && drinkLogic.diedInFire)
+                if (control.vodkaStatus)
                 {
                     GUI.Button(new Rect(Screen.width - Screen.width/4, 0, width*2, height), "Drücke \"E\" um den \nVodka zu trinken");
                 }
