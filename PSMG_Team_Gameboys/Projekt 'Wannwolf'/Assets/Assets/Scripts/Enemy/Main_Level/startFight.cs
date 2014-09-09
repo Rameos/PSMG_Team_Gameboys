@@ -6,13 +6,14 @@ using iViewX;
 [RequireComponent(typeof(RecyclePizza))]
 [RequireComponent(typeof(FollowPlayer))]
 
-public class startFight : MonoBehaviourWithGazeComponent
+public class startFight : MonoBehaviour
 {
     private const float TIME_BEFORE_SUB_MUSHROOMS = 2f;
 
     public Transform pizza;
     public GameObject prefab;
     public Texture2D gazeCursor;
+    public GameObject cutLine;
 
     private bool cursorAcvtive;
     private bool draw; 
@@ -42,6 +43,7 @@ public class startFight : MonoBehaviourWithGazeComponent
     private GameObject player;
     private CameraSwitcher switcher;
     private Vector3 mushroomPosition;
+    private CheckForWin check;
 
 
 
@@ -53,6 +55,8 @@ public class startFight : MonoBehaviourWithGazeComponent
         recycle = GetComponent<RecyclePizza>();
         player = GameObject.FindGameObjectWithTag(TagManager.PLAYER);
         switcher = pizza.GetComponent<CameraSwitcher>();
+        check = GameObject.Find("PizzaCutParent").GetComponent<CheckForWin>();
+        cutLine = GameObject.Find("PizzaCutParent");
     }
 
     void setValues()
@@ -82,26 +86,20 @@ public class startFight : MonoBehaviourWithGazeComponent
     {
         checkPassedTimeInFight();
         checkFightEndStatus();
-        checkEyetrackerAvailable();      
+     
     }
 
-    void checkEyetrackerAvailable()
-    {
-        if (gazeModel.posGazeRight.x == 0 && gazeModel.posGazeRight.y == 0)
-        {
-            checkMousePosition();
-        }
-        checkGazePosition();
-    }
+
 
     void checkFightEndStatus()
     {
-        if (countCuts == 10)
+        if (check.getCuts() == 8)
         {
             setNotFightingStatus();
             setValues();
             StopAllCoroutines();
             recycle.recycleEnemy();
+            removeCut();
         }
     }
 
@@ -168,8 +166,25 @@ public class startFight : MonoBehaviourWithGazeComponent
         cursorAcvtive = true;
         setFightStatus();
         stat = true;
-        draw = true;
+        //draw = true;
         fighting = true;
+        drawCut();
+        check.setFightStarted(true);
+        
+    }
+
+    void drawCut()
+    {
+       // cutLine.transform.position.x = x;
+        //cutLine.transform.position.y = Screen.height / 2;
+        //cutLine.transform.position = Vector3.MoveTowards(pos3, too3, step3);
+        cutLine.transform.position = new Vector3(0.5f , 0.5f , 1f);
+
+    }
+
+    void removeCut()
+    {
+        cutLine.transform.position = new Vector3(-10f, -10f, -10f);
     }
 
     void rotatePizza()
@@ -214,72 +229,5 @@ public class startFight : MonoBehaviourWithGazeComponent
             GUI.DrawTexture(new Rect(posGaze.x, posGaze.y, gazeCursor.width, gazeCursor.height), gazeCursor);
         }
 
-        if (draw == true && countCuts <11)
-        {
-            xLinePos = (Screen.width - Screen.width / 2) - 250; 
-            for (int i = 0; i < 10; i++)
-            {
-                GUI.color = Color.yellow;
-                GUI.Box(new Rect(xLinePos, yLinePos, 50, 50), "---------");
-                xLinePos += 50;
-            }
-        }
-
-        if (drawNext == true )
-        {
-            xLinePos = (Screen.width - Screen.width / 2) - 250;
-            for (int i = 0; i < countCuts; i++)
-            {
-                GUI.color = Color.red;
-                GUI.Box(new Rect(xLinePos, yLinePos, 50, 50), "---------");
-                xLinePos += 50;
-            }
-        }
-    }
-
-    public override void OnGazeEnter(RaycastHit hit)
-    {
-
-    }
-
-    public override void OnGazeStay(RaycastHit hit)
-    {
-        //checkGazePosition();
-    }
-
-    void checkGazePosition()
-    {
-        if (gazeModel.posGazeRight.x >= xMinEye && gazeModel.posGazeRight.x <= xMaxEye && gazeModel.posGazeRight.y >= yMin && gazeModel.posGazeRight.y <= yMax)
-        {
-            drawLine(eyePos, eyeCuts);
-        }
-    }
-
-
-    void checkMousePosition()
-    {
-        if (Input.mousePosition.x >= xMinMouse && Input.mousePosition.x <= xMaxMouse && Input.mousePosition.y >= yMin && Input.mousePosition.y <= yMax)
-        {
-            drawLine(mousePos, mouseCuts);
-        }
-    }
-
-    void drawLine(float pos, int cuts)
-    {
-        if (stat == true)
-        {
-            xMinMouse += pos;
-            xMaxMouse += pos;
-            xMinEye += pos;
-            xMaxEye += pos;
-            countCuts += cuts;
-            drawNext = true;
-        }           
-    }
-
-    //Reset the Element.Transform when the gaze leaves the Collider
-    public override void OnGazeExit()
-    {
-       
     }
 }
