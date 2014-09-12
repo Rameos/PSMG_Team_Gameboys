@@ -1,50 +1,14 @@
 fileFormatVersion: 2
-guid: 06adb87e1d2ec894facc6ab45097a8d5
+guid: 69484cf398a40c64293ade209c0e6718
 ModelImporter:
   serializedVersion: 16
   fileIDToRecycleName:
-    100000: Armature
-    100002: Armature|Belly.Bot
-    100004: Armature|Belly.Top
-    100006: Armature|Foot.L
-    100008: Armature|Foot.R
-    100010: Armature|Hand.L
-    100012: Armature|Hand.R
-    100014: Armature|Head
-    100016: Armature|Tail.Bot
-    100018: Armature|Tail.Mid.Bot
-    100020: Armature|Tail.Mid.Top
-    100022: Armature|Tail.Top
-    100024: //RootNode
-    100026: Bierber_Body
-    100028: Bierber_Body_MeshPart0
-    100030: Bierber_Body_MeshPart1
-    100032: Camera
-    100034: Lamp
-    400000: Armature
-    400002: Armature|Belly.Bot
-    400004: Armature|Belly.Top
-    400006: Armature|Foot.L
-    400008: Armature|Foot.R
-    400010: Armature|Hand.L
-    400012: Armature|Hand.R
-    400014: Armature|Head
-    400016: Armature|Tail.Bot
-    400018: Armature|Tail.Mid.Bot
-    400020: Armature|Tail.Mid.Top
-    400022: Armature|Tail.Top
-    400024: //RootNode
-    400026: Bierber_Body
-    400028: Bierber_Body_MeshPart0
-    400030: Bierber_Body_MeshPart1
-    400032: Camera
-    400034: Lamp
-    4300000: Bierber_Body_MeshPart0
-    4300002: Bierber_Body_MeshPart1
-    7400000: Armature|Bierber_Idle
+    100000: //RootNode
+    400000: //RootNode
+    2300000: //RootNode
+    3300000: //RootNode
+    4300000: Hindernis 4
     9500000: //RootNode
-    13700000: Bierber_Body_MeshPart0
-    13700002: Bierber_Body_MeshPart1
   materials:
     importMaterials: 1
     materialName: 0
