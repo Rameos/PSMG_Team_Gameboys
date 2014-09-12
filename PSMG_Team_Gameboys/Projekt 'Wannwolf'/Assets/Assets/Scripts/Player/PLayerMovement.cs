@@ -4,7 +4,7 @@ using System.Collections;
 public class PLayerMovement : MonoBehaviour {
 
     private const float gravityBoost = 3.5f;
-    private const float jumpStrength = 20f;
+    private const float jumpStrength = 25f;
 
     public Transform treeTrunk;
 
@@ -32,7 +32,7 @@ public class PLayerMovement : MonoBehaviour {
 
     void moveHorizontal()
     {
-        treeTrunk.Rotate(new Vector3(0f, 0f, 1f), Input.GetAxis("Horizontal"));
+        treeTrunk.Rotate(new Vector3(0f, 0f, 1f), Input.GetAxis("Horizontal") * 2);
     }
 
     void setJumpCondition()

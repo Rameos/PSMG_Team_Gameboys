@@ -3,20 +3,20 @@ using System.Collections;
 
 public class AutomaticMovement : MonoBehaviour {
 
+    private const float speed = 0.6f;
+
     public Transform mainCamera;
 
     private MoneyManagement money;
-    private float speed;
     private bool stop;
 
     void Awake()
     {
         gameObject.transform.Rotate(new Vector3(0, 1, 0), 90);
-        speed = 0.3f;
         stop = true;
         money = GetComponent<MoneyManagement>();
         StartCoroutine(wait());
-    }
+    } 
 
     IEnumerator wait()
     {
@@ -28,6 +28,7 @@ public class AutomaticMovement : MonoBehaviour {
 	void FixedUpdate () {
         if (!stop)
         {
+            playAnimaton();
             gameObject.transform.position += new Vector3(1f, 0f, 0f) * speed;
         }
 	}
@@ -36,6 +37,7 @@ public class AutomaticMovement : MonoBehaviour {
     {
         if (col.gameObject.tag == TagManager.BARRIER)
         {
+            stopAnimation();
             stop = true;
         }
     }
@@ -63,5 +65,21 @@ public class AutomaticMovement : MonoBehaviour {
             money.addMoney(1);
             GameObject.Destroy(col.gameObject);
         }
+    }
+
+    void stopAnimation()
+    {
+        animation.Stop();
+    }
+
+    void playAnimaton()
+    {
+        animation.Play("Armature|Eberhardt_Walk");
+        animation["Armature|Eberhardt_Walk"].speed = 6.0f;
+    }
+
+    public bool getStopStatus
+    {
+        get { return stop; } 
     }
 }
