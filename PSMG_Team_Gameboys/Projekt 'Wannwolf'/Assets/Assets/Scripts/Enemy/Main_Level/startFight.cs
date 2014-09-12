@@ -22,6 +22,7 @@ public class startFight : MonoBehaviour
     private bool inTrigger;
     private bool fighting;
     private bool fClicked;
+    private bool won = false;
 
     private float xMaxMouse;
     private float xMinMouse;
@@ -43,7 +44,7 @@ public class startFight : MonoBehaviour
     private GameObject player;
     private CameraSwitcher switcher;
     private Vector3 mushroomPosition;
-    private CheckForWin check;
+    private Cut cut;
 
 
 
@@ -55,7 +56,7 @@ public class startFight : MonoBehaviour
         recycle = GetComponent<RecyclePizza>();
         player = GameObject.FindGameObjectWithTag(TagManager.PLAYER);
         switcher = pizza.GetComponent<CameraSwitcher>();
-        check = GameObject.Find("PizzaCutParent").GetComponent<CheckForWin>();
+        cut = GameObject.Find("PizzaCutParent").GetComponent<Cut>();
         cutLine = GameObject.Find("PizzaCutParent");
     }
 
@@ -71,7 +72,7 @@ public class startFight : MonoBehaviour
         yMin = yLinePos - 100;
 
         countCuts = 0;
-        
+        won = false;
         stat = false;
         draw = false;
         fClicked = false;
@@ -93,7 +94,7 @@ public class startFight : MonoBehaviour
 
     void checkFightEndStatus()
     {
-        if (check.getCuts() == 8)
+        if (won == true)
         {
             setNotFightingStatus();
             setValues();
@@ -101,6 +102,11 @@ public class startFight : MonoBehaviour
             recycle.recycleEnemy();
             removeCut();
         }
+    }
+
+    public void setWon()
+    {
+        won = true;
     }
 
     void checkPassedTimeInFight()
@@ -168,8 +174,8 @@ public class startFight : MonoBehaviour
         stat = true;
         //draw = true;
         fighting = true;
+        cut.setStarted();
         drawCut();
-        check.setFightStarted(true);
         
     }
 
@@ -178,6 +184,7 @@ public class startFight : MonoBehaviour
        // cutLine.transform.position.x = x;
         //cutLine.transform.position.y = Screen.height / 2;
         //cutLine.transform.position = Vector3.MoveTowards(pos3, too3, step3);
+        cut.setPizza(gameObject);
         cutLine.transform.position = new Vector3(0.5f , 0.5f , 1f);
 
     }
