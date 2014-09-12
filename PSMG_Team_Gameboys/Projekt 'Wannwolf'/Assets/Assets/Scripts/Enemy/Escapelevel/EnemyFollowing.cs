@@ -15,7 +15,7 @@ public class EnemyFollowing : MonoBehaviour {
     void Awake()
     {
         go = false;
-        speed = 0.35f;
+        speed = 0.7f;
         climbSpeed = 3f;
         climb = false;
         enemy = gameObject;
@@ -33,6 +33,7 @@ public class EnemyFollowing : MonoBehaviour {
         if (go)
         {
             enemy.transform.rotation = Quaternion.LookRotation(player.position - enemy.transform.position);
+            //enemy.transform.localScale += new Vector3(Time.deltaTime / 10, Time.deltaTime / 10, 0f);
             if (!climb)
             {
                 enemy.transform.position += enemy.transform.TransformDirection(Vector3.forward * speed);
