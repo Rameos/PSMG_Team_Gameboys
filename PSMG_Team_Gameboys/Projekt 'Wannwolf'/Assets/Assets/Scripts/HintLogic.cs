@@ -68,6 +68,7 @@ public class HintLogic : MonoBehaviour {
     {
         if (!wasPlayed && !audio.isPlaying)
         {
+            Debug.Log("Sollte nun Dialog feuern...");
             showTask();
             audio.clip = dialogue;
             audio.Play();
