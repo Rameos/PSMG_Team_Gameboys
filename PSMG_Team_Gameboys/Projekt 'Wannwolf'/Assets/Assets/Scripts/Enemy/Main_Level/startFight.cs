@@ -22,6 +22,7 @@ public class startFight : MonoBehaviour
     private bool inTrigger;
     private bool fighting;
     private bool fClicked;
+    private bool won = false;
 
     private float xMaxMouse;
     private float xMinMouse;
@@ -71,7 +72,7 @@ public class startFight : MonoBehaviour
         yMin = yLinePos - 100;
 
         countCuts = 0;
-        
+        won = false;
         stat = false;
         draw = false;
         fClicked = false;
@@ -93,7 +94,7 @@ public class startFight : MonoBehaviour
 
     void checkFightEndStatus()
     {
-        if (check.getCuts() == 8)
+        if (won == true)
         {
             setNotFightingStatus();
             setValues();
@@ -101,6 +102,11 @@ public class startFight : MonoBehaviour
             recycle.recycleEnemy();
             removeCut();
         }
+    }
+
+    public void setWon()
+    {
+        won = true;
     }
 
     void checkPassedTimeInFight()
