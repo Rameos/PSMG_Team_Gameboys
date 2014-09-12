@@ -26,7 +26,7 @@ public class Cut : MonoBehaviour {
 
         xMax = Screen.width * 0.3809;
         xMin = Screen.width * 0.33699;
-        yMax = Screen.height * 0.4895;
+        yMax = Screen.height * 0.55;
         yMin = Screen.height * 0.3636;
 	
 	}
