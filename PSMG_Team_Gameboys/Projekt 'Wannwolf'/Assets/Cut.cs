@@ -14,6 +14,7 @@ public class Cut : MonoBehaviour {
     private double win = Screen.width * 0.6336;
     private float oldPos;
     private float distance;
+    private GameObject pizza;
 
     private startFight fight;
 
@@ -21,7 +22,7 @@ public class Cut : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        fight = GameObject.FindGameObjectWithTag("Pizza").GetComponent<startFight>();
+        
 
         xMax = Screen.width * 0.3809;
         xMin = Screen.width * 0.33699;
@@ -43,6 +44,11 @@ public class Cut : MonoBehaviour {
         }
 	
 	}
+
+    public void setPizza(GameObject obj)
+    {
+        pizza = obj;
+    }
 
     void checkPosition()
     {
@@ -71,13 +77,13 @@ public class Cut : MonoBehaviour {
                 {
                     fightWon();
                 }
-                Debug.Log(Input.mousePosition.x);
             }
         }
     }
 
     void fightWon()
     {
+        fight = pizza.GetComponent<startFight>();
         draw = false;
         fight.setWon();
         distance = 0;

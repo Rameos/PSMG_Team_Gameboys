@@ -45,6 +45,7 @@ public class startFight : MonoBehaviour
     private CameraSwitcher switcher;
     private Vector3 mushroomPosition;
     private CheckForWin check;
+    private Cut cut;
 
 
 
@@ -56,7 +57,7 @@ public class startFight : MonoBehaviour
         recycle = GetComponent<RecyclePizza>();
         player = GameObject.FindGameObjectWithTag(TagManager.PLAYER);
         switcher = pizza.GetComponent<CameraSwitcher>();
-        check = GameObject.Find("PizzaCutParent").GetComponent<CheckForWin>();
+        cut = GameObject.Find("PizzaCutParent").GetComponent<Cut>();
         cutLine = GameObject.Find("PizzaCutParent");
     }
 
@@ -184,6 +185,7 @@ public class startFight : MonoBehaviour
        // cutLine.transform.position.x = x;
         //cutLine.transform.position.y = Screen.height / 2;
         //cutLine.transform.position = Vector3.MoveTowards(pos3, too3, step3);
+        cut.setPizza(gameObject);
         cutLine.transform.position = new Vector3(0.5f , 0.5f , 1f);
 
     }
