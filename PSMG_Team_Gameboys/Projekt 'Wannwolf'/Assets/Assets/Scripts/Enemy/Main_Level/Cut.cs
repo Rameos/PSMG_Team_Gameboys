@@ -3,9 +3,9 @@ using System.Collections;
 
 public class Cut : MonoBehaviour {
 
-    private bool fightStarted = true;
     private bool startPosSet = false;
     private bool draw = false;
+    private bool started = false;
     private float startPos;
     private double xMax;
     private double xMin;
@@ -34,7 +34,7 @@ public class Cut : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         //Debug.Log("y: " + Input.mousePosition.y);
-        if (fightStarted == true)
+        if (started)
         {
             checkPosition();
             if (draw)
@@ -42,8 +42,12 @@ public class Cut : MonoBehaviour {
                 getDistance();
             }
         }
-	
 	}
+
+    public void setStarted()
+    {
+        started = true;
+    }
 
     public void setPizza(GameObject obj)
     {

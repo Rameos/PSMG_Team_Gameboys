@@ -44,7 +44,6 @@ public class startFight : MonoBehaviour
     private GameObject player;
     private CameraSwitcher switcher;
     private Vector3 mushroomPosition;
-    private CheckForWin check;
     private Cut cut;
 
 
@@ -175,8 +174,8 @@ public class startFight : MonoBehaviour
         stat = true;
         //draw = true;
         fighting = true;
+        cut.setStarted();
         drawCut();
-        check.setFightStarted(true);
         
     }
 
