@@ -6,8 +6,8 @@ public class CameraControl : MonoBehaviour {
     private const float passingTime = 3f;
 
     public Transform target;
-    public Transform terrain;
-    
+
+    private Terrain terrain;
     private Transform mainCamera;
 
     private float walkDistance;
@@ -16,10 +16,10 @@ public class CameraControl : MonoBehaviour {
     private float timePassed;
 
     private float minCameraDistance;
-    public bool staticCamera = false;
 
 	// Use this for initialization
 	void Start () {
+        terrain = Terrain.FindObjectOfType<Terrain>();
         mainCamera = transform;
         walkDistance = 30f;
         mouseX = 0f;
@@ -33,12 +33,10 @@ public class CameraControl : MonoBehaviour {
         mainCamera.rotation = Quaternion.Euler(mouseY, mouseX, 0);
         mainCamera.position = mainCamera.rotation * new Vector3(0, 0, -walkDistance) + target.position;
         mainCamera.LookAt(target);
-        mouseX += Input.GetAxis("Mouse X") * 5;
-        mouseY += Input.GetAxis("Mouse Y") * 5;
-
-        recalculateRotateAngles();
+        mouseX += Input.GetAxis("Mouse X") * 3;
+        mouseY += Input.GetAxis("Mouse Y") * 3;
         checkHit();
-        setCameraPosition();
+        recalculateRotateAngles();
     }
 
     void recalculateRotateAngles()
@@ -60,9 +58,9 @@ public class CameraControl : MonoBehaviour {
                 {
                     mouseY = minCameraDistance;
                 }
-                 else if (mouseY >= 75)
+                 else if (mouseY >= 50)
                 {
-                    mouseY = 75;
+                    mouseY = 50;
                 }
         //setCameraPosition();
     }
@@ -89,27 +87,23 @@ public class CameraControl : MonoBehaviour {
     void checkHit()
     {
         RaycastHit hit;
-        float rayDistance = 5f;
+       
+        if (mainCamera.position.y - terrain.SampleHeight(mainCamera.transform.position) < 3)
+        {
+            mainCamera.position = Vector3.Slerp(mainCamera.transform.position, mainCamera.rotation * new Vector3(0, 4f, -walkDistance) + target.position, 100f);
+            mainCamera.LookAt(target);
+        }
 
-        if (Physics.Raycast(mainCamera.transform.position, Vector3.forward, out hit, rayDistance))
-            {
-                mouseY += rayDistance;
-            }
-        else if (Physics.Raycast(mainCamera.transform.position, camera.transform.TransformDirection(Vector3.left), out hit, rayDistance))
+        float rayDistance = 3f;
+
+   
+        if (Physics.Raycast(mainCamera.transform.position, mainCamera.transform.TransformDirection(Vector3.left), out hit, rayDistance))
                 {
-                    mouseY += rayDistance;
+                    mouseY += rayDistance+4;
                 }
-        else if (Physics.Raycast(mainCamera.transform.position, camera.transform.TransformDirection(Vector3.right), out hit, rayDistance))
+        else if (Physics.Raycast(mainCamera.transform.position, mainCamera.transform.TransformDirection(Vector3.right), out hit, rayDistance))
                     {
-                        mouseY += rayDistance;
+                        mouseY += rayDistance+4;
                     }
-        else if (Physics.Raycast(mainCamera.transform.position, camera.transform.TransformDirection(Vector3.down), out hit, rayDistance))
-                        {
-                            mouseY += rayDistance;
-                        }
-        else if (Physics.Raycast(mainCamera.transform.position, camera.transform.TransformDirection(Vector3.up), out hit, rayDistance))
-                            {
-                                mouseY += rayDistance;
-                            }
         }
 }

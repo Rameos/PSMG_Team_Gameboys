@@ -7,8 +7,8 @@ public class PlayerControl : MonoBehaviour {
 
     private const float minWaitTime = 0.01f;   //Min time the player has to rest after a 'full' run //WAS 3f!!
     private const float jumpStrength = 20f;
-    private const float playerRunSpeed = 30f; // was 30f, set up for debugging purposes!
-    private const float playerWalkSpeed = 20f;
+    private const float playerRunSpeed = 35f; // was 30f, set up for debugging purposes!
+    private const float playerWalkSpeed = 25f;
     private const float playerSneakSpeed = 10f;
     private const float gravityBoost = 3.5f;
 	private const int slowWalking = 0;
@@ -63,6 +63,14 @@ public class PlayerControl : MonoBehaviour {
         drankVodka = false;
         ableToDoubleJump = false;
 	}
+
+    void Start()
+    {
+        if (PlayerPrefsX.GetQuaternion("PlayerRotation").Equals(null))
+        {
+            characterController.transform.Rotate(180f, 0, 0);
+        }
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -90,7 +98,6 @@ public class PlayerControl : MonoBehaviour {
             horizontal *= -1;
             vertical *= -1;
         }
-
         Vector3 moveTo = new Vector3(horizontal, 0f, vertical);
 
         setGravity();
@@ -112,6 +119,7 @@ public class PlayerControl : MonoBehaviour {
         else if (jumping)
         {
             audioManager.handleWalkingSound(false);
+            animation.Stop();
         }
         else
         {
@@ -122,7 +130,7 @@ public class PlayerControl : MonoBehaviour {
 
     }
 
-    void rotateInCameraView()
+   void rotateInCameraView()
     {
         Quaternion playerRotation = new Quaternion(mainCamera.localRotation.x, 0f, mainCamera.localRotation.z, 0f);
         characterController.transform.localRotation = playerRotation;
