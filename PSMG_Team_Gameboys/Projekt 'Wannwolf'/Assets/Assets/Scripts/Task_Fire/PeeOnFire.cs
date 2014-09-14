@@ -21,7 +21,7 @@ public class PeeOnFire : MonoBehaviourWithGazeComponent
 
 	void Update () {
         shrinkFire();
-        //growFire();
+        growFire();
 	}
 
     void shrinkFire()

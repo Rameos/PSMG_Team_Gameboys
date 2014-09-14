@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
+using iViewX;
 
-public class Cut : MonoBehaviour {
+public class Cut : MonoBehaviourWithGazeComponent {
 
     private bool startPosSet = false;
     private bool draw = false;
@@ -36,11 +37,24 @@ public class Cut : MonoBehaviour {
         //Debug.Log("y: " + Input.mousePosition.y);
         if (started)
         {
-            checkPosition();
-            if (draw)
+            if (gazeModel.posGazeRight.x == 0 && gazeModel.posGazeRight.y == 0)
             {
-                getDistance();
+                checkPosition(Input.mousePosition.x, Input.mousePosition.y);
+                if (draw)
+                {
+                    getDistance(Input.mousePosition.x, Input.mousePosition.y);
+                }
             }
+            else
+            {
+                checkPosition(gazeModel.posGazeRight.x, gazeModel.posGazeRight.y);
+                if (draw)
+                {
+                    getDistance(gazeModel.posGazeRight.x, gazeModel.posGazeRight.y);
+                }
+            }
+            
+           
         }
 	}
 
@@ -54,13 +68,13 @@ public class Cut : MonoBehaviour {
         pizza = obj;
     }
 
-    void checkPosition()
+    void checkPosition(float x, float y)
     {
-        if (Input.mousePosition.x <= xMax && Input.mousePosition.x >= xMin && Input.mousePosition.y <= yMax && Input.mousePosition.y >= yMin)
+        if (x <= xMax && x >= xMin && y <= yMax && y >= yMin)
         {
             if (!startPosSet)
             {
-                startPos = Input.mousePosition.x;
+                startPos = x;
                 startPosSet = true;
                 oldPos = startPos;
                 draw = true;
@@ -69,15 +83,15 @@ public class Cut : MonoBehaviour {
         }
     }
 
-    void getDistance()
+    void getDistance(float x, float y)
     {
-        if (Input.mousePosition.y <= yMax && Input.mousePosition.y >= yMin)
+        if (y <= yMax && y >= yMin)
         {
-            if (Input.mousePosition.x > oldPos)
+            if (x > oldPos)
             {
-                oldPos = Input.mousePosition.x;
+                oldPos = x;
                 distance = oldPos - startPos;
-                if (Input.mousePosition.x >= win)
+                if (x >= win)
                 {
                     fightWon();
                 }
@@ -102,5 +116,20 @@ public class Cut : MonoBehaviour {
         {
             GUI.Label(new Rect(startPos, (float)(Screen.height * 0.5), distance, 20), textureToDisplay);
         }
+    }
+
+    public override void OnGazeEnter(RaycastHit hit)
+    {
+
+    }
+
+    public override void OnGazeStay(RaycastHit hit)
+    {
+
+    }
+
+    public override void OnGazeExit()
+    {
+
     }
 }
