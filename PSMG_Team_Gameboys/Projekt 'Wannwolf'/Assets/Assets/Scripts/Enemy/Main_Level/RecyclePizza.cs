@@ -24,7 +24,7 @@ public class RecyclePizza : MonoBehaviour {
     IEnumerator recyclePizza(float seconds)
     {
   
-            gameObject.transform.position = new Vector3(0, 0, 300);
+            gameObject.transform.position = new Vector3(0, 0, 3000);
             //pizza.SetActive(false);
             //pizza[i].renderer.enabled = false;
             //gameObject.collider.enabled = false;
