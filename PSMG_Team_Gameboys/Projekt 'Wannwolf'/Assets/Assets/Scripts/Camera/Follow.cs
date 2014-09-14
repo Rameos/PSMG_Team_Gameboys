@@ -5,6 +5,8 @@ public class Follow : MonoBehaviour {
 
     public Transform target;
 
+
+	// Set the minimap on start of the game for the very first time (same as in LateUpdate)
     void Awake()
     {
         if (target != null)

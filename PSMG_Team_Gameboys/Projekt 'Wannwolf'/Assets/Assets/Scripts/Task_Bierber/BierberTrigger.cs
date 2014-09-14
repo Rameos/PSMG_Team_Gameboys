@@ -22,6 +22,8 @@ public class BierberTrigger : MonoBehaviour {
 			GameObject.FindGameObjectWithTag(TagManager.BIERBER_INVISIBLE_WALL).collider.enabled = false;
 			//System.Threading.Thread.Sleep (2500);
 			StartCoroutine(fallingTree());
+
+			// Disable the renderer of the angler's minimap icon
 			GameObject.FindGameObjectWithTag("MinimapAngler").GetComponent<ColorBlue>().setRenderer(false);
 
 			

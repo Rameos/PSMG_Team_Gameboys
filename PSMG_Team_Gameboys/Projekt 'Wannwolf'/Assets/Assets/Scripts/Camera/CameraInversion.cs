@@ -7,7 +7,7 @@ public class CameraInversion : MonoBehaviour {
     
   
 
-    // Flip the camera
+    // Flip the camera to fit the player's movement
     void OnPreCull()
     {
         camera.ResetWorldToCameraMatrix();
