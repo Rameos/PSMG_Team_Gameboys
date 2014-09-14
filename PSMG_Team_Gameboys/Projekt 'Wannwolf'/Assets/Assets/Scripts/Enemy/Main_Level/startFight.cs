@@ -42,11 +42,8 @@ public class startFight : MonoBehaviour
 
     private RecyclePizza recycle;
     private GameObject player;
-    private GameObject norbert;
     private CameraSwitcher switcher;
     private Vector3 mushroomPosition;
-    private Vector3 playerPos;
-    private Vector3 norbertPos;
     private Cut cut;
 
 
@@ -61,7 +58,6 @@ public class startFight : MonoBehaviour
         switcher = pizza.GetComponent<CameraSwitcher>();
         cut = GameObject.Find("PizzaCutParent").GetComponent<Cut>();
         cutLine = GameObject.Find("PizzaCutParent");
-        norbert = GameObject.FindGameObjectWithTag(TagManager.NORBERT);
     }
 
     void setValues()
@@ -91,6 +87,7 @@ public class startFight : MonoBehaviour
     {
         checkPassedTimeInFight();
         checkFightEndStatus();
+     
     }
 
 
@@ -174,8 +171,6 @@ public class startFight : MonoBehaviour
 
     void fight()
     {
-        mushroomPosition = pizza.transform.position;
-        savePositions();
         Debug.Log("fight");
         cursorAcvtive = true;
         setFightStatus();
@@ -202,79 +197,30 @@ public class startFight : MonoBehaviour
         cutLine.transform.position = new Vector3(-10f, -10f, -10f);
     }
 
+    void rotatePizza()
+    {
+        pizza.rotation = new Quaternion(0,0,0,0);
+        /*float currentX = pizza.eulerAngles.x;
+        float currentY = pizza.eulerAngles.y;
+        float currentZ = pizza.eulerAngles.z;
+        pizza.Rotate(currentX - 90, currentY - 180, currentZ -0);
+        print("" + currentX + ", " + currentY + ", " + currentZ);*/
+    }
+
     void setFightStatus()
     {
         GetComponent<FollowPlayer>().enabled = false;
-        norbert.GetComponent<NorbertFollowEberhardt>().enabled = false;
+        //rotatePizza();
         player.GetComponent<PlayerControl>().enabled = false;
-        setFightPositions();
         switcher.setCameraStatic();
         switcher.setCameraFocus(gameObject);
-    }
-
-    void setFightPositions()
-    {
-        setPizzaFightPosition();
-        setPlayerFightPosition();
-        setNorbertFightPosition();
-    }
-
-    void setNotFightPosition()
-    {
-        setPlayerNotFightPosition();
-        setNorbertNotFightPosition();
-    }
-
-    void setPizzaFightPosition()
-    {
-        gameObject.transform.position = GameObject.FindGameObjectWithTag(TagManager.PIZZA_FIGHT_POSITION).transform.position;
-        gameObject.transform.rotation = GameObject.FindGameObjectWithTag(TagManager.PIZZA_FIGHT_POSITION).transform.rotation;
-    }
-
-    void setPlayerFightPosition()
-    {
-        player.transform.position = GameObject.FindGameObjectWithTag(TagManager.PLAYER_FIGHT_POSITION).transform.position;
-        player.transform.LookAt(gameObject.transform);
-    }
-
-    void setNorbertFightPosition()
-    {
-        norbert.transform.position = GameObject.FindGameObjectWithTag(TagManager.NORBERT_FIGHT_POSITION).transform.position;
-        player.transform.LookAt(gameObject.transform);
-    }
-
-    void savePositions()
-    {
-        saveNorbertPos();
-        savePlayerPos();
-    }
-
-    void savePlayerPos()
-    {
-        playerPos = player.transform.position;
-    }
-
-    void saveNorbertPos()
-    {
-        norbertPos = norbert.transform.position;
-    }
-
-    void setPlayerNotFightPosition()
-    {
-        player.transform.position = playerPos;
-    }
-
-    void setNorbertNotFightPosition()
-    {
-        norbert.transform.position = norbertPos;
+        mushroomPosition = pizza.transform.position;
     }
 
     void setNotFightingStatus()
     {
-        setNotFightPosition();
         fighting = false;
         instantiateMushroom();
-        norbert.GetComponent<NorbertFollowEberhardt>().enabled = true;
         GetComponent<FollowPlayer>().enabled = true;
         player.GetComponent<PlayerControl>().enabled = true;
         switcher.setCameraDynamic();

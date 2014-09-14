@@ -53,9 +53,5 @@ public class TagManager : MonoBehaviour {
     public static string STOP_URINATING = "StopUrinating";
     public static string VOMIT = "Vomit";
 	public static string STAMM = "Stamm";
-    public static string NORBERT = "Norbert";
     public static string PEEING_POSITION = "PeeingPosition";
-    public static string PLAYER_FIGHT_POSITION = "PlayerFightPosition";
-    public static string PIZZA_FIGHT_POSITION = "PizzaFightPosition";
-    public static string NORBERT_FIGHT_POSITION = "NorbertFightPosition";
 }
