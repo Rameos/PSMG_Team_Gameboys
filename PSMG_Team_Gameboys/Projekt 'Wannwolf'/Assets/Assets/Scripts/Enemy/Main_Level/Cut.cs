@@ -28,13 +28,13 @@ public class Cut : MonoBehaviourWithGazeComponent {
         xMax = Screen.width * 0.373;
         xMin = Screen.width * 0.315;
         yMax = Screen.height * 0.575;
-        yMin = Screen.height * 0.416;
+        yMin = Screen.height * 0.35;
 	
 	}
 	
 	// Update is called once per frame
 	void Update () {
-        if (started)
+        if (started == true)
         {
             if (gazeModel.posGazeRight.x == 0 && gazeModel.posGazeRight.y == 0)
             {
@@ -59,6 +59,7 @@ public class Cut : MonoBehaviourWithGazeComponent {
 
     public void setStarted(bool isStarted)
     {
+        
         started = isStarted;
     }
 

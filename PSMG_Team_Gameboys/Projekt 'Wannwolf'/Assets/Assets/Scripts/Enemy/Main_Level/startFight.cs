@@ -97,6 +97,7 @@ public class startFight : MonoBehaviour
         if (won == true)
         {
             setNotFightingStatus();
+            cut.setStarted(false);
             setValues();
             StopAllCoroutines();
             recycle.recycleEnemy();
@@ -170,6 +171,7 @@ public class startFight : MonoBehaviour
 
     void fight()
     {
+        Debug.Log("fight");
         cursorAcvtive = true;
         setFightStatus();
         stat = true;
