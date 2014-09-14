@@ -68,6 +68,11 @@ public class Cut : MonoBehaviourWithGazeComponent {
         pizza = obj;
     }
 
+    public GameObject getFightingPizza()
+    {
+        return pizza;
+    }
+
     void checkPosition(float x, float y)
     {
         if (x <= xMax && x >= xMin && y <= yMax && y >= yMin)
