@@ -97,6 +97,7 @@ public class startFight : MonoBehaviour
         if (won == true)
         {
             setNotFightingStatus();
+            cut.setStarted(false);
             setValues();
             StopAllCoroutines();
             recycle.recycleEnemy();
@@ -153,7 +154,7 @@ public class startFight : MonoBehaviour
     void OnTriggerExit(Collider col)
     {
         inTrigger = false;
-        cut.setStarted();
+        cut.setStarted(false);
     }
 
     IEnumerator startPizzaFight(float seconds)
@@ -170,12 +171,13 @@ public class startFight : MonoBehaviour
 
     void fight()
     {
+        Debug.Log("fight");
         cursorAcvtive = true;
         setFightStatus();
         stat = true;
         //draw = true;
         fighting = true;
-        cut.setStarted();
+        cut.setStarted(true);
         drawCut();
         
     }

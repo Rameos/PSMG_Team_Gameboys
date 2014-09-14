@@ -12,7 +12,7 @@ public class Cut : MonoBehaviourWithGazeComponent {
     private double xMin;
     private double yMax;
     private double yMin;
-    private double win = Screen.width * 0.6336;
+    private double win = Screen.width * 0.652;
     private float oldPos;
     private float distance;
     private GameObject pizza;
@@ -25,17 +25,16 @@ public class Cut : MonoBehaviourWithGazeComponent {
 	void Start () {
         
 
-        xMax = Screen.width * 0.3809;
-        xMin = Screen.width * 0.33699;
-        yMax = Screen.height * 0.55;
-        yMin = Screen.height * 0.3636;
+        xMax = Screen.width * 0.373;
+        xMin = Screen.width * 0.315;
+        yMax = Screen.height * 0.575;
+        yMin = Screen.height * 0.35;
 	
 	}
 	
 	// Update is called once per frame
 	void Update () {
-        //Debug.Log("y: " + Input.mousePosition.y);
-        if (started)
+        if (started == true)
         {
             if (gazeModel.posGazeRight.x == 0 && gazeModel.posGazeRight.y == 0)
             {
@@ -58,9 +57,10 @@ public class Cut : MonoBehaviourWithGazeComponent {
         }
 	}
 
-    public void setStarted()
+    public void setStarted(bool isStarted)
     {
-        started = !started;
+        
+        started = isStarted;
     }
 
     public void setPizza(GameObject obj)
@@ -108,6 +108,7 @@ public class Cut : MonoBehaviourWithGazeComponent {
         oldPos = 0;
         startPos = 0;
         startPosSet = false;
+        started = false;
     }
 
     void OnGUI()
