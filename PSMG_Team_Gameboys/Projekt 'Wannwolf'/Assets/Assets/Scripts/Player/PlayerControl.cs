@@ -145,8 +145,9 @@ public class PlayerControl : MonoBehaviour {
         if (sneak)
         {
             playerSpeed = playerSneakSpeed;
+			animation["Armature|Eberhardt_Walk"].speed = 0.5f;
             animation.Play("Armature|Eberhardt_Walk");
-            animation["Armature|Eberhardt_Walk"].speed = 0.5f;
+            
         }
     }
 
@@ -169,8 +170,9 @@ public class PlayerControl : MonoBehaviour {
             countRunTime();
             playerSpeed = playerRunSpeed;
 			audioManager.handleSpeedWalkingSound(speedWalking);
+			animation["Armature|Eberhardt_Walk"].speed = 2f;
             animation.Play("Armature|Eberhardt_Walk");
-            animation["Armature|Eberhardt_Walk"].speed = 2f;
+            
 
         }
         else
