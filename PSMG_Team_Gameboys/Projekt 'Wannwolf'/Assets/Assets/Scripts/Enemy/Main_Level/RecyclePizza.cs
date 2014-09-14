@@ -5,7 +5,8 @@ public class RecyclePizza : MonoBehaviour {
 
     //public GameObject[] pizza;
     private Vector3 pizzaStartPosition;
-    private float moveSpeed; 
+    private float moveSpeed;
+    public Vector3 startPos;
 
    void Awake()
    {
@@ -32,7 +33,7 @@ public class RecyclePizza : MonoBehaviour {
             //pizza[i].renderer.enabled = true;
             //gameObject.collider.enabled = true;
             //pizza.SetActive(true);
-            gameObject.transform.position = pizzaStartPosition;
+            gameObject.transform.position = startPos;
         
             
 
