@@ -153,6 +153,7 @@ public class startFight : MonoBehaviour
     void OnTriggerExit(Collider col)
     {
         inTrigger = false;
+        cut.setStarted();
     }
 
     IEnumerator startPizzaFight(float seconds)

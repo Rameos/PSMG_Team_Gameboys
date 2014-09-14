@@ -60,7 +60,7 @@ public class Cut : MonoBehaviourWithGazeComponent {
 
     public void setStarted()
     {
-        started = true;
+        started = !started;
     }
 
     public void setPizza(GameObject obj)
