@@ -8,11 +8,13 @@ public class ColorBlue : MonoBehaviour {
 
     void Start()
     {
+		// Set object color to blue
         Object.renderer.material.color = Color.blue;
     }
 
 	void Update()
 	{
+		// Enable/Disable the object's renderer
 		if (isRendered) 
 		{
 			Object.renderer.enabled = true;
@@ -21,6 +23,7 @@ public class ColorBlue : MonoBehaviour {
 		}
 	}
 
+	// Make it possible to set the isRendered variable from other Scripts
 	public void setRenderer(bool b)
 	{
 		isRendered = b;

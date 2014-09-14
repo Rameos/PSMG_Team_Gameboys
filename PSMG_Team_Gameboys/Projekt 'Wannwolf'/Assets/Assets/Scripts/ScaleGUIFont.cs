@@ -8,6 +8,7 @@ public class ScaleGUIFont : MonoBehaviour {
 
     void Update()
     {
+		// Scale the font size in relation to the screen resolution
         text.fontSize = Mathf.Min(Screen.width, Screen.height) / ratio;
     }
 }
