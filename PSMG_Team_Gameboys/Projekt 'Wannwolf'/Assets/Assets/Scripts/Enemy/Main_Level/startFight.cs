@@ -153,7 +153,7 @@ public class startFight : MonoBehaviour
     void OnTriggerExit(Collider col)
     {
         inTrigger = false;
-        cut.setStarted();
+        cut.setStarted(false);
     }
 
     IEnumerator startPizzaFight(float seconds)
@@ -175,7 +175,7 @@ public class startFight : MonoBehaviour
         stat = true;
         //draw = true;
         fighting = true;
-        cut.setStarted();
+        cut.setStarted(true);
         drawCut();
         
     }
