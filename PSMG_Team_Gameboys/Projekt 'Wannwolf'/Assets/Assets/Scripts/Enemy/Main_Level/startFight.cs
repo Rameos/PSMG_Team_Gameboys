@@ -56,7 +56,7 @@ public class startFight : MonoBehaviour
         recycle = GetComponent<RecyclePizza>();
         player = GameObject.FindGameObjectWithTag(TagManager.PLAYER);
         switcher = pizza.GetComponent<CameraSwitcher>();
-        cut = GameObject.Find("PizzaCutParent").GetComponent<Cut>();
+        cut = gameObject.GetComponent<Cut>();
         cutLine = GameObject.Find("PizzaCutParent");
     }
 
