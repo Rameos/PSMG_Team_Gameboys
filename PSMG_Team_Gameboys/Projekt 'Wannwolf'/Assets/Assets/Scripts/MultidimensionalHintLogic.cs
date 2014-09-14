@@ -15,6 +15,9 @@ public class MultidimensionalHintLogic : MonoBehaviour {
 
     public GameObject invisibleWall;
     public GameObject untertitel;
+    public GameObject hint;
+
+    public Texture2D texture;
 
     void Awake()
     {
@@ -70,7 +73,8 @@ public class MultidimensionalHintLogic : MonoBehaviour {
 
     void showTask(string text)
     {
-        untertitel.guiText.text = text;
+        untertitel.guiTexture.texture = texture;
+        hint.guiText.text = text;
         StartCoroutine(resetDialog(5));
     }
 
@@ -86,6 +90,7 @@ public class MultidimensionalHintLogic : MonoBehaviour {
     IEnumerator resetDialog(float seconds)
     {
         yield return new WaitForSeconds(seconds);
-        untertitel.guiText.text = "";
+        untertitel.guiText.text = ""; 
+        untertitel.guiTexture.texture = null;
     }
 }

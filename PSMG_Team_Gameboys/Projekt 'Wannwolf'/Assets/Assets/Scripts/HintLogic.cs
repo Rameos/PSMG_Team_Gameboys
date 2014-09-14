@@ -9,8 +9,11 @@ public class HintLogic : MonoBehaviour {
     private bool wasPlayed;
     private bool dialogueTriggered;
     public GameObject untertitel;
+    public GameObject hint;
     public AudioClip dialogue;
     public string text;
+
+    public Texture2D texture;
 
     public GameObject invisibleWall;
 
@@ -54,14 +57,16 @@ public class HintLogic : MonoBehaviour {
 
     void showTask()
     {
-        untertitel.guiText.text = text;
+        untertitel.guiTexture.texture = texture;
+        hint.guiText.text = text;
         StartCoroutine(resetDialog(5));
     }
 
     IEnumerator resetDialog(float seconds)
     {
         yield return new WaitForSeconds(seconds);
-        untertitel.guiText.text = "";
+        hint.guiText.text = "";
+        untertitel.guiTexture.texture = null;
     }
 
     void playSound()

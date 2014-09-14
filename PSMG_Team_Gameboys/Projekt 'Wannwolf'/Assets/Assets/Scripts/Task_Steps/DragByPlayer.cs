@@ -65,22 +65,22 @@ public class DragByPlayer : MonoBehaviour {
             {
                 if (obj.transform.parent == null)
                 {
-                    GUI.Button(new Rect(Screen.width - (Screen.width / 6), 0, Screen.width / 5, Screen.height / 8), "Drücke \"F\" um \ndas Bier aufzunehmen");
+                    GUI.Button(new Rect((Screen.width - 170) / 2, (float)(Screen.height * 0.7), 170, 100), "Drücke \"F\" um \ndas Bier aufzunehmen");
                 }
                 else
                 {
-                    GUI.Button(new Rect(Screen.width - (Screen.width / 6), 0, Screen.width / 5, Screen.height / 8), "Drücke \"F\" um \ndas Bier abzulegen");
+                    GUI.Button(new Rect((Screen.width - 170) / 2, (float)(Screen.height * 0.7), 170, 100), "Drücke \"F\" um \ndas Bier abzulegen");
                 }
             }
             else
             {
                 if (obj.transform.parent == null)
                 {
-                    GUI.Button(new Rect(Screen.width - (Screen.width / 6), 0, Screen.width / 5, Screen.height / 8), "Drücke \"F\" um \nden Baumstamm aufzunehmen");
+                    GUI.Button(new Rect((Screen.width - 170) / 2, (float)(Screen.height * 0.7), 170, 100), "Drücke \"F\" um \nden Baumstamm aufzunehmen");
                 }
                 else
                 {
-                    GUI.Button(new Rect(Screen.width - (Screen.width / 6), 0, Screen.width / 5, Screen.height / 8), "Drücke \"F\" um \n den Baumstamm abzulegen");
+                    GUI.Button(new Rect((Screen.width - 170) / 2, (float)(Screen.height * 0.7), 170, 100), "Drücke \"F\" um \n den Baumstamm abzulegen");
                 }
             }
             

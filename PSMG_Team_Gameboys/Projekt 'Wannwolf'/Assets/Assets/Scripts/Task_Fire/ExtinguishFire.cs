@@ -8,6 +8,9 @@ public class ExtinguishFire : MonoBehaviour {
     private PlayerControl control;
     private ParticleSystem urin;
     private CameraSwitcher switcher;
+
+    private float width = 160;
+    private float height = 30;
    
     private bool extinguishable;
     public bool startPeeing = false;
@@ -62,13 +65,13 @@ public class ExtinguishFire : MonoBehaviour {
     {
         if (drinkLogic.inFireRadius && control.vodkaStatus)
         {
-            GUI.Button(new Rect(Screen.width-(Screen.width/6), 0, Screen.width / 5 , Screen.height / 8), "Drücke \"F\" um das Feuer zu löschen");
+            GUI.Button(new Rect((Screen.width - (width * 2)) / 2, (float)(Screen.height * 0.2), width * 2, height), "Drücke \"F\" um das Feuer zu löschen");
             control.hadVodkaOnce = true;
         }
 
         if (drinkLogic.inFireRadius && drinkLogic.ableToUrinate)
         {
-            GUI.Button(new Rect(Screen.width - (Screen.width / 6), 0, Screen.width / 5, Screen.height / 8), "Drücke \"E\" um das Feuer zu auszupinkeln");
+            GUI.Button(new Rect((Screen.width - (width * 2)) / 2, (float)(Screen.height * 0.2), width * 2, height), "Drücke \"E\" um das Feuer zu auszupinkeln");
         }
     }
 
