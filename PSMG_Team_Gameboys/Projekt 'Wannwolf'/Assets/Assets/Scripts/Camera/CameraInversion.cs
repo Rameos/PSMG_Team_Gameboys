@@ -12,7 +12,7 @@ public class CameraInversion : MonoBehaviour {
     {
         camera.ResetWorldToCameraMatrix();
         camera.ResetProjectionMatrix();
-        camera.projectionMatrix = camera.projectionMatrix * Matrix4x4.Scale(new Vector3(1, -1, 1));
+        camera.projectionMatrix = camera.projectionMatrix * Matrix4x4.Scale(new Vector3(1, 1, 1));
         rotateCameraWithPlayer();        
     }
 

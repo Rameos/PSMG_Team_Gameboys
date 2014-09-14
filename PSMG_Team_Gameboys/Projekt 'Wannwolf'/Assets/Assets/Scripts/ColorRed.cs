@@ -12,13 +12,16 @@ public class ColorRed : MonoBehaviour {
 
     void Update()
     {
-        if (!Object.GetComponent<Follow>().target.GetComponent<FollowPlayer>().isFollowing)
+		if (!Object.GetComponent<Follow>().target.GetComponent<FollowPlayer>().isFollowing)
         {
             Object.renderer.enabled = false;
         }
         else
         {
-            Object.renderer.enabled = true;
-        }
+			if(!Object.GetComponent<Follow>().target.GetComponent<startFight>().won)
+			{
+            	Object.renderer.enabled = true;
+			}        
+		}
     }
 }

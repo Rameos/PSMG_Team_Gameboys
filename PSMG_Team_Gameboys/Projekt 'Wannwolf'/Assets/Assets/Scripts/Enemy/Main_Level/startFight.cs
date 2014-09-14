@@ -22,7 +22,7 @@ public class startFight : MonoBehaviour
     private bool inTrigger;
     private bool fighting;
     private bool fClicked;
-    private bool won = false;
+    public bool won = false;
 
     private float xMaxMouse;
     private float xMinMouse;
