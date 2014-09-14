@@ -102,21 +102,21 @@ public class PilzeriaMenu : MonoBehaviour {
         {
             if (!isMenu && inMenuRadius)
             {
-                GUI.Button(new Rect (Screen.width - Screen.width/4, 0, width*2, height), "Drücke \"F\" um das \nPilzeriamenu zu öffnen");
+                GUI.Button(new Rect (Screen.width/2, (float)(Screen.height * 0.75), width*2, height), "Drücke \"F\" um das \nPilzeriamenu zu öffnen");
             }
         }
                 if (control.vodkaStatus)
                 {
-                    GUI.Button(new Rect(Screen.width - Screen.width/4, 0, width*2, height), "Drücke \"E\" um den \nVodka zu trinken");
+                    GUI.Button(new Rect(Screen.width / 2, (float)(Screen.height * 0.7), width * 2, height), "Drücke \"E\" um den \nVodka zu trinken");
                 }
 
         if(control.vodkaStatus)
         {
-            GUI.Button(new Rect(Screen.width / 3, 0, width, height), "Eberhardt hat Vodka");
+            GUI.Button(new Rect(Screen.width / 2, (float)(Screen.height * 0.7), width, height), "Eberhardt hat Vodka");
         }
         else if (control.drankStatus)
         {
-            GUI.Button(new Rect(Screen.width / 3, 0, width, height), "Eberhardt ist betrunken");
+            GUI.Button(new Rect(Screen.width / 2, (float)(Screen.height * 0.7), width, height), "Eberhardt ist betrunken");
         }
     }
 

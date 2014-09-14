@@ -6,6 +6,7 @@ public class GameMenu : MonoBehaviour {
     private bool isPaused;
     private float width;
     private float height;
+    private bool showSave = false;
     //private AudioSource gameMusic;
 
     void Awake()
@@ -46,6 +47,8 @@ public class GameMenu : MonoBehaviour {
             if (GUI.Button(new Rect((width-100)/2, height/2 + 150, 100, 50), "Save Game"))
             {
                 Save.saveGame();
+                StartCoroutine(showSaveStatus());
+                
             }
 
             if (GUI.Button(new Rect((width-100)/2, height/2 + 225, 100, 50), "Quit"))
@@ -53,7 +56,22 @@ public class GameMenu : MonoBehaviour {
                 LoadScene.loadMainMenu();
                 toggleTimeScale();
             }
+
+            if (showSave)
+            {
+                GUI.color = Color.green; 
+                GUI.Button(new Rect((width - 110) / 2, (float)(Screen.height * 0.3), 120, 50), "Spiel gespeichert");
+            }
         }
+
+        
+    }
+
+    IEnumerator showSaveStatus()
+    {
+        showSave = true;
+        yield return new WaitForSeconds(2);
+        showSave = false;
     }
 
     void toggleTimeScale()
