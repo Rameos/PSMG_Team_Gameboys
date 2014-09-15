@@ -219,8 +219,8 @@ public class startFight : MonoBehaviour
 
     void setNotFightingStatus()
     {
-        fighting = false;
         instantiateMushroom();
+        fighting = false;
         GetComponent<FollowPlayer>().enabled = true;
         player.GetComponent<PlayerControl>().enabled = true;
         switcher.setCameraDynamic();

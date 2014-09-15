@@ -10,14 +10,14 @@ public class CheckRunStatus : MonoBehaviour {
     private bool sneaking;
 
 
-    void Start()
+    void Awake()
     {
         money = GameObject.FindGameObjectWithTag(TagManager.PLAYER).GetComponent<MoneyManagement>();
         beforeMoney = money.getCurrentMoney();
         sneaking = true;
     }
 
-    void FixedUpdate()
+    void Update()
     {
         if (!sneaking)
         {

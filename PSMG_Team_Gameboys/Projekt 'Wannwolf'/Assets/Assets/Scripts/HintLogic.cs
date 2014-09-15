@@ -8,6 +8,7 @@ public class HintLogic : MonoBehaviour {
     private GameObject player;
     private bool wasPlayed;
     private bool dialogueTriggered;
+    private bool isPlaying;
     public GameObject untertitel;
     public GameObject hint;
     public AudioClip dialogue;
@@ -27,6 +28,19 @@ public class HintLogic : MonoBehaviour {
 
     void Update()
     {
+        if (isPlaying)
+        {
+            if (Input.GetKey(KeyCode.Space))
+            {
+                player.GetComponent<PlayerControl>().enabled = true;
+                wasPlayed = true;
+                Destroy(gameObject);
+                if (invisibleWall != null)
+                {
+                    Destroy(invisibleWall);
+                }
+            }
+        }
         destroyHintAndWall();
         checkForDying();
     }
@@ -35,7 +49,12 @@ public class HintLogic : MonoBehaviour {
     {
         if (col.tag == TagManager.PLAYER)
         {
-            checkForNeed();  
+            checkForNeed();
+            if (gameObject.tag == TagManager.BIERBER_HINT)
+            {
+                isPlaying = true;
+                player.GetComponent<PlayerControl>().enabled = false;
+            }
         }
     }
 
@@ -84,6 +103,7 @@ public class HintLogic : MonoBehaviour {
     {
         if (dialogueTriggered && !audio.isPlaying && !gameMenu.gameMenuStatus)
         {
+            player.GetComponent<PlayerControl>().enabled = true;
             wasPlayed = true;
             Destroy(gameObject);
             if (invisibleWall != null)
