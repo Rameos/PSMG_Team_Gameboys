@@ -81,7 +81,8 @@ public class Respawn : MonoBehaviour
 
     void setPlayerControl(bool enabled)
     {
-        player.GetComponent<PlayerControl>().enabled = enabled;
+        if(player.GetComponent<PlayerControl>() != null)
+            player.GetComponent<PlayerControl>().enabled = enabled;
     }
 
     //Reloads the last-saved version of the Game and manages the money
