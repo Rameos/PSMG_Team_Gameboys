@@ -8,6 +8,11 @@ public class PickTimeMachineReplacement : MonoBehaviour {
     private GameObject mainCamera;
     private CameraControl cameraControl;
     private PlayerControl playerControl;
+	private int counter = 0;
+
+	public Texture2D lenker;
+	public Texture2D rad;
+	public Texture2D turbine;
 
     void Start()
     {
@@ -23,6 +28,7 @@ public class PickTimeMachineReplacement : MonoBehaviour {
     {
         rotateObject();
         riseObject();
+		updateHUD(counter);
     }
 
 	void OnTriggerEnter(Collider col){
@@ -31,6 +37,7 @@ public class PickTimeMachineReplacement : MonoBehaviour {
             cameraControl.enabled = false;
             playerControl.enabled = false;
             inTrigger = true;
+			counter++;
         }
     }
 
@@ -62,4 +69,21 @@ public class PickTimeMachineReplacement : MonoBehaviour {
             StartCoroutine(stop());
         }
     }
+
+	void updateHUD(int counter){
+		switch (counter) {
+			case 1:
+				GameObject.FindGameObjectWithTag("Lenker").GetComponent<GUITexture>().texture = lenker;
+				break;		
+			case 2:
+				GameObject.FindGameObjectWithTag("Rad").GetComponent<GUITexture>().texture = rad;
+				break;		
+			case 3:
+				GameObject.FindGameObjectWithTag("Turbine").GetComponent<GUITexture>().texture = turbine;
+				break;
+			default:
+				print("Aufsammeln");
+				break;
+		}
+	}
 }

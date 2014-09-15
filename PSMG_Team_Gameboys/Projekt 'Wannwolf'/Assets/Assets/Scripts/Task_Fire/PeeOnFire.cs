@@ -11,7 +11,6 @@ public class PeeOnFire : MonoBehaviourWithGazeComponent
     private float rotation;
     private ExtinguishFire exFire;
 
-
 	void Awake () {
     exFire = GameObject.FindGameObjectWithTag(TagManager.FIRE_RADIUS_TRIGGER).GetComponent<ExtinguishFire>();
     fire = gameObject.GetComponentsInChildren<ParticleSystem>();
