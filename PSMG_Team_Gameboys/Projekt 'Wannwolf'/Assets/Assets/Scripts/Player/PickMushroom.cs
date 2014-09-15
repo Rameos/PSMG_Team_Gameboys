@@ -6,7 +6,7 @@ public class PickMushroom : MonoBehaviour {
     private const float livingtime = 15f;
     private const int mushroomValue = 5;
 
-    private float passedTime;
+    private float passedTime = 0f;
 
     void Awake()
     {
@@ -17,7 +17,7 @@ public class PickMushroom : MonoBehaviour {
     {
         rotateObject();
 
-        passedTime += Time.fixedDeltaTime;
+		passedTime += Time.deltaTime;
 
         if (passedTime >= livingtime)
         {
@@ -42,5 +42,6 @@ public class PickMushroom : MonoBehaviour {
     void disappearMushroom()
     {
         Destroy(gameObject);
+		passedTime = 0f;
     }
 }

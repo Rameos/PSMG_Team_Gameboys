@@ -81,9 +81,6 @@ public class PickTimeMachineReplacement : MonoBehaviour {
 			case 3:
 				GameObject.FindGameObjectWithTag("Turbine").GetComponent<GUITexture>().texture = turbine;
 				break;
-			default:
-				print("Aufsammeln");
-				break;
 		}
 	}
 }
