@@ -32,6 +32,20 @@ public class ExtinguishFire : MonoBehaviour {
         {
             GameObject.Destroy(fireRadiusTrigger);
         }
+
+        if (drinkLogic.inFireRadius)
+        {
+            if (drinkLogic.ableToUrinate && Input.GetKeyDown(KeyCode.E))
+            {
+                urin.particleSystem.Play(true);
+                GameObject.FindGameObjectWithTag(TagManager.PLAYER).transform.position = GameObject.FindGameObjectWithTag(TagManager.PEEING_POSITION).transform.position;
+                control.enabled = false;
+                switcher.setCameraStatic();
+                switcher.setFireTaskStatic(GameObject.FindGameObjectWithTag(TagManager.PLAYER));
+                startPeeing = true;
+                Destroy(gameObject);
+            }
+        }
     }
 
     void OnTriggerEnter(Collider other)
@@ -49,16 +63,7 @@ public class ExtinguishFire : MonoBehaviour {
             extinguishable = false;
         }
 
-        if (drinkLogic.ableToUrinate && Input.GetKeyDown(KeyCode.E))
-        {
-            urin.particleSystem.Play(true);
-            GameObject.FindGameObjectWithTag(TagManager.PLAYER).transform.position = GameObject.FindGameObjectWithTag(TagManager.PEEING_POSITION).transform.position;
-            control.enabled = false;
-            switcher.setCameraStatic();
-            switcher.setFireTaskStatic(GameObject.FindGameObjectWithTag(TagManager.PLAYER));
-            startPeeing = true;
-            Destroy(gameObject);
-        }
+       
     }
 
     void OnGUI()

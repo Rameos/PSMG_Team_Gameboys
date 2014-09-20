@@ -17,6 +17,17 @@ public class DragByPlayer : MonoBehaviour {
         }
     }
 
+    void Update()
+    {
+        if (inTrigger)
+        {
+            if (Input.GetKeyDown("f"))
+            {
+                follow();
+            }
+        }
+    }
+
     void OnTriggerEnter()
     {
         inTrigger = true;
@@ -29,10 +40,7 @@ public class DragByPlayer : MonoBehaviour {
 
     void OnTriggerStay()
     {
-        if (Input.GetKeyDown("f"))
-        {
-            follow();
-        }
+      
     }
 
     void follow()

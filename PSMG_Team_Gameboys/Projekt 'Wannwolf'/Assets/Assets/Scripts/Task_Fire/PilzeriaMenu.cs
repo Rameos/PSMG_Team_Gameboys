@@ -24,6 +24,18 @@ public class PilzeriaMenu : MonoBehaviour {
         drinkLogic = player.GetComponent<DrinkLogic>();
 	}
 
+    void Update()
+    {
+        if (inMenuRadius)
+        {
+            if (Input.GetKeyDown(KeyCode.F))
+            {
+                toggleTimeScale();
+                togglePlayerControl();
+            }
+        }
+    }
+
     void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == TagManager.PLAYER)
@@ -35,11 +47,7 @@ public class PilzeriaMenu : MonoBehaviour {
     }
 
 	void OnTriggerStay (Collider other) {
-		if (Input.GetKeyDown (KeyCode.F))
-        {
-            toggleTimeScale();
-            togglePlayerControl();
-        }
+		
 	}
 
     void OnTriggerExit(Collider other)

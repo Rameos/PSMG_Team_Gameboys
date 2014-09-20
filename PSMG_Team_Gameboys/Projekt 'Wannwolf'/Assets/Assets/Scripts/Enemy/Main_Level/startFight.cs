@@ -87,6 +87,14 @@ public class startFight : MonoBehaviour
     {
         checkPassedTimeInFight();
         checkFightEndStatus();
+        if (inTrigger)
+        {
+            if (Input.GetKeyDown("f"))
+            {
+                StopAllCoroutines();
+                fight();
+            }
+        }
      
     }
 
@@ -140,15 +148,7 @@ public class startFight : MonoBehaviour
 
     void OnTriggerStay(Collider col)
     {
-        if (col.gameObject.tag == TagManager.PLAYER)
-        {
-            inTrigger = true;
-            if (Input.GetKeyDown("f"))
-            {
-                StopAllCoroutines();
-                fight();
-            }
-        }
+        
     }
 
     void OnTriggerExit(Collider col)
