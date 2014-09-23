@@ -16,8 +16,8 @@ public class BierberTrigger : MonoBehaviour {
 		}
 		if(GameObject.FindGameObjectWithTag(TagManager.BEER).transform.parent == GameObject.Find("pickto").transform)
 		{
-			GameObject.FindGameObjectWithTag(TagManager.BEER).transform.parent = GameObject.Find(TagManager.BIERBER_BODY).transform;
-			GameObject.FindGameObjectWithTag(TagManager.BEER).transform.position = new Vector3(577.37f, 101.68f, 263.06f);
+			//GameObject.FindGameObjectWithTag(TagManager.BEER).transform.parent = GameObject.Find(TagManager.BIERBER_BODY).transform;
+            GameObject.FindGameObjectWithTag(TagManager.BEER).transform.position = new Vector3(574.5643f, 104.2155f, 233.2953f);
 			GameObject.FindGameObjectWithTag (TagManager.BIERBER).animation.CrossFade ("BierberWalkAndCutTree", 0f);
 			GameObject.FindGameObjectWithTag(TagManager.BIERBER_INVISIBLE_WALL).collider.enabled = false;
 			//System.Threading.Thread.Sleep (2500);
@@ -33,6 +33,6 @@ public class BierberTrigger : MonoBehaviour {
 	}
 	IEnumerator fallingTree(){
 		yield return new WaitForSeconds(3);
-		GameObject.FindGameObjectWithTag (TagManager.STAMM).animation.CrossFade ("FallingTree", 0f);
+		GameObject.FindGameObjectWithTag (TagManager.STAMM).animation.CrossFade ("FallingTree1", 0f);
 	}
 }
