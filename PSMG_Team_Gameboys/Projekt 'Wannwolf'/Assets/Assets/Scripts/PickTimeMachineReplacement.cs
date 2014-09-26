@@ -27,7 +27,7 @@ public class PickTimeMachineReplacement : MonoBehaviour {
     {
         rotateObject();
         riseObject();
-		updateHUD(playerControl.hasPieces);
+		updateHUD(playerControl.hasPieces); // use "hasPieces instance variable of the player to check, which ersatzteil has already been picked up
     }
 
 	void OnTriggerEnter(Collider col){
@@ -69,6 +69,7 @@ public class PickTimeMachineReplacement : MonoBehaviour {
         }
     }
 
+    // Display the picked ersatzteil with 100% opacity insted of 50%
 	void updateHUD(int counter){
 		switch (counter) {
 			case 1:
