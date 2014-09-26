@@ -32,11 +32,10 @@ public class Menu : MonoBehaviour {
     {
         if (!isCalibrated)
         {
-            if (gazeModel.posGazeRight.x != 0 && gazeModel.posGazeRight.y != 0)
-            {
+            
                 isCalibrated = true;
                 Calibration.calibrate();
-            }
+            
 
         }
     }
