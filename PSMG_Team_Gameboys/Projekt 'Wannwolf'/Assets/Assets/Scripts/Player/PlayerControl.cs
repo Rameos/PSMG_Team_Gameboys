@@ -66,6 +66,9 @@ public class PlayerControl : MonoBehaviour {
 
     void Start()
     {
+        // Hide Mouse cursor ingame
+        Screen.showCursor = false;
+
         if (PlayerPrefsX.GetQuaternion("PlayerRotation").Equals(null))
         {
             characterController.transform.Rotate(180f, 0, 0);
