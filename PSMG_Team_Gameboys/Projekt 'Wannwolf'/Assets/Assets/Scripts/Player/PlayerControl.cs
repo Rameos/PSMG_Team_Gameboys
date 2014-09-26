@@ -75,6 +75,7 @@ public class PlayerControl : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		move ();
+        print("speed: " + animation["Armature|Eberhardt_Walk"].speed);
 	}
 
     //Moves the Player depending on the Inputs
@@ -108,7 +109,6 @@ public class PlayerControl : MonoBehaviour {
 			alternativeMoveTo = moveTo;
             rotateInCameraView();
             animation.Play("Armature|Eberhardt_Walk");
-            animation["Armature|Eberhardt_Walk"].speed = 1.0f;
 
 		} else if (jumping && horizontal == 0 && vertical == 0) {
 			characterController.Move (alternativeMoveTo * Time.deltaTime);
@@ -145,9 +145,13 @@ public class PlayerControl : MonoBehaviour {
         if (sneak)
         {
             playerSpeed = playerSneakSpeed;
-			animation["Armature|Eberhardt_Walk"].speed = 0.5f;
+            animation["Armature|Eberhardt_Walk"].speed = 0.5f;
             animation.Play("Armature|Eberhardt_Walk");
-            
+
+        }
+        else
+        {
+            animation["Armature|Eberhardt_Walk"].speed = 1.0f;
         }
     }
 
@@ -167,17 +171,16 @@ public class PlayerControl : MonoBehaviour {
 
         if (run && runable && !jumping)
         {
+            animation["Armature|Eberhardt_Walk"].speed = 2.0f;
+            animation.Play("Armature|Eberhardt_Walk");
             countRunTime();
             playerSpeed = playerRunSpeed;
 			audioManager.handleSpeedWalkingSound(speedWalking);
-			animation["Armature|Eberhardt_Walk"].speed = 2f;
-            animation.Play("Armature|Eberhardt_Walk");
-            
-
         }
         else
         {
             runRest();
+            animation["Armature|Eberhardt_Walk"].speed = 1.0f;
 			audioManager.handleSpeedWalkingSound(slowWalking);
         }
     }
