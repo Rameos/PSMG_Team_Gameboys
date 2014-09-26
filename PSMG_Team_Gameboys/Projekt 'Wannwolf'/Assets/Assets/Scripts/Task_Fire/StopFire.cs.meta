@@ -1,9 +1,0 @@
-fileFormatVersion: 2
-guid: 864010e4c7d53a84fb67dc04d44a8b56
-MonoImporter:
-  serializedVersion: 2
-  defaultReferences:
-  - gazeCursor: {fileID: 2800000, guid: 9c2825c0cc3045842b70523e9d669d39, type: 3}
-  executionOrder: 0
-  icon: {instanceID: 0}
-  userData: 
