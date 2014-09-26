@@ -70,6 +70,7 @@ public class startFight : MonoBehaviour
     {
         checkPassedTimeInFight();
         checkFightEndStatus();
+        checkGazePosition();
         if (inTrigger)
         {
             //if f is clicked, start fight immediately
