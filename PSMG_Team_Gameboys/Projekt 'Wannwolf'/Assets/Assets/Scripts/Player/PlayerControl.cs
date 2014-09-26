@@ -17,6 +17,8 @@ public class PlayerControl : MonoBehaviour {
 
     public Transform mainCamera;
 
+    public int hasPieces;
+
     // Beverages
     private bool hasVodka;
     private bool drankVodka;
@@ -62,6 +64,8 @@ public class PlayerControl : MonoBehaviour {
         hasVodka = false;
         drankVodka = false;
         ableToDoubleJump = false;
+
+        hasPieces = 0;
 	}
 
     void Start()
@@ -86,8 +90,8 @@ public class PlayerControl : MonoBehaviour {
     void move()
     {
         setNotJumpable();
-        setWalkCondition();
         setJumpCondition();
+        setWalkCondition();
         setRunCondition();
         setSneakCondition();
         setPlayerMovement();

@@ -8,7 +8,6 @@ public class PickTimeMachineReplacement : MonoBehaviour {
     private GameObject mainCamera;
     private CameraControl cameraControl;
     private PlayerControl playerControl;
-	private int counter = 0;
 
 	public Texture2D lenker;
 	public Texture2D rad;
@@ -28,7 +27,7 @@ public class PickTimeMachineReplacement : MonoBehaviour {
     {
         rotateObject();
         riseObject();
-		updateHUD(counter);
+		updateHUD(playerControl.hasPieces);
     }
 
 	void OnTriggerEnter(Collider col){
@@ -36,8 +35,8 @@ public class PickTimeMachineReplacement : MonoBehaviour {
         {
             cameraControl.enabled = false;
             playerControl.enabled = false;
+            playerControl.hasPieces++;
             inTrigger = true;
-			counter++;
         }
     }
 
