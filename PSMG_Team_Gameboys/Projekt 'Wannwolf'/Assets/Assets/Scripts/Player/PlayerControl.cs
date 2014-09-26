@@ -75,7 +75,7 @@ public class PlayerControl : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		move ();
-        print("speed: " + animation["Armature|Eberhardt_Walk"].speed);
+        //print("speed: " + animation["Armature|Eberhardt_Walk"].speed);
 	}
 
     //Moves the Player depending on the Inputs
