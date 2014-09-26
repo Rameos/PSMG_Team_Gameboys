@@ -27,6 +27,7 @@ public class Menu : MonoBehaviour {
         }
     }
 
+    //starts the calibration when a player starts/loads a game
     void startCalibration()
     {
         if (!isCalibrated)
