@@ -39,7 +39,8 @@ public class MoneyManagement : MonoBehaviour {
 		moneyText.text = currentMoney.ToString();
 	}
 	
-	// Add Money to current money 
+	 
+    // Add Money to current money 
 	public void addMoney(int value) { currentMoney += value; }
 	
 	// Subtract money from current money

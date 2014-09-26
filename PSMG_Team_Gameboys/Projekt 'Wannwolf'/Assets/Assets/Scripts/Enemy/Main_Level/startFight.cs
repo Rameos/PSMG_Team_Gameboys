@@ -235,8 +235,9 @@ public class startFight : MonoBehaviour
     {
         if (cursorAcvtive)
         {
+            float pizzarollerScale = 0.15f;
             Vector3 posGaze = (gazeModel.posGazeLeft + gazeModel.posGazeRight) * 0.5f;
-            GUI.DrawTexture(new Rect(posGaze.x, posGaze.y, gazeCursor.width, gazeCursor.height), gazeCursor);
+            GUI.DrawTexture(new Rect(posGaze.x, posGaze.y, gazeCursor.width * pizzarollerScale, gazeCursor.height * pizzarollerScale), gazeCursor);
         }
 
     }
