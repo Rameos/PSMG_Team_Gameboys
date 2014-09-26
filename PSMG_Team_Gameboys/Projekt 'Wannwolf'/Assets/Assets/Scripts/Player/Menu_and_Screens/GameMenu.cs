@@ -33,7 +33,7 @@ public class GameMenu : MonoBehaviour {
     {
         if (isPaused)
         {
-            if (GUI.Button(new Rect((width-100)/2, height/2 - 75, 100, 50), "Zurueck"))
+            if (GUI.Button(new Rect((width-100)/2, height/2 - 75, 100, 50), "Weiterspielen"))
             {
                 toggleTimeScale();
                 toggleAudioListener();
