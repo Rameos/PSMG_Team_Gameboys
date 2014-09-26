@@ -37,7 +37,7 @@ public class Checkpoint : MonoBehaviour {
     {
         if (gameSaved)
         {
-            GUI.Button(new Rect((Screen.width - 200) / 2, (float)(Screen.height * 0.7), 200, 50), "Spiel automatisch gespeichert");
+            GUI.Button(new Rect((Screen.width - 200) / 2, (float)(Screen.height * 0.2), 200, 50), "Spiel automatisch gespeichert");
         }
     }
 

@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Runtime.InteropServices;
+using iViewX;
 
 public class GameMenu : MonoBehaviour {
 
@@ -31,42 +33,53 @@ public class GameMenu : MonoBehaviour {
     {
         if (isPaused)
         {
-            if (GUI.Button(new Rect((width-100)/2, height/2, 100, 50), "Resume"))
+            if (GUI.Button(new Rect((width-100)/2, height/2 - 75, 100, 50), "Zurueck"))
             {
                 toggleTimeScale();
                 toggleAudioListener();
             }
 
-            if (GUI.Button(new Rect((width-100)/2, height/2 + 75, 100, 50), "New Game"))
+            if (GUI.Button(new Rect((width-100)/2, height/2, 100, 50), "Neues Spiel"))
             {
                 toggleTimeScale();
                 toggleAudioListener();
                 LoadScene.loadFirstLevel();
             }
 
-            if (GUI.Button(new Rect((width-100)/2, height/2 + 150, 100, 50), "Save Game"))
+            if (GUI.Button(new Rect((width-100)/2, height/2 + 75, 100, 50), "Speichern"))
             {
                 Save.saveGame();
                 StartCoroutine(showSaveStatus());
                 
             }
 
-            if (GUI.Button(new Rect((width-100)/2, height/2 + 225, 100, 50), "Quit"))
+            //starts the eyetracker calibration
+            if (GUI.Button(new Rect((width-100)/2, height/2 + 150, 100, 50), "Kalibrieren"))
+            {
+                toggleTimeScale();
+                toggleAudioListener();
+                Calibration.calibrate();
+            }
+
+            if (GUI.Button(new Rect((width - 100) / 2, height / 2 + 225, 100, 50), "Beenden"))
             {
                 LoadScene.loadMainMenu();
                 toggleTimeScale();
             }
 
+            //if the game was saved the message "Spiel gespeichert" appears
             if (showSave)
             {
                 GUI.color = Color.green; 
-                GUI.Button(new Rect((width - 110) / 2, (float)(Screen.height * 0.3), 120, 50), "Spiel gespeichert");
+                GUI.Button(new Rect((width - 120) / 2, (float)(Screen.height * 0.2), 120, 50), "Spiel gespeichert");
             }
         }
 
         
     }
+    
 
+    //the "Spiel gespeichert" message disappears after 2 seconds
     IEnumerator showSaveStatus()
     {
         showSave = true;

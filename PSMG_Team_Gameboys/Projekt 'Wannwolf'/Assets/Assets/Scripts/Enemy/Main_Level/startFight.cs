@@ -24,21 +24,13 @@ public class startFight : MonoBehaviour
     private bool fClicked;
     public bool won = false;
 
-    private float xMaxMouse;
-    private float xMinMouse;
-    private float xMaxEye;
-    private float xMinEye;
-    private float yMax;
-    private float yMin;
-    private float xLinePos;
-    private float xLineMaxPos;
-    private float yLinePos;
-    private float mousePos = 50;
-    private float eyePos = 100;
-
     private int countCuts;
     private int mouseCuts = 1;
     private int eyeCuts = 2;
+
+    private float x = 0f;
+    private float y = 0f;
+    private float pizzarollerScale = 0.15f;
 
     private RecyclePizza recycle;
     private GameObject player;
@@ -60,17 +52,9 @@ public class startFight : MonoBehaviour
         cutLine = GameObject.Find("PizzaCutParent");
     }
 
+    //resets the values to its original value
     void setValues()
     {
-        xLinePos = (Screen.width - Screen.width / 2) - 250;
-        yLinePos = (Screen.height - Screen.height / 2) - 50;
-        xMaxMouse = xLinePos + 50;
-        xMinMouse = xLinePos - 50;
-        xMaxEye = xLinePos + 80;
-        xMinEye = xLinePos - 80;
-        yMax = yLinePos + 200;
-        yMin = yLinePos - 100;
-
         countCuts = 0;
         won = false;
         stat = false;
@@ -80,15 +64,16 @@ public class startFight : MonoBehaviour
         fighting = false;
         inTrigger = false;
         drawNext = false;
-
     }
 
     void Update()
     {
         checkPassedTimeInFight();
         checkFightEndStatus();
+        checkGazePosition();
         if (inTrigger)
         {
+            //if f is clicked, start fight immediately
             if (Input.GetKeyDown("f"))
             {
                 StopAllCoroutines();
@@ -98,8 +83,22 @@ public class startFight : MonoBehaviour
      
     }
 
+    void checkGazePosition()
+    {
+        Vector3 posGaze = (gazeModel.posGazeLeft + gazeModel.posGazeRight) * 0.5f;
+        if (posGaze.x == 0 && posGaze.y == 0)
+        {
+            x = Input.mousePosition.x;
+            y = Input.mousePosition.y;
+        }
+        else
+        {
+            x = posGaze.x;
+            y = posGaze.y;
+        }
+    }
 
-
+    //check if fight is won
     void checkFightEndStatus()
     {
         if (won == true)
@@ -113,11 +112,13 @@ public class startFight : MonoBehaviour
         }
     }
 
+    //set status won
     public void setWon()
     {
         won = true;
     }
 
+    //subtract mushrooms after a few seconds
     void checkPassedTimeInFight()
     {
         if (fighting)
@@ -126,6 +127,7 @@ public class startFight : MonoBehaviour
         }
     }
 
+    //substract mushrooms
     IEnumerator subtractMushrooms()
     {
         yield return new WaitForSeconds(TIME_BEFORE_SUB_MUSHROOMS);
@@ -137,6 +139,7 @@ public class startFight : MonoBehaviour
         Time.fixedDeltaTime += Time.deltaTime;
     }
 
+    //if player is in radius for 5 seconds, start fight
     void OnTriggerEnter(Collider col)
     {
         if (col.gameObject.tag == TagManager.PLAYER)
@@ -151,12 +154,14 @@ public class startFight : MonoBehaviour
         
     }
 
+    //if player leaves the pizza radius, he is not able to fight anymore
     void OnTriggerExit(Collider col)
     {
         inTrigger = false;
         cut.setStarted(false);
     }
 
+    //start fight after 5 seconds
     IEnumerator startPizzaFight(float seconds)
     {
         yield return new WaitForSeconds(seconds);
@@ -171,27 +176,22 @@ public class startFight : MonoBehaviour
 
     void fight()
     {
-        Debug.Log("fight");
         cursorAcvtive = true;
         setFightStatus();
         stat = true;
-        //draw = true;
         fighting = true;
         cut.setStarted(true);
-        drawCut();
-        
+        drawCut();   
     }
 
+    //draws a white area where the pizza should be cut
     void drawCut()
     {
-       // cutLine.transform.position.x = x;
-        //cutLine.transform.position.y = Screen.height / 2;
-        //cutLine.transform.position = Vector3.MoveTowards(pos3, too3, step3);
         cut.setPizza(gameObject);
         cutLine.transform.position = new Vector3(0.5f , 0.5f , 1f);
-
     }
 
+    //removes white area after the fight is won
     void removeCut()
     {
         cutLine.transform.position = new Vector3(-10f, -10f, -10f);
@@ -226,6 +226,7 @@ public class startFight : MonoBehaviour
         switcher.setCameraDynamic();
     }
 
+    //a mushroom appears after the pizza is killed
     private void instantiateMushroom()
     {
         Instantiate(prefab, mushroomPosition, new Quaternion(0, 0, 0, 0));
@@ -233,10 +234,10 @@ public class startFight : MonoBehaviour
 
     void OnGUI()
     {
+        //draws the gazecursor
         if (cursorAcvtive)
         {
-            Vector3 posGaze = (gazeModel.posGazeLeft + gazeModel.posGazeRight) * 0.5f;
-            GUI.DrawTexture(new Rect(posGaze.x, posGaze.y, gazeCursor.width, gazeCursor.height), gazeCursor);
+            GUI.DrawTexture(new Rect(x, y, gazeCursor.width * pizzarollerScale, gazeCursor.height * pizzarollerScale), gazeCursor);
         }
 
     }

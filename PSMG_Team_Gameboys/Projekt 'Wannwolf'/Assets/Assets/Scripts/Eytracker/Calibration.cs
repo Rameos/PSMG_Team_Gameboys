@@ -5,10 +5,9 @@ using iViewX;
 
 public class Calibration : MonoBehaviour
 {
-
+    //starts calibration
     public static void calibrate()
     {
-        Debug.Log("calibrate");
         GazeControlComponent.Instance.StartCalibration();
     }
 }
