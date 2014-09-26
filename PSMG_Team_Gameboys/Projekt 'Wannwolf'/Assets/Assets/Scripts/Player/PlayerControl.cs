@@ -145,6 +145,8 @@ public class PlayerControl : MonoBehaviour {
         if (sneak)
         {
             playerSpeed = playerSneakSpeed;
+
+            // Play the wak animation slower while Eberhardt is sneaking
             animation["Armature|Eberhardt_Walk"].speed = 0.5f;
             animation.Play("Armature|Eberhardt_Walk");
 
@@ -171,6 +173,7 @@ public class PlayerControl : MonoBehaviour {
 
         if (run && runable && !jumping)
         {
+            // Play the wak animation faster while Eberhardt is sneaking
             animation["Armature|Eberhardt_Walk"].speed = 2.0f;
             animation.Play("Armature|Eberhardt_Walk");
             countRunTime();
