@@ -12,6 +12,7 @@ public class GameMenu : MonoBehaviour {
     private bool allSoundsDisabled;
     //private AudioSource gameMusic;
 
+    // Game menu button values
     private float BUTTON_WIDTH = 150;
     private float BUTTON_HEIGHT = 50;
 
@@ -43,6 +44,8 @@ public class GameMenu : MonoBehaviour {
                 toggleTimeScale();
                 toggleAudioListener();
             }
+
+            // Sound on/off button
             if (allSoundsDisabled)
             {
                 if (GUI.Button(new Rect((width - 100) / 2, height / 2 - 75, BUTTON_WIDTH, BUTTON_HEIGHT), "Ton anschalten"))
@@ -80,6 +83,7 @@ public class GameMenu : MonoBehaviour {
                 }
             }
 
+            // Button to start a new game
             if (GUI.Button(new Rect((width - 100) / 2, height / 2, BUTTON_WIDTH, BUTTON_HEIGHT), "Neues Spiel"))
             {
                 toggleTimeScale();
@@ -87,6 +91,7 @@ public class GameMenu : MonoBehaviour {
                 LoadScene.loadFirstLevel();
             }
 
+            // Save button
             if (GUI.Button(new Rect((width - 100) / 2, height / 2 + 75, BUTTON_WIDTH, BUTTON_HEIGHT), "Speichern"))
             {
                 Save.saveGame();
@@ -94,7 +99,7 @@ public class GameMenu : MonoBehaviour {
                 
             }
 
-            //starts the eyetracker calibration
+            // Starts the eyetracker calibration
             if (GUI.Button(new Rect((width - 100) / 2, height / 2 + 150, BUTTON_WIDTH, BUTTON_HEIGHT), "Kalibrieren"))
             {
                 toggleTimeScale();
@@ -102,13 +107,14 @@ public class GameMenu : MonoBehaviour {
                 Calibration.calibrate();
             }
 
+            // Close button
             if (GUI.Button(new Rect((width - 100) / 2, height / 2 + 225, BUTTON_WIDTH, BUTTON_HEIGHT), "Beenden"))
             {
                 LoadScene.loadMainMenu();
                 toggleTimeScale();
             }
 
-            //if the game was saved the message "Spiel gespeichert" appears
+            // If the game was saved the message "Spiel gespeichert" appears
             if (showSave)
             {
                 GUI.color = Color.green; 
