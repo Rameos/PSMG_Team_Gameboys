@@ -9,7 +9,11 @@ public class GameMenu : MonoBehaviour {
     private float width;
     private float height;
     private bool showSave = false;
+    private bool allSoundsDisabled;
     //private AudioSource gameMusic;
+
+    private float BUTTON_WIDTH = 150;
+    private float BUTTON_HEIGHT = 50;
 
     void Awake()
     {
@@ -18,6 +22,7 @@ public class GameMenu : MonoBehaviour {
         width = Screen.width;
         height = Screen.height;
         isPaused = false;
+        allSoundsDisabled = false;
     }
 
    void Update()
@@ -26,16 +31,6 @@ public class GameMenu : MonoBehaviour {
         {
             toggleTimeScale();
             toggleAudioListener();
-
-            // Show cursor while game menu is opened
-            if (!Screen.showCursor)
-            {
-                Screen.showCursor = true;
-            }
-            else
-            {
-                Screen.showCursor = false;
-            }
         }
     }
 
@@ -43,20 +38,56 @@ public class GameMenu : MonoBehaviour {
     {
         if (isPaused)
         {
-            if (GUI.Button(new Rect((width-100)/2, height/2 - 75, 100, 50), "Weiterspielen"))
+            if (GUI.Button(new Rect((width - 100) / 2, height / 2 - 150, BUTTON_WIDTH, BUTTON_HEIGHT), "Weiterspielen"))
             {
                 toggleTimeScale();
                 toggleAudioListener();
             }
+            if (allSoundsDisabled)
+            {
+                if (GUI.Button(new Rect((width - 100) / 2, height / 2 - 75, BUTTON_WIDTH, BUTTON_HEIGHT), "Ton anschalten"))
+                {
 
-            if (GUI.Button(new Rect((width-100)/2, height/2, 100, 50), "Neues Spiel"))
+                    // Mute/Unmute all ingame sounds
+                    if (allSoundsDisabled)
+                    {
+                        allSoundsDisabled = false;
+                        AudioListener.pause = false;
+                    }
+                    else
+                    {
+                        allSoundsDisabled = true;
+                        AudioListener.pause = true;
+                    }
+                }
+            }
+            else
+            {
+                if (GUI.Button(new Rect((width - 100) / 2, height / 2 - 75, BUTTON_WIDTH, BUTTON_HEIGHT), "Ton ausschalten"))
+                {
+
+                    // Mute/Unmute all ingame sounds
+                    if (allSoundsDisabled)
+                    {
+                        allSoundsDisabled = false;
+                        AudioListener.pause = false;
+                    }
+                    else
+                    {
+                        allSoundsDisabled = true;
+                        AudioListener.pause = true;
+                    }
+                }
+            }
+
+            if (GUI.Button(new Rect((width - 100) / 2, height / 2, BUTTON_WIDTH, BUTTON_HEIGHT), "Neues Spiel"))
             {
                 toggleTimeScale();
                 toggleAudioListener();
                 LoadScene.loadFirstLevel();
             }
 
-            if (GUI.Button(new Rect((width-100)/2, height/2 + 75, 100, 50), "Speichern"))
+            if (GUI.Button(new Rect((width - 100) / 2, height / 2 + 75, BUTTON_WIDTH, BUTTON_HEIGHT), "Speichern"))
             {
                 Save.saveGame();
                 StartCoroutine(showSaveStatus());
@@ -64,14 +95,14 @@ public class GameMenu : MonoBehaviour {
             }
 
             //starts the eyetracker calibration
-            if (GUI.Button(new Rect((width-100)/2, height/2 + 150, 100, 50), "Kalibrieren"))
+            if (GUI.Button(new Rect((width - 100) / 2, height / 2 + 150, BUTTON_WIDTH, BUTTON_HEIGHT), "Kalibrieren"))
             {
                 toggleTimeScale();
                 toggleAudioListener();
                 Calibration.calibrate();
             }
 
-            if (GUI.Button(new Rect((width - 100) / 2, height / 2 + 225, 100, 50), "Beenden"))
+            if (GUI.Button(new Rect((width - 100) / 2, height / 2 + 225, BUTTON_WIDTH, BUTTON_HEIGHT), "Beenden"))
             {
                 LoadScene.loadMainMenu();
                 toggleTimeScale();
@@ -104,12 +135,14 @@ public class GameMenu : MonoBehaviour {
             setPlayerControlStatus = false;
             setCameraControlStatus = false;
             Time.timeScale = 0.0f;
+            Screen.showCursor = true; // Show mouse cursor while in game menu
         }
         else
         {
             setPlayerControlStatus = true;
             setCameraControlStatus = true;
             Time.timeScale = 1.0f;
+            Screen.showCursor = false; // Hide mouse cursor ingame
         }
         isPaused = !isPaused;
     }
@@ -121,7 +154,10 @@ public class GameMenu : MonoBehaviour {
         }
         else
         {
-            AudioListener.pause = false;
+            if (!allSoundsDisabled)
+            {
+                AudioListener.pause = false;
+            }
         }
     }
 
