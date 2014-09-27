@@ -33,6 +33,8 @@ public class Checkpoint : MonoBehaviour {
         GetComponent<Checkpoint>().enabled = false;
     }
 
+
+    //if the player reaches a checkpoint, the message "Spiel automatisch gespeichert" appears
     void OnGUI()
     {
         if (gameSaved)

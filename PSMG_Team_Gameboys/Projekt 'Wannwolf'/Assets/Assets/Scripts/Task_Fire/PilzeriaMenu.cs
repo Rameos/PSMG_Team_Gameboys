@@ -111,14 +111,16 @@ public class PilzeriaMenu : MonoBehaviour {
         {
             if (!isMenu && inMenuRadius)
             {
+                //informs player how to open the pilzeria menu
                 GUI.Button(new Rect((Screen.width - (width* 2))/2, (float)(Screen.height * 0.2), width * 2, height), "Drücke \"F\" um das \nPilzeriamenu zu öffnen");
             }
         }
                 if (control.vodkaStatus)
                 {
+                    //informs player how to drink the wodka
                     GUI.Button(new Rect((Screen.width - (width * 2)) / 2, (float)(Screen.height * 0.1), width * 2, height), "Drücke \"E\" um den \nVodka zu trinken");
                 }
-
+        //informs the player about Eberhardt's state
         if(control.vodkaStatus)
         {
             GUI.Button(new Rect((Screen.width - width) / 2, (float)(Screen.height * 0.8), width, height), "Eberhardt hat Vodka");

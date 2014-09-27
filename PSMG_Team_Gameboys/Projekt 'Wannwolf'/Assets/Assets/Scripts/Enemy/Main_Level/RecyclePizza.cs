@@ -3,14 +3,12 @@ using System.Collections;
 
 public class RecyclePizza : MonoBehaviour {
 
-    //public GameObject[] pizza;
     private Vector3 pizzaStartPosition;
     private float moveSpeed;
     public Vector3 startPos;
 
    void Awake()
    {
-       //pizza = GameObject.FindGameObjectsWithTag("Pizza");
        pizzaStartPosition = gameObject.transform.position;
        moveSpeed = 0.5f;
    }
@@ -18,25 +16,15 @@ public class RecyclePizza : MonoBehaviour {
     public void recycleEnemy()
     {        
         gameObject.transform.position = pizzaStartPosition;
-
         StartCoroutine(recyclePizza(15));
     }
 
+    //moves the pizza out of the players sight and puts it back after 15 seconds
     IEnumerator recyclePizza(float seconds)
     {
-  
             gameObject.transform.position = new Vector3(0, 0, 3000);
-            //pizza.SetActive(false);
-            //pizza[i].renderer.enabled = false;
-            //gameObject.collider.enabled = false;
             yield return new WaitForSeconds(seconds);
-            //pizza[i].renderer.enabled = true;
-            //gameObject.collider.enabled = true;
-            //pizza.SetActive(true);
             gameObject.transform.position = startPos;
-        
-            
-
     }
 
     // Enemy returns to its original position

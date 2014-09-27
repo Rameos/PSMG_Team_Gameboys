@@ -43,6 +43,7 @@ public class DragByPlayer : MonoBehaviour {
       
     }
 
+    //objects follow the player
     void follow()
     {
         if (obj.transform.parent == null && GameObject.Find("pickto").GetComponentInChildren<DragByPlayer>() == null && !waitActive)
@@ -65,6 +66,8 @@ public class DragByPlayer : MonoBehaviour {
         }
     }
 
+
+    //informs the player how to pick up an item
     void OnGUI()
     {
         if (inTrigger)
