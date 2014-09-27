@@ -5,14 +5,21 @@ public class PilzeriaMenu : MonoBehaviour {
 
 	private bool isMenu = false;
     private bool inMenuRadius = false;
-	private Rect butRect;
-	private float width = 160;
-	private float height = 30;
+	
+	private float width = 160f;
+	private float height = 50f;
+
+    private string pushF = "Drücke \"F\" um das \nPilzeriamenu zu öffnen";
+    private string pushE = "Drücke \"E\" um den \nVodka zu trinken";
+    private string hasVodka = "Eberhardt hat Vodka";
+    private string isDrunk = "Eberhardt ist betrunken";
+
+    private Rect butRect;
     private MoneyManagement moneyManagement;
     private GameObject player;
     private PlayerControl control;
-
     private DrinkLogic drinkLogic;
+    private GUIStyle center;
 
 
 	// Use this for initialization
@@ -22,6 +29,7 @@ public class PilzeriaMenu : MonoBehaviour {
         player = GameObject.FindGameObjectWithTag(TagManager.PLAYER);
         control = player.GetComponent<PlayerControl>();
         drinkLogic = player.GetComponent<DrinkLogic>();
+        
 	}
 
     void Update()
@@ -111,23 +119,25 @@ public class PilzeriaMenu : MonoBehaviour {
         {
             if (!isMenu && inMenuRadius)
             {
+                center = new GUIStyle(GUI.skin.textField);
+                center.alignment = TextAnchor.MiddleCenter;
                 //informs player how to open the pilzeria menu
-                GUI.Button(new Rect((Screen.width - (width* 2))/2, (float)(Screen.height * 0.2), width * 2, height), "Drücke \"F\" um das \nPilzeriamenu zu öffnen");
+                GUI.TextField(new Rect((Screen.width - (width* 2))/2, (float)(Screen.height * 0.2), width * 2, height), pushF, center);
             }
         }
                 if (control.vodkaStatus)
                 {
                     //informs player how to drink the wodka
-                    GUI.Button(new Rect((Screen.width - (width * 2)) / 2, (float)(Screen.height * 0.1), width * 2, height), "Drücke \"E\" um den \nVodka zu trinken");
+                    GUI.TextField(new Rect((Screen.width - (width * 2)) / 2, (float)(Screen.height * 0.1), width * 2, height), pushE, center);
                 }
         //informs the player about Eberhardt's state
         if(control.vodkaStatus)
         {
-            GUI.Button(new Rect((Screen.width - width) / 2, (float)(Screen.height * 0.8), width, height), "Eberhardt hat Vodka");
+            GUI.TextField(new Rect((Screen.width - width) / 2, (float)(Screen.height * 0.8), width, height), hasVodka, center);
         }
         else if (control.drankStatus)
         {
-            GUI.Button(new Rect((Screen.width - width) / 2, (float)(Screen.height * 0.8), width, height), "Eberhardt ist betrunken");
+            GUI.TextField(new Rect((Screen.width - width) / 2, (float)(Screen.height * 0.8), width, height), isDrunk, center);
         }
     }
 
