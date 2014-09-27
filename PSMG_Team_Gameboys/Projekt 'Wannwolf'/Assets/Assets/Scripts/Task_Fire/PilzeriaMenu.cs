@@ -60,6 +60,7 @@ public class PilzeriaMenu : MonoBehaviour {
 	void OnGUI()
 	{
 		if (isMenu) {
+            
 			butRect.y = (Screen.height - height)/2 - 60;
 
 			if(GUI.Button (butRect, "Double Jump - $30"))
@@ -147,8 +148,14 @@ public class PilzeriaMenu : MonoBehaviour {
     void togglePlayerControl()
     {
         if (!isMenu)
+        {
             GameObject.FindGameObjectWithTag(TagManager.MAIN_CAMERA).GetComponent<CameraControl>().enabled = true;
+            Screen.showCursor = false; // Hide cursor ingame
+        }
         else
+        {
             GameObject.FindGameObjectWithTag(TagManager.MAIN_CAMERA).GetComponent<CameraControl>().enabled = false;
+            Screen.showCursor = true; // Show cursor while pilzeria menu is opened
+        }
     }
 }

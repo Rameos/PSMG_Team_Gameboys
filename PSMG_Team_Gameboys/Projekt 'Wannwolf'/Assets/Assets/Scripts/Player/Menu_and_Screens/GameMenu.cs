@@ -26,6 +26,16 @@ public class GameMenu : MonoBehaviour {
         {
             toggleTimeScale();
             toggleAudioListener();
+
+            // Show cursor while game menu is opened
+            if (!Screen.showCursor)
+            {
+                Screen.showCursor = true;
+            }
+            else
+            {
+                Screen.showCursor = false;
+            }
         }
     }
 
