@@ -64,7 +64,7 @@ public class PilzeriaMenu : MonoBehaviour {
 
 			if(GUI.Button (butRect, "Double Jump - $30"))
 			{
-				if(moneyManagement.getCurrentMoney() >= 30)
+				if(moneyManagement.getCurrentMoney() > 30)
 				{
 					pay(30);
 					//enable double jump
@@ -78,7 +78,7 @@ public class PilzeriaMenu : MonoBehaviour {
 
 			if(GUI.Button (butRect, "Länger sprinten - $25"))
 			{
-				if(moneyManagement.getCurrentMoney() >= 25)
+				if(moneyManagement.getCurrentMoney() > 25)
 				{
 					pay(25);
                     control.sprintTimeStatus = 2;
@@ -91,7 +91,7 @@ public class PilzeriaMenu : MonoBehaviour {
 
             if (GUI.Button(butRect, "Vodka - 35$") && !control.vodkaStatus)
             {
-                if (moneyManagement.getCurrentMoney() >= 35)
+                if (moneyManagement.getCurrentMoney() > 35)
                 {
                     pay(35);
                     control.vodkaStatus = true;
