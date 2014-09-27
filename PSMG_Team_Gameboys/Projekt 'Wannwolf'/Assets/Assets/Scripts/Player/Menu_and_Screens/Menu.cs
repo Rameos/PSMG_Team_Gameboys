@@ -32,11 +32,8 @@ public class Menu : MonoBehaviour {
     {
         if (!isCalibrated)
         {
-            
                 isCalibrated = true;
                 Calibration.calibrate();
-            
-
         }
     }
 }

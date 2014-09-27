@@ -23,6 +23,7 @@ public class PeeOnFire : MonoBehaviourWithGazeComponent
         growFire();
 	}
 
+    //while the player is looking at the fire, it constantly shrinks until it completely disappears
     void shrinkFire()
     {
         if (peeing && exFire.startPeeing)
@@ -51,6 +52,8 @@ public class PeeOnFire : MonoBehaviourWithGazeComponent
         }
     }
 
+
+    //if the player stopped extinguishing the fire before it is completely gone, the fire grows back to its original size
     void growFire()
     {
         if (!peeing)
@@ -65,6 +68,8 @@ public class PeeOnFire : MonoBehaviourWithGazeComponent
         }
     }
 
+
+    //starts extinguishing the fire and turns Eberhardt depending on where the player looks at
     public override void OnGazeEnter(RaycastHit hit)
     {
         peeing = true;
@@ -76,6 +81,7 @@ public class PeeOnFire : MonoBehaviourWithGazeComponent
    
     }
 
+    //stops extinguishing the fire, if the player stops looking at it
     public override void OnGazeExit()
     {
         peeing = false;

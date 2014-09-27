@@ -71,6 +71,8 @@ public class MultidimensionalHintLogic : MonoBehaviour {
         }
     }
 
+
+    //shows the current task
     void showTask(string text)
     {
         untertitel.guiTexture.texture = texture;
@@ -87,6 +89,8 @@ public class MultidimensionalHintLogic : MonoBehaviour {
 
         }
     }
+
+    //removes the current task after 5 seconds
     IEnumerator resetDialog(float seconds)
     {
         yield return new WaitForSeconds(seconds);

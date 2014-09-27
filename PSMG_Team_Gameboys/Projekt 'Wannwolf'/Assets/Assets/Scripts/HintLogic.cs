@@ -74,6 +74,8 @@ public class HintLogic : MonoBehaviour {
         playSound();
     }
 
+
+    //shows current task
     void showTask()
     {
         untertitel.guiTexture.texture = texture;
@@ -81,6 +83,7 @@ public class HintLogic : MonoBehaviour {
         StartCoroutine(resetDialog(5));
     }
 
+    //removes the current task after 5 seconds
     IEnumerator resetDialog(float seconds)
     {
         yield return new WaitForSeconds(seconds);
