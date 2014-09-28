@@ -10,19 +10,15 @@ public class MoneyManagement : MonoBehaviour {
 	int currentMoney;
 	public GUIText moneyText;
 
+    // Initialize instance variables on gamestart
     void Awake()
     {
-        Start();
-    }
-	
-	// Initialize instance variables on gamestart
-	void Start () {
         moneyMinimum = 0;
-		moneyMaximum = 100;
+        moneyMaximum = 100;
         startMoney = 60;
-		currentMoney = startMoney;
-		updateGuiText();
-	}
+        currentMoney = startMoney;
+        updateGuiText();
+    }
 	
 	// Update current money once per frame
 	void Update () {
