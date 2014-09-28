@@ -57,4 +57,5 @@ public class TagManager : MonoBehaviour
     public static string PEEING_POSITION = "PeeingPosition";
     public static string NORBERT = "Norbert";
     public static string REPLACEMENT = "Replacement";
+    public static string VOMIT_ZONE = "VomitZone";
 }

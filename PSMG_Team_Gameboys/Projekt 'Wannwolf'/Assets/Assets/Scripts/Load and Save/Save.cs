@@ -7,6 +7,11 @@ public class Save : MonoBehaviour
     private const string playerPosition = "PlayerPosition";
     private const string playerRotation = "PlayerRotation";
     private const string playerMoney = "PlayerMoney";
+    private const string playerDrunk = "PlayerDrunk";
+    private const string playerDoubleJump = "PlayerDoubleJump";
+    private const string playerStamina = "PlayerStamina";
+    private const string playerVodka = "PlayerVodka";
+
 
     private const string bierberPosition = "BierberPosition";
     private const string bierberRotation = "BierberRotation";
@@ -33,6 +38,8 @@ public class Save : MonoBehaviour
 
     private const string replacementPositions = "ReplacementPosition";
     private const string replacementRotations = "ReplacementRotation";
+
+    private const string destroyVomitZone = "DestroyVomitZone";
 
     private const string destroyFireInvisibleWall = "DestroyFireInvisibleWall";
 
@@ -73,6 +80,7 @@ public class Save : MonoBehaviour
         saveBierberHint();
         saveStairBuildHint();
         saveFire();
+        saveVomitZone();
         PlayerPrefs.Save();
     }
 
@@ -90,6 +98,11 @@ public class Save : MonoBehaviour
             PlayerPrefsX.SetVector3(playerPosition, player.transform.position);
             PlayerPrefsX.SetQuaternion(playerRotation, player.transform.rotation);
             PlayerPrefs.SetInt(playerMoney, player.GetComponent<MoneyManagement>().getCurrentMoney());
+            PlayerControl playerControl = player.GetComponent<PlayerControl>();
+            PlayerPrefsX.SetBool(playerDrunk, playerControl.drankStatus);
+            PlayerPrefsX.SetBool(playerDoubleJump, playerControl.ableToDoubleJumpStatus);
+            PlayerPrefs.SetFloat(playerStamina, playerControl.sprintTimeStatus);
+            PlayerPrefsX.SetBool(playerVodka, playerControl.vodkaStatus);
         }
     }
 
@@ -292,9 +305,18 @@ public class Save : MonoBehaviour
         else PlayerPrefsX.SetBool(destroyEndOFJourneyHint, true);
     }
 
+    static void saveVomitZone()
+    {
+        if (GameObject.FindGameObjectWithTag(TagManager.VOMIT_ZONE) != null && (!PlayerPrefsX.GetBool(destroyVomitZone) || !PlayerPrefs.HasKey(destroyVomitZone)))
+        {
+            PlayerPrefsX.SetBool(destroyVomitZone, false);
+        }
+        else PlayerPrefsX.SetBool(destroyVomitZone, true);
+    }
+
     static void saveFire()
     {
-        if (GameObject.FindGameObjectsWithTag(TagManager.FIRE) != null && (!PlayerPrefsX.GetBool(destroyFireHint) || !PlayerPrefs.HasKey(destroyFireHint)))
+        if (GameObject.FindGameObjectWithTag(TagManager.FIRE) != null && (!PlayerPrefsX.GetBool(destroyFireHint) || !PlayerPrefs.HasKey(destroyFireHint)))
         {
             PlayerPrefsX.SetBool(destroyFire, false);
         }

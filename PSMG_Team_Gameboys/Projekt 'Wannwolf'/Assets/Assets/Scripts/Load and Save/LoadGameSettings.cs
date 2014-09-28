@@ -6,6 +6,10 @@ public class LoadGameSettings : MonoBehaviour
     private const string playerPosition = "PlayerPosition";
     private const string playerRotation = "PlayerRotation";
     private const string playerMoney = "PlayerMoney";
+    private const string playerDrunk = "PlayerDrunk";
+    private const string playerDoubleJump = "PlayerDoubleJump";
+    private const string playerStamina = "PlayerStamina";
+    private const string playerVodka = "PlayerVodka";
 
     private const string bierberPosition = "BierberPosition";
     private const string bierberRotation = "BierberRotation";
@@ -32,6 +36,8 @@ public class LoadGameSettings : MonoBehaviour
 
     private const string replacementPositions = "ReplacementPosition";
     private const string replacementRotations = "ReplacementRotation";
+
+    private const string destroyVomitZone = "DestroyVomitZone";
 
     private const string destroyFireInvisibleWall = "DestroyFireInvisibleWall";
 
@@ -78,6 +84,7 @@ public class LoadGameSettings : MonoBehaviour
         loadFireHint();
         loadFireInvisibleWall();
         loadFire();
+        loadVomitZone();
     }
 
     void loadPlayer()
@@ -88,6 +95,11 @@ public class LoadGameSettings : MonoBehaviour
             player.transform.position = PlayerPrefsX.GetVector3(playerPosition);
             player.transform.rotation = PlayerPrefsX.GetQuaternion(playerRotation);
             player.GetComponent<MoneyManagement>().setCurrentMoney(PlayerPrefs.GetInt(playerMoney));
+            PlayerControl playerControl = player.GetComponent<PlayerControl>();
+            playerControl.drankStatus = PlayerPrefsX.GetBool(playerDrunk);
+            playerControl.ableToDoubleJumpStatus = PlayerPrefsX.GetBool(playerDoubleJump);
+            playerControl.vodkaStatus = PlayerPrefsX.GetBool(playerVodka);
+            playerControl.sprintTimeStatus = PlayerPrefs.GetInt(playerStamina);
         }
     }
 
@@ -264,6 +276,14 @@ public class LoadGameSettings : MonoBehaviour
         if (GameObject.FindGameObjectWithTag(TagManager.FIRE_INVISIBLE_WALL) != null && PlayerPrefsX.GetBool(destroyFireInvisibleWall))
         {
             Destroy(GameObject.FindGameObjectWithTag(TagManager.FIRE_INVISIBLE_WALL));
+        }
+    }
+
+    void loadVomitZone()
+    {
+        if (GameObject.FindGameObjectWithTag(TagManager.VOMIT_ZONE) != null && PlayerPrefsX.GetBool(destroyVomitZone))
+        {
+            Destroy(GameObject.FindGameObjectWithTag(TagManager.VOMIT_ZONE));
         }
     }
 
