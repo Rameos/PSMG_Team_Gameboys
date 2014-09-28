@@ -60,7 +60,6 @@ public class Save : MonoBehaviour
         saveBierberBody();
         saveBierberHead();
         saveTreeStatus();
-        saveBierberWallStatus();
         saveBier();
         savePizza();
         saveNorbert();
