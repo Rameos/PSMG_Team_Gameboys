@@ -12,9 +12,22 @@ public class GameMenu : MonoBehaviour {
     private bool allSoundsDisabled;
     //private AudioSource gameMusic;
 
+    private string keepPlaying = "Weiterspielen";
+    private string soundOn = "Ton anschalten";
+    private string soundOff = "Ton ausschalten";
+    private string newGame = "Neues Spiel";
+    private string save = "Speichern";
+    private string calibrate = "Kalibrieren";
+    private string quit = "Beenden";
+    private string gameSaved = "Spiel gespeichert";
+
+
+
     // Game menu button values
     private float BUTTON_WIDTH = 150;
     private float BUTTON_HEIGHT = 50;
+
+    private GUIStyle center;
 
     void Awake()
     {
@@ -39,7 +52,7 @@ public class GameMenu : MonoBehaviour {
     {
         if (isPaused)
         {
-            if (GUI.Button(new Rect((width - 100) / 2, height / 2 - 150, BUTTON_WIDTH, BUTTON_HEIGHT), "Weiterspielen"))
+            if (GUI.Button(new Rect((width - BUTTON_WIDTH) / 2, height / 2 - 150, BUTTON_WIDTH, BUTTON_HEIGHT), keepPlaying))
             {
                 toggleTimeScale();
                 toggleAudioListener();
@@ -48,7 +61,7 @@ public class GameMenu : MonoBehaviour {
             // Sound on/off button
             if (allSoundsDisabled)
             {
-                if (GUI.Button(new Rect((width - 100) / 2, height / 2 - 75, BUTTON_WIDTH, BUTTON_HEIGHT), "Ton anschalten"))
+                if (GUI.Button(new Rect((width - BUTTON_WIDTH) / 2, height / 2 - 75, BUTTON_WIDTH, BUTTON_HEIGHT), soundOn))
                 {
 
                     // Mute/Unmute all ingame sounds
@@ -66,7 +79,7 @@ public class GameMenu : MonoBehaviour {
             }
             else
             {
-                if (GUI.Button(new Rect((width - 100) / 2, height / 2 - 75, BUTTON_WIDTH, BUTTON_HEIGHT), "Ton ausschalten"))
+                if (GUI.Button(new Rect((width - BUTTON_WIDTH) / 2, height / 2 - 75, BUTTON_WIDTH, BUTTON_HEIGHT), soundOff))
                 {
 
                     // Mute/Unmute all ingame sounds
@@ -84,7 +97,7 @@ public class GameMenu : MonoBehaviour {
             }
 
             // Button to start a new game
-            if (GUI.Button(new Rect((width - 100) / 2, height / 2, BUTTON_WIDTH, BUTTON_HEIGHT), "Neues Spiel"))
+            if (GUI.Button(new Rect((width - BUTTON_WIDTH) / 2, height / 2, BUTTON_WIDTH, BUTTON_HEIGHT), newGame))
             {
                 toggleTimeScale();
                 toggleAudioListener();
@@ -92,7 +105,7 @@ public class GameMenu : MonoBehaviour {
             }
 
             // Save button
-            if (GUI.Button(new Rect((width - 100) / 2, height / 2 + 75, BUTTON_WIDTH, BUTTON_HEIGHT), "Speichern"))
+            if (GUI.Button(new Rect((width - BUTTON_WIDTH) / 2, height / 2 + 75, BUTTON_WIDTH, BUTTON_HEIGHT), save))
             {
                 Save.saveGame();
                 StartCoroutine(showSaveStatus());
@@ -100,7 +113,7 @@ public class GameMenu : MonoBehaviour {
             }
 
             // Starts the eyetracker calibration
-            if (GUI.Button(new Rect((width - 100) / 2, height / 2 + 150, BUTTON_WIDTH, BUTTON_HEIGHT), "Kalibrieren"))
+            if (GUI.Button(new Rect((width - BUTTON_WIDTH) / 2, height / 2 + 150, BUTTON_WIDTH, BUTTON_HEIGHT), calibrate))
             {
                 toggleTimeScale();
                 toggleAudioListener();
@@ -108,7 +121,7 @@ public class GameMenu : MonoBehaviour {
             }
 
             // Close button
-            if (GUI.Button(new Rect((width - 100) / 2, height / 2 + 225, BUTTON_WIDTH, BUTTON_HEIGHT), "Beenden"))
+            if (GUI.Button(new Rect((width - BUTTON_WIDTH) / 2, height / 2 + 225, BUTTON_WIDTH, BUTTON_HEIGHT), quit))
             {
                 LoadScene.loadMainMenu();
                 toggleTimeScale();
@@ -117,8 +130,10 @@ public class GameMenu : MonoBehaviour {
             // If the game was saved the message "Spiel gespeichert" appears
             if (showSave)
             {
+                center = new GUIStyle(GUI.skin.textField);
+                center.alignment = TextAnchor.MiddleCenter;
                 GUI.color = Color.green; 
-                GUI.Button(new Rect((width - 120) / 2, (float)(Screen.height * 0.2), 120, 50), "Spiel gespeichert");
+                GUI.TextField(new Rect((width - 120) / 2, (float)(Screen.height * 0.1), 120, 50),gameSaved, center);
             }
         }
 
