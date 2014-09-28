@@ -24,7 +24,7 @@ public class CameraSwitcher : MonoBehaviour {
     {
         mainCamera.transform.localPosition = gameObject.transform.localPosition + new Vector3(0,5f,-8f);
         mainCamera.transform.LookAt(gameObject.transform);
-        GameObject.FindGameObjectWithTag(TagManager.PLAYER).transform.position = gameObject.transform.localPosition - new Vector3(0, 0, 16f);
+        GameObject.FindGameObjectWithTag(TagManager.PLAYER).transform.position = gameObject.transform.localPosition - new Vector3(0, 0, 7f);
         gameObject.transform.LookAt(mainCamera.transform);
     }
 

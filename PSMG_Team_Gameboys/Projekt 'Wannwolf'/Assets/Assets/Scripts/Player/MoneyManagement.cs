@@ -6,17 +6,29 @@ public class MoneyManagement : MonoBehaviour {
 	// Instance variables
 	int moneyMinimum;
 	int moneyMaximum;
-    int startMoney;
+    public int startMoney = 60;
 	int currentMoney;
 	public GUIText moneyText;
 
     // Initialize instance variables on gamestart
     void Awake()
     {
+        init();
+
+        if (!PlayerPrefs.HasKey("PlayerMoney"))
+        {
+            currentMoney = PlayerPrefs.GetInt("PlayerMoney");
+        }
+        else
+        {
+            currentMoney = startMoney;
+        }
+    }
+
+    void init()
+    {
         moneyMinimum = 0;
         moneyMaximum = 100;
-        startMoney = 60;
-        currentMoney = startMoney;
         updateGuiText();
     }
 	
@@ -35,8 +47,7 @@ public class MoneyManagement : MonoBehaviour {
 		moneyText.text = currentMoney.ToString();
 	}
 	
-	 
-    // Add Money to current money 
+	// Add Money to current money 
 	public void addMoney(int value) { currentMoney += value; }
 	
 	// Subtract money from current money
