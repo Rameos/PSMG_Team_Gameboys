@@ -94,12 +94,35 @@ public class LoadGameSettings : MonoBehaviour
             GameObject player = GameObject.FindGameObjectWithTag(TagManager.PLAYER);
             player.transform.position = PlayerPrefsX.GetVector3(playerPosition);
             player.transform.rotation = PlayerPrefsX.GetQuaternion(playerRotation);
-            player.GetComponent<MoneyManagement>().setCurrentMoney(PlayerPrefs.GetInt(playerMoney));
-            PlayerControl playerControl = player.GetComponent<PlayerControl>();
-            playerControl.drankStatus = PlayerPrefsX.GetBool(playerDrunk);
-            playerControl.ableToDoubleJumpStatus = PlayerPrefsX.GetBool(playerDoubleJump);
-            playerControl.vodkaStatus = PlayerPrefsX.GetBool(playerVodka);
-            playerControl.sprintTimeStatus = PlayerPrefs.GetInt(playerStamina);
+            if (PlayerPrefs.HasKey(playerMoney))
+            {
+                player.GetComponent<MoneyManagement>().setCurrentMoney(PlayerPrefs.GetInt(playerMoney));
+            }
+
+            if (GameObject.FindGameObjectWithTag(TagManager.PLAYER).GetComponent<PlayerControl>() != null)
+            {
+                PlayerControl playerControl = player.GetComponent<PlayerControl>();
+
+                if (PlayerPrefs.HasKey(playerDrunk))
+                {
+                    playerControl.drankStatus = PlayerPrefsX.GetBool(playerDrunk);
+                }
+
+                if (PlayerPrefs.HasKey(playerDoubleJump))
+                {
+                    playerControl.ableToDoubleJumpStatus = PlayerPrefsX.GetBool(playerDoubleJump);
+                }
+
+                if (PlayerPrefs.HasKey(playerVodka))
+                {
+                    playerControl.vodkaStatus = PlayerPrefsX.GetBool(playerVodka);
+                }
+
+                if (PlayerPrefs.HasKey(playerStamina))
+                {
+                    playerControl.sprintTimeStatus = PlayerPrefs.GetFloat(playerStamina);
+                }
+            }
         }
     }
 
