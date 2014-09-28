@@ -9,7 +9,14 @@ public class Menu : MonoBehaviour {
     private string loadLast = "Letztes Spiel laden";
     private string gameSaved = "GameSaved";
     private string quit = "Spiel beenden";
- 
+
+    void Update()
+    {
+        if (!Screen.showCursor)
+        {
+            Screen.showCursor = true;
+        }
+    }
 
 	void OnGUI(){
         if (GUI.Button(new Rect(550, 115, 200, 100), newGame))
