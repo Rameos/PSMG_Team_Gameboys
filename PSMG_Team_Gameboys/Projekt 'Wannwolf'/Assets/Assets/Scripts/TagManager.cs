@@ -58,4 +58,7 @@ public class TagManager : MonoBehaviour
     public static string NORBERT = "Norbert";
     public static string REPLACEMENT = "Replacement";
     public static string VOMIT_ZONE = "VomitZone";
+    public static string RAD = "Rad";
+    public static string LENKER = "Lenker";
+    public static string TURBINE = "Turbine";
 }

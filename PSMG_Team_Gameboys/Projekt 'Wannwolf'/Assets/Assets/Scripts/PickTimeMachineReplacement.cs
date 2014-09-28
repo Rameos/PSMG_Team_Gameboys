@@ -13,6 +13,8 @@ public class PickTimeMachineReplacement : MonoBehaviour {
 	public Texture2D rad;
 	public Texture2D turbine;
 
+    private int animationPlayed;
+
     void Start()
     {
         mainCamera = GameObject.FindGameObjectWithTag(TagManager.MAIN_CAMERA);
@@ -21,6 +23,8 @@ public class PickTimeMachineReplacement : MonoBehaviour {
 
         rotationSpeed = 6f;
         inTrigger = false;
+
+        animationPlayed = 0;
     }
 
     void FixedUpdate()
@@ -74,12 +78,27 @@ public class PickTimeMachineReplacement : MonoBehaviour {
 		switch (counter) {
 			case 1:
 				GameObject.FindGameObjectWithTag("Lenker").GetComponent<GUITexture>().texture = lenker;
+                if (animationPlayed == 0)
+                {
+                    GameObject.FindGameObjectWithTag(TagManager.LENKER).animation.CrossFade("Highlight", 0f);
+                }
+                animationPlayed++;
 				break;		
 			case 2:
 				GameObject.FindGameObjectWithTag("Rad").GetComponent<GUITexture>().texture = rad;
+
+                if (animationPlayed == 1)
+                {
+                    GameObject.FindGameObjectWithTag(TagManager.RAD).animation.CrossFade("HighlightRad", 0f);
+                }
+                animationPlayed++;
 				break;		
 			case 3:
 				GameObject.FindGameObjectWithTag("Turbine").GetComponent<GUITexture>().texture = turbine;
+                if (animationPlayed == 2)
+                {
+                    //
+                }
 				break;
 		}
 	}

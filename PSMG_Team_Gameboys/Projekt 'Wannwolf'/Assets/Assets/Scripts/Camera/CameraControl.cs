@@ -17,6 +17,8 @@ public class CameraControl : MonoBehaviour {
 
     private float minCameraDistance;
 
+    public bool drunkCamera;
+
 	// Use this for initialization
 	void Start () {
         terrain = Terrain.FindObjectOfType<Terrain>();
@@ -26,6 +28,7 @@ public class CameraControl : MonoBehaviour {
         mouseY = 0f;
         timePassed = 0f;
         minCameraDistance = 5f;
+        drunkCamera = false;
 	}
 
     void LateUpdate()
@@ -33,8 +36,19 @@ public class CameraControl : MonoBehaviour {
         mainCamera.rotation = Quaternion.Euler(mouseY, mouseX, 0);
         mainCamera.position = mainCamera.rotation * new Vector3(0, 0, -walkDistance) + target.position;
         mainCamera.LookAt(target);
-        mouseX += Input.GetAxis("Mouse X") * 3;
-        mouseY += Input.GetAxis("Mouse Y") * 3;
+
+        //if (!drunkCamera)
+        //{
+            mouseX += Input.GetAxis("Mouse X") * 3;
+            mouseY += Input.GetAxis("Mouse Y") * 3;
+        //}
+        /**else
+        {
+            mouseX -= Input.GetAxis("Mouse X") * 3;
+            mouseY -= Input.GetAxis("Mouse Y") * 3;
+        }
+        */
+
         checkHit();
         recalculateRotateAngles();
     }
@@ -105,5 +119,17 @@ public class CameraControl : MonoBehaviour {
                     {
                         mouseY += rayDistance+4;
                     }
-        }
+    }
+
+    // Set Camera drunk
+    public void setCameraDrunk()
+    {
+        drunkCamera = true;
+    }
+
+    // Set Camera sober
+    public void setCameraSober()
+    {
+        drunkCamera = false;
+    }
 }

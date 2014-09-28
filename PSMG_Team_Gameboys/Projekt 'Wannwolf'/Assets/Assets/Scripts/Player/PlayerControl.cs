@@ -106,6 +106,11 @@ public class PlayerControl : MonoBehaviour {
         {
             horizontal *= -1;
             vertical *= -1;
+            setCameraDrunk();
+        }
+        else
+        {
+            setCameraSober();
         }
         Vector3 moveTo = new Vector3(horizontal, 0f, vertical);
 
@@ -143,6 +148,19 @@ public class PlayerControl : MonoBehaviour {
         characterController.transform.localRotation = playerRotation;
         characterController.transform.Rotate(180f, 0, 0);
     }
+    
+   // Invert camera while Eberhardt is drunk
+   void setCameraDrunk()
+   {
+       mainCamera.gameObject.GetComponent<CameraControl>().setCameraDrunk();
+   }
+
+    // Set Camera to normal mode when Eberhardt is sober
+   void setCameraSober()
+   {
+       mainCamera.gameObject.GetComponent<CameraControl>().setCameraSober();
+   }
+
 
     //Checks if sneak key is pressed
     void setSneakCondition()
