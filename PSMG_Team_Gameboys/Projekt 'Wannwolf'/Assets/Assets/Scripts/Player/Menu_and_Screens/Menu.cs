@@ -8,7 +8,7 @@ public class Menu : MonoBehaviour {
     private string newGame = "Neues Spiel";
     private string loadLast = "Letztes Spiel laden";
     private string gameSaved = "GameSaved";
-    private string quit = "Quit Game";
+    private string quit = "Spiel beenden";
  
 
 	void OnGUI(){
