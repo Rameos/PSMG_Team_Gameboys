@@ -89,11 +89,11 @@ public class PlayerControl : MonoBehaviour {
     //Moves the Player depending on the Inputs
     void move()
     {
-        setNotJumpable();
-        setJumpCondition();
+        setNotJumpable();        
         setWalkCondition();
         setRunCondition();
         setSneakCondition();
+        setJumpCondition();
         setPlayerMovement();
     }
 
