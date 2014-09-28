@@ -65,7 +65,6 @@ public class LoadGameSettings : MonoBehaviour
         loadBierberBody(); 
         loadBierberHead();
         loadFallenTree();
-        loadInvisibleWall();
         loadBier();
         loadPizza();
         loadNorbert();
@@ -130,15 +129,6 @@ public class LoadGameSettings : MonoBehaviour
             fallenTree.renderer.enabled = PlayerPrefsX.GetBool(fallenTreeRendered);
         }
     }
-
-    void loadInvisibleWall()
-    {
-        if (GameObject.FindGameObjectWithTag(TagManager.BIERBER_INVISIBLE_WALL) != null && PlayerPrefsX.GetBool(destroyBierberInvisibleWall))
-        {
-            Destroy(GameObject.FindGameObjectWithTag(TagManager.BIERBER_INVISIBLE_WALL));
-        }
-    }
-
 
     void loadBier()
     {

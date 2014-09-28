@@ -124,15 +124,6 @@ public class Save : MonoBehaviour
         }
     }
 
-    static void saveBierberWallStatus()
-    {
-            if (GameObject.FindGameObjectWithTag(TagManager.BIERBER_INVISIBLE_WALL) != null && (!PlayerPrefsX.GetBool(destroyBierberInvisibleWall) || !PlayerPrefs.HasKey(destroyBierberInvisibleWall)))
-            {
-                PlayerPrefsX.GetBool(destroyBierberInvisibleWall, false);
-            }
-            else PlayerPrefsX.GetBool(destroyBierberInvisibleWall, true);
-    }
-
     static void saveTreeStatus()
     {
         if (GameObject.FindGameObjectWithTag(TagManager.STAMM) != null)
