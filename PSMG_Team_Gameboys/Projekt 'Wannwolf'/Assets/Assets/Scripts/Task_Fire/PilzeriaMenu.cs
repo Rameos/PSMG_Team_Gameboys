@@ -6,12 +6,11 @@ public class PilzeriaMenu : MonoBehaviour {
 	private bool isMenu = false;
     private bool inMenuRadius = false;
 	
-	private float width = 190f;
+	private float width = 200f;
 	private float height = 50f;
 
     private string pushF = "Drücke \"F\" um das \nPilzeriamenu zu öffnen";
-    private string pushE = "Drücke \"E\" um den \nVodka zu trinken";
-    private string hasVodka = "Eberhardt hat Vodka";
+    private string hasVodka = "Eberhardt hat Vodka, \ndrücke \"E\", um ihn zu trinken";
     private string isDrunk = "Eberhardt ist betrunken";
 
     private Rect butRect;
@@ -129,15 +128,11 @@ public class PilzeriaMenu : MonoBehaviour {
                 GUI.TextField(new Rect((Screen.width - (width* 2))/2, (float)(Screen.height * 0.2), width * 2, height), pushF, center);
             }
         }
-                if (control.vodkaStatus)
-                {
-                    //informs player how to drink the wodka
-                    GUI.TextField(new Rect((Screen.width - (width * 2)) / 2, (float)(Screen.height * 0.1), width * 2, height), pushE, center);
-                }
-        //informs the player about Eberhardt's state
+                
+        //informs the player about Eberhardt's state and how to drink the vodka
         if(control.vodkaStatus)
         {
-            GUI.TextField(new Rect((Screen.width - width) / 2, (float)(Screen.height * 0.8), width, height), hasVodka, center);
+            GUI.TextField(new Rect((Screen.width - 2* width) / 2, (float)(Screen.height * 0.8), 2 * width, height), hasVodka, center);
         }
         else if (control.drankStatus)
         {

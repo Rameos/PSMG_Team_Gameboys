@@ -14,6 +14,7 @@ public class DragByPlayer : MonoBehaviour {
     private string dropTree = "Drücke \"F\" um \n den Baumstamm abzulegen";
 
     private GUIStyle center;
+    public Font font;
 
 
     void Start()
@@ -83,6 +84,7 @@ public class DragByPlayer : MonoBehaviour {
             if (isBeer)
             {
                 center = new GUIStyle(GUI.skin.textField);
+                center.font = font;
                 center.alignment = TextAnchor.MiddleCenter;
                 if (obj.transform.parent == null)
                 {
