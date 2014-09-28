@@ -112,6 +112,7 @@ public class Respawn : MonoBehaviour
         int minMoney = money.getMoneyMinimum();
         if(currentMoney <= minMoney){
             LoadScene.loadLastGame();
+            PlayerPrefs.SetInt("PlayerMoney", 60);
             setPlayerControl(true);
         }
     }
@@ -119,6 +120,7 @@ public class Respawn : MonoBehaviour
     void manageMoney()
     {
         money.subtractMoney(subtractValue);
+        PlayerPrefs.SetInt("PlayerMoney", money.getCurrentMoney());
     }
 
     public bool respawnStatus
