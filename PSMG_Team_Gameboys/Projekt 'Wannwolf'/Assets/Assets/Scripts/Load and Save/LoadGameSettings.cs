@@ -14,7 +14,6 @@ public class LoadGameSettings : MonoBehaviour
 
     private const string destroyBierberInvisibleWall = "DestroyBierberInvisibleWall";
 
-    private const string fallenTreeRendered = "FallenTreeRendered";
     private const string fallenTreePosition = "FallenTreePosition";
     private const string fallenTreeRotation = "FallenTreeRotation";
 
@@ -59,7 +58,6 @@ public class LoadGameSettings : MonoBehaviour
 
     public void loadAll()
     {
-        Debug.Log("LoadAll");
         loadPlayer();
         loadBierber();
         loadBierberBody(); 
@@ -123,10 +121,11 @@ public class LoadGameSettings : MonoBehaviour
 
     void loadFallenTree()
     {
-        if (GameObject.FindGameObjectWithTag(TagManager.FALLEN_TREE) != null)
+        if (GameObject.FindGameObjectWithTag(TagManager.STAMM) != null)
         {
-            GameObject fallenTree = GameObject.FindGameObjectWithTag(TagManager.FALLEN_TREE);
-            fallenTree.renderer.enabled = PlayerPrefsX.GetBool(fallenTreeRendered);
+            GameObject fallenTree = GameObject.FindGameObjectWithTag(TagManager.STAMM);
+            fallenTree.transform.position = PlayerPrefsX.GetVector3(fallenTreePosition);
+            fallenTree.transform.rotation = PlayerPrefsX.GetQuaternion(fallenTreeRotation);
         }
     }
 
@@ -145,13 +144,13 @@ public class LoadGameSettings : MonoBehaviour
     {
         if (GameObject.FindGameObjectWithTag(TagManager.PIZZA) != null)
         {
-            Vector3[] pizzaPositions = PlayerPrefsX.GetVector3Array("PizzaPositions");
-            Quaternion[] pizzaRotations = PlayerPrefsX.GetQuaternionArray("PizzaRotations");
-            for (int i = 0; i < pizzaPositions.Length; i++)
+            Vector3[] pizzaPos = PlayerPrefsX.GetVector3Array(pizzaPositions);
+            Quaternion[] pizzaRot = PlayerPrefsX.GetQuaternionArray(pizzaRotations);
+            for (int i = 0; i < pizzaPos.Length; i++)
             {
                 GameObject pizza = GameObject.FindGameObjectWithTag(TagManager.PIZZA);
-                pizza.transform.position = pizzaPositions[i];
-                pizza.transform.rotation = pizzaRotations[i];
+                pizza.transform.position = pizzaPos[i];
+                pizza.transform.rotation = pizzaRot[i];
             }
         }
     }
@@ -254,10 +253,8 @@ public class LoadGameSettings : MonoBehaviour
 
     void loadBierberHint()
     {
-        Debug.Log("Laden: " + PlayerPrefsX.GetBool(destroyBierberHint));
         if (GameObject.FindGameObjectWithTag(TagManager.BIERBER_HINT) != null && PlayerPrefsX.GetBool(destroyBierberHint))
         {
-            Debug.Log("Destroy: " + PlayerPrefsX.GetBool(destroyBierberHint));
             Destroy(GameObject.FindGameObjectWithTag(TagManager.BIERBER_HINT));
         }
     }

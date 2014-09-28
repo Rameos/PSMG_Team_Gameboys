@@ -15,7 +15,6 @@ public class Save : MonoBehaviour
 
     private const string destroyBierberInvisibleWall = "DestroyBierberInvisibleWall";
 
-    private const string fallenTreeRendered = "FallenTreeRendered";
     private const string fallenTreePosition = "FallenTreePosition";
     private const string fallenTreeRotation = "FallenTreeRotation";
 
@@ -74,7 +73,6 @@ public class Save : MonoBehaviour
         saveBierberHint();
         saveStairBuildHint();
         saveFire();
-
         PlayerPrefs.Save();
     }
 
@@ -128,7 +126,6 @@ public class Save : MonoBehaviour
         if (GameObject.FindGameObjectWithTag(TagManager.STAMM) != null)
         {
             GameObject fallenTree = GameObject.FindGameObjectWithTag(TagManager.STAMM);
-            PlayerPrefsX.SetBool(fallenTreeRendered, fallenTree.renderer.enabled);
             PlayerPrefsX.SetVector3(fallenTreePosition, fallenTree.transform.position);
             PlayerPrefsX.SetQuaternion(fallenTreeRotation, fallenTree.transform.rotation);
         }
@@ -234,13 +231,11 @@ public class Save : MonoBehaviour
 
     static void saveBierberHint()
     {
-        Debug.Log("Vorher: " + PlayerPrefsX.GetBool(destroyBierberHint));
         if (GameObject.FindGameObjectWithTag(TagManager.BIERBER_HINT) != null && (!PlayerPrefsX.GetBool(destroyBierberHint) || !PlayerPrefs.HasKey(destroyBierberHint)))
         {
             PlayerPrefsX.SetBool(destroyBierberHint, false);
         }
         else PlayerPrefsX.SetBool(destroyBierberHint, true);
-        Debug.Log("Nachher: " + PlayerPrefsX.GetBool(destroyBierberHint));
     }
 
     static void saveFireHint()
