@@ -29,7 +29,6 @@ public class BierberTrigger : MonoBehaviour {
             
             DestroyBeerTrigger();
 			GameObject.FindGameObjectWithTag (TagManager.BIERBER).animation.CrossFade ("BierberWalkAndCutTree", 0f);
-			GameObject.FindGameObjectWithTag(TagManager.BIERBER_INVISIBLE_WALL).collider.enabled = false;
 			StartCoroutine(fallingTree());
 
 			// Disable the renderer of the angler's minimap icon
