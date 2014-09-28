@@ -6,7 +6,7 @@ public class PilzeriaMenu : MonoBehaviour {
 	private bool isMenu = false;
     private bool inMenuRadius = false;
 	
-	private float width = 160f;
+	private float width = 190f;
 	private float height = 50f;
 
     private string pushF = "Drücke \"F\" um das \nPilzeriamenu zu öffnen";
@@ -20,6 +20,8 @@ public class PilzeriaMenu : MonoBehaviour {
     private PlayerControl control;
     private DrinkLogic drinkLogic;
     private GUIStyle center;
+
+    public Font font;
 
 
 	// Use this for initialization
@@ -67,11 +69,15 @@ public class PilzeriaMenu : MonoBehaviour {
 	//create menu buttons
 	void OnGUI()
 	{
+        center = new GUIStyle(GUI.skin.textField);
+        center.font = font;
+        center.alignment = TextAnchor.MiddleCenter;
+
 		if (isMenu) {
             
 			butRect.y = (Screen.height - height)/2 - 60;
 
-			if(GUI.Button (butRect, "Double Jump - $30"))
+            if (GUI.Button(butRect, "Double Jump - $30", center))
 			{
 				if(moneyManagement.getCurrentMoney() > 30)
 				{
@@ -85,7 +91,7 @@ public class PilzeriaMenu : MonoBehaviour {
 
 			butRect.y += height + 20;
 
-			if(GUI.Button (butRect, "Länger sprinten - $25"))
+            if (GUI.Button(butRect, "Länger sprinten - $25", center))
 			{
 				if(moneyManagement.getCurrentMoney() > 25)
 				{
@@ -98,7 +104,7 @@ public class PilzeriaMenu : MonoBehaviour {
 
 			butRect.y += height + 20;
 
-            if (GUI.Button(butRect, "Vodka - 35$") && !control.vodkaStatus)
+            if (GUI.Button(butRect, "Vodka - 35$", center) && !control.vodkaStatus)
             {
                 if (moneyManagement.getCurrentMoney() > 35)
                 {
@@ -111,7 +117,7 @@ public class PilzeriaMenu : MonoBehaviour {
 
             butRect.y += height + 20;
 
-			if(GUI.Button (butRect, "Zurück") || Input.GetKeyDown(KeyCode.Escape))
+            if (GUI.Button(butRect, "Zurück", center) || Input.GetKeyDown(KeyCode.Escape))
                 toggleTimeScale();
                 togglePlayerControl();
         }
@@ -119,8 +125,6 @@ public class PilzeriaMenu : MonoBehaviour {
         {
             if (!isMenu && inMenuRadius)
             {
-                center = new GUIStyle(GUI.skin.textField);
-                center.alignment = TextAnchor.MiddleCenter;
                 //informs player how to open the pilzeria menu
                 GUI.TextField(new Rect((Screen.width - (width* 2))/2, (float)(Screen.height * 0.2), width * 2, height), pushF, center);
             }

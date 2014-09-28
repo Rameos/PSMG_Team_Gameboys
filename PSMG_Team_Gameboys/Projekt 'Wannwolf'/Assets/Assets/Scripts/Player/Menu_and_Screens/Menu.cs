@@ -10,6 +10,9 @@ public class Menu : MonoBehaviour {
     private string gameSaved = "GameSaved";
     private string quit = "Spiel beenden";
 
+    private GUIStyle fontStyle;
+    public Font font;
+
     void Update()
     {
         if (!Screen.showCursor)
@@ -19,13 +22,17 @@ public class Menu : MonoBehaviour {
     }
 
 	void OnGUI(){
-        if (GUI.Button(new Rect(550, 115, 200, 100), newGame))
+        fontStyle = new GUIStyle(GUI.skin.button);
+        fontStyle.font = font;
+        fontStyle.alignment = TextAnchor.MiddleCenter;
+
+        if (GUI.Button(new Rect(550, 115, 200, 100), newGame, fontStyle))
         {
             startCalibration();
             LoadScene.loadFirstLevel();
         }
 
-        if (GUI.Button(new Rect(550, 230, 200, 100), loadLast))
+        if (GUI.Button(new Rect(550, 230, 200, 100), loadLast, fontStyle))
         {
             if (PlayerPrefs.HasKey(gameSaved))
             {
@@ -33,7 +40,7 @@ public class Menu : MonoBehaviour {
                 LoadScene.loadLastGame();
             }
         }
-        if (GUI.Button(new Rect(550, 345, 200, 100), quit))
+        if (GUI.Button(new Rect(550, 345, 200, 100), quit, fontStyle))
         {
             Application.Quit();
         }
