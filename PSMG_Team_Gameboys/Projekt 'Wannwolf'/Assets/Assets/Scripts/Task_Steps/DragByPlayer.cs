@@ -6,7 +6,15 @@ public class DragByPlayer : MonoBehaviour {
     private GameObject obj;
     private bool waitActive = false;
     private bool isBeer = false;
-    bool inTrigger = false;
+    private bool inTrigger = false;
+
+    private string pickBeer = "Drücke \"F\" um \ndas Bier aufzunehmen";
+    private string dropBeer = "Drücke \"F\" um \ndas Bier abzulegen";
+    private string pickTree = "Drücke \"F\" um \nden Baumstamm aufzunehmen";
+    private string dropTree = "Drücke \"F\" um \n den Baumstamm abzulegen";
+
+    private GUIStyle center;
+
 
     void Start()
     {
@@ -74,24 +82,26 @@ public class DragByPlayer : MonoBehaviour {
         {
             if (isBeer)
             {
+                center = new GUIStyle(GUI.skin.textField);
+                center.alignment = TextAnchor.MiddleCenter;
                 if (obj.transform.parent == null)
                 {
-                    GUI.Button(new Rect((Screen.width - 170) / 2, (float)(Screen.height * 0.2), 170, 100), "Drücke \"F\" um \ndas Bier aufzunehmen");
+                    GUI.TextField(new Rect((Screen.width - 170) / 2, (float)(Screen.height * 0.2), 170, 100), pickBeer, center);
                 }
                 else
                 {
-                    GUI.Button(new Rect((Screen.width - 170) / 2, (float)(Screen.height * 0.2), 170, 100), "Drücke \"F\" um \ndas Bier abzulegen");
+                    GUI.TextField(new Rect((Screen.width - 170) / 2, (float)(Screen.height * 0.2), 170, 100), dropBeer, center);
                 }
             }
             else
             {
                 if (obj.transform.parent == null)
                 {
-                    GUI.Button(new Rect((Screen.width - 170) / 2, (float)(Screen.height * 0.2),200, 100), "Drücke \"F\" um \nden Baumstamm aufzunehmen");
+                    GUI.TextField(new Rect((Screen.width - 170) / 2, (float)(Screen.height * 0.2), 200, 100), pickTree, center);
                 }
                 else
                 {
-                    GUI.Button(new Rect((Screen.width - 170) / 2, (float)(Screen.height * 0.2), 200, 100), "Drücke \"F\" um \n den Baumstamm abzulegen");
+                    GUI.TextField(new Rect((Screen.width - 170) / 2, (float)(Screen.height * 0.2), 200, 100), dropTree, center);
                 }
             }
             
