@@ -33,7 +33,7 @@ public class BierberTrigger : MonoBehaviour {
 	}
 	IEnumerator fallingTree(){
 		yield return new WaitForSeconds(3);
-		GameObject.FindGameObjectWithTag (TagManager.STAMM).animation.CrossFade ("FallingTree1", 0f);
         Destroy(GameObject.FindGameObjectWithTag(TagManager.BIERBER_INVISIBLE_WALL));
+        GameObject.FindGameObjectWithTag(TagManager.STAMM).animation.Play("FallingTree");
 	}
 }
