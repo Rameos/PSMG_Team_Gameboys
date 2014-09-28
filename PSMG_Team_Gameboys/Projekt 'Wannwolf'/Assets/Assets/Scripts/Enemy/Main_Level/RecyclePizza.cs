@@ -26,12 +26,4 @@ public class RecyclePizza : MonoBehaviour {
             yield return new WaitForSeconds(seconds);
             gameObject.transform.position = startPos;
     }
-
-    // Enemy returns to its original position
-    void returnToOrigin()
-    {
-        gameObject.transform.rotation = Quaternion.Slerp(gameObject.transform.rotation,
-        Quaternion.LookRotation(pizzaStartPosition - gameObject.transform.position), 1f);
-        gameObject.transform.position += gameObject.transform.forward * moveSpeed;
-    }
 }
