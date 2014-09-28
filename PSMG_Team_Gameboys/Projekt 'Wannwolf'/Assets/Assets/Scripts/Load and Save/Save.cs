@@ -13,19 +13,48 @@ public class Save : MonoBehaviour
     private const string bierberBodyRendered = "BierberBodyRendered";
     private const string bierberHeadRendered = "BierberHeadRendered";
 
-    private const string bierberInvisibleWall = "BierberInvisibleWall";
+    private const string destroyBierberInvisibleWall = "DestroyBierberInvisibleWall";
 
     private const string fallenTreeRendered = "FallenTreeRendered";
+    private const string fallenTreePosition = "FallenTreePosition";
+    private const string fallenTreeRotation = "FallenTreeRotation";
 
     private const string bierPosition = "BierPosition";
     private const string bierRotation = "BierRotation";
+    private const string bierActiveStatus = "BierActiveStatus";
 
     private const string pizzaPositions = "PizzaPositions";
     private const string pizzaRotations = "PizzaRotations";
 
+    private const string norbertPosition = "NorbertPosition";
+    private const string norbertRotation = "NorbertRotation";
+
+    private const string stelzePositions = "StelzePosition";
+    private const string stelzeRotations = "StelzeRotation";
+
+    private const string replacementPositions = "ReplacementPosition";
+    private const string replacementRotations = "ReplacementRotation";
+
+    private const string destroyFireInvisibleWall = "DestroyFireInvisibleWall";
+
+    private const string destroyPizzaHint = "DestroyPizzaHint";
+    private const string destroyPilzeriaHint = "DestroyPilzeriaHint";
+    private const string destroyFireHint = "DestroyFireHint";
+    private const string destroyBierberHint = "DestroyBierberHint";
+    private const string destroySneakingHint = "DestroySneakingHint";
+    private const string destroyJumpHint = "DestroyJumpHint";
+    private const string destroyStairBuildHint = "DestroySTairBuildHint";
+    private const string destroyEndOFJourneyHint = "DestroyEndOfJourneyHint";
+
+    private const string destroyFire = "DestroyFire";
+
+    private const string stelzesSaved = "StelzesSaved";
+
+
     public static void saveGame()
     {
         saveScene();
+        saveStelzes();
         savePlayer();
         saveBierber();
         saveBierberBody();
@@ -34,6 +63,19 @@ public class Save : MonoBehaviour
         saveBierberWallStatus();
         saveBier();
         savePizza();
+        saveNorbert();
+        saveFireInvisibleWall();
+        saveFire();
+        savePilzeriaHint();
+        savePizzaHint();
+        saveSneakingHint();
+        saveJumpHint();
+        saveEndOFJourneyHint();
+        saveFireHint();
+        saveBierberHint();
+        saveStairBuildHint();
+        saveFire();
+
         PlayerPrefs.Save();
     }
 
@@ -50,6 +92,7 @@ public class Save : MonoBehaviour
             GameObject player = GameObject.FindGameObjectWithTag(TagManager.PLAYER);
             PlayerPrefsX.SetVector3(playerPosition, player.transform.position);
             PlayerPrefsX.SetQuaternion(playerRotation, player.transform.rotation);
+            PlayerPrefs.SetInt(playerMoney, player.GetComponent<MoneyManagement>().getCurrentMoney());
         }
     }
 
@@ -83,20 +126,21 @@ public class Save : MonoBehaviour
 
     static void saveBierberWallStatus()
     {
-        if (GameObject.FindGameObjectWithTag(TagManager.BIERBER_INVISIBLE_WALL) != null)
-        {
-            GameObject invisibleWall = GameObject.FindGameObjectWithTag(TagManager.BIERBER_INVISIBLE_WALL);
-            PlayerPrefsX.SetBool(bierberInvisibleWall, invisibleWall.collider.enabled);
-        }
+            if (GameObject.FindGameObjectWithTag(TagManager.BIERBER_INVISIBLE_WALL) != null && (!PlayerPrefsX.GetBool(destroyBierberInvisibleWall) || !PlayerPrefs.HasKey(destroyBierberInvisibleWall)))
+            {
+                PlayerPrefsX.GetBool(destroyBierberInvisibleWall, false);
+            }
+            else PlayerPrefsX.GetBool(destroyBierberInvisibleWall, true);
     }
 
     static void saveTreeStatus()
     {
-
-        if (GameObject.FindGameObjectWithTag(TagManager.FALLEN_TREE) != null)
+        if (GameObject.FindGameObjectWithTag(TagManager.STAMM) != null)
         {
-            GameObject fallenTree = GameObject.FindGameObjectWithTag(TagManager.FALLEN_TREE);
+            GameObject fallenTree = GameObject.FindGameObjectWithTag(TagManager.STAMM);
             PlayerPrefsX.SetBool(fallenTreeRendered, fallenTree.renderer.enabled);
+            PlayerPrefsX.SetVector3(fallenTreePosition, fallenTree.transform.position);
+            PlayerPrefsX.SetQuaternion(fallenTreeRotation, fallenTree.transform.rotation);
         }
     }
 
@@ -107,6 +151,7 @@ public class Save : MonoBehaviour
             GameObject bier = GameObject.FindGameObjectWithTag(TagManager.BEER);
             PlayerPrefsX.SetVector3(bierPosition, bier.transform.position);
             PlayerPrefsX.SetQuaternion(bierRotation, bier.transform.rotation);
+            PlayerPrefsX.SetBool(bierActiveStatus, bier.GetComponent<DragByPlayer>().enabled);
         }
     }
 
@@ -125,5 +170,149 @@ public class Save : MonoBehaviour
             PlayerPrefsX.SetVector3Array(pizzaPositions, pizzaPos);
             PlayerPrefsX.SetQuaternionArray(pizzaRotations, pizzaRot);
         }
+    }
+
+    static void saveNorbert()
+    {
+        if (GameObject.FindGameObjectWithTag(TagManager.NORBERT) != null)
+        {
+            GameObject norbert = GameObject.FindGameObjectWithTag(TagManager.NORBERT);
+            PlayerPrefsX.SetVector3(norbertPosition, norbert.transform.position);
+            PlayerPrefsX.SetQuaternion(norbertRotation, norbert.transform.rotation);
+        }
+    }
+
+    static void saveStelzes()
+    {
+        if(!PlayerPrefs.HasKey(stelzesSaved))
+        {
+            if (GameObject.FindGameObjectWithTag(TagManager.STELZE) != null)
+            {
+                GameObject[] stelzes = GameObject.FindGameObjectsWithTag(TagManager.STELZE);
+                Vector3[] stelzePos = new Vector3[stelzes.Length];
+                Quaternion[] stelzeRot = new Quaternion[stelzes.Length];
+                for (int i = 0; i < stelzes.Length; i++)
+                {
+                    stelzePos[i] = stelzes[i].transform.position;
+                    stelzeRot[i] = stelzes[i].transform.rotation;
+                }
+                PlayerPrefsX.SetVector3Array(stelzePositions, stelzePos);
+                PlayerPrefsX.SetQuaternionArray(stelzeRotations, stelzeRot);
+            }
+        }
+    }
+
+    static void setStelzesSaved()
+    {
+        PlayerPrefs.SetString(stelzesSaved ,"True");
+    }
+
+    static void saveReplacements()
+    {
+        if (GameObject.FindGameObjectWithTag(TagManager.REPLACEMENT) != null)
+        {
+            GameObject[] replacements = GameObject.FindGameObjectsWithTag(TagManager.REPLACEMENT);
+            Vector3[] replacementsPos = new Vector3[replacements.Length];
+            Quaternion[] replacementsRot = new Quaternion[replacements.Length];
+            for (int i = 0; i < replacements.Length; i++)
+            {
+                replacementsPos[i] = replacements[i].transform.position;
+                replacementsRot[i] = replacements[i].transform.rotation;
+            }
+            PlayerPrefsX.SetVector3Array(replacementPositions, replacementsPos);
+            PlayerPrefsX.SetQuaternionArray(replacementRotations, replacementsRot);
+        }
+    }
+
+    static void saveFireInvisibleWall()
+    {
+        if (GameObject.FindGameObjectWithTag(TagManager.FIRE_INVISIBLE_WALL) != null && (!PlayerPrefsX.GetBool(destroyFireInvisibleWall) || !PlayerPrefs.HasKey(destroyFireInvisibleWall)))
+        {
+            PlayerPrefsX.SetBool(destroyFireInvisibleWall, false);
+        }
+        else PlayerPrefsX.SetBool(destroyFireInvisibleWall, true);
+    }
+
+    static void savePizzaHint()
+    {
+        if (GameObject.FindGameObjectWithTag(TagManager.PIZZA_HINT) != null && (!PlayerPrefsX.GetBool(destroyPizzaHint) || !PlayerPrefs.HasKey(destroyPizzaHint)))
+        {
+            PlayerPrefsX.SetBool(destroyPizzaHint, false);
+        }
+        else PlayerPrefsX.SetBool(destroyPizzaHint, true);
+    }
+
+    static void saveBierberHint()
+    {
+        Debug.Log("Vorher: " + PlayerPrefsX.GetBool(destroyBierberHint));
+        if (GameObject.FindGameObjectWithTag(TagManager.BIERBER_HINT) != null && (!PlayerPrefsX.GetBool(destroyBierberHint) || !PlayerPrefs.HasKey(destroyBierberHint)))
+        {
+            PlayerPrefsX.SetBool(destroyBierberHint, false);
+        }
+        else PlayerPrefsX.SetBool(destroyBierberHint, true);
+        Debug.Log("Nachher: " + PlayerPrefsX.GetBool(destroyBierberHint));
+    }
+
+    static void saveFireHint()
+    {
+        if (GameObject.FindGameObjectWithTag(TagManager.FIRE_ARRIVAL_HINT) != null && (!PlayerPrefsX.GetBool(destroyFireHint) || !PlayerPrefs.HasKey(destroyFireHint)))
+        {
+            PlayerPrefsX.SetBool(destroyFireHint, false);
+        }
+        else PlayerPrefsX.SetBool(destroyFireHint, true);
+    }
+
+    static void saveJumpHint()
+    {
+        if (GameObject.FindGameObjectWithTag(TagManager.JUMP_HINT) != null && (!PlayerPrefsX.GetBool(destroyJumpHint) || !PlayerPrefs.HasKey(destroyJumpHint)))
+        {
+            PlayerPrefsX.SetBool(destroyJumpHint, false);
+        }
+        else PlayerPrefsX.SetBool(destroyJumpHint, true);
+    }
+
+    static void saveSneakingHint()
+    {
+        if (GameObject.FindGameObjectWithTag(TagManager.ANGLER_ARRIVAL_HINT) != null && (!PlayerPrefsX.GetBool(destroySneakingHint) || !PlayerPrefs.HasKey(destroySneakingHint)))
+        {
+            PlayerPrefsX.SetBool(destroySneakingHint, false);
+        }
+        else PlayerPrefsX.SetBool(destroySneakingHint, true);
+    }
+
+    static void savePilzeriaHint()
+    {
+        if (GameObject.FindGameObjectWithTag(TagManager.VODKA_HINT) != null && (!PlayerPrefsX.GetBool(destroyPilzeriaHint) || !PlayerPrefs.HasKey(destroyPilzeriaHint)))
+        {
+            PlayerPrefsX.SetBool(destroyPilzeriaHint, false);
+        }
+        else PlayerPrefsX.SetBool(destroyPilzeriaHint, true);
+    }
+
+    static void saveStairBuildHint()
+    {
+        if (GameObject.FindGameObjectWithTag(TagManager.STAIR_BUILD_HINT) != null && (!PlayerPrefsX.GetBool(destroyStairBuildHint) || !PlayerPrefs.HasKey(destroyStairBuildHint)))
+        {
+            PlayerPrefsX.SetBool(destroyStairBuildHint, false);
+        }
+        else PlayerPrefsX.SetBool(destroyStairBuildHint, true);
+    }
+
+    static void saveEndOFJourneyHint()
+    {
+        if (GameObject.FindGameObjectWithTag(TagManager.CHASE_HINT) != null && (!PlayerPrefsX.GetBool(destroyEndOFJourneyHint) || !PlayerPrefs.HasKey(destroyEndOFJourneyHint)))
+        {
+            PlayerPrefsX.SetBool(destroyEndOFJourneyHint, false);
+        }
+        else PlayerPrefsX.SetBool(destroyEndOFJourneyHint, true);
+    }
+
+    static void saveFire()
+    {
+        if (GameObject.FindGameObjectsWithTag(TagManager.FIRE) != null && (!PlayerPrefsX.GetBool(destroyFireHint) || !PlayerPrefs.HasKey(destroyFireHint)))
+        {
+            PlayerPrefsX.SetBool(destroyFire, false);
+        }
+        else PlayerPrefsX.SetBool(destroyFire, true);
     }
 }

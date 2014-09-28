@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class TagManager : MonoBehaviour {
+public class TagManager : MonoBehaviour
+{
 
     public static string MAIN_CAMERA = "MainCamera";
     public static string GAME_CONTROLLER = "GameController";
@@ -52,6 +53,8 @@ public class TagManager : MonoBehaviour {
     public static string VODKA_HINT = "VodkaHint";
     public static string STOP_URINATING = "StopUrinating";
     public static string VOMIT = "Vomit";
-	public static string STAMM = "Stamm";
+    public static string STAMM = "Stamm";
     public static string PEEING_POSITION = "PeeingPosition";
+    public static string NORBERT = "Norbert";
+    public static string REPLACEMENT = "Replacement";
 }

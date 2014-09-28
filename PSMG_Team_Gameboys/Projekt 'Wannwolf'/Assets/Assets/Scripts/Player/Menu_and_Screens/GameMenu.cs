@@ -6,8 +6,6 @@ using iViewX;
 public class GameMenu : MonoBehaviour {
 
     private bool isPaused;
-    private float width;
-    private float height;
     private bool showSave = false;
     private bool allSoundsDisabled;
     //private AudioSource gameMusic;
@@ -24,8 +22,11 @@ public class GameMenu : MonoBehaviour {
 
 
     // Game menu button values
-    private float BUTTON_WIDTH = 150;
-    private float BUTTON_HEIGHT = 50;
+    private float width;
+    private float height;
+    private float buttonWidth;
+    private float buttonHeight;
+    private float buttonDistance;
 
     private GUIStyle center;
 
@@ -33,8 +34,13 @@ public class GameMenu : MonoBehaviour {
     {
         //gameMusic = GameObject.FindGameObjectWithTag(TagManager.PLAYER).GetComponent<AudioSource>().audio;
         //gameMusic.ignoreListenerPause = true;
+
         width = Screen.width;
         height = Screen.height;
+        buttonWidth = width / 10;
+        buttonHeight = height / 15;
+        buttonDistance = height / 12;
+
         isPaused = false;
         allSoundsDisabled = false;
     }
@@ -52,7 +58,7 @@ public class GameMenu : MonoBehaviour {
     {
         if (isPaused)
         {
-            if (GUI.Button(new Rect((width - BUTTON_WIDTH) / 2, height / 2 - 150, BUTTON_WIDTH, BUTTON_HEIGHT), keepPlaying))
+            if (GUI.Button(new Rect((width - buttonWidth) / 2, height / 2 - 2 * buttonDistance, buttonWidth, buttonHeight), keepPlaying))
             {
                 toggleTimeScale();
                 toggleAudioListener();
@@ -61,7 +67,7 @@ public class GameMenu : MonoBehaviour {
             // Sound on/off button
             if (allSoundsDisabled)
             {
-                if (GUI.Button(new Rect((width - BUTTON_WIDTH) / 2, height / 2 - 75, BUTTON_WIDTH, BUTTON_HEIGHT), soundOn))
+                if (GUI.Button(new Rect((width - buttonWidth) / 2, height / 2 - buttonDistance, buttonWidth, buttonHeight), soundOn))
                 {
 
                     // Mute/Unmute all ingame sounds
@@ -79,7 +85,7 @@ public class GameMenu : MonoBehaviour {
             }
             else
             {
-                if (GUI.Button(new Rect((width - BUTTON_WIDTH) / 2, height / 2 - 75, BUTTON_WIDTH, BUTTON_HEIGHT), soundOff))
+                if (GUI.Button(new Rect((width - buttonWidth) / 2, height / 2 - buttonDistance, buttonWidth, buttonHeight), soundOff))
                 {
 
                     // Mute/Unmute all ingame sounds
@@ -97,7 +103,7 @@ public class GameMenu : MonoBehaviour {
             }
 
             // Button to start a new game
-            if (GUI.Button(new Rect((width - BUTTON_WIDTH) / 2, height / 2, BUTTON_WIDTH, BUTTON_HEIGHT), newGame))
+            if (GUI.Button(new Rect((width - buttonWidth) / 2, height / 2, buttonWidth, buttonHeight), newGame))
             {
                 toggleTimeScale();
                 toggleAudioListener();
@@ -105,7 +111,7 @@ public class GameMenu : MonoBehaviour {
             }
 
             // Save button
-            if (GUI.Button(new Rect((width - BUTTON_WIDTH) / 2, height / 2 + 75, BUTTON_WIDTH, BUTTON_HEIGHT), save))
+            if (GUI.Button(new Rect((width - buttonWidth) / 2, height / 2 + buttonDistance, buttonWidth, buttonHeight), save))
             {
                 Save.saveGame();
                 StartCoroutine(showSaveStatus());
@@ -113,7 +119,7 @@ public class GameMenu : MonoBehaviour {
             }
 
             // Starts the eyetracker calibration
-            if (GUI.Button(new Rect((width - BUTTON_WIDTH) / 2, height / 2 + 150, BUTTON_WIDTH, BUTTON_HEIGHT), calibrate))
+            if (GUI.Button(new Rect((width - buttonWidth) / 2, height / 2 + 2 * buttonDistance, buttonWidth, buttonHeight), calibrate))
             {
                 toggleTimeScale();
                 toggleAudioListener();
@@ -121,7 +127,7 @@ public class GameMenu : MonoBehaviour {
             }
 
             // Close button
-            if (GUI.Button(new Rect((width - BUTTON_WIDTH) / 2, height / 2 + 225, BUTTON_WIDTH, BUTTON_HEIGHT), quit))
+            if (GUI.Button(new Rect((width - buttonWidth) / 2, height / 2 + 3 * buttonDistance, buttonWidth, buttonHeight), quit))
             {
                 LoadScene.loadMainMenu();
                 toggleTimeScale();
@@ -132,8 +138,8 @@ public class GameMenu : MonoBehaviour {
             {
                 center = new GUIStyle(GUI.skin.textField);
                 center.alignment = TextAnchor.MiddleCenter;
-                GUI.color = Color.green; 
-                GUI.TextField(new Rect((width - 120) / 2, (float)(Screen.height * 0.1), 120, 50),gameSaved, center);
+                GUI.color = Color.green;
+                GUI.TextField(new Rect((width - buttonWidth) / 2, (float)(height * 0.1), buttonWidth, buttonHeight), gameSaved, center);
             }
         }
 
