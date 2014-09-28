@@ -29,9 +29,6 @@ public class GameMenu : MonoBehaviour {
     private float buttonDistance;
 
     private GUIStyle center;
-    private GUIStyle fontStyle;
-
-    public Font font;
 
     void Awake()
     {
@@ -59,12 +56,9 @@ public class GameMenu : MonoBehaviour {
 
     void OnGUI()
     {
-        fontStyle = new GUIStyle(GUI.skin.button);
-        fontStyle.font = font;
-
         if (isPaused)
         {
-            if (GUI.Button(new Rect((width - buttonWidth) / 2, height / 2 - 2 * buttonDistance, buttonWidth, buttonHeight), keepPlaying, fontStyle))
+            if (GUI.Button(new Rect((width - buttonWidth) / 2, height / 2 - 2 * buttonDistance, buttonWidth, buttonHeight), keepPlaying))
             {
                 toggleTimeScale();
                 toggleAudioListener();
@@ -73,7 +67,7 @@ public class GameMenu : MonoBehaviour {
             // Sound on/off button
             if (allSoundsDisabled)
             {
-                if (GUI.Button(new Rect((width - buttonWidth) / 2, height / 2 - buttonDistance, buttonWidth, buttonHeight), soundOn, fontStyle))
+                if (GUI.Button(new Rect((width - buttonWidth) / 2, height / 2 - buttonDistance, buttonWidth, buttonHeight), soundOn))
                 {
 
                     // Mute/Unmute all ingame sounds
@@ -91,7 +85,7 @@ public class GameMenu : MonoBehaviour {
             }
             else
             {
-                if (GUI.Button(new Rect((width - buttonWidth) / 2, height / 2 - buttonDistance, buttonWidth, buttonHeight), soundOff, fontStyle))
+                if (GUI.Button(new Rect((width - buttonWidth) / 2, height / 2 - buttonDistance, buttonWidth, buttonHeight), soundOff))
                 {
 
                     // Mute/Unmute all ingame sounds
@@ -109,7 +103,7 @@ public class GameMenu : MonoBehaviour {
             }
 
             // Button to start a new game
-            if (GUI.Button(new Rect((width - buttonWidth) / 2, height / 2, buttonWidth, buttonHeight), newGame, fontStyle))
+            if (GUI.Button(new Rect((width - buttonWidth) / 2, height / 2, buttonWidth, buttonHeight), newGame))
             {
                 toggleTimeScale();
                 toggleAudioListener();
@@ -117,7 +111,7 @@ public class GameMenu : MonoBehaviour {
             }
 
             // Save button
-            if (GUI.Button(new Rect((width - buttonWidth) / 2, height / 2 + buttonDistance, buttonWidth, buttonHeight), save, fontStyle))
+            if (GUI.Button(new Rect((width - buttonWidth) / 2, height / 2 + buttonDistance, buttonWidth, buttonHeight), save))
             {
                 Save.saveGame();
                 StartCoroutine(showSaveStatus());
@@ -125,7 +119,7 @@ public class GameMenu : MonoBehaviour {
             }
 
             // Starts the eyetracker calibration
-            if (GUI.Button(new Rect((width - buttonWidth) / 2, height / 2 + 2 * buttonDistance, buttonWidth, buttonHeight), calibrate, fontStyle))
+            if (GUI.Button(new Rect((width - buttonWidth) / 2, height / 2 + 2 * buttonDistance, buttonWidth, buttonHeight), calibrate))
             {
                 toggleTimeScale();
                 toggleAudioListener();
@@ -133,7 +127,7 @@ public class GameMenu : MonoBehaviour {
             }
 
             // Close button
-            if (GUI.Button(new Rect((width - buttonWidth) / 2, height / 2 + 3 * buttonDistance, buttonWidth, buttonHeight), quit, fontStyle))
+            if (GUI.Button(new Rect((width - buttonWidth) / 2, height / 2 + 3 * buttonDistance, buttonWidth, buttonHeight), quit))
             {
                 LoadScene.loadMainMenu();
                 toggleTimeScale();
@@ -143,9 +137,7 @@ public class GameMenu : MonoBehaviour {
             if (showSave)
             {
                 center = new GUIStyle(GUI.skin.textField);
-                center.font = font;
                 center.alignment = TextAnchor.MiddleCenter;
-                
                 GUI.color = Color.green;
                 GUI.TextField(new Rect((width - buttonWidth) / 2, (float)(height * 0.1), buttonWidth, buttonHeight), gameSaved, center);
             }
