@@ -38,7 +38,7 @@ public class startFight : MonoBehaviour
     private Vector3 mushroomPosition;
     private Cut cut;
 
-
+	private Tutorial logic;
 
     void Start()
     {
@@ -50,6 +50,7 @@ public class startFight : MonoBehaviour
         switcher = pizza.GetComponent<CameraSwitcher>();
         cut = gameObject.GetComponent<Cut>();
         cutLine = GameObject.Find("PizzaCutParent");
+		logic = GameObject.FindGameObjectWithTag(TagManager.MAIN_CAMERA).GetComponent<Tutorial>();
     }
 
     //resets the values to its original value
@@ -103,6 +104,10 @@ public class startFight : MonoBehaviour
     {
         if (won == true)
         {
+			if (gameObject.tag == "TutorialPizza")
+			{
+				logic.playTutorialEnd();
+			}
             setNotFightingStatus();
             cut.setStarted(false);
             setValues();
@@ -176,6 +181,10 @@ public class startFight : MonoBehaviour
 
     void fight()
     {
+		if (gameObject.tag == "TutorialPizza") 
+		{
+			logic.playTutorialStart();
+		}
         cursorAcvtive = true;
         setFightStatus();
         stat = true;
