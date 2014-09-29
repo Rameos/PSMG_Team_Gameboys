@@ -8,11 +8,9 @@ public class Menu : MonoBehaviour {
     private string gameSaved = "GameSaved";
     private string quit = "Spiel beenden";
 
-    private GUIStyle fontStyle;
-    public Font font;
-    public GameObject button1;
-    public GameObject button2;
-    public GameObject button3;
+    private bool isCalibrated = false;
+  
+    public GUIStyle customButton;
 
     void Start()
     {
@@ -25,28 +23,16 @@ public class Menu : MonoBehaviour {
         {
             Screen.showCursor = true;
         }
-        showLeaves();
-    }
-
-    void showLeaves()
-    {
-        button1.transform.position = new Vector3(0.475f, 0.325f, 1f);
-        button2.transform.position = new Vector3(0.475f, 0.525f, 1f);
-        button3.transform.position = new Vector3(0.475f, 0.725f, 1f);
     }
 
 	void OnGUI(){
-        fontStyle = new GUIStyle(GUI.skin.button);
-        fontStyle.font = font;
-        fontStyle.alignment = TextAnchor.MiddleCenter;
-
-       /* if (GUI.Button(new Rect(550, 115, 200, 100), newGame, fontStyle))
+        if (GUI.Button(new Rect(550, 115, 200, 100), newGame, customButton))
         {
             startCalibration();
             LoadScene.loadFirstLevel();
         }
-
-        if (GUI.Button(new Rect(550, 230, 200, 100), loadLast, fontStyle))
+        
+        if (GUI.Button(new Rect(550, 230, 200, 100), loadLast, customButton))
         {
             if (PlayerPrefs.HasKey(gameSaved))
             {
@@ -54,13 +40,19 @@ public class Menu : MonoBehaviour {
                 LoadScene.loadLastGame();
             }
         }
-        if (GUI.Button(new Rect(550, 345, 200, 100), quit, fontStyle))
+        if (GUI.Button(new Rect(550, 345, 200, 100), quit, customButton))
         {
             Application.Quit();
         }
-        * */
     }
 
     //starts the calibration when a player starts/loads a game
-    
+    void startCalibration()
+    {
+        if (!isCalibrated)
+        {
+            isCalibrated = true;
+            Calibration.calibrate();
+        }
+    }
 }
