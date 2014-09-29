@@ -1,19 +1,26 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class LoadHelper : MonoBehaviour {
+public class LoadHelper : MonoBehaviour
+{
 
     public void LoadBasicMovement()
+    {
+        LoadScene.loadBM();
+    }
+
+    public void LoadBasicTutorial()
     {
         animation.Stop();
         LoadScene.loadScene();
     }
 
-	// Update is called once per frame
-	void Update () {
+    // Update is called once per frame
+    void Update()
+    {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            LoadBasicMovement();
+            LoadBasicTutorial();
         }
-	}
+    }
 }

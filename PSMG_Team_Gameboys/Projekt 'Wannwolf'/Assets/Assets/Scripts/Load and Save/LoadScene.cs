@@ -4,7 +4,7 @@ using System.Collections;
 public class LoadScene : MonoBehaviour
 {
     private static SceneFader sceneFader;
-    private static string[] levels = new string[4] {"IntroComic", "BasicMovement", "Escape_Level_Basic", "outro"};
+    private static string[] levels = new string[5] {"IntroComic", "TutorialRight", "BasicMovement", "Escape_Level_Basic", "outro"};
     private static string mainMenu = "load_test_scene";
     private static int loadNum = 0;
 
@@ -34,7 +34,7 @@ public class LoadScene : MonoBehaviour
 
     public static void loadBM()
     {
-        loadNum = 1;
+        loadNum = 2;
         PlayerPrefs.DeleteAll();
         sceneFader.switchScene(levels[loadNum]);
     }
