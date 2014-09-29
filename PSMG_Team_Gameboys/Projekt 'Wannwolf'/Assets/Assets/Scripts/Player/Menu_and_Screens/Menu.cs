@@ -3,8 +3,6 @@ using System.Collections;
 
 public class Menu : MonoBehaviour {
 
-    private bool isCalibrated = false;
-
     private string newGame = "Neues Spiel";
     private string loadLast = "Letztes Spiel laden";
     private string gameSaved = "GameSaved";
@@ -12,6 +10,14 @@ public class Menu : MonoBehaviour {
 
     private GUIStyle fontStyle;
     public Font font;
+    public GameObject button1;
+    public GameObject button2;
+    public GameObject button3;
+
+    void Start()
+    {
+        //leave = GameObject.Find("LeaveButton");
+    }
 
     void Update()
     {
@@ -19,6 +25,14 @@ public class Menu : MonoBehaviour {
         {
             Screen.showCursor = true;
         }
+        showLeaves();
+    }
+
+    void showLeaves()
+    {
+        button1.transform.position = new Vector3(0.475f, 0.325f, 1f);
+        button2.transform.position = new Vector3(0.475f, 0.525f, 1f);
+        button3.transform.position = new Vector3(0.475f, 0.725f, 1f);
     }
 
 	void OnGUI(){
@@ -26,7 +40,7 @@ public class Menu : MonoBehaviour {
         fontStyle.font = font;
         fontStyle.alignment = TextAnchor.MiddleCenter;
 
-        if (GUI.Button(new Rect(550, 115, 200, 100), newGame, fontStyle))
+       /* if (GUI.Button(new Rect(550, 115, 200, 100), newGame, fontStyle))
         {
             startCalibration();
             LoadScene.loadFirstLevel();
@@ -44,15 +58,9 @@ public class Menu : MonoBehaviour {
         {
             Application.Quit();
         }
+        * */
     }
 
     //starts the calibration when a player starts/loads a game
-    void startCalibration()
-    {
-        if (!isCalibrated)
-        {
-                isCalibrated = true;
-                Calibration.calibrate();
-        }
-    }
+    
 }
