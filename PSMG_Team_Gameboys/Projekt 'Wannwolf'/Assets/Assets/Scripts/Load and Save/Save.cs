@@ -98,11 +98,21 @@ public class Save : MonoBehaviour
             PlayerPrefsX.SetVector3(playerPosition, player.transform.position);
             PlayerPrefsX.SetQuaternion(playerRotation, player.transform.rotation);
             PlayerPrefs.SetInt(playerMoney, player.GetComponent<MoneyManagement>().getCurrentMoney());
-            PlayerControl playerControl = player.GetComponent<PlayerControl>();
-            PlayerPrefsX.SetBool(playerDrunk, playerControl.drankStatus);
-            PlayerPrefsX.SetBool(playerDoubleJump, playerControl.ableToDoubleJumpStatus);
-            PlayerPrefs.SetFloat(playerStamina, playerControl.sprintTimeStatus);
-            PlayerPrefsX.SetBool(playerVodka, playerControl.vodkaStatus);
+
+            if (player.GetComponent<PlayerControl>() != null)
+            {
+                PlayerControl playerControl = player.GetComponent<PlayerControl>();
+
+                if (playerControl.onStelze)
+                {
+                    PlayerPrefsX.SetVector3(playerPosition, playerControl.stelzePosition);
+                }
+
+                PlayerPrefsX.SetBool(playerDrunk, playerControl.drankStatus);
+                PlayerPrefsX.SetBool(playerDoubleJump, playerControl.ableToDoubleJumpStatus);
+                PlayerPrefs.SetFloat(playerStamina, playerControl.sprintTimeStatus);
+                PlayerPrefsX.SetBool(playerVodka, playerControl.vodkaStatus);
+            }
         }
     }
 
@@ -198,6 +208,8 @@ public class Save : MonoBehaviour
                 }
                 PlayerPrefsX.SetVector3Array(stelzePositions, stelzePos);
                 PlayerPrefsX.SetQuaternionArray(stelzeRotations, stelzeRot);
+
+                setStelzesSaved();
             }
         }
     }

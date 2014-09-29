@@ -16,8 +16,6 @@ public class HintLogic : MonoBehaviour {
 
     public Texture2D texture;
 
-    public GameObject invisibleWall;
-
     void Awake()
     {
         wasPlayed = false;
@@ -34,22 +32,29 @@ public class HintLogic : MonoBehaviour {
             {
                 player.GetComponent<PlayerControl>().enabled = true;
                 wasPlayed = true;
-                Destroy(gameObject);
-                if (invisibleWall != null)
-                {
-                    Destroy(invisibleWall);
-                }
             }
         }
+        stopShowingTask();
         destroyHintAndWall();
         checkForDying();
+    }
+
+    void stopShowingTask()
+    {
+        if (wasPlayed)
+        {
+            Debug.Log("InStopTask");
+            StartCoroutine(resetDialog(5));
+            wasPlayed = false;
+            dialogueTriggered = false;
+        }
     }
 
     void OnTriggerEnter(Collider col)
     {
         if (col.tag == TagManager.PLAYER)
         {
-            checkForNeed();
+            playSound();
             if (gameObject.tag == TagManager.BIERBER_HINT)
             {
                 isPlaying = true;
@@ -58,29 +63,11 @@ public class HintLogic : MonoBehaviour {
         }
     }
 
-    void controllPlaytime(bool wasPlayed, AudioClip sound)
-    {
-        /*if (gameObject.tag == TagManager.VODKA_HINT)
-        {
-            if (player.GetComponent<PlayerControl>().hadVodkaOnce)
-            {
-                playSound();
-            }
-        }
-        else
-        {
-            playSound();
-        }*/
-        playSound();
-    }
-
-
     //shows current task
     void showTask()
     {
         untertitel.guiTexture.texture = texture;
         hint.guiText.text = text;
-        StartCoroutine(resetDialog(5));
     }
 
     //removes the current task after 5 seconds
@@ -89,6 +76,7 @@ public class HintLogic : MonoBehaviour {
         yield return new WaitForSeconds(seconds);
         hint.guiText.text = "";
         untertitel.guiTexture.texture = null;
+        Destroy(gameObject);
     }
 
     void playSound()
@@ -108,11 +96,6 @@ public class HintLogic : MonoBehaviour {
         {
             player.GetComponent<PlayerControl>().enabled = true;
             wasPlayed = true;
-            Destroy(gameObject);
-            if (invisibleWall != null)
-            {
-                Destroy(invisibleWall);
-            }
         }
     }
 
@@ -122,22 +105,6 @@ public class HintLogic : MonoBehaviour {
         {
             audio.Stop();
             dialogueTriggered = false;
-            
-        }
-    }
-    void checkForNeed()
-    {
-        if (gameObject.tag == TagManager.FIRE_ARRIVAL_HINT && player.GetComponent<PlayerControl>().drankStatus || player.GetComponent<PlayerControl>().vodkaStatus)
-        {
-            Destroy(gameObject);
-        }
-        else if (gameObject.tag == TagManager.JUMP_HINT && player.GetComponent<PlayerControl>().ableToDoubleJumpStatus)
-        {
-            Destroy(gameObject);
-        }
-        else
-        {
-            controllPlaytime(wasPlayed, dialogue); 
         }
     }
 }

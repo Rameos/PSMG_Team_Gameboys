@@ -15,7 +15,6 @@ public class ExtinguishFire : MonoBehaviour {
     private bool extinguishable;
     public bool startPeeing = false;
 
-    private string pressF = "Drücke \"F\" um das Feuer zu löschen";
     private string pressE = "Drücke \"E\" um das Feuer zu auszupinkeln";
 
     private GUIStyle center;
@@ -77,12 +76,6 @@ public class ExtinguishFire : MonoBehaviour {
         center = new GUIStyle(GUI.skin.button);
         center.font = font;
         center.alignment = TextAnchor.MiddleCenter;
-
-        if (drinkLogic.inFireRadius && control.vodkaStatus)
-        {
-            GUI.Button(new Rect((Screen.width - (width * 2)) / 2, (float)(Screen.height * 0.2), width * 2, height), pressF, center);
-            control.hadVodkaOnce = true;
-        }
 
         if (drinkLogic.inFireRadius && drinkLogic.ableToUrinate)
         {

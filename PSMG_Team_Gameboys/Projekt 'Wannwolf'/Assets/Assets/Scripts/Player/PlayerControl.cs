@@ -18,6 +18,8 @@ public class PlayerControl : MonoBehaviour {
     public Transform mainCamera;
 
     public int hasPieces;
+    public Vector3 stelzePosition;
+    public bool onStelze;
 
     // Beverages
     private bool hasVodka;
