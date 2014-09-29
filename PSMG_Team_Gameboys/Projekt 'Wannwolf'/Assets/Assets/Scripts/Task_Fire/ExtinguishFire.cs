@@ -8,6 +8,7 @@ public class ExtinguishFire : MonoBehaviour {
     private PlayerControl control;
     private ParticleSystem urin;
     private CameraSwitcher switcher;
+    public GUIStyle message;
 
     private float width = 160;
     private float height = 30;
@@ -18,8 +19,6 @@ public class ExtinguishFire : MonoBehaviour {
     private string pressF = "Drücke \"F\" um das Feuer zu löschen";
     private string pressE = "Drücke \"E\" um das Feuer zu auszupinkeln";
 
-    private GUIStyle center;
-    public Font font;
     
     void Awake()
     {
@@ -74,19 +73,15 @@ public class ExtinguishFire : MonoBehaviour {
 
     void OnGUI()
     {
-        center = new GUIStyle(GUI.skin.button);
-        center.font = font;
-        center.alignment = TextAnchor.MiddleCenter;
-
         if (drinkLogic.inFireRadius && control.vodkaStatus)
         {
-            GUI.Button(new Rect((Screen.width - (width * 2)) / 2, (float)(Screen.height * 0.2), width * 2, height), pressF, center);
+            GUI.Button(new Rect((Screen.width - (width * 2)) / 2, (float)(Screen.height * 0.2), width * 2, height), pressF, message);
             control.hadVodkaOnce = true;
         }
 
         if (drinkLogic.inFireRadius && drinkLogic.ableToUrinate)
         {
-            GUI.Button(new Rect((Screen.width - (width * 2)) / 2, (float)(Screen.height * 0.2), width * 2, height), pressE, center);
+            GUI.Button(new Rect((Screen.width - (width * 2)) / 2, (float)(Screen.height * 0.2), width * 2, height), pressE, message);
         }
     }
 
