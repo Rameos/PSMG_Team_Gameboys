@@ -12,11 +12,6 @@ public class Menu : MonoBehaviour {
   
     public GUIStyle customButton;
 
-    void Start()
-    {
-        //leave = GameObject.Find("LeaveButton");
-    }
-
     void Update()
     {
         if (!Screen.showCursor)
@@ -26,13 +21,13 @@ public class Menu : MonoBehaviour {
     }
 
 	void OnGUI(){
-        if (GUI.Button(new Rect(550, 115, 200, 100), newGame, customButton))
+        if (GUI.Button(new Rect(550, 100, 200, 100), newGame, customButton))
         {
             startCalibration();
             LoadScene.loadFirstLevel();
         }
         
-        if (GUI.Button(new Rect(550, 230, 200, 100), loadLast, customButton))
+        if (GUI.Button(new Rect(550, 250, 200, 100), loadLast, customButton))
         {
             if (PlayerPrefs.HasKey(gameSaved))
             {
@@ -40,7 +35,7 @@ public class Menu : MonoBehaviour {
                 LoadScene.loadLastGame();
             }
         }
-        if (GUI.Button(new Rect(550, 345, 200, 100), quit, customButton))
+        if (GUI.Button(new Rect(550, 400, 200, 100), quit, customButton))
         {
             Application.Quit();
         }
