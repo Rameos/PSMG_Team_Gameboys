@@ -9,8 +9,6 @@ public class PickTimeMachineReplacement : MonoBehaviour {
     private CameraControl cameraControl;
     private PlayerControl playerControl;
     private ReplacementHUDLogic hudLogic;
-    private PLayerMovement playerMovement;
-    private AutomaticMovement playerAutomaticMovement;
 
     void Start()
     {
@@ -18,9 +16,7 @@ public class PickTimeMachineReplacement : MonoBehaviour {
         cameraControl = mainCamera.GetComponent<CameraControl>();
         hudLogic = GameObject.FindGameObjectWithTag(TagManager.GAME_CONTROLLER).GetComponent<ReplacementHUDLogic>();
         playerControl = GameObject.FindGameObjectWithTag(TagManager.PLAYER).GetComponent<PlayerControl>();
-        playerMovement = GameObject.FindGameObjectWithTag(TagManager.PLAYER).GetComponent<PLayerMovement>();
-        playerAutomaticMovement = GameObject.FindGameObjectWithTag(TagManager.PLAYER).GetComponent<AutomaticMovement>();
-
+      
         rotationSpeed = 6f;
         inTrigger = false;
     }
@@ -36,8 +32,7 @@ public class PickTimeMachineReplacement : MonoBehaviour {
         {
             cameraControl.enabled = false;
             playerControl.enabled = false;
-            playerMovement.enabled = false;
-            playerAutomaticMovement.enabled = false;
+
             inTrigger = true;
         }
     }

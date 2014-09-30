@@ -47,7 +47,7 @@ public class ReplacementHUDLogic : MonoBehaviour {
                 GameObject.FindGameObjectWithTag("Turbine").GetComponent<GUITexture>().texture = turbine;
                 if (animationPlayed == 2)
                 {
-                    LoadScene.loadScene();
+                    
                 }
                 break;
         }
