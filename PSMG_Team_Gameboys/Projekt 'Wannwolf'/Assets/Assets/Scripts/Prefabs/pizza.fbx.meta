@@ -42,6 +42,17 @@ ModelImporter:
     100072: Pilz_Belag_R
     100074: Pilz_Belag_unten
     100076: Pilz_Hand
+    100078: Bein L
+    100080: Bein R
+    100082: Pilz Bein L
+    100084: Pilz Bein R
+    100086: Pilz belag L
+    100088: Pilz Belag mitte
+    100090: Pilz Belag mitte ob
+    100092: Pilz Belag R
+    100094: Pilz Belag unten
+    100096: Zahn L
+    100098: Zahn R
     400000: Auge_L
     400002: Auge_L_001
     400004: Auge_L_002
@@ -81,6 +92,17 @@ ModelImporter:
     400072: Pilz_Belag_R
     400074: Pilz_Belag_unten
     400076: Pilz_Hand
+    400078: Bein L
+    400080: Bein R
+    400082: Pilz Bein L
+    400084: Pilz Bein R
+    400086: Pilz belag L
+    400088: Pilz Belag mitte
+    400090: Pilz Belag mitte ob
+    400092: Pilz Belag R
+    400094: Pilz Belag unten
+    400096: Zahn L
+    400098: Zahn R
     2300000: Auge_L
     2300002: Auge_L_001
     2300004: Auge_L_002
@@ -119,6 +141,17 @@ ModelImporter:
     2300070: Pilz_Belag_R
     2300072: Pilz_Belag_unten
     2300074: Pilz_Hand
+    2300076: Bein L
+    2300078: Bein R
+    2300080: Pilz Bein L
+    2300082: Pilz Bein R
+    2300084: Pilz belag L
+    2300086: Pilz Belag mitte
+    2300088: Pilz Belag mitte ob
+    2300090: Pilz Belag R
+    2300092: Pilz Belag unten
+    2300094: Zahn L
+    2300096: Zahn R
     3300000: Auge_L
     3300002: Auge_L_001
     3300004: Auge_L_002
@@ -157,6 +190,17 @@ ModelImporter:
     3300070: Pilz_Belag_R
     3300072: Pilz_Belag_unten
     3300074: Pilz_Hand
+    3300076: Bein L
+    3300078: Bein R
+    3300080: Pilz Bein L
+    3300082: Pilz Bein R
+    3300084: Pilz belag L
+    3300086: Pilz Belag mitte
+    3300088: Pilz Belag mitte ob
+    3300090: Pilz Belag R
+    3300092: Pilz Belag unten
+    3300094: Zahn L
+    3300096: Zahn R
     4300000: Salami
     4300002: Sphere_013
     4300004: Sphere_012
@@ -195,7 +239,226 @@ ModelImporter:
     4300070: Arm_L
     4300072: Arm_R
     4300074: Augenbraue
+    4300076: Pilz belag L
+    4300078: Pilz Belag mitte ob
+    4300080: Pilz Belag mitte
+    4300082: Pilz Belag unten
+    4300084: Pilz Belag R
+    4300086: Pilz Bein L
+    4300088: Pilz Bein R
+    4300090: Bein R
+    4300092: Bein L
+    4300094: Zahn L
+    4300096: Zahn R
     7400000: Default Take
+    7400002: Pilz belag L|Bein LAction
+    7400004: Pilz belag L|CameraAction
+    7400006: Pilz belag L|Lamp.001Action
+    7400008: Pilz belag L|LampAction
+    7400010: Pilz belag L|Pilz Bein LAction
+    7400012: Pilz belag L|Pilz Bein RAction
+    7400014: Pilz belag L|Pilz belag LAction
+    7400016: Pilz belag L|Pilz Belag mitte obAction
+    7400018: Pilz belag L|Pilz Belag mitteAction
+    7400020: Pilz belag L|Pilz Belag RAction
+    7400022: Pilz belag L|Pilz Belag untenAction
+    7400024: Pilz belag L|TeigAction
+    7400026: Pilz belag L|Tod
+    7400028: Pilz belag L|Zahn LAction
+    7400030: Pilz belag L|Zahn RAction
+    7400032: Pilz belag L|ZungeAction
+    7400034: Pilz Belag mitte ob|Bein LAction
+    7400036: Pilz Belag mitte ob|CameraAction
+    7400038: Pilz Belag mitte ob|Lamp.001Action
+    7400040: Pilz Belag mitte ob|LampAction
+    7400042: Pilz Belag mitte ob|Pilz Bein LAction
+    7400044: Pilz Belag mitte ob|Pilz Bein RAction
+    7400046: Pilz Belag mitte ob|Pilz belag LAction
+    7400048: Pilz Belag mitte ob|Pilz Belag mitte obAction
+    7400050: Pilz Belag mitte ob|Pilz Belag mitteAction
+    7400052: Pilz Belag mitte ob|Pilz Belag RAction
+    7400054: Pilz Belag mitte ob|Pilz Belag untenAction
+    7400056: Pilz Belag mitte ob|TeigAction
+    7400058: Pilz Belag mitte ob|Tod
+    7400060: Pilz Belag mitte ob|Zahn LAction
+    7400062: Pilz Belag mitte ob|Zahn RAction
+    7400064: Pilz Belag mitte ob|ZungeAction
+    7400066: Pilz Belag mitte|Bein LAction
+    7400068: Pilz Belag mitte|CameraAction
+    7400070: Pilz Belag mitte|Lamp.001Action
+    7400072: Pilz Belag mitte|LampAction
+    7400074: Pilz Belag mitte|Pilz Bein LAction
+    7400076: Pilz Belag mitte|Pilz Bein RAction
+    7400078: Pilz Belag mitte|Pilz belag LAction
+    7400080: Pilz Belag mitte|Pilz Belag mitte obAction
+    7400082: Pilz Belag mitte|Pilz Belag mitteAction
+    7400084: Pilz Belag mitte|Pilz Belag RAction
+    7400086: Pilz Belag mitte|Pilz Belag untenAction
+    7400088: Pilz Belag mitte|TeigAction
+    7400090: Pilz Belag mitte|Tod
+    7400092: Pilz Belag mitte|Zahn LAction
+    7400094: Pilz Belag mitte|Zahn RAction
+    7400096: Pilz Belag mitte|ZungeAction
+    7400098: Pilz Belag unten|Bein LAction
+    7400100: Pilz Belag unten|CameraAction
+    7400102: Pilz Belag unten|Lamp.001Action
+    7400104: Pilz Belag unten|LampAction
+    7400106: Pilz Belag unten|Pilz Bein LAction
+    7400108: Pilz Belag unten|Pilz Bein RAction
+    7400110: Pilz Belag unten|Pilz belag LAction
+    7400112: Pilz Belag unten|Pilz Belag mitte obAction
+    7400114: Pilz Belag unten|Pilz Belag mitteAction
+    7400116: Pilz Belag unten|Pilz Belag RAction
+    7400118: Pilz Belag unten|Pilz Belag untenAction
+    7400120: Pilz Belag unten|TeigAction
+    7400122: Pilz Belag unten|Tod
+    7400124: Pilz Belag unten|Zahn LAction
+    7400126: Pilz Belag unten|Zahn RAction
+    7400128: Pilz Belag unten|ZungeAction
+    7400130: Pilz Belag R|Bein LAction
+    7400132: Pilz Belag R|CameraAction
+    7400134: Pilz Belag R|Lamp.001Action
+    7400136: Pilz Belag R|LampAction
+    7400138: Pilz Belag R|Pilz Bein LAction
+    7400140: Pilz Belag R|Pilz Bein RAction
+    7400142: Pilz Belag R|Pilz belag LAction
+    7400144: Pilz Belag R|Pilz Belag mitte obAction
+    7400146: Pilz Belag R|Pilz Belag mitteAction
+    7400148: Pilz Belag R|Pilz Belag RAction
+    7400150: Pilz Belag R|Pilz Belag untenAction
+    7400152: Pilz Belag R|TeigAction
+    7400154: Pilz Belag R|Tod
+    7400156: Pilz Belag R|Zahn LAction
+    7400158: Pilz Belag R|Zahn RAction
+    7400160: Pilz Belag R|ZungeAction
+    7400162: Pilz Bein L|Bein LAction
+    7400164: Pilz Bein L|CameraAction
+    7400166: Pilz Bein L|Lamp.001Action
+    7400168: Pilz Bein L|LampAction
+    7400170: Pilz Bein L|Pilz Bein LAction
+    7400172: Pilz Bein L|Pilz Bein RAction
+    7400174: Pilz Bein L|Pilz belag LAction
+    7400176: Pilz Bein L|Pilz Belag mitte obAction
+    7400178: Pilz Bein L|Pilz Belag mitteAction
+    7400180: Pilz Bein L|Pilz Belag RAction
+    7400182: Pilz Bein L|Pilz Belag untenAction
+    7400184: Pilz Bein L|TeigAction
+    7400186: Pilz Bein L|Tod
+    7400188: Pilz Bein L|Zahn LAction
+    7400190: Pilz Bein L|Zahn RAction
+    7400192: Pilz Bein L|ZungeAction
+    7400194: Pilz Bein R|Bein LAction
+    7400196: Pilz Bein R|CameraAction
+    7400198: Pilz Bein R|Lamp.001Action
+    7400200: Pilz Bein R|LampAction
+    7400202: Pilz Bein R|Pilz Bein LAction
+    7400204: Pilz Bein R|Pilz Bein RAction
+    7400206: Pilz Bein R|Pilz belag LAction
+    7400208: Pilz Bein R|Pilz Belag mitte obAction
+    7400210: Pilz Bein R|Pilz Belag mitteAction
+    7400212: Pilz Bein R|Pilz Belag RAction
+    7400214: Pilz Bein R|Pilz Belag untenAction
+    7400216: Pilz Bein R|TeigAction
+    7400218: Pilz Bein R|Tod
+    7400220: Pilz Bein R|Zahn LAction
+    7400222: Pilz Bein R|Zahn RAction
+    7400224: Pilz Bein R|ZungeAction
+    7400226: Bein R|Bein LAction
+    7400228: Bein R|CameraAction
+    7400230: Bein R|Lamp.001Action
+    7400232: Bein R|LampAction
+    7400234: Bein R|Pilz Bein LAction
+    7400236: Bein R|Pilz Bein RAction
+    7400238: Bein R|Pilz belag LAction
+    7400240: Bein R|Pilz Belag mitte obAction
+    7400242: Bein R|Pilz Belag mitteAction
+    7400244: Bein R|Pilz Belag RAction
+    7400246: Bein R|Pilz Belag untenAction
+    7400248: Bein R|TeigAction
+    7400250: Bein R|Tod
+    7400252: Bein R|Zahn LAction
+    7400254: Bein R|Zahn RAction
+    7400256: Bein R|ZungeAction
+    7400258: Bein L|Bein LAction
+    7400260: Bein L|CameraAction
+    7400262: Bein L|Lamp.001Action
+    7400264: Bein L|LampAction
+    7400266: Bein L|Pilz Bein LAction
+    7400268: Bein L|Pilz Bein RAction
+    7400270: Bein L|Pilz belag LAction
+    7400272: Bein L|Pilz Belag mitte obAction
+    7400274: Bein L|Pilz Belag mitteAction
+    7400276: Bein L|Pilz Belag RAction
+    7400278: Bein L|Pilz Belag untenAction
+    7400280: Bein L|TeigAction
+    7400282: Bein L|Tod
+    7400284: Bein L|Zahn LAction
+    7400286: Bein L|Zahn RAction
+    7400288: Bein L|ZungeAction
+    7400290: Zunge|Bein LAction
+    7400292: Zunge|CameraAction
+    7400294: Zunge|Lamp.001Action
+    7400296: Zunge|LampAction
+    7400298: Zunge|Pilz Bein LAction
+    7400300: Zunge|Pilz Bein RAction
+    7400302: Zunge|Pilz belag LAction
+    7400304: Zunge|Pilz Belag mitte obAction
+    7400306: Zunge|Pilz Belag mitteAction
+    7400308: Zunge|Pilz Belag RAction
+    7400310: Zunge|Pilz Belag untenAction
+    7400312: Zunge|TeigAction
+    7400314: Zunge|Tod
+    7400316: Zunge|Zahn LAction
+    7400318: Zunge|Zahn RAction
+    7400320: Zunge|ZungeAction
+    7400322: Zahn L|Bein LAction
+    7400324: Zahn L|CameraAction
+    7400326: Zahn L|Lamp.001Action
+    7400328: Zahn L|LampAction
+    7400330: Zahn L|Pilz Bein LAction
+    7400332: Zahn L|Pilz Bein RAction
+    7400334: Zahn L|Pilz belag LAction
+    7400336: Zahn L|Pilz Belag mitte obAction
+    7400338: Zahn L|Pilz Belag mitteAction
+    7400340: Zahn L|Pilz Belag RAction
+    7400342: Zahn L|Pilz Belag untenAction
+    7400344: Zahn L|TeigAction
+    7400346: Zahn L|Tod
+    7400348: Zahn L|Zahn LAction
+    7400350: Zahn L|Zahn RAction
+    7400352: Zahn L|ZungeAction
+    7400354: Zahn R|Bein LAction
+    7400356: Zahn R|CameraAction
+    7400358: Zahn R|Lamp.001Action
+    7400360: Zahn R|LampAction
+    7400362: Zahn R|Pilz Bein LAction
+    7400364: Zahn R|Pilz Bein RAction
+    7400366: Zahn R|Pilz belag LAction
+    7400368: Zahn R|Pilz Belag mitte obAction
+    7400370: Zahn R|Pilz Belag mitteAction
+    7400372: Zahn R|Pilz Belag RAction
+    7400374: Zahn R|Pilz Belag untenAction
+    7400376: Zahn R|TeigAction
+    7400378: Zahn R|Tod
+    7400380: Zahn R|Zahn LAction
+    7400382: Zahn R|Zahn RAction
+    7400384: Zahn R|ZungeAction
+    7400386: Teig|Bein LAction
+    7400388: Teig|CameraAction
+    7400390: Teig|Lamp.001Action
+    7400392: Teig|LampAction
+    7400394: Teig|Pilz Bein LAction
+    7400396: Teig|Pilz Bein RAction
+    7400398: Teig|Pilz belag LAction
+    7400400: Teig|Pilz Belag mitte obAction
+    7400402: Teig|Pilz Belag mitteAction
+    7400404: Teig|Pilz Belag RAction
+    7400406: Teig|Pilz Belag untenAction
+    7400408: Teig|TeigAction
+    7400410: Teig|Tod
+    7400412: Teig|Zahn LAction
+    7400414: Teig|Zahn RAction
+    7400416: Teig|ZungeAction
     9500000: //RootNode
   materials:
     importMaterials: 1
