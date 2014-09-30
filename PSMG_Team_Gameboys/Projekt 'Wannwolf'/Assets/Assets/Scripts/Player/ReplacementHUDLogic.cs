@@ -24,24 +24,25 @@ public class ReplacementHUDLogic : MonoBehaviour {
     // Display the picked ersatzteil with 100% opacity instead of 50%
     void updateHUD(int counter)
     {
-        switch (counter)
+        print("counter: " + counter);
+        switch (counter)                
         {
             case 1:
                 GameObject.FindGameObjectWithTag(TagManager.LENKER).GetComponent<GUITexture>().texture = lenker;
                 if (animationPlayed == 0)
                 {
-                    GameObject.FindGameObjectWithTag(TagManager.LENKER).animation.CrossFade("Highlight", 0f);
+                    GameObject.FindGameObjectWithTag(TagManager.LENKER).animation.CrossFade("Highlight_Lenker", 0f);
+                    animationPlayed++;
                 }
-                animationPlayed++;
                 break;
             case 2:
                 GameObject.FindGameObjectWithTag(TagManager.RAD).GetComponent<GUITexture>().texture = rad;
 
                 if (animationPlayed == 1)
                 {
-                    GameObject.FindGameObjectWithTag(TagManager.RAD).animation.CrossFade("HighlightRad", 0f);
+                    GameObject.FindGameObjectWithTag(TagManager.RAD).animation.CrossFade("Highlight_Rad", 0f);
+                    animationPlayed++;
                 }
-                animationPlayed++;
                 break;
             case 3:
                 GameObject.FindGameObjectWithTag(TagManager.TURBINE).GetComponent<GUITexture>().texture = turbine;
