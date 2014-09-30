@@ -5,6 +5,7 @@ public class Checkpoint : MonoBehaviour {
 
     private bool gameSaved;
     private bool firstTimeOnCheckpoint;
+    private static float WAITING_TIME = 1f;
 
     private string savedGame = "Spiel automatisch gespeichert";
 
@@ -36,7 +37,7 @@ public class Checkpoint : MonoBehaviour {
 
     IEnumerator wait()
     {
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(WAITING_TIME);
         GetComponent<Checkpoint>().enabled = false;
     }
 
