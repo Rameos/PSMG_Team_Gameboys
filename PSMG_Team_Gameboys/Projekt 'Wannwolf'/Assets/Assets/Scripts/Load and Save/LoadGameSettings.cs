@@ -34,7 +34,9 @@ public class LoadGameSettings : MonoBehaviour
     private const string stelzePositions = "StelzePosition";
     private const string stelzeRotations = "StelzeRotation";
 
-    private const string destroyReplacements = "DestroyReplacements";
+    private const string destroyReplacementRad = "DestroyReplacementRad";
+    private const string destroyReplacementLenker = "DestroyReplacementLenker";
+    private const string destroyReplacementTurbine = "DestroyReplacementTurbine";
 
     private const string destroyVomitZone = "DestroyVomitZone";
 
@@ -74,7 +76,9 @@ public class LoadGameSettings : MonoBehaviour
         loadPizza();
         loadNorbert();
         loadStelzes();
-        loadReplacements();
+        loadReplacementLenker();
+        loadReplacementRad();
+        loadReplacementTurbine();
         loadPilzeriaHint();
         loadPizzaHint();
         loadJumpHint();
@@ -217,15 +221,27 @@ public class LoadGameSettings : MonoBehaviour
         }
     }
 
-    void loadReplacements()
+    void loadReplacementRad()
     {
-        if (GameObject.FindGameObjectsWithTag(TagManager.REPLACEMENT) != null  && PlayerPrefsX.GetBool(destroyReplacements))
+        if (GameObject.FindGameObjectsWithTag(TagManager.ERSATZTEIL_RAD) != null  && PlayerPrefsX.GetBool(destroyReplacementRad))
         {
-            GameObject[] replacements = GameObject.FindGameObjectsWithTag(TagManager.REPLACEMENT);
-            for (int i = 0; i < replacements.Length; i++)
-            {
-                Destroy(replacements[i]);
-            }
+            Destroy(GameObject.FindGameObjectWithTag(TagManager.ERSATZTEIL_RAD));
+        }
+    }
+
+    void loadReplacementLenker()
+    {
+        if (GameObject.FindGameObjectsWithTag(TagManager.ERSATZTEIL_LENKER) != null  && PlayerPrefsX.GetBool(destroyReplacementLenker))
+        {
+            Destroy(GameObject.FindGameObjectWithTag(TagManager.ERSATZTEIL_LENKER));
+        }
+    }
+
+    void loadReplacementTurbine()
+    {
+        if (GameObject.FindGameObjectsWithTag(TagManager.ERSATZTEIL_TURBINE) != null  && PlayerPrefsX.GetBool(destroyReplacementTurbine))
+        {
+            Destroy(GameObject.FindGameObjectWithTag(TagManager.ERSATZTEIL_TURBINE));
         }
     }
 

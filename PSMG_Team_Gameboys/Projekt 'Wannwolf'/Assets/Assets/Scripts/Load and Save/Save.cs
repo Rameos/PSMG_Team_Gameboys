@@ -36,7 +36,9 @@ public class Save : MonoBehaviour
     private const string stelzePositions = "StelzePosition";
     private const string stelzeRotations = "StelzeRotation";
 
-    private const string destroyReplacements = "DestroyReplacements";
+    private const string destroyReplacementRad = "DestroyReplacementRad";
+    private const string destroyReplacementLenker = "DestroyReplacementLenker";
+    private const string destroyReplacementTurbine = "DestroyReplacementTurbine";
 
     private const string destroyVomitZone = "DestroyVomitZone";
 
@@ -82,6 +84,9 @@ public class Save : MonoBehaviour
         saveStairBuildHint();
         saveFire();
         saveVomitZone();
+        saveReplacementLenker();
+        saveReplacementRad();
+        saveReplacementTurbine();
         saveReplacementPieces();
         PlayerPrefs.Save();
     }
@@ -221,12 +226,31 @@ public class Save : MonoBehaviour
         PlayerPrefs.SetString(stelzesSaved ,"True");
     }
 
-    static void saveReplacements()
+    static void saveReplacementRad()
     {
-        if (GameObject.FindGameObjectsWithTag(TagManager.REPLACEMENT) != null)
+        if (GameObject.FindGameObjectsWithTag(TagManager.ERSATZTEIL_RAD) != null && (!PlayerPrefsX.GetBool(destroyReplacementRad) || !PlayerPrefs.HasKey(destroyReplacementRad)))
         {
-           
+            PlayerPrefsX.SetBool(destroyReplacementRad, false);
         }
+        else PlayerPrefsX.SetBool(destroyReplacementRad, true);
+    }
+
+     static void saveReplacementTurbine()
+    {
+        if (GameObject.FindGameObjectsWithTag(TagManager.ERSATZTEIL_TURBINE) != null && (!PlayerPrefsX.GetBool(destroyReplacementTurbine) || !PlayerPrefs.HasKey(destroyReplacementTurbine)))
+        {
+            PlayerPrefsX.SetBool(destroyReplacementTurbine, false);
+        }
+        else PlayerPrefsX.SetBool(destroyReplacementTurbine, true);
+    }
+
+     static void saveReplacementLenker()
+    {
+        if (GameObject.FindGameObjectsWithTag(TagManager.ERSATZTEIL_LENKER) != null && (!PlayerPrefsX.GetBool(destroyReplacementLenker) || !PlayerPrefs.HasKey(destroyReplacementLenker)))
+        {
+            PlayerPrefsX.SetBool(destroyReplacementLenker, false);
+        }
+        else PlayerPrefsX.SetBool(destroyReplacementLenker, true);
     }
 
     static void saveFireInvisibleWall()
