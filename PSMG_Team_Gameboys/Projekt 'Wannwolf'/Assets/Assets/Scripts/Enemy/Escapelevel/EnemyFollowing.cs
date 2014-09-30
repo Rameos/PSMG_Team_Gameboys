@@ -15,7 +15,7 @@ public class EnemyFollowing : MonoBehaviour {
     void Awake()
     {
         go = false;
-        speed = 0.65f;
+        speed = 0.57f;
         climbSpeed = 3f;
         climb = false;
         enemy = gameObject;

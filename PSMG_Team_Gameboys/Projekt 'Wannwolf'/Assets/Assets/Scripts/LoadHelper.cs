@@ -26,7 +26,7 @@ public class LoadHelper : MonoBehaviour
 
     void OnTriggerEnter(Collider col)
     {
-        if (col.tag == TagManager.ESCAPE_TRIGGER)
+        if (col.tag == TagManager.PLAYER)
         {
             LoadScene.loadEscapeLevel();
         }

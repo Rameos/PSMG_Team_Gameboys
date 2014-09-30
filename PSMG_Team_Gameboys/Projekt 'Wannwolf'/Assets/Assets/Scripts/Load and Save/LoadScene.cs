@@ -26,7 +26,7 @@ public class LoadScene : MonoBehaviour
 
     public static void loadEscapeLevel()
     {
-        sceneFader.switchScene(levels[4]);
+        sceneFader.switchScene(levels[3]);
     }
 
     public static void loadFirstLevel()
