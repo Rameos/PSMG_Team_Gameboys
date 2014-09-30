@@ -5,6 +5,7 @@ public class PLayerMovement : MonoBehaviour {
 
     private const float gravityBoost = 3.5f;
     private const float jumpStrength = 25f;
+    public int hasPieces;
 
     public Transform treeTrunk;
 

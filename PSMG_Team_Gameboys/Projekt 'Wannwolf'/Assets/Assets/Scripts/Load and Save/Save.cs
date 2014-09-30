@@ -54,6 +54,8 @@ public class Save : MonoBehaviour
 
     private const string destroyFire = "DestroyFire";
 
+    private const string replacementPieces = "ReplacemetPieces";
+
     private const string stelzesSaved = "StelzesSaved";
 
 
@@ -81,6 +83,7 @@ public class Save : MonoBehaviour
         saveStairBuildHint();
         saveFire();
         saveVomitZone();
+        saveReplacementPieces();
         PlayerPrefs.Save();
     }
 
@@ -333,5 +336,14 @@ public class Save : MonoBehaviour
             PlayerPrefsX.SetBool(destroyFire, false);
         }
         else PlayerPrefsX.SetBool(destroyFire, true);
+    }
+
+    static void saveReplacementPieces()
+    {
+        if (GameObject.FindGameObjectWithTag(TagManager.GAME_CONTROLLER) != null)
+        {
+            ReplacementHUDLogic replacementLogic = GameObject.FindGameObjectWithTag(TagManager.GAME_CONTROLLER).GetComponent<ReplacementHUDLogic>();
+            PlayerPrefs.SetInt(replacementPieces, replacementLogic.hasPieces);
+        }
     }
 }

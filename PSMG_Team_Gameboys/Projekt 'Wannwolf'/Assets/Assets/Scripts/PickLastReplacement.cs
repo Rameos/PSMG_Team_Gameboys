@@ -1,25 +1,26 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class PickTimeMachineReplacement : MonoBehaviour {
+public class PickLastReplacement : MonoBehaviour
+{
 
     private bool inTrigger;
     private float rotationSpeed;
     private GameObject mainCamera;
-    private CameraControl cameraControl;
-    private PlayerControl playerControl;
+    private GameObject player;
+    private Camera_Escape cameraControl;
     private ReplacementHUDLogic hudLogic;
     private PLayerMovement playerMovement;
     private AutomaticMovement playerAutomaticMovement;
 
     void Start()
     {
+        player = GameObject.FindGameObjectWithTag(TagManager.PLAYER);
         mainCamera = GameObject.FindGameObjectWithTag(TagManager.MAIN_CAMERA);
-        cameraControl = mainCamera.GetComponent<CameraControl>();
+        cameraControl = mainCamera.GetComponent<Camera_Escape>();
         hudLogic = GameObject.FindGameObjectWithTag(TagManager.GAME_CONTROLLER).GetComponent<ReplacementHUDLogic>();
-        playerControl = GameObject.FindGameObjectWithTag(TagManager.PLAYER).GetComponent<PlayerControl>();
-        playerMovement = GameObject.FindGameObjectWithTag(TagManager.PLAYER).GetComponent<PLayerMovement>();
-        playerAutomaticMovement = GameObject.FindGameObjectWithTag(TagManager.PLAYER).GetComponent<AutomaticMovement>();
+        playerMovement = player.GetComponent<PLayerMovement>();
+        playerAutomaticMovement = player.GetComponent<AutomaticMovement>();
 
         rotationSpeed = 6f;
         inTrigger = false;
@@ -31,13 +32,14 @@ public class PickTimeMachineReplacement : MonoBehaviour {
         riseObject();
     }
 
-	void OnTriggerEnter(Collider col){
+    void OnTriggerEnter(Collider col)
+    {
         if (col.tag == TagManager.PLAYER)
         {
             cameraControl.enabled = false;
-            playerControl.enabled = false;
             playerMovement.enabled = false;
             playerAutomaticMovement.enabled = false;
+            hudLogic.hasPieces++;
             inTrigger = true;
         }
     }
@@ -47,15 +49,12 @@ public class PickTimeMachineReplacement : MonoBehaviour {
         yield return new WaitForSeconds(3f);
         inTrigger = false;
         yield return new WaitForSeconds(1f);
-        hudLogic.hasPieces++;
-        Destroy(gameObject);
-        cameraControl.enabled = true;
-        playerControl.enabled = true;
+        LoadScene.loadScene();
     }
 
     void rotateObject()
     {
-        gameObject.transform.Rotate(new Vector3(0, 1, 0), rotationSpeed);
+        gameObject.transform.Rotate(new Vector3(0, 0, 1), rotationSpeed);
         if (inTrigger)
         {
             rotationSpeed += Time.deltaTime * 15;

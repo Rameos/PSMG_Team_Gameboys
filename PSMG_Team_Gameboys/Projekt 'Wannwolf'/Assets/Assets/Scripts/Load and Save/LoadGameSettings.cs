@@ -52,6 +52,8 @@ public class LoadGameSettings : MonoBehaviour
 
     private const string destroyFire = "DestroyFire";
 
+    private const string replacementPieces = "ReplacemetPieces";
+
     private const string stelzesSaved = "StelzesSaved";
 
     void Awake()
@@ -85,6 +87,7 @@ public class LoadGameSettings : MonoBehaviour
         loadFireInvisibleWall();
         loadFire();
         loadVomitZone();
+        loadReplacementPieces();
     }
 
     void loadPlayer()
@@ -315,6 +318,15 @@ public class LoadGameSettings : MonoBehaviour
         if (GameObject.FindGameObjectWithTag(TagManager.FIRE) != null && PlayerPrefsX.GetBool(destroyFire))
         {
             Destroy(GameObject.FindGameObjectWithTag(TagManager.FIRE));
+        }
+    }
+
+    void loadReplacementPieces()
+    {
+        if (GameObject.FindGameObjectWithTag(TagManager.GAME_CONTROLLER) != null)
+        {
+            ReplacementHUDLogic replacementLogic = GameObject.FindGameObjectWithTag(TagManager.GAME_CONTROLLER).GetComponent<ReplacementHUDLogic>();
+            replacementLogic.hasPieces = PlayerPrefs.GetInt(replacementPieces);
         }
     }
 }

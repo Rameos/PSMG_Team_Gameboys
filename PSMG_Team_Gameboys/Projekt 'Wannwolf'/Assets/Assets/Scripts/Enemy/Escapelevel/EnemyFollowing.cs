@@ -15,7 +15,7 @@ public class EnemyFollowing : MonoBehaviour {
     void Awake()
     {
         go = false;
-        speed = 0.7f;
+        speed = 0.65f;
         climbSpeed = 3f;
         climb = false;
         enemy = gameObject;
@@ -45,10 +45,14 @@ public class EnemyFollowing : MonoBehaviour {
         }
 	}
 
-    void OnTrigerEnter(Collider col){
+    void OnTriggerEnter(Collider col){
         if(col.gameObject.tag == TagManager.BARRIER)
         {
             climb = true;
+        }else
+        if (col.tag == TagManager.PLAYER)
+        {
+            LoadScene.loadEscapeLevel();
         }
     }
 

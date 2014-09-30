@@ -167,15 +167,27 @@ public class GameMenu : MonoBehaviour {
     {
         if (!isPaused)
         {
-            setPlayerControlStatus = false;
-            setCameraControlStatus = false;
+            if (GameObject.FindGameObjectWithTag(TagManager.PLAYER).GetComponent<PlayerControl>() != null)
+            {
+                setPlayerControlStatus = false;
+            }
+            if (GameObject.FindGameObjectWithTag(TagManager.MAIN_CAMERA).GetComponent<CameraControl>() != null)
+            {
+                setCameraControlStatus = false;
+            }
             Time.timeScale = 0.0f;
             Screen.showCursor = true; // Show mouse cursor while in game menu
         }
         else
         {
-            setPlayerControlStatus = true;
-            setCameraControlStatus = true;
+            if (GameObject.FindGameObjectWithTag(TagManager.PLAYER).GetComponent<PlayerControl>() != null)
+            {
+                setPlayerControlStatus = true;
+            }
+            if (GameObject.FindGameObjectWithTag(TagManager.MAIN_CAMERA).GetComponent<CameraControl>() != null)
+            {
+                setCameraControlStatus = true;
+            }
             Time.timeScale = 1.0f;
             Screen.showCursor = false; // Hide mouse cursor ingame
         }

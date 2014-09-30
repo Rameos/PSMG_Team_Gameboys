@@ -24,6 +24,11 @@ public class LoadScene : MonoBehaviour
         sceneFader.switchScene(PlayerPrefs.GetString("SceneToLoad"));
     }
 
+    public static void loadEscapeLevel()
+    {
+        sceneFader.switchScene(levels[3]);
+    }
+
     public static void loadFirstLevel()
     {
         resetLoadNum();
