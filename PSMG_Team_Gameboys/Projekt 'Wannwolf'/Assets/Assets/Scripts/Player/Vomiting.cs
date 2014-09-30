@@ -8,12 +8,14 @@ public class Vomiting : MonoBehaviour {
     private PlayerControl playerControl;
     private CameraSwitcher switcher;
     private ParticleSystem vomit;
+    public AudioClip vomitSound;
 
     void Start()
     {
         playerControl = GameObject.FindGameObjectWithTag(TagManager.PLAYER).GetComponent<PlayerControl>();
         vomit = GameObject.FindGameObjectWithTag("Vomit").GetComponent<ParticleSystem>();
         switcher = gameObject.GetComponent<CameraSwitcher>();
+        audio.clip = vomitSound;
     }
 
     void OnTriggerEnter(Collider col)
@@ -50,6 +52,7 @@ public class Vomiting : MonoBehaviour {
     void startVomiting()
     {
         vomit.Play(true);
+        audio.Play();
     }
 
     void stopVomiting()

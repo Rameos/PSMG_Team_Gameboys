@@ -10,11 +10,15 @@ public class PeeOnFire : MonoBehaviourWithGazeComponent
     private GameObject player;
     private float rotation;
     private ExtinguishFire exFire;
+    private bool isPeeing;
+    public AudioClip PeeSound;
 
 	void Awake () {
     exFire = GameObject.FindGameObjectWithTag(TagManager.FIRE_RADIUS_TRIGGER).GetComponent<ExtinguishFire>();
     fire = gameObject.GetComponentsInChildren<ParticleSystem>();
     player = GameObject.FindGameObjectWithTag("Player");
+    audio.clip = PeeSound;
+    isPeeing = false;
 	}
 	
 
@@ -28,6 +32,11 @@ public class PeeOnFire : MonoBehaviourWithGazeComponent
     {
         if (peeing && exFire.startPeeing)
         {
+            if (!isPeeing)
+            {
+                audio.Play();
+                isPeeing = true;
+            }
             if (fire[0].startLifetime <= 0.1)
             {
                 GameObject.FindGameObjectWithTag(TagManager.PLAYER_FLAMES).GetComponent<ParticleSystem>().Stop();
@@ -58,6 +67,7 @@ public class PeeOnFire : MonoBehaviourWithGazeComponent
     {
         if (!peeing)
         {
+            
             if (fire[0].startLifetime < 3.5f)
             {
                 for (int i = 0; i < fire.Length; i++)
@@ -85,5 +95,7 @@ public class PeeOnFire : MonoBehaviourWithGazeComponent
     public override void OnGazeExit()
     {
         peeing = false;
+        isPeeing = false;
+        audio.Stop();
     }
 }
