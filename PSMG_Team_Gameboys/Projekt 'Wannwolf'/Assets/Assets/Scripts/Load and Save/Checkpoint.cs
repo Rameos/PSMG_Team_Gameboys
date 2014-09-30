@@ -9,8 +9,8 @@ public class Checkpoint : MonoBehaviour {
     private string savedGame = "Spiel automatisch gespeichert";
 
     private GUIStyle center;
+    public GUIStyle message;
     public Font font;
-
 
 
     void Start()
@@ -49,7 +49,7 @@ public class Checkpoint : MonoBehaviour {
             center = new GUIStyle(GUI.skin.textField);
             center.font = font;
             center.alignment = TextAnchor.MiddleCenter;
-            GUI.TextField(new Rect((Screen.width - 300) / 2, (float)(Screen.height * 0.2), 300, 50), "Spiel automatisch gespeichert" , center);
+            GUI.TextField(new Rect((Screen.width - 300) / 2, (float)(Screen.height * 0.2), 300, 50), savedGame , message);
         }
     }
 

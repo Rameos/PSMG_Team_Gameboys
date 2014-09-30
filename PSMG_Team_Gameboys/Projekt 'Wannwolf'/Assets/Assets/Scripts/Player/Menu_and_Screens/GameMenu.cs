@@ -28,8 +28,8 @@ public class GameMenu : MonoBehaviour {
     private float buttonHeight;
     private float buttonDistance;
 
-    private GUIStyle center;
     private GUIStyle fontStyle;
+    public GUIStyle message;
     public Font font;
 
     void Awake()
@@ -142,12 +142,8 @@ public class GameMenu : MonoBehaviour {
             // If the game was saved the message "Spiel gespeichert" appears
             if (showSave)
             {
-                center = new GUIStyle(GUI.skin.textField);
-                center.alignment = TextAnchor.MiddleCenter;
-                center.font = font;
-
                 GUI.color = Color.green;
-                GUI.TextField(new Rect((width - buttonWidth) / 2, (float)(height * 0.1), buttonWidth, buttonHeight), gameSaved, center);
+                GUI.TextField(new Rect((width - buttonWidth) / 2, (float)(height * 0.1), buttonWidth, buttonHeight), gameSaved, message);
             }
         }
 
