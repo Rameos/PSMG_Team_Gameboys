@@ -21,13 +21,13 @@ public class ReplacementHUDLogic : MonoBehaviour {
         updateHUD(hasPieces);
 	}
 
-    // Display the picked ersatzteil with 100% opacity insted of 50%
+    // Display the picked ersatzteil with 100% opacity instead of 50%
     void updateHUD(int counter)
     {
         switch (counter)
         {
             case 1:
-                GameObject.FindGameObjectWithTag("Lenker").GetComponent<GUITexture>().texture = lenker;
+                GameObject.FindGameObjectWithTag(TagManager.LENKER).GetComponent<GUITexture>().texture = lenker;
                 if (animationPlayed == 0)
                 {
                     GameObject.FindGameObjectWithTag(TagManager.LENKER).animation.CrossFade("Highlight", 0f);
@@ -35,7 +35,7 @@ public class ReplacementHUDLogic : MonoBehaviour {
                 animationPlayed++;
                 break;
             case 2:
-                GameObject.FindGameObjectWithTag("Rad").GetComponent<GUITexture>().texture = rad;
+                GameObject.FindGameObjectWithTag(TagManager.RAD).GetComponent<GUITexture>().texture = rad;
 
                 if (animationPlayed == 1)
                 {
@@ -44,7 +44,7 @@ public class ReplacementHUDLogic : MonoBehaviour {
                 animationPlayed++;
                 break;
             case 3:
-                GameObject.FindGameObjectWithTag("Turbine").GetComponent<GUITexture>().texture = turbine;
+                GameObject.FindGameObjectWithTag(TagManager.TURBINE).GetComponent<GUITexture>().texture = turbine;
                 if (animationPlayed == 2)
                 {
                     

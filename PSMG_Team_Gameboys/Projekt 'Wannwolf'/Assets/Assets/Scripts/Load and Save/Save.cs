@@ -36,8 +36,7 @@ public class Save : MonoBehaviour
     private const string stelzePositions = "StelzePosition";
     private const string stelzeRotations = "StelzeRotation";
 
-    private const string replacementPositions = "ReplacementPosition";
-    private const string replacementRotations = "ReplacementRotation";
+    private const string destroyReplacements = "DestroyReplacements";
 
     private const string destroyVomitZone = "DestroyVomitZone";
 
@@ -224,18 +223,9 @@ public class Save : MonoBehaviour
 
     static void saveReplacements()
     {
-        if (GameObject.FindGameObjectWithTag(TagManager.REPLACEMENT) != null)
+        if (GameObject.FindGameObjectsWithTag(TagManager.REPLACEMENT) != null)
         {
-            GameObject[] replacements = GameObject.FindGameObjectsWithTag(TagManager.REPLACEMENT);
-            Vector3[] replacementsPos = new Vector3[replacements.Length];
-            Quaternion[] replacementsRot = new Quaternion[replacements.Length];
-            for (int i = 0; i < replacements.Length; i++)
-            {
-                replacementsPos[i] = replacements[i].transform.position;
-                replacementsRot[i] = replacements[i].transform.rotation;
-            }
-            PlayerPrefsX.SetVector3Array(replacementPositions, replacementsPos);
-            PlayerPrefsX.SetQuaternionArray(replacementRotations, replacementsRot);
+           
         }
     }
 

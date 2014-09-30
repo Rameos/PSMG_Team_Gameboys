@@ -34,8 +34,7 @@ public class LoadGameSettings : MonoBehaviour
     private const string stelzePositions = "StelzePosition";
     private const string stelzeRotations = "StelzeRotation";
 
-    private const string replacementPositions = "ReplacementPosition";
-    private const string replacementRotations = "ReplacementRotation";
+    private const string destroyReplacements = "DestroyReplacements";
 
     private const string destroyVomitZone = "DestroyVomitZone";
 
@@ -220,15 +219,12 @@ public class LoadGameSettings : MonoBehaviour
 
     void loadReplacements()
     {
-        if (GameObject.FindGameObjectWithTag(TagManager.REPLACEMENT) != null)
+        if (GameObject.FindGameObjectsWithTag(TagManager.REPLACEMENT) != null  && PlayerPrefsX.GetBool(destroyReplacements))
         {
             GameObject[] replacements = GameObject.FindGameObjectsWithTag(TagManager.REPLACEMENT);
-            Quaternion[] rotations = PlayerPrefsX.GetQuaternionArray(replacementRotations);
-            Vector3[] positions = PlayerPrefsX.GetVector3Array(replacementPositions);
             for (int i = 0; i < replacements.Length; i++)
             {
-                replacements[i].transform.position = positions[i];
-                replacements[i].transform.rotation = rotations[i];
+                Destroy(replacements[i]);
             }
         }
     }
