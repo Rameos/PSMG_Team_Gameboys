@@ -23,4 +23,12 @@ public class LoadHelper : MonoBehaviour
             LoadBasicTutorial();
         }
     }
+
+    void OnTriggerEnter(Collider col)
+    {
+        if (col.tag == TagManager.ESCAPE_TRIGGER)
+        {
+            LoadScene.loadEscapeLevel();
+        }
+    }
 }

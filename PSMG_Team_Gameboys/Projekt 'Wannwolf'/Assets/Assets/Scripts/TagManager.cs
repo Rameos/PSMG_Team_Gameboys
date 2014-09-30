@@ -61,4 +61,8 @@ public class TagManager : MonoBehaviour
     public static string RAD = "Rad";
     public static string LENKER = "Lenker";
     public static string TURBINE = "Turbine";
+    public static string ESCAPE_TRIGGER = "EscapeTrigger";
+    public static string ERSATZTEIL_RAD = "ErsatzteilRad";
+    public static string ERSATZTEIL_LENKER = "ErsatzteilLenker";
+    public static string ERSATZTEIL_TURBINE = "ErsatzteilTurbine";
 }
