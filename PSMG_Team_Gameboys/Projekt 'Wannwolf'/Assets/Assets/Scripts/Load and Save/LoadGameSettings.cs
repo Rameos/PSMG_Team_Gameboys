@@ -10,6 +10,8 @@ public class LoadGameSettings : MonoBehaviour
     private const string playerDoubleJump = "PlayerDoubleJump";
     private const string playerStamina = "PlayerStamina";
     private const string playerVodka = "PlayerVodka";
+    private const string playerOnStelze = "PlayerOnStelze";
+    private const string playerOnStelzePos = "PlayerOnStelzePos";
 
     private const string bierberPosition = "BierberPosition";
     private const string bierberRotation = "BierberRotation";
@@ -98,8 +100,10 @@ public class LoadGameSettings : MonoBehaviour
         if (GameObject.FindGameObjectWithTag(TagManager.PLAYER) != null)
         {
             GameObject player = GameObject.FindGameObjectWithTag(TagManager.PLAYER);
-            player.transform.position = PlayerPrefsX.GetVector3(playerPosition);
+
+            player.transform.position = PlayerPrefsX.GetVector3(playerPosition);        
             player.transform.rotation = PlayerPrefsX.GetQuaternion(playerRotation);
+            
             if (PlayerPrefs.HasKey(playerMoney))
             {
                 player.GetComponent<MoneyManagement>().setCurrentMoney(PlayerPrefs.GetInt(playerMoney));
@@ -223,7 +227,7 @@ public class LoadGameSettings : MonoBehaviour
 
     void loadReplacementRad()
     {
-        if (GameObject.FindGameObjectsWithTag(TagManager.ERSATZTEIL_RAD) != null  && PlayerPrefsX.GetBool(destroyReplacementRad))
+        if (GameObject.FindGameObjectWithTag(TagManager.ERSATZTEIL_RAD) != null  && PlayerPrefsX.GetBool(destroyReplacementRad))
         {
             Destroy(GameObject.FindGameObjectWithTag(TagManager.ERSATZTEIL_RAD));
         }
@@ -231,7 +235,7 @@ public class LoadGameSettings : MonoBehaviour
 
     void loadReplacementLenker()
     {
-        if (GameObject.FindGameObjectsWithTag(TagManager.ERSATZTEIL_LENKER) != null  && PlayerPrefsX.GetBool(destroyReplacementLenker))
+        if (GameObject.FindGameObjectWithTag(TagManager.ERSATZTEIL_LENKER) != null  && PlayerPrefsX.GetBool(destroyReplacementLenker))
         {
             Destroy(GameObject.FindGameObjectWithTag(TagManager.ERSATZTEIL_LENKER));
         }
@@ -239,7 +243,7 @@ public class LoadGameSettings : MonoBehaviour
 
     void loadReplacementTurbine()
     {
-        if (GameObject.FindGameObjectsWithTag(TagManager.ERSATZTEIL_TURBINE) != null  && PlayerPrefsX.GetBool(destroyReplacementTurbine))
+        if (GameObject.FindGameObjectWithTag(TagManager.ERSATZTEIL_TURBINE) != null  && PlayerPrefsX.GetBool(destroyReplacementTurbine))
         {
             Destroy(GameObject.FindGameObjectWithTag(TagManager.ERSATZTEIL_TURBINE));
         }

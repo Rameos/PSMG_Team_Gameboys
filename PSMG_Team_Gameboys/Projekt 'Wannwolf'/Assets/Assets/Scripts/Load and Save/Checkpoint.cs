@@ -26,7 +26,6 @@ public class Checkpoint : MonoBehaviour {
             Save.saveGame();
             gameSaved = true;
             firstTimeOnCheckpoint = false;
-            Debug.LogWarning("Saved");
         }
     }
 

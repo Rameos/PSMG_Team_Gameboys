@@ -39,7 +39,7 @@ public class ExtinguishFire : MonoBehaviour {
 
         if (drinkLogic.inFireRadius)
         {
-            if (drinkLogic.ableToUrinate && Input.GetKeyDown(KeyCode.E))
+            if (GameObject.FindGameObjectWithTag(TagManager.PLAYER).GetComponent<PlayerControl>().drankStatus && Input.GetKeyDown(KeyCode.E))
             {
                 urin.particleSystem.Play(true);
                 GameObject.FindGameObjectWithTag(TagManager.PLAYER).transform.position = GameObject.FindGameObjectWithTag(TagManager.PEEING_POSITION).transform.position;
@@ -54,24 +54,29 @@ public class ExtinguishFire : MonoBehaviour {
 
     void OnTriggerEnter(Collider other)
     {
-        drinkLogic.inFireRadius = true;
+        if (other.tag == TagManager.PLAYER)
+        {
+            drinkLogic.inFireRadius = true;
+        }
     }
 
     void OnTriggerStay(Collider other)
     {
-        if (drinkLogic.vodkaEmptied && extinguishable)
+        if (other.tag == TagManager.PLAYER)
         {
-            drinkLogic.diedInFire = true;
-            drinkLogic.vodkaEmptied = false;
-            extinguishable = false;
-        }
 
-       
+            if (drinkLogic.vodkaEmptied && extinguishable)
+            {
+                drinkLogic.diedInFire = true;
+                drinkLogic.vodkaEmptied = false;
+                extinguishable = false;
+            }
+        }
     }
 
     void OnGUI()
     {
-        if (drinkLogic.inFireRadius && drinkLogic.ableToUrinate)
+        if (drinkLogic.inFireRadius && GameObject.FindGameObjectWithTag(TagManager.PLAYER).GetComponent<PlayerControl>().drankStatus)
         {
             GUI.Button(new Rect((Screen.width - (width * 2)) / 2, (float)(Screen.height * 0.2), width * 2, height), pressE, message);
         }
@@ -79,7 +84,10 @@ public class ExtinguishFire : MonoBehaviour {
 
     void OnTriggerExit(Collider other)
     {
-       drinkLogic.inFireRadius = false;
-       extinguishable = true;
+        if (other.tag == TagManager.PLAYER)
+        {
+            drinkLogic.inFireRadius = false;
+            extinguishable = true;
+        }
     }
 }

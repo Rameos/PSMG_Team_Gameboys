@@ -7,13 +7,11 @@ public class AutomaticMovement : MonoBehaviour {
 
     public Transform mainCamera;
 
-    private MoneyManagement money;
     private bool stop;
 
     void Awake()
     {
         stop = true;
-        money = GetComponent<MoneyManagement>();
         StartCoroutine(wait());
     } 
 
@@ -54,15 +52,6 @@ public class AutomaticMovement : MonoBehaviour {
         if (col.gameObject.tag == TagManager.BARRIER)
         {
             stop = false;
-        }
-    }
-
-    void OnCollisionEnter(Collision col)
-    {
-        if (col.gameObject.tag == TagManager.MUSHROOM)
-        {
-            money.addMoney(1);
-            GameObject.Destroy(col.gameObject);
         }
     }
 

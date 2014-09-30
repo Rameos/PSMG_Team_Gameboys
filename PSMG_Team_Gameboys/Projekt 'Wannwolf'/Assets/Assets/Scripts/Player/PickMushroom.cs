@@ -29,7 +29,7 @@ public class PickMushroom : MonoBehaviour {
     {
         if (col.tag == TagManager.PLAYER)
         {
-            col.GetComponent<MoneyManagement>().addMoney(mushroomValue);
+            GameObject.FindGameObjectWithTag(TagManager.PLAYER).GetComponent<MoneyManagement>().addMoney(mushroomValue);
             disappearMushroom();
         }
     }

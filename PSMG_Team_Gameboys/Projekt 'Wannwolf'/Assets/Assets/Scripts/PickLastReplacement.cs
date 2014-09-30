@@ -36,6 +36,7 @@ public class PickLastReplacement : MonoBehaviour
     {
         if (col.tag == TagManager.PLAYER)
         {
+            Destroy(GameObject.FindGameObjectWithTag(TagManager.PIZZA));
             cameraControl.enabled = false;
             playerMovement.enabled = false;
             playerAutomaticMovement.enabled = false;

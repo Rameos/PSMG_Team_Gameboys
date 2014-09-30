@@ -28,7 +28,7 @@ public class MoneyManagement : MonoBehaviour {
     void init()
     {
         moneyMinimum = 0;
-        moneyMaximum = 100;
+        moneyMaximum = 150;
         updateGuiText();
     }
 	

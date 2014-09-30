@@ -13,7 +13,7 @@ public class HintLogic : MonoBehaviour {
     public GameObject hint;
     public AudioClip dialogue;
     public string text;
-
+    
     public Texture2D texture;
 
     void Awake()
@@ -54,8 +54,12 @@ public class HintLogic : MonoBehaviour {
     {
         if (col.tag == TagManager.PLAYER)
         {
-            playSound();
-            if (gameObject.tag == TagManager.BIERBER_HINT)
+            if (player.GetComponent<PlayerControl>().vodkaStatus || player.GetComponent<PlayerControl>().drankStatus)
+            {
+                Destroy(gameObject);
+            }else playSound();
+            
+            if (gameObject.tag == TagManager.BIERBER_HINT && !isPlaying)
             {
                 isPlaying = true;
                 player.GetComponent<PlayerControl>().enabled = false;

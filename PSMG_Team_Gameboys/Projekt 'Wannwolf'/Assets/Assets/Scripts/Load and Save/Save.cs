@@ -11,6 +11,8 @@ public class Save : MonoBehaviour
     private const string playerDoubleJump = "PlayerDoubleJump";
     private const string playerStamina = "PlayerStamina";
     private const string playerVodka = "PlayerVodka";
+    private const string playerOnStelze = "PlayerOnStelze";
+    private const string playerOnStelzePos = "PlayerOnStelzePos";
 
 
     private const string bierberPosition = "BierberPosition";
@@ -102,7 +104,15 @@ public class Save : MonoBehaviour
         if (GameObject.FindGameObjectWithTag(TagManager.PLAYER) != null)
         {
             GameObject player = GameObject.FindGameObjectWithTag(TagManager.PLAYER);
-            PlayerPrefsX.SetVector3(playerPosition, player.transform.position);
+
+            if (player.GetComponent<PlayerControl>().onStelze)
+            {
+                PlayerPrefsX.SetVector3(playerPosition, player.GetComponent<PlayerControl>().stelzePosition);
+            }
+            else
+            {
+                PlayerPrefsX.SetVector3(playerPosition, player.transform.position);
+            }
             PlayerPrefsX.SetQuaternion(playerRotation, player.transform.rotation);
             PlayerPrefs.SetInt(playerMoney, player.GetComponent<MoneyManagement>().getCurrentMoney());
 
@@ -228,7 +238,7 @@ public class Save : MonoBehaviour
 
     static void saveReplacementRad()
     {
-        if (GameObject.FindGameObjectsWithTag(TagManager.ERSATZTEIL_RAD) != null && (!PlayerPrefsX.GetBool(destroyReplacementRad) || !PlayerPrefs.HasKey(destroyReplacementRad)))
+        if (GameObject.FindGameObjectWithTag(TagManager.ERSATZTEIL_RAD) != null && (!PlayerPrefsX.GetBool(destroyReplacementRad) || !PlayerPrefs.HasKey(destroyReplacementRad)))
         {
             PlayerPrefsX.SetBool(destroyReplacementRad, false);
         }
@@ -237,7 +247,7 @@ public class Save : MonoBehaviour
 
      static void saveReplacementTurbine()
     {
-        if (GameObject.FindGameObjectsWithTag(TagManager.ERSATZTEIL_TURBINE) != null && (!PlayerPrefsX.GetBool(destroyReplacementTurbine) || !PlayerPrefs.HasKey(destroyReplacementTurbine)))
+        if (GameObject.FindGameObjectWithTag(TagManager.ERSATZTEIL_TURBINE) != null && (!PlayerPrefsX.GetBool(destroyReplacementTurbine) || !PlayerPrefs.HasKey(destroyReplacementTurbine)))
         {
             PlayerPrefsX.SetBool(destroyReplacementTurbine, false);
         }
@@ -246,7 +256,7 @@ public class Save : MonoBehaviour
 
      static void saveReplacementLenker()
     {
-        if (GameObject.FindGameObjectsWithTag(TagManager.ERSATZTEIL_LENKER) != null && (!PlayerPrefsX.GetBool(destroyReplacementLenker) || !PlayerPrefs.HasKey(destroyReplacementLenker)))
+        if (GameObject.FindGameObjectWithTag(TagManager.ERSATZTEIL_LENKER) != null && (!PlayerPrefsX.GetBool(destroyReplacementLenker) || !PlayerPrefs.HasKey(destroyReplacementLenker)))
         {
             PlayerPrefsX.SetBool(destroyReplacementLenker, false);
         }

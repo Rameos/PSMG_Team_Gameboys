@@ -31,7 +31,7 @@ public class CameraSwitcher : MonoBehaviour {
     public void setFireTaskStatic(GameObject gameObject)
     {
         mainCamera.transform.position = gameObject.transform.position + new Vector3(11, 3, -18);
-        setCameraFocus(gameObject);
+        mainCamera.transform.LookAt(gameObject.transform);
     }
 
     public void setVomitStatic()
