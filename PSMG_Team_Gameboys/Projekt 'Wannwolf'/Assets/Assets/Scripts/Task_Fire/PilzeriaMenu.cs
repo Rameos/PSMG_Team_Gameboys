@@ -12,6 +12,10 @@ public class PilzeriaMenu : MonoBehaviour {
     private string pushF = "Drücke \"F\" um das \nPilzeriamenu zu öffnen";
     private string hasVodka = "Eberhardt hat Vodka, \ndrücke \"E\", um ihn zu trinken";
     private string isDrunk = "Eberhardt ist betrunken";
+    private string doubleJump = "Double Jump - $30";
+    private string sprintLonger = "Länger sprinten - $25";
+    private string vodka = "Vodka - 35$";
+    private string back = "Zurück";
 
     private Rect butRect;
     private MoneyManagement moneyManagement;
@@ -19,6 +23,7 @@ public class PilzeriaMenu : MonoBehaviour {
     private PlayerControl control;
     private DrinkLogic drinkLogic;
     private GUIStyle center;
+    public GUIStyle message;
 
     public Font font;
 
@@ -76,7 +81,7 @@ public class PilzeriaMenu : MonoBehaviour {
             
 			butRect.y = (Screen.height - height)/2 - 60;
 
-            if (GUI.Button(butRect, "Double Jump - $30", center))
+            if (GUI.Button(butRect, doubleJump, center))
 			{
 				if(moneyManagement.getCurrentMoney() > 30)
 				{
@@ -90,7 +95,7 @@ public class PilzeriaMenu : MonoBehaviour {
 
 			butRect.y += height + 20;
 
-            if (GUI.Button(butRect, "Länger sprinten - $25", center))
+            if (GUI.Button(butRect, sprintLonger, center))
 			{
 				if(moneyManagement.getCurrentMoney() > 25)
 				{
@@ -103,7 +108,7 @@ public class PilzeriaMenu : MonoBehaviour {
 
 			butRect.y += height + 20;
 
-            if (GUI.Button(butRect, "Vodka - 35$", center) && !control.vodkaStatus)
+            if (GUI.Button(butRect, vodka, center) && !control.vodkaStatus)
             {
                 if (moneyManagement.getCurrentMoney() > 35)
                 {
@@ -116,7 +121,7 @@ public class PilzeriaMenu : MonoBehaviour {
 
             butRect.y += height + 20;
 
-            if (GUI.Button(butRect, "Zurück", center) || Input.GetKeyDown(KeyCode.Escape))
+            if (GUI.Button(butRect, back, center) || Input.GetKeyDown(KeyCode.Escape))
                 toggleTimeScale();
                 togglePlayerControl();
         }
@@ -125,18 +130,18 @@ public class PilzeriaMenu : MonoBehaviour {
             if (!isMenu && inMenuRadius)
             {
                 //informs player how to open the pilzeria menu
-                GUI.TextField(new Rect((Screen.width - (width* 2))/2, (float)(Screen.height * 0.2), width * 2, height), pushF, center);
+                GUI.Label(new Rect((Screen.width - (width* 2))/2, (float)(Screen.height * 0.2), width * 2, height), pushF, message);
             }
         }
                 
         //informs the player about Eberhardt's state and how to drink the vodka
         if(control.vodkaStatus)
         {
-            GUI.TextField(new Rect((Screen.width - 2* width) / 2, (float)(Screen.height * 0.8), 2 * width, height), hasVodka, center);
+            GUI.Label(new Rect((Screen.width - 2* width) / 2, (float)(Screen.height * 0.8), 2 * width, height), hasVodka, message);
         }
         else if (control.drankStatus)
         {
-            GUI.TextField(new Rect((Screen.width - width) / 2, (float)(Screen.height * 0.8), width, height), isDrunk, center);
+            GUI.Label(new Rect((Screen.width - width) / 2, (float)(Screen.height * 0.8), width, height), isDrunk, message);
         }
     }
 
