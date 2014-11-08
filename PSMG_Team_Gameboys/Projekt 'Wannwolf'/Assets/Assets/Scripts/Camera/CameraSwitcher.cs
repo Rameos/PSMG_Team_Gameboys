@@ -4,10 +4,12 @@ using System.Collections;
 public class CameraSwitcher : MonoBehaviour {
 
     private GameObject mainCamera;
+    private GameObject peeingPosition;
 
 	// Use this for initialization
 	void Start () {
         mainCamera = GameObject.FindGameObjectWithTag(TagManager.MAIN_CAMERA);
+        peeingPosition = GameObject.FindGameObjectWithTag(TagManager.PEEING_POSITION);
 	}
 
     public void setCameraStatic()
@@ -30,7 +32,9 @@ public class CameraSwitcher : MonoBehaviour {
 
     public void setFireTaskStatic(GameObject gameObject)
     {
-        mainCamera.transform.position = gameObject.transform.position + new Vector3(11, 3, -18);
+        gameObject.transform.position = peeingPosition.transform.position;
+        gameObject.transform.rotation = peeingPosition.transform.rotation;
+        mainCamera.transform.position = gameObject.transform.position + new Vector3(0, 5, -18);
         mainCamera.transform.LookAt(gameObject.transform);
     }
 
